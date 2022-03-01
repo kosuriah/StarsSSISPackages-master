@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Stars_HRMADH_Call_Fax_Process"
   DTS:PackageType="5"
-  DTS:VersionBuild="1901"
-  DTS:VersionGUID="{C1760E6D-9565-4862-9D3D-199E6A5AC6AF}">
+  DTS:VersionBuild="1902"
+  DTS:VersionGUID="{5ED304EE-4105-4464-A95A-139987D4F73D}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -50,11 +50,11 @@
             <DTS:Property
               DTS:Name="ServerPassword"
               Sensitive="1"
-              Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWWFCw4OzmUSTaFZBxn9hwwAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAADGa/byjCdYeFdbqANVJD56AAAAAASAAACgAAAAEAAAAGe621uuQpon1CkTSoSGWQowAAAA9WJQQQ4uSeE8ZcQnURuqNFk3/mxxJBTXbT0WO2cxs79JClBWTPnXva9Ngzm/eN3IFAAAAOh8s6b0m30Mp9P1f5bXiF3Kh631</DTS:Property>
+              Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWWFCw4OzmUSTaFZBxn9hwwAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAAADc80NKDTX0pcSQ93cw7MoAAAAAASAAACgAAAAEAAAAOb9XspC1eOFCWpSFVQzovQwAAAAt9Rvrt7zLMNq+CTTpvXQjo2R0XZkOiy3hwpYQEbL3Rl0y2xC/RlOwHcOLK7mfbNLFAAAAEil5V4Ae7PON5nAbN9kAMH3ZWT1</DTS:Property>
             <DTS:Property
               DTS:Name="ProxyPassword"
               Sensitive="1"
-              Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWWFCw4OzmUSTaFZBxn9hwwAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAAA5O3tGZZvZD9oHcqQJ1frHAAAAAASAAACgAAAAEAAAAPDhBm4yl5eqi687rkRVyr0IAAAAyCRG26S7xgYUAAAAsZjdKxUuVhAxU7MqwkrU2SUmBGQ</DTS:Property>
+              Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWWFCw4OzmUSTaFZBxn9hwwAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAABsYFULx0uAAkRLUta7GsGeAAAAAASAAACgAAAAEAAAAEY+b77Zs6xIwt3wtA+HbMgIAAAAUgLX/txRg3YUAAAAW3Wnm4s5MolgjQwDx/khcIquuCQ</DTS:Property>
           </DTS:HttpConnection>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
@@ -23730,7 +23730,7 @@ AND EXISTS(SELECT * FROM [Stars_Call_Lists].staging.HRMDTM_DTP_CALL_FAX_LIST STG
         <NodeLayout
           Size="206,42"
           Id="Package\Send notification on QIM Call summary"
-          TopLeft="1209.21825396825,762.857142857143" />
+          TopLeft="1284.21825396825,758.857142857143" />
         <NodeLayout
           Size="195,42"
           Id="Package\Sequence Container\ExecSQL Truncate CosmoComm Resolve"
@@ -23896,18 +23896,30 @@ AND EXISTS(SELECT * FROM [Stars_Call_Lists].staging.HRMDTM_DTP_CALL_FAX_LIST STG
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 4]"
-          TopLeft="1313.96468253968,712.4">
+          TopLeft="1315.61111111111,712">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,50.4571428571429"
+              EndConnector="71.6071428571402,46.857142857143"
               Start="0,0"
-              End="0,42.9571428571429">
+              End="71.6071428571402,39.357142857143">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,42.9571428571429" />
+                    End="0,19.4285714285715" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,19.4285714285715"
+                    Point2="0,23.4285714285715"
+                    Point3="4,23.4285714285715" />
+                  <mssgle:LineSegment
+                    End="67.6071428571402,23.4285714285715" />
+                  <mssgle:CubicBezierSegment
+                    Point1="67.6071428571402,23.4285714285715"
+                    Point2="71.6071428571402,23.4285714285715"
+                    Point3="71.6071428571402,27.4285714285715" />
+                  <mssgle:LineSegment
+                    End="71.6071428571402,39.357142857143" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -23940,18 +23952,30 @@ AND EXISTS(SELECT * FROM [Stars_Call_Lists].staging.HRMDTM_DTP_CALL_FAX_LIST STG
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 5]"
-          TopLeft="1314.85912698412,804.857142857143">
+          TopLeft="1387.21825396825,800.857142857143">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,61.142857142857"
+              EndConnector="-69.7182539682501,65.142857142857"
               Start="0,0"
-              End="0,53.642857142857">
+              End="-69.7182539682501,57.642857142857">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,53.642857142857" />
+                    End="0,28.5714285714285" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,28.5714285714285"
+                    Point2="0,32.5714285714285"
+                    Point3="-4,32.5714285714285" />
+                  <mssgle:LineSegment
+                    End="-65.7182539682501,32.5714285714285" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-65.7182539682501,32.5714285714285"
+                    Point2="-69.7182539682501,32.5714285714285"
+                    Point3="-69.7182539682501,36.5714285714285" />
+                  <mssgle:LineSegment
+                    End="-69.7182539682501,57.642857142857" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
