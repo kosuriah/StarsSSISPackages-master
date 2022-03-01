@@ -1,0 +1,10 @@
+﻿<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="Cube SQLSTARSSSAS"
+  DTS:DTSID="{E08DA9B1-58AC-49AC-BFC8-5AAE9E7ACDAF}"
+  DTS:CreationName="MSOLAP100">
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectionString="Data Source=10.5.4.124;Initial Catalog=Stars;Provider=MSOLAP.4;Integrated Security=SSPI;" />
+  </DTS:ObjectData>
+</DTS:ConnectionManager>

@@ -1,0 +1,2092 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="2/18/2015 1:34:38 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="SQLSTARS"
+  DTS:CreatorName="PHARMMD\bill.shoap"
+  DTS:DTSID="{FDBF1BB3-6A77-4F64-8E28-8C585903B162}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.1300.371"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Stars_HRMADH_Call_Fax_Process"
+  DTS:PackageType="5"
+  DTS:VersionBuild="1812"
+  DTS:VersionGUID="{46531109-6DB0-4FD6-A851-3EE923C65153}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Fax PDF Folder]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{25CD3FA4-8547-4B23-8CB8-0C48B46A0D84}"
+      DTS:ObjectName="Fax PDF Folder">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Project::FaxSendPath]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:FileUsageType="2"
+          DTS:ConnectionString="\\p10devsde003.pharmmd.local\Stars\FaxSend\" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ReportServer]"
+      DTS:CreationName="HTTP"
+      DTS:DelayValidation="True"
+      DTS:DTSID="{142C8964-2658-4A30-BE7F-C72698426A7B}"
+      DTS:ObjectName="ReportServer">
+      <DTS:PropertyExpression
+        DTS:Name="ServerPassword">@[$Project::SharepointSSRSPassword]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="http://sqlstarsrpt.pharmmd.local/_vti_bin/reportserver">
+          <DTS:HttpConnection
+            DTS:ServerURL="http://sqlstarsrpt.pharmmd.local/_vti_bin/reportserver"
+            DTS:UseServerCredentials="True"
+            DTS:ServerUserName="starsreports"
+            DTS:ServerDomain="pharmmd"
+            DTS:TimeOut="300"
+            DTS:ChunkSize="1000">
+            <DTS:Property
+              DTS:Name="ServerPassword"
+              Sensitive="1"
+              Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAwppM/tGJEU6LNQr3XzinsgAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAAB0LmKKK4JLNpRS8WihJxOLAAAAAASAAACgAAAAEAAAAC0wc9JEn7djXTvAPPRT1UowAAAAgqdk6P/rxc5QDIkqcPPmWruC0TvNsHVBwcZH/1Y51KKdtcB/datmRmGY1TYNL7fjFAAAAG0AwEfLj3m4i7dD4gBiV/BgtLXs</DTS:Property>
+            <DTS:Property
+              DTS:Name="ProxyPassword"
+              Sensitive="1"
+              Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAwppM/tGJEU6LNQr3XzinsgAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAAD+38EgKigrUqgECd0Fu+FlAAAAAASAAACgAAAAEAAAAEhPPe2GFkW//74RXN+Xv+0IAAAAxD/LXgK0R64UAAAASB80HXoTsAnvGHOVTeEVGeVg+oM</DTS:Property>
+          </DTS:HttpConnection>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[SMTP Relay Server]"
+      DTS:CreationName="SMTP"
+      DTS:DTSID="{E64C3656-0C3F-4BAD-9C16-6ACEF20D546A}"
+      DTS:ObjectName="SMTP Relay Server">
+      <DTS:ObjectData>
+        <SmtpConnectionManager
+          ConnectionString="SmtpServer=mxgw-vip.pharmmd.net;UseWindowsAuthentication=False;EnableSsl=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{ED38C74D-F665-48D3-A301-ADB1202134FD}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="Campaign_Date">
+      <DTS:VariableValue
+        DTS:DataType="8">20180530</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{EA0657F9-9AC5-434B-964B-BD6EC20969D3}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="FaxDay">
+      <DTS:VariableValue
+        DTS:DataType="8">False</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{D31DBD0C-AF43-41E8-87AB-BA45A33311DC}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="ProviderSet">
+      <DTS:VariableValue
+        DTS:DataSubType="ManagedSerializable"
+        DTS:DataType="13">
+        <SOAP-ENV:Envelope xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+          <SOAP-ENV:Body>
+            <xsd:anyType
+              id="ref-1"></xsd:anyType>
+          </SOAP-ENV:Body>
+        </SOAP-ENV:Envelope>
+      </DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{88B515C6-744F-42DE-94CD-3BA33ADA4E04}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="Provider_ID">
+      <DTS:VariableValue
+        DTS:DataType="8">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{D4C8C869-1EF2-4B22-A62A-57F8CA88E018}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="RunDay">
+      <DTS:VariableValue
+        DTS:DataType="8">False</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Current Date &amp; Check Day of Run"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Based on date Call list will generate"
+      DTS:DTSID="{CF80ED45-769D-4805-B865-30D50B7F8127}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Current Date &amp; Check Day of Run"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{E882F2C6-5A27-4607-9934-7BEF3FBB60D6}"
+          SQLTask:SqlStatementSource="Declare @Env varchar(50) = ?&#xA;&#xA;select&#xA;case &#xA; --when convert(varchar(10), GETDATE(), 112) = '20160117' then 'True'&#xA; when @Env='PROD' and cast(GETDATE()+1 as date) in &#xA;  ('2021-04-02','2021-05-31','2021-07-05','2021-09-06','2021-11-25','2021-11-26','2021-12-24','2021-12-27') then 'False'&#xA; when @Env='PROD' and DATENAME(weekday,GETDATE()+1) in ('Saturday','Sunday') then 'False'&#xA; else 'True' &#xA;end [RunDay] --Generate Call list for next day&#xA;,&#xA;&#xA;case &#xA; --when DATENAME(weekday,GETDATE()-1) = 'Tuesday' then 'True'&#xA; when DATENAME(weekday,GETDATE()+1) = 'Tuesday' then 'True'&#xA; else 'False' &#xA;end [FaxDay]&#xA;&#xA;&#xA;&#xA;&#xA;/*&#xA;Declare @Env varchar(50) = ?&#xA; &#xA;Select &#xA;case &#xA; --when convert(varchar(10), GETDATE(), 112) = '20160117' then 'True'&#xA; when @Env='PROD' and cast(GETDATE() as date) in ('2020-04-10','2020-05-25','2020-07-04','2020-09-07','2020-11-26','2020-11-27','2020-12-24','2020-12-25') then 'False'&#xA; when @Env='PROD' and DATENAME(weekday,GETDATE()) in ('Saturday','Sunday') then 'False'&#xA; else 'True' &#xA;end [RunDay] --Generate Call list for next day&#xA;,&#xA;case &#xA; --when DATENAME(weekday,GETDATE()) = 'Tuesday' then 'True'&#xA; when DATENAME(weekday,GETDATE()) = 'Tuesday' then 'True'&#xA; else 'False' &#xA;end [FaxDay]&#xA;*/"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::RunDay" />
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="1"
+            SQLTask:DtsVariableName="User::FaxDay" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="$Project::Environment_Flag"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Faxes has been generated successfully"
+      DTS:CreationName="Microsoft.SendMailTask"
+      DTS:Description="Send Mail Task"
+      DTS:DTSID="{709D4C97-AF64-443D-A68D-27B7936BE645}"
+      DTS:ExecutableType="Microsoft.SendMailTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Faxes has been generated successfully"
+      DTS:TaskContact="Send Mail Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="1">
+      <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0" />
+      <DTS:PropertyExpression
+        DTS:Name="FromLine">"StarsTeam@pharmmd.com"</DTS:PropertyExpression>
+      <DTS:PropertyExpression
+        DTS:Name="Subject">@[$Project::Environment_Flag] +" Stars Faxes generated successfully on" + RIGHT("0" + (DT_STR, 2, 1252) DATEPART("mm" , GETDATE()), 2) + "-" + RIGHT("0" + (DT_STR, 2, 1252) DATEPART("dd" , GETDATE()), 2) + "-" +  (DT_STR, 4, 1252) DATEPART("yyyy" , GETDATE())</DTS:PropertyExpression>
+      <DTS:PropertyExpression
+        DTS:Name="ToLine">@[$Project::CallListEmailRecipients]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <SendMailTask:SendMailTaskData
+          SendMailTask:SMTPServer="{E64C3656-0C3F-4BAD-9C16-6ACEF20D546A}"
+          SendMailTask:From="StarsTeam@pharmmd.com"
+          SendMailTask:To="stars_developers@adherehealth.com"
+          SendMailTask:Subject="DEV Stars Faxes generated successfully on11-19-2021" xmlns:SendMailTask="www.microsoft.com/sqlserver/dts/tasks/sendmailtask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Genarete HRM Faxes(hold or Archive)"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{75F1794F-FEB7-4E7C-9169-3F60BDB258D4}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Genarete HRM Faxes(hold or Archive)">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Genarete HRM Faxes(hold or Archive)\Archive Faxes to Hold folder if it fax day is false"
+          DTS:CreationName="Microsoft.ScriptTask"
+          DTS:Description="Script Task"
+          DTS:DTSID="{3B23C8CA-23BE-4B1D-8B18-03D381CAE173}"
+          DTS:ExecutableType="Microsoft.ScriptTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Archive Faxes to Hold folder if it fax day is false"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ScriptProject
+              Name="ST_0abdcc39c9ae4e79a6afdb9d2f189a04"
+              VSTAMajorVersion="15"
+              VSTAMinorVersion="0"
+              Language="CSharp"
+              ReadOnlyVariables="User::Campaign_Date,User::FaxDay,$Project::FaxSendPath,$Project::FaxHoldPath">
+              <ProjectItem
+                Name="ST_0abdcc39c9ae4e79a6afdb9d2f189a04.csproj"
+                Encoding="UTF16LE"><![CDATA[<?xml version="1.0" encoding="utf-16"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!-- This section defines project-level properties.
+
+       Configuration - Specifies whether the default configuration is Release or Debug.
+       Platform - Specifies what CPU the output of this project can run on.
+       OutputType - Must be "Library" for VSTA.
+       NoStandardLibraries - Set to "false" for VSTA.
+       RootNamespace - In C#, this specifies the namespace given to new files.
+                       In Visual Basic, all objects are wrapped in this namespace at runtime.
+       AssemblyName - Name of the output assembly.
+  -->
+  <PropertyGroup>
+    <ProjectTypeGuids>{30D016F9-3734-4E33-A861-5E7D899E18F3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <OutputType>Library</OutputType>
+    <NoStandardLibraries>false</NoStandardLibraries>
+    <RootNamespace>ST_45a79023f8d94579b174ab0242aa7565.csproj</RootNamespace>
+    <AssemblyName>ST_0abdcc39c9ae4e79a6afdb9d2f189a04</AssemblyName>
+    <ProjectGuid>{E812CB9F-876E-4D64-A899-0040A4296F73}</ProjectGuid>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile></TargetFrameworkProfile>
+  </PropertyGroup>
+  <!-- This section defines properties that are set when the "Debug" configuration is
+       selected.
+
+       DebugSymbols - If true, create symbols (.pdb). If false, do not create symbols.
+       Optimize - If true, optimize the build output. If false, do not optimize.
+       OutputPath - Output path of the project relative to the project file.
+       EnableUnmanagedDebugging - If true, starting the debugger will attach both managed and unmanaged debuggers.
+       DefineConstants - Constants defined for the preprocessor.
+       Warning Level - Warning level for the compiler.
+  -->
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <Optimize>false</Optimize>
+    <OutputPath>.\bin\Debug\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <!-- This section defines properties that are set when the "Release" configuration is
+       selected.
+
+       DebugSymbols - If true, create symbols (.pdb). If false, do not create symbols.
+       Optimize - If true, optimize the build output. If false, do not optimize.
+       OutputPath - Output path of the project relative to the project file.
+       EnableUnmanagedDebugging - If true, starting the debugger will attach both managed and unmanaged debuggers.
+       DefineConstants - Constants defined for the preprocessor.
+       Warning Level - Warning level for the compiler.
+  -->
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <OutputPath>.\bin\Release\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineConstants>TRACE</DefineConstants>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <!-- This section enables pre- and post-build steps. However,
+       it is recommended that MSBuild tasks be used instead of these properties.
+  -->
+  <PropertyGroup>
+    <PreBuildEvent></PreBuildEvent>
+    <PostBuildEvent></PostBuildEvent>
+  </PropertyGroup>
+  <!-- This sections specifies references for the project. -->
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.SqlServer.ManagedDTS, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.SqlServer.ScriptTask, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=89845dcd8080cc91" />
+  </ItemGroup>
+  <!-- This section defines the user source files that are part of the
+       project.
+
+       Compile - Specifies a source file to compile.
+       EmbeddedResource - Specifies a .resx file for embedded resources.
+       None - Specifies a file that is not to be passed to the compiler (for instance,
+              a text file or XML file).
+       AppDesigner - Specifies the directory where the application properties files can
+                     be found.
+  -->
+  <ItemGroup>
+    <AppDesigner Include="Properties\" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="ScriptMain.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <!-- Include the default configuration information and metadata files for the add-in.
+         These files are copied to the build output directory when the project is
+         built, and the path to the configuration file is passed to add-in on the command
+         line when debugging.
+    -->
+  </ItemGroup>
+  <!-- Include the build rules for a C# project.-->
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- This section defines VSTA properties that describe the host-changable project properties. -->
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{30D016F9-3734-4E33-A861-5E7D899E18F3}">
+        <ProjectProperties HostName="VSTAHostName" HostPackage="{B3A685AA-7EAF-4BC6-9940-57959FA5AC07}" ApplicationType="usd" Language="cs" TemplatesPath="" DebugInfoExeName="" />
+        <Host Name="SSIS_ScriptTask" />
+        <ProjectClient>
+          <HostIdentifier>SSIS_ST140</HostIdentifier>
+        </ProjectClient>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>]]></ProjectItem>
+              <ProjectItem
+                Name="Properties\Resources.resx"
+                Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+</root>]]></ProjectItem>
+              <ProjectItem
+                Name="Properties\AssemblyInfo.cs"
+                Encoding="UTF8"><![CDATA[using System.Reflection;
+using System.Runtime.CompilerServices;
+
+//
+// General Information about an assembly is controlled through the following 
+// set of attributes. Change these attribute values to modify the information
+// associated with an assembly.
+//
+[assembly: AssemblyTitle("ST_45a79023f8d94579b174ab0242aa7565.csproj")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("ST_45a79023f8d94579b174ab0242aa7565.csproj")]
+[assembly: AssemblyCopyright("Copyright @  2015")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+//
+// Version information for an assembly consists of the following four values:
+//
+//      Major Version
+//      Minor Version 
+//      Build Number
+//      Revision
+//
+// You can specify all the values or you can default the Revision and Build Numbers 
+// by using the '*' as shown below:
+
+[assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
+              <ProjectItem
+                Name="ScriptMain.cs"
+                Encoding="UTF8"><![CDATA[/*
+   Microsoft SQL Server Integration Services Script Task
+   Write scripts using Microsoft Visual C# 2008.
+   The ScriptMain is the entry point class of the script.
+*/
+
+using System;
+using System.Data;
+using Microsoft.SqlServer.Dts.Runtime;
+using System.Windows.Forms;
+using System.IO;
+using System.Text;
+using Microsoft.SqlServer;
+
+namespace ST_45a79023f8d94579b174ab0242aa7565.csproj
+{
+    [Microsoft.SqlServer.Dts.Tasks.ScriptTask.SSISScriptTaskEntryPointAttribute]
+    public partial class ScriptMain : Microsoft.SqlServer.Dts.Tasks.ScriptTask.VSTARTScriptObjectModelBase
+    {
+
+        #region VSTA generated code
+        enum ScriptResults
+        {
+            Success = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Success,
+            Failure = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Failure
+        };
+        #endregion
+
+        public void Main()
+        {
+            //Prod if we don't send fax letter we normally moved to hold folder
+            string SourceFolderPath = Dts.Variables["$Project::FaxSendPath"].Value.ToString();
+            string ArchiveHoldFolderPath = Dts.Variables["$Project::FaxHoldPath"].Value.ToString(); //@"\\10.5.4.113\General\Stars\HRMLetters\PDFLetters\Hold\"; // this is Z drive path(Z:\)
+            string TodayArchiveFolderPath = ArchiveHoldFolderPath + Dts.Variables["Campaign_Date"].Value.ToString(); 
+
+            try
+            {
+                if (!Directory.Exists(TodayArchiveFolderPath))
+                    Directory.CreateDirectory(TodayArchiveFolderPath);
+
+                // Get Files & Copy
+                string[] files = Directory.GetFiles(SourceFolderPath);
+                foreach (string file in files)
+                {
+                    string name = Path.GetFileName(file);
+                    string dest = Path.Combine(TodayArchiveFolderPath, name);
+                    File.Move(file, dest);
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ToString();
+            }
+            // TODO: Add your code here
+            Dts.TaskResult = (int)ScriptResults.Success;
+        }
+    }
+}]]></ProjectItem>
+              <ProjectItem
+                Name="Project"
+                Encoding="UTF16LE"><![CDATA[<?xml version="1.0" encoding="UTF-16" standalone="yes"?>
+<c:Project xmlns:c="http://schemas.microsoft.com/codeprojectml/2010/08/main" xmlns:msb="http://schemas.microsoft.com/developer/msbuild/2003" runtimeVersion="4.0" schemaVersion="1.0">
+  <msb:PropertyGroup>
+    <msb:CodeName>ST_0abdcc39c9ae4e79a6afdb9d2f189a04</msb:CodeName>
+    <msb:Language>msBuild</msb:Language>
+    <msb:DisplayName>ST_0abdcc39c9ae4e79a6afdb9d2f189a04</msb:DisplayName>
+    <msb:ProjectId>{E796C860-AE2F-4022-9391-3D7332BECB6E}</msb:ProjectId>
+  </msb:PropertyGroup>
+  <msb:ItemGroup>
+    <msb:Project Include="ST_0abdcc39c9ae4e79a6afdb9d2f189a04.csproj" />
+    <msb:File Include="Properties\Settings.settings" />
+    <msb:File Include="Properties\AssemblyInfo.cs" />
+    <msb:File Include="Properties\Resources.resx" />
+    <msb:File Include="Properties\Resources.Designer.cs" />
+    <msb:File Include="Properties\Settings.Designer.cs" />
+    <msb:File Include="ScriptMain.cs" />
+  </msb:ItemGroup>
+</c:Project>]]></ProjectItem>
+              <ProjectItem
+                Name="Properties\Settings.Designer.cs"
+                Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "ST_45a79023f8d94579b174ab0242aa7565.csproj.Properties.Settings.get_Default():ST_45a79023f8d94579b174ab0242aa7565.csproj.Properties.Sett" +
+    "ings")]
+
+namespace ST_45a79023f8d94579b174ab0242aa7565.csproj.Properties
+{
+
+
+    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase
+    {
+
+        [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+        private static Settings defaultInstance = new Settings();
+
+        public static Settings Default
+        {
+            get
+            {
+                return defaultInstance;
+            }
+        }
+    }
+}]]></ProjectItem>
+              <ProjectItem
+                Name="Properties\Settings.settings"
+                Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
+</SettingsFile>]]></ProjectItem>
+              <ProjectItem
+                Name="Properties\Resources.Designer.cs"
+                Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "ST_45a79023f8d94579b174ab0242aa7565.csproj.Properties.Resources.get_ResourceManager():System.Resources.Resou" +
+    "rceManager")]
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "ST_45a79023f8d94579b174ab0242aa7565.csproj.Properties.Resources.get_Culture():System.Globalization.CultureIn" +
+    "fo")]
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "ST_45a79023f8d94579b174ab0242aa7565.csproj.Properties.Resources.set_Culture(System.Globalization.CultureInfo" +
+    "):Void")]
+
+namespace ST_45a79023f8d94579b174ab0242aa7565.csproj.Properties
+{
+
+
+    /// <summary>
+    ///   A strongly-typed resource class, for looking up localized strings, etc.
+    /// </summary>
+    // This class was auto-generated by the StronglyTypedResourceBuilder
+    // class via a tool like ResGen or Visual Studio.
+    // To add or remove a member, edit your .ResX file then rerun ResGen
+    // with the /str option, or rebuild your VS project.
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    internal class Resources
+    {
+
+        private static global::System.Resources.ResourceManager resourceMan;
+
+        private static global::System.Globalization.CultureInfo resourceCulture;
+
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        internal Resources()
+        {
+        }
+
+        /// <summary>
+        ///   Returns the cached ResourceManager instance used by this class.
+        /// </summary>
+        [global::System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Resources.ResourceManager ResourceManager
+        {
+            get
+            {
+                if ((resourceMan == null))
+                {
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ST_45a79023f8d94579b174ab0242aa7565.csproj.Properties.Resources", typeof(Resources).Assembly);
+                    resourceMan = temp;
+                }
+                return resourceMan;
+            }
+        }
+
+        /// <summary>
+        ///   Overrides the current thread's CurrentUICulture property for all
+        ///   resource lookups using this strongly typed resource class.
+        /// </summary>
+        [global::System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Globalization.CultureInfo Culture
+        {
+            get
+            {
+                return resourceCulture;
+            }
+            set
+            {
+                resourceCulture = value;
+            }
+        }
+    }
+}]]></ProjectItem>
+              <BinaryItem
+                Name="ST_0abdcc39c9ae4e79a6afdb9d2f189a04.dll">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
+MwAuAS4AOwAuAS4AQwD+AC4ASwA0AS4AUwAuAS4AWwBLAUMAYwCNAEkAcwD1AGEAewCNAGMAawCN
+ABsAAwABAAQAAwAAAIUEvgAAAAsBwwAAAMwFyAACAAQAAwACAAUABQABAAYABQACAAcABwAEgAAA
+AQAAAEEcVnoAAAAAAAABAAAABAAAAAAAAAAAAAAAdgBfAAAAAAAOAAAAAAAAAAAAAAB/AF0DAAAA
+AAQAAAAAAAAAAAAAAHYA/gMAAAAADgAAAAAAAAAAAAAAfwA4AAAAAAAAAAAAAQAAAOYEAAAFAAIA
+AAAAAABTVF8wYWJkY2MzOWM5YWU0ZTc5YTZhZmRiOWQyZjE4OWEwNAA8TW9kdWxlPgBTeXN0ZW0u
+SU8ATWljcm9zb2Z0LlNxbFNlcnZlci5NYW5hZ2VkRFRTAHZhbHVlX18AbXNjb3JsaWIAZGVmYXVs
+dEluc3RhbmNlAFZhcmlhYmxlAFJ1bnRpbWVUeXBlSGFuZGxlAEdldFR5cGVGcm9tSGFuZGxlAEZp
+bGUAR2V0RmlsZU5hbWUATWljcm9zb2Z0LlNxbFNlcnZlci5EdHMuUnVudGltZQBDb21iaW5lAFR5
+cGUARmFpbHVyZQBnZXRfQ3VsdHVyZQBzZXRfQ3VsdHVyZQByZXNvdXJjZUN1bHR1cmUAVlNUQVJU
+U2NyaXB0T2JqZWN0TW9kZWxCYXNlAEFwcGxpY2F0aW9uU2V0dGluZ3NCYXNlAEVkaXRvckJyb3dz
+YWJsZVN0YXRlAENvbXBpbGVyR2VuZXJhdGVkQXR0cmlidXRlAERlYnVnZ2VyTm9uVXNlckNvZGVB
+dHRyaWJ1dGUARGVidWdnYWJsZUF0dHJpYnV0ZQBFZGl0b3JCcm93c2FibGVBdHRyaWJ1dGUAQXNz
+ZW1ibHlUaXRsZUF0dHJpYnV0ZQBBc3NlbWJseVRyYWRlbWFya0F0dHJpYnV0ZQBUYXJnZXRGcmFt
+ZXdvcmtBdHRyaWJ1dGUAQXNzZW1ibHlDb25maWd1cmF0aW9uQXR0cmlidXRlAEFzc2VtYmx5RGVz
+Y3JpcHRpb25BdHRyaWJ1dGUAQ29tcGlsYXRpb25SZWxheGF0aW9uc0F0dHJpYnV0ZQBBc3NlbWJs
+eVByb2R1Y3RBdHRyaWJ1dGUAQXNzZW1ibHlDb3B5cmlnaHRBdHRyaWJ1dGUAU1NJU1NjcmlwdFRh
+c2tFbnRyeVBvaW50QXR0cmlidXRlAEFzc2VtYmx5Q29tcGFueUF0dHJpYnV0ZQBSdW50aW1lQ29t
+cGF0aWJpbGl0eUF0dHJpYnV0ZQBnZXRfVmFsdWUAdmFsdWUATW92ZQBTeXN0ZW0uUnVudGltZS5W
+ZXJzaW9uaW5nAFRvU3RyaW5nAFBhdGgAU1RfNDVhNzkwMjNmOGQ5NDU3OWIxNzRhYjAyNDJhYTc1
+NjUuY3Nwcm9qAE1pY3Jvc29mdC5TcWxTZXJ2ZXIuU2NyaXB0VGFzawBNaWNyb3NvZnQuU3FsU2Vy
+dmVyLkR0cy5UYXNrcy5TY3JpcHRUYXNrAFNjcmlwdE9iamVjdE1vZGVsAFN5c3RlbS5Db21wb25l
+bnRNb2RlbABTVF8wYWJkY2MzOWM5YWU0ZTc5YTZhZmRiOWQyZjE4OWEwNC5kbGwAZ2V0X0l0ZW0A
+U3lzdGVtAEVudW0AcmVzb3VyY2VNYW4AU2NyaXB0TWFpbgBTeXN0ZW0uQ29uZmlndXJhdGlvbgBT
+eXN0ZW0uR2xvYmFsaXphdGlvbgBTeXN0ZW0uUmVmbGVjdGlvbgBFeGNlcHRpb24AQ3VsdHVyZUlu
+Zm8ARGlyZWN0b3J5SW5mbwBnZXRfUmVzb3VyY2VNYW5hZ2VyAC5jdG9yAC5jY3RvcgBTeXN0ZW0u
+RGlhZ25vc3RpY3MAU3lzdGVtLlJ1bnRpbWUuQ29tcGlsZXJTZXJ2aWNlcwBTeXN0ZW0uUmVzb3Vy
+Y2VzAFNUXzQ1YTc5MDIzZjhkOTQ1NzliMTc0YWIwMjQyYWE3NTY1LmNzcHJvai5Qcm9wZXJ0aWVz
+LlJlc291cmNlcy5yZXNvdXJjZXMARGVidWdnaW5nTW9kZXMAU1RfNDVhNzkwMjNmOGQ5NDU3OWIx
+NzRhYjAyNDJhYTc1NjUuY3Nwcm9qLlByb3BlcnRpZXMAZ2V0X1ZhcmlhYmxlcwBHZXRGaWxlcwBT
+ZXR0aW5ncwBTdWNjZXNzAGdldF9EdHMAU2NyaXB0UmVzdWx0cwBFeGlzdHMAQ29uY2F0AE9iamVj
+dABnZXRfRGVmYXVsdABzZXRfVGFza1Jlc3VsdABnZXRfQXNzZW1ibHkAQ3JlYXRlRGlyZWN0b3J5
+AAArJABQAHIAbwBqAGUAYwB0ADoAOgBGAGEAeABTAGUAbgBkAFAAYQB0AGgAACskAFAAcgBvAGoA
+ZQBjAHQAOgA6AEYAYQB4AEgAbwBsAGQAUABhAHQAaAAAG0MAYQBtAHAAYQBpAGcAbgBfAEQAYQB0
+AGUAAH9TAFQAXwA0ADUAYQA3ADkAMAAyADMAZgA4AGQAOQA0ADUANwA5AGIAMQA3ADQAYQBiADAA
+MgA0ADIAYQBhADcANQA2ADUALgBjAHMAcAByAG8AagAuAFAAcgBvAHAAZQByAHQAaQBlAHMALgBS
+AGUAcwBvAHUAcgBjAGUAcwAAAAAAdgt3XLtGdk2LOfz/1eul8gAEIAEBCAMgAAEFIAEBEREEIAEB
+DgUgAQERVQkHBg4OHQ4IDg4EIAASZQQgABJpBSABEm0cAyAAHAMgAA4FAAIODg4EAAECDgUAARJ5
+DgUAAR0ODgQAAQ4OBQACAQ4OCAABEoCFEYCJBSAAEoCNByACAQ4SgI0It3pcVhk04IkIiYRdzYCA
+zJEEAAAAAAQBAAAAAwYSTQMGElEDBhIQAgYIAwYRFAQAABJNBAAAElEFAAEBElEEAAASEAMAAAEE
+CAASTQQIABJRBAgAEhAIAQAIAAAAAAAeAQABAFQCFldyYXBOb25FeGNlcHRpb25UaHJvd3MBCAEA
+AgAAAAAALwEAKlNUXzQ1YTc5MDIzZjhkOTQ1NzliMTc0YWIwMjQyYWE3NTY1LmNzcHJvagAABQEA
+AAAAFgEAEUNvcHlyaWdodCBAICAyMDE1AABJAQAaLk5FVEZyYW1ld29yayxWZXJzaW9uPXY0LjUB
+AFQOFEZyYW1ld29ya0Rpc3BsYXlOYW1lEi5ORVQgRnJhbWV3b3JrIDQuNQAAALQAAADOyu++AQAA
+AJEAAABsU3lzdGVtLlJlc291cmNlcy5SZXNvdXJjZVJlYWRlciwgbXNjb3JsaWIsIFZlcnNpb249
+NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5
+I1N5c3RlbS5SZXNvdXJjZXMuUnVudGltZVJlc291cmNlU2V0AgAAAAAAAAAAAAAAUEFEUEFEULQA
+AACILwAAAAAAAAAAAACiLwAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlC8AAAAAAAAAAAAAAABf
+Q29yRGxsTWFpbgBtc2NvcmVlLmRsbAAAAAAA/yUAIAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAABABAAAAAYAACAAAAAAAAAAAAAAAAAAAABAAEAAAAwAACAAAAAAAAAAAAAAAAAAAABAAAA
+AABIAAAAWEAAADoEAAAAAAAAAAAAADoENAAAAFYAUwBfAFYARQBSAFMASQBPAE4AXwBJAE4ARgBP
+AAAAAAC9BO/+AAABAAAAAQBWekEcAAABAFZ6QRw/AAAAAAAAAAQAAAACAAAAAAAAAAAAAAAAAAAA
+RAAAAAEAVgBhAHIARgBpAGwAZQBJAG4AZgBvAAAAAAAkAAQAAABUAHIAYQBuAHMAbABhAHQAaQBv
+AG4AAAAAAAAAsASaAwAAAQBTAHQAcgBpAG4AZwBGAGkAbABlAEkAbgBmAG8AAAB2AwAAAQAwADAA
+MAAwADAANABiADAAAAAaAAEAAQBDAG8AbQBtAGUAbgB0AHMAAAAAAAAAIgABAAEAQwBvAG0AcABh
+AG4AeQBOAGEAbQBlAAAAAAAAAAAAfgArAAEARgBpAGwAZQBEAGUAcwBjAHIAaQBwAHQAaQBvAG4A
+AAAAAFMAVABfADQANQBhADcAOQAwADIAMwBmADgAZAA5ADQANQA3ADkAYgAxADcANABhAGIAMAAy
+ADQAMgBhAGEANwA1ADYANQAuAGMAcwBwAHIAbwBqAAAAAAA+AA8AAQBGAGkAbABlAFYAZQByAHMA
+aQBvAG4AAAAAADEALgAwAC4ANwAyADMAMwAuADMAMQAzADEAOAAAAAAAcAAoAAEASQBuAHQAZQBy
+AG4AYQBsAE4AYQBtAGUAAABTAFQAXwAwAGEAYgBkAGMAYwAzADkAYwA5AGEAZQA0AGUANwA5AGEA
+NgBhAGYAZABiADkAZAAyAGYAMQA4ADkAYQAwADQALgBkAGwAbAAAAEgAEgABAEwAZQBnAGEAbABD
+AG8AcAB5AHIAaQBnAGgAdAAAAEMAbwBwAHkAcgBpAGcAaAB0ACAAQAAgACAAMgAwADEANQAAACoA
+AQABAEwAZQBnAGEAbABUAHIAYQBkAGUAbQBhAHIAawBzAAAAAAAAAAAAeAAoAAEATwByAGkAZwBp
+AG4AYQBsAEYAaQBsAGUAbgBhAG0AZQAAAFMAVABfADAAYQBiAGQAYwBjADMAOQBjADkAYQBlADQA
+ZQA3ADkAYQA2AGEAZgBkAGIAOQBkADIAZgAxADgAOQBhADAANAAuAGQAbABsAAAAdgArAAEAUABy
+AG8AZAB1AGMAdABOAGEAbQBlAAAAAABTAFQAXwA0ADUAYQA3ADkAMAAyADMAZgA4AGQAOQA0ADUA
+NwA5AGIAMQA3ADQAYQBiADAAMgA0ADIAYQBhADcANQA2ADUALgBjAHMAcAByAG8AagAAAAAAQgAP
+AAEAUAByAG8AZAB1AGMAdABWAGUAcgBzAGkAbwBuAAAAMQAuADAALgA3ADIAMwAzAC4AMwAxADMA
+MQA4AAAAAABGAA8AAQBBAHMAcwBlAG0AYgBsAHkAIABWAGUAcgBzAGkAbwBuAAAAMQAuADAALgA3
+ADIAMwAzAC4AMwAxADMAMQA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAwAAAC0PwAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
+            </ScriptProject>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Genarete HRM Faxes(hold or Archive)\Execute Process Task"
+          DTS:CreationName="Microsoft.ExecuteProcess"
+          DTS:Description="Execute Process Task"
+          DTS:DTSID="{1E5B6A38-2091-40E2-9E69-1A6E843E0F9F}"
+          DTS:ExecutableType="Microsoft.ExecuteProcess"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Execute Process Task"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecuteProcessData
+              Executable="\\p10prdsde003.pharmmd.local\Stars\Applications\Putty\psftp.exe"
+              Arguments="stars_operations_prod@p10prdlap101 -pw Thr33D0g$ -b faxSFTP.txt -v -be -batch -hostkey 12:67:8b:65:9a:47:cb:87:c3:73:e5:54:9b:61:88:9e"
+              WorkingDirectory="\\p10prdsde003.pharmmd.local\Stars\Applications\Putty"
+              WindowStyle="Hidden" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Genarete HRM Faxes(hold or Archive)\Get Providers Set"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{27D0CE3B-C94C-4003-B753-A6B68F525431}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Get Providers Set"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{6311C9A2-D389-4B9C-B757-1A615A452B59}"
+              SQLTask:SqlStatementSource="Select distinct [NPI], convert(varchar(10),[Campaign_Date],112) [Campaign_Date]&#xA;from [staging].[HRMDTM_DTP_Call_Fax_List] with (nolock) &#xA;where Entity_Type = 'provider'&#xA;and DNC_Flag &lt;&gt; 1&#xA;and len(Provider_Phone) = 10"
+              SQLTask:ResultType="ResultSetType_Rowset" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="0"
+                SQLTask:DtsVariableName="User::ProviderSet" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Genarete HRM Faxes(hold or Archive)\Loop through Providers"
+          DTS:CreationName="STOCK:FOREACHLOOP"
+          DTS:Description="Foreach Loop Container"
+          DTS:DTSID="{19019F28-95F6-46D8-B61F-AC2435FC33D0}"
+          DTS:ExecutableType="STOCK:FOREACHLOOP"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Loop through Providers">
+          <DTS:ForEachEnumerator
+            DTS:CreationName="Microsoft.ForEachADOEnumerator"
+            DTS:DTSID="{BFA3B967-4B76-4D1C-95BB-66D7BA736B3E}"
+            DTS:ObjectName="{AE174D42-B3C5-4130-99E1-6153D264FB7A}">
+            <DTS:ObjectData>
+              <FEEADO
+                EnumType="EnumerateRowsInFirstTable"
+                VarName="User::ProviderSet" />
+            </DTS:ObjectData>
+          </DTS:ForEachEnumerator>
+          <DTS:Variables />
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\Genarete HRM Faxes(hold or Archive)\Loop through Providers\Generate Faxes thru Report"
+              DTS:CreationName="Microsoft.ScriptTask"
+              DTS:Description="Script Task"
+              DTS:DTSID="{4405E039-3C1B-466F-854E-0CD3C2795EF5}"
+              DTS:ExecutableType="Microsoft.ScriptTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Generate Faxes thru Report"
+              DTS:ThreadHint="1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <ScriptProject
+                  Name="ST_112a86ea8fa74260b6cb5a35b010f020"
+                  VSTAMajorVersion="15"
+                  VSTAMinorVersion="0"
+                  Language="VisualBasic"
+                  ReadOnlyVariables="User::Campaign_Date,User::Provider_ID,$Project::FaxSendPath,$Project::FaxLetterRDL">
+                  <ProjectItem
+                    Name="st_112a86ea8fa74260b6cb5a35b010f020.vbproj"
+                    Encoding="UTF16LE"><![CDATA[<?xml version="1.0" encoding="utf-16"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!-- This section defines project-level properties.
+
+       Configuration - Specifies whether the default configuration is Release or Debug.
+       Platform - Specifies what CPU the output of this project can run on.
+       OutputType - Must be "Library" for VSTA.
+       NoStandardLibraries - Set to "false" for VSTA.
+       RootNamespace - In C#, this specifies the namespace given to new files.
+                       In Visual Basic, all objects are wrapped in this namespace at runtime.
+       AssemblyName - Name of the output assembly.
+  -->
+  <PropertyGroup>
+    <ProjectTypeGuids>{30D016F9-3734-4E33-A861-5E7D899E18F3};{F184B08F-C81C-45F6-A57F-5ABD9991F28F}</ProjectTypeGuids>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <OutputType>Library</OutputType>
+    <RootNamespace>ST_d323930f206f476db7521f95f57bf383.vbproj</RootNamespace>
+    <AssemblyName>st_112a86ea8fa74260b6cb5a35b010f020</AssemblyName>
+    <StartupObject></StartupObject>
+    <OptionExplicit>On</OptionExplicit>
+    <OptionCompare>Binary</OptionCompare>
+    <OptionStrict>Off</OptionStrict>
+    <OptionInfer>On</OptionInfer>
+    <ProjectGuid>{5FB338C8-DAEA-4132-892B-C540D7380DAC}</ProjectGuid>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile></TargetFrameworkProfile>
+  </PropertyGroup>
+  <!-- This section defines properties that are set when the "Debug" configuration is
+       selected.
+
+       DebugSymbols - If true, create symbols (.pdb). If false, do not create symbols.
+       Optimize - If true, optimize the build output. If false, do not optimize.
+       OutputPath - Output path of the project relative to the project file.
+       EnableUnmanagedDebugging - If true, starting the debugger will attach both managed and unmanaged debuggers.
+       DefineConstants - Constants defined for the preprocessor.
+       Warning Level - Warning level for the compiler.
+  -->
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DefineConstants></DefineConstants>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <DebugSymbols>true</DebugSymbols>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <NoWarn>42016,42017,42018,42019,42032,42353,42354,42355,42353,42354,42355,42353,42354,42355</NoWarn>
+  </PropertyGroup>
+  <!-- This section defines properties that are set when the "Release" configuration is
+       selected.
+
+       DebugSymbols - If true, create symbols (.pdb). If false, do not create symbols.
+       Optimize - If true, optimize the build output. If false, do not optimize.
+       OutputPath - Output path of the project relative to the project file.
+       EnableUnmanagedDebugging - If true, starting the debugger will attach both managed and unmanaged debuggers.
+       DefineConstants - Constants defined for the preprocessor.
+       Warning Level - Warning level for the compiler.
+  -->
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DefineConstants></DefineConstants>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <NoWarn>42016,42017,42018,42019,42032,42353,42354,42355,42353,42354,42355,42353,42354,42355</NoWarn>
+  </PropertyGroup>
+  <!-- This section enables pre- and post-build steps. However,
+       it is recommended that MSBuild tasks be used instead of these properties.
+  -->
+  <PropertyGroup>
+    <PreBuildEvent></PreBuildEvent>
+    <PostBuildEvent></PostBuildEvent>
+  </PropertyGroup>
+  <!-- This sections specifies references for the project. -->
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.SqlServer.ManagedDTS, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.SqlServer.ScriptTask, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=89845dcd8080cc91" />
+  </ItemGroup>
+  <!-- Visual Basic supports Importing namespaces (equivalent to using statements in C#).-->
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Data" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+  </ItemGroup>
+  <!-- This section defines the user source files that are part of the
+       project.
+
+       Compile - Specifies a source file to compile.
+       EmbeddedResource - Specifies a .resx file for embedded resources.
+       None - Specifies a file that is not to be passed to the compiler (for instance,
+              a text file or XML file).
+       AppDesigner - Specifies the directory where the application properties files can
+                     be found.
+  -->
+  <ItemGroup>
+    <AppDesigner Include="My Project\" />
+    <Compile Include="My Project\AssemblyInfo.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ScriptMain.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <!-- Include the default configuration information and metadata files for the add-in.
+         These files are copied to the build output directory when the project is
+         built, and the path to the configuration file is passed to add-in on the command
+         line when debugging.
+    -->
+  </ItemGroup>
+  <!-- Include the build rules for a VB project.-->
+  <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
+  <!-- This section defines VSTA properties that describe the host-changable project properties. -->
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{30D016F9-3734-4E33-A861-5E7D899E18F3}">
+        <ProjectProperties HostName="VSTAHostName" HostPackage="{B3A685AA-7EAF-4BC6-9940-57959FA5AC07}" ApplicationType="usd" Language="vb" TemplatesPath="" DebugInfoExeName="" />
+        <Host Name="SSIS_ScriptTask" />
+        <ProjectClient>
+          <HostIdentifier>SSIS_ST140</HostIdentifier>
+        </ProjectClient>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>]]></ProjectItem>
+                  <ProjectItem
+                    Name="My Project\AssemblyInfo.vb"
+                    Encoding="UTF8"><![CDATA[Imports System
+Imports System.Reflection
+Imports System.Runtime.InteropServices
+
+' General Information about an assembly is controlled through the following 
+' set of attributes. Change these attribute values to modify the information
+' associated with an assembly.
+
+' Review the values of the assembly attributes
+
+<Assembly: AssemblyTitle("ST_d323930f206f476db7521f95f57bf383.vbproj")> 
+<Assembly: AssemblyDescription("")> 
+<Assembly: AssemblyCompany("")> 
+<Assembly: AssemblyProduct("ST_d323930f206f476db7521f95f57bf383.vbproj")> 
+<Assembly: AssemblyCopyright("Copyright @  2015")> 
+<Assembly: AssemblyTrademark("")> 
+<Assembly: CLSCompliant(True)> 
+
+<Assembly: ComVisible(False)> 
+
+'The following GUID is for the ID of the typelib if this project is exposed to COM
+<Assembly: Guid("97ffd72b-0723-4a85-aaf2-752288e91077")> 
+
+' Version information for an assembly consists of the following four values:
+'
+'      Major Version
+'      Minor Version 
+'      Build Number
+'      Revision
+'
+' You can specify all the values or you can default the Build and Revision Numbers 
+' by using the '*' as shown below:
+' <Assembly: AssemblyVersion("1.0.*")>
+
+<Assembly: AssemblyVersion("1.0.0.0")> 
+<Assembly: AssemblyFileVersion("1.0.0.0")> ]]></ProjectItem>
+                  <ProjectItem
+                    Name="ScriptMain.vb"
+                    Encoding="UTF8"><![CDATA[' Microsoft SQL Server Integration Services Script Task
+' Write scripts using Microsoft Visual Basic 2008.
+' The ScriptMain is the entry point class of the script.
+
+Imports System
+Imports System.Data
+Imports System.Math
+Imports Microsoft.SqlServer.Dts.Runtime
+
+<Microsoft.SqlServer.Dts.Tasks.ScriptTask.SSISScriptTaskEntryPointAttribute> _
+<System.CLSCompliantAttribute(False)> _
+Partial Public Class ScriptMain
+    Inherits Microsoft.SqlServer.Dts.Tasks.ScriptTask.VSTARTScriptObjectModelBase
+
+    Enum ScriptResults
+        Success = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Success
+        Failure = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Failure
+    End Enum
+
+    Public Sub Main()
+        Try
+            Dim httpConn As ConnectionManager = Dts.Connections("ReportServer")
+            Dim clientConn As HttpClientConnection = New HttpClientConnection(httpConn.AcquireConnection(Nothing))
+            Dim sProvider_ID As String = Dts.Variables("Provider_ID").Value
+            Dim currentdate As String = Dts.Variables("Campaign_Date").Value  'Date.Today.Date.ToString("yyyy-MM-dd")
+            'Dim ReportFileName As String = "\\p10prdsde003.pharmmd.local\Stars\FaxSend\" & sProvider_ID & "_" & currentdate & ".pdf"
+            Dim FaxGeneratePath As String = Dts.Variables("$Project::FaxSendPath").Value
+            Dim ReportFileName As String = FaxGeneratePath & sProvider_ID & ".pdf" 'p10prdsde003 - This is SQLSTARS where process created all files
+            Dim ReportURL As String = "http://sqlstarsrpt.pharmmd.local/_vti_bin/reportserver?http://sqlstarsrpt.pharmmd.local/BI Reports/Internal/Development/HRMCallFaxProcess/"
+
+            clientConn.ServerURL = ReportURL & Dts.Variables("$Project::FaxLetterRDL").Value & "&rs:Command=Render&Prescriber_ID=" & sProvider_ID & "&rs:Format=PDF&rc:Toolbar=False"
+
+            clientConn.DownloadFile(ReportFileName, True)
+
+            Dts.TaskResult = ScriptResults.Success
+        Catch ex As Exception
+            Dim erro As String = ex.ToString()
+            Dts.TaskResult = ScriptResults.Failure
+        End Try
+        
+    End Sub
+
+End Class]]></ProjectItem>
+                  <ProjectItem
+                    Name="My Project\Settings.settings"
+                    Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)" GeneratedClassNamespace="$safeprojectname" GeneratedClassName="MySettings">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
+</SettingsFile>]]></ProjectItem>
+                  <ProjectItem
+                    Name="My Project\Settings.Designer.vb"
+                    Encoding="UTF8"><![CDATA['------------------------------------------------------------------------------
+' <autogenerated>
+'     This code was generated by a tool.
+'
+'     Changes to this file may cause incorrect behavior and will be lost if
+'     the code is regenerated.
+' </autogenerated>
+'------------------------------------------------------------------------------
+
+Option Strict Off
+Option Explicit On
+
+
+
+Partial Friend NotInheritable Class MySettings
+    Inherits System.Configuration.ApplicationSettingsBase
+
+    Private Shared m_Value As MySettings
+
+    Private Shared m_SyncObject As Object = New Object
+
+    <System.Diagnostics.DebuggerNonUserCode()> _
+    Public Shared ReadOnly Property Value() As MySettings
+        Get
+            If (MySettings.m_Value Is Nothing) Then
+                System.Threading.Monitor.Enter(MySettings.m_SyncObject)
+                If (MySettings.m_Value Is Nothing) Then
+                    Try
+                        MySettings.m_Value = New MySettings
+                    Finally
+                        System.Threading.Monitor.Exit(MySettings.m_SyncObject)
+                    End Try
+                End If
+            End If
+            Return MySettings.m_Value
+        End Get
+    End Property
+End Class]]></ProjectItem>
+                  <ProjectItem
+                    Name="Project"
+                    Encoding="UTF16LE"><![CDATA[<?xml version="1.0" encoding="UTF-16" standalone="yes"?>
+<c:Project xmlns:c="http://schemas.microsoft.com/codeprojectml/2010/08/main" xmlns:msb="http://schemas.microsoft.com/developer/msbuild/2003" runtimeVersion="4.0" schemaVersion="1.0">
+  <msb:PropertyGroup>
+    <msb:CodeName>st_112a86ea8fa74260b6cb5a35b010f020</msb:CodeName>
+    <msb:Language>msBuild</msb:Language>
+    <msb:DisplayName>st_112a86ea8fa74260b6cb5a35b010f020</msb:DisplayName>
+    <msb:ProjectId>{CBA384C7-A922-4106-AAFC-3F21F93F19AA}</msb:ProjectId>
+  </msb:PropertyGroup>
+  <msb:ItemGroup>
+    <msb:Project Include="st_112a86ea8fa74260b6cb5a35b010f020.vbproj" />
+    <msb:File Include="My Project\Settings.settings" />
+    <msb:File Include="My Project\AssemblyInfo.vb" />
+    <msb:File Include="ScriptMain.vb" />
+    <msb:File Include="My Project\Resources.resx" />
+    <msb:File Include="My Project\Resources.Designer.vb" />
+    <msb:File Include="My Project\Settings.Designer.vb" />
+    <msb:Breakpoint Include="1dfcf1a6928a48a5aa983354201378f4">
+      <msb:FileName>ScriptMain.vb</msb:FileName>
+      <msb:ColumnNumber>13</msb:ColumnNumber>
+      <msb:Enabled>True</msb:Enabled>
+      <msb:LineNumber>33</msb:LineNumber>
+      <msb:Condition>
+      </msb:Condition>
+      <msb:ConditionType>1</msb:ConditionType>
+      <msb:Language>Basic</msb:Language>
+      <msb:HitCountType>1</msb:HitCountType>
+      <msb:HitCountTarget>1</msb:HitCountTarget>
+    </msb:Breakpoint>
+  </msb:ItemGroup>
+</c:Project>]]></ProjectItem>
+                  <ProjectItem
+                    Name="My Project\Resources.resx"
+                    Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+</root>]]></ProjectItem>
+                  <ProjectItem
+                    Name="My Project\Resources.Designer.vb"
+                    Encoding="UTF8"><![CDATA['------------------------------------------------------------------------------
+' <autogenerated>
+'     This code was generated by a tool.
+'
+'     Changes to this file may cause incorrect behavior and will be lost if
+'     the code is regenerated.
+' </autogenerated>
+'------------------------------------------------------------------------------
+
+Option Strict Off
+Option Explicit On
+
+
+Namespace My.Resources
+    
+    '''<summary>
+    '''   A strongly-typed resource class, for looking up localized strings, etc.
+    '''</summary>
+    'This class was auto-generated by the Strongly Typed Resource Builder
+    'class via a tool like ResGen or Visual Studio.NET.
+    'To add or remove a member, edit your .ResX file then rerun ResGen
+    'with the /str option, or rebuild your VS project.
+    Class MyResources
+        
+        Private Shared _resMgr As System.Resources.ResourceManager
+        
+        Private Shared _resCulture As System.Globalization.CultureInfo
+        
+        Friend Sub New()
+            MyBase.New
+        End Sub
+        
+        '''<summary>
+        '''   Returns the cached ResourceManager instance used by this class.
+        '''</summary>
+        <System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)>  _
+        Public Shared ReadOnly Property ResourceManager() As System.Resources.ResourceManager
+            Get
+                If (_resMgr Is Nothing) Then
+                    Dim temp As System.Resources.ResourceManager = New System.Resources.ResourceManager("My.Resources.MyResources", GetType(MyResources).Assembly)
+                    _resMgr = temp
+                End If
+                Return _resMgr
+            End Get
+        End Property
+        
+        '''<summary>
+        '''   Overrides the current thread's CurrentUICulture property for all
+        '''   resource lookups using this strongly typed resource class.
+        '''</summary>
+        <System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)>  _
+        Public Shared Property Culture() As System.Globalization.CultureInfo
+            Get
+                Return _resCulture
+            End Get
+            Set
+                _resCulture = value
+            End Set
+        End Property
+    End Class
+End Namespace]]></ProjectItem>
+                  <BinaryItem
+                    Name="st_112a86ea8fa74260b6cb5a35b010f020.dll">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
+5wkVBgYAMAkxCAYAagdqBBIAQAXtBBYAJAlPARYAOQZPARYA+AhPARYAFQFPAQ4AFAkKCAYAlwSZ
+BQ4APwkKCA4AtgAKCAYAUweZBQAAAABPAAAAAAABAAEAAAAAAN0FtQlNAAEAAQAAAAAAHge1CVEA
+AQACAAABEACNCbUJYQABAAMAAAAAAJoIYghhAAUACAAAARAAAgmjBIEABwAMAAEAAADCBaMEjQAJ
+AA8ABQEAALMHAABhAAkAEQAFAQAANAAAAGEACQAYAAIBAABZCQAAnQAKABoAMQCNBjoBMQBkBkIB
+MQB4BkoBMQCmBlIBEQApB1oBEQCXAV4BEQA/BGIBEQBuCWYBIQCrCfgABgauAGkBVoBJCWwBVoB3
+AWwBUCAAAAAABhhdBwYAAQBYIAAAAAAGGF0HBgABAGAgAAAAABEYYwfMAAEAiiAAAAAAEwgRB3AB
+AQCWIAAAAAATCM0FdQEBAKIgAAAAABMIAgd6AQEAriAAAAAAEwijB38BAQC6IAAAAAADGF0HBgAB
+AMIgAAAAABYIxAaEAQEA7iAAAAAAFgh/AYkBAQD1IAAAAAAWCIsBjgEBAP0gAAAAABEYYwfMAAIA
+DiEAAAAABhhdBwYAAgAYIQAAAAAWCEcElAECAHQhAAAAAAYYXQcGAAIAfCEAAAAABgDIBQYAAgCw
+IgAAAADGAg0J0AACAL4iAAAAAMYCCQHVAAMAxiIAAAAAgwBvAZkBAwDSIgAAAADGApUEyAADANwi
+AAAAABEAmwCeAQMA/CIAAAAAAQCHAKYBBAC6IAAAAAAGGF0HBgAFAAgjAAAAAAMI8ABKAAUAPCMA
+AAAABhhdBwYABQAAAAEAZAQAAAEAYgYAAAEAAAEAAAEAAAEJAF0HAQARAF0HBgAZAF0HCgApAF0H
+EAAxAF0HEAA5AF0HEABBAF0HEABJAF0HEABRAF0HEABZAF0HFQBhAF0HFQBpAF0HEABxAF0HEAB5
+AF0HEACBAF0HGgCRAF0HIACpAF0HBgCxAF0HBgC5AF0HBgDRAF0HJgDpAF0HEAAJAV0HBgARAV0H
+BgCZAF0HBgChAF0HBgAMAF0HBgAUAF0HBgAcAF0HBgAkAF0HBgAMAPAASgAUAPAASgAcAPAASgAk
+APAASgDBAF0HBgDZADABTwDZAOMJVwDxAF0HXQBRAVsEZQABAV0HBgBZAQsHagBZAZcJagAZAV0H
+BgAZAVEJewBhASAJgQBpAZAFhwApAScGjgBxAV0HkwBhAfQImAB5AZAFngCBAUcEpQCJAZUEqQCR
+AWcJrgCZAXsJtQBxAVgAEABxAUIBuwBhAZwJAQChAUMHwQAxAZUEyAChATEHzADBAA0J0ADBAAkB
+1QDBAJUEyACpAeEA4QA0AKsJ+AA8AEcESgA8AFEEDwE8AF0HBgAIACwAMAEIADAANQEpAKsAXwMu
+AAsA1gEuABMA3wEuABsA/gEuACMABwIuACsANwIuADMANwIuADsABwIuAEMAPQIuAEsANwIuAFMA
+VAIuAFsANwIuAGMAWgIuAGsAhAIuAHMAkQJAAIsANQFAAIMA2wJDAHsA5AJDAIMA2wJJAKsAcANj
+AHsA5AJjAIMA2wJpAKsAhAOAAIsANQGDAJMANQGDAJsANQGDAHsA5AKJAKsAkQOgAIsANQGpAIMA
+/gHAAIsANQHJAIMA/gHgAIsANQHjALsANQHjAFMANwLpALMANQEDAYMA2wIDAaMA/QIjAYMA2wIj
+AVsANwIgAoMA2wIgAosANQFAAoMA2wJAAosANQFgAoMA2wJgAosANQGAAoMA2wKAAosANQGgAosA
+NQHAAosANQHgAosANQHgAoMA2wIAA4sANQEgA4sANQEgA4MA2wJvANkA7AAEAAEABQAFAAYABwAJ
+AAgAAAAgB64BAADfBbMBAAAGB7gBAAC1B70BAADIBsIBAACbAccBAABkBMwBAAD0ANEBAgAEAAMA
+AgAFAAUAAgAGAAcAAgAHAAkAAgAJAAsAAgAKAA0AAQALAA0AAgAOAA8AAgAYABEALgA1ADwAQwDe
+APEAAAEHAQSAAAABAAAAAAAAAAAAAAAAAAEAAAAEAAAAAAAAAAAAAAAVAcIAAAAAAAQAAAAAAAAA
+AAAAABUBmQUAAAAACgAAAAAAAAAAAAAAHgHLAAAAAAAOAAAAAAAAAAAAAAAnAc4EAAAAAA4AAAAA
+AAAAAAAAACcBZgAAAAAAAAAAAAEAAACmCAAACAAEAAkABAAKAAcAAAAQABIAhQAAABAAKwCFAAAA
+AAAtAIUAfwDnAH8ACgEAAAAAAHN0XzExMmE4NmVhOGZhNzQyNjBiNmNiNWEzNWIwMTBmMDIwAENv
+bnRleHRWYWx1ZWAxAFRocmVhZFNhZmVPYmplY3RQcm92aWRlcmAxADxNb2R1bGU+AHNldF9TZXJ2
+ZXJVUkwATWljcm9zb2Z0LlNxbFNlcnZlci5NYW5hZ2VkRFRTAFQARGlzcG9zZV9fSW5zdGFuY2Vf
+XwBDcmVhdGVfX0luc3RhbmNlX18AdmFsdWVfXwBQcm9qZWN0RGF0YQBtc2NvcmxpYgBNaWNyb3Nv
+ZnQuVmlzdWFsQmFzaWMAQ3JlYXRlSW5zdGFuY2UAZ2V0X0dldEluc3RhbmNlAGluc3RhbmNlAEdl
+dEhhc2hDb2RlAFZhcmlhYmxlAFJ1bnRpbWVUeXBlSGFuZGxlAEdldFR5cGVGcm9tSGFuZGxlAERv
+d25sb2FkRmlsZQBNaWNyb3NvZnQuU3FsU2VydmVyLkR0cy5SdW50aW1lAEdldFR5cGUARmFpbHVy
+ZQBnZXRfQ3VsdHVyZQBzZXRfQ3VsdHVyZQBfcmVzQ3VsdHVyZQBWU1RBUlRTY3JpcHRPYmplY3RN
+b2RlbEJhc2UAQXBwbGljYXRpb25CYXNlAEFwcGxpY2F0aW9uU2V0dGluZ3NCYXNlAEVkaXRvckJy
+b3dzYWJsZVN0YXRlAEd1aWRBdHRyaWJ1dGUASGVscEtleXdvcmRBdHRyaWJ1dGUAR2VuZXJhdGVk
+Q29kZUF0dHJpYnV0ZQBEZWJ1Z2dlck5vblVzZXJDb2RlQXR0cmlidXRlAERlYnVnZ2FibGVBdHRy
+aWJ1dGUARWRpdG9yQnJvd3NhYmxlQXR0cmlidXRlAENvbVZpc2libGVBdHRyaWJ1dGUAQXNzZW1i
+bHlUaXRsZUF0dHJpYnV0ZQBTdGFuZGFyZE1vZHVsZUF0dHJpYnV0ZQBIaWRlTW9kdWxlTmFtZUF0
+dHJpYnV0ZQBBc3NlbWJseVRyYWRlbWFya0F0dHJpYnV0ZQBUYXJnZXRGcmFtZXdvcmtBdHRyaWJ1
+dGUARGVidWdnZXJIaWRkZW5BdHRyaWJ1dGUAQXNzZW1ibHlGaWxlVmVyc2lvbkF0dHJpYnV0ZQBN
+eUdyb3VwQ29sbGVjdGlvbkF0dHJpYnV0ZQBBc3NlbWJseURlc2NyaXB0aW9uQXR0cmlidXRlAENv
+bXBpbGF0aW9uUmVsYXhhdGlvbnNBdHRyaWJ1dGUAQXNzZW1ibHlQcm9kdWN0QXR0cmlidXRlAEFz
+c2VtYmx5Q29weXJpZ2h0QXR0cmlidXRlAENMU0NvbXBsaWFudEF0dHJpYnV0ZQBTU0lTU2NyaXB0
+VGFza0VudHJ5UG9pbnRBdHRyaWJ1dGUAQXNzZW1ibHlDb21wYW55QXR0cmlidXRlAFJ1bnRpbWVD
+b21wYXRpYmlsaXR5QXR0cmlidXRlAG1fVmFsdWUAZ2V0X1ZhbHVlAHNldF9WYWx1ZQBHZXRPYmpl
+Y3RWYWx1ZQBTeXN0ZW0uVGhyZWFkaW5nAFN5c3RlbS5SdW50aW1lLlZlcnNpb25pbmcAVG9TdHJp
+bmcATWF0aABTVF9kMzIzOTMwZjIwNmY0NzZkYjc1MjFmOTVmNTdiZjM4My52YnByb2oATWljcm9z
+b2Z0LlNxbFNlcnZlci5TY3JpcHRUYXNrAE1pY3Jvc29mdC5TcWxTZXJ2ZXIuRHRzLlRhc2tzLlNj
+cmlwdFRhc2sATWljcm9zb2Z0LlZpc3VhbEJhc2ljLk15U2VydmljZXMuSW50ZXJuYWwAU2NyaXB0
+T2JqZWN0TW9kZWwAU3lzdGVtLkNvbXBvbmVudE1vZGVsAHN0XzExMmE4NmVhOGZhNzQyNjBiNmNi
+NWEzNWIwMTBmMDIwLmRsbABnZXRfSXRlbQBTeXN0ZW0ARW51bQBTeXN0ZW0uQ29tcG9uZW50TW9k
+ZWwuRGVzaWduAFNjcmlwdE1haW4AZ2V0X0FwcGxpY2F0aW9uAE15QXBwbGljYXRpb24AU3lzdGVt
+LkNvbmZpZ3VyYXRpb24AU3lzdGVtLkdsb2JhbGl6YXRpb24AU3lzdGVtLlJlZmxlY3Rpb24AQWNx
+dWlyZUNvbm5lY3Rpb24ASHR0cENsaWVudENvbm5lY3Rpb24ARXhjZXB0aW9uAEN1bHR1cmVJbmZv
+AG1fQXBwT2JqZWN0UHJvdmlkZXIAbV9Vc2VyT2JqZWN0UHJvdmlkZXIAbV9Db21wdXRlck9iamVj
+dFByb3ZpZGVyAG1fTXlXZWJTZXJ2aWNlc09iamVjdFByb3ZpZGVyAGdldF9SZXNvdXJjZU1hbmFn
+ZXIAQ29ubmVjdGlvbk1hbmFnZXIAU3lzdGVtLkNvZGVEb20uQ29tcGlsZXIAZ2V0X1VzZXIARW50
+ZXIAZ2V0X0NvbXB1dGVyAE15Q29tcHV0ZXIAX3Jlc01ncgBDbGVhclByb2plY3RFcnJvcgBTZXRQ
+cm9qZWN0RXJyb3IAQWN0aXZhdG9yAC5jdG9yAC5jY3RvcgBNb25pdG9yAFN5c3RlbS5EaWFnbm9z
+dGljcwBNaWNyb3NvZnQuVmlzdWFsQmFzaWMuRGV2aWNlcwBnZXRfV2ViU2VydmljZXMATXlXZWJT
+ZXJ2aWNlcwBNaWNyb3NvZnQuVmlzdWFsQmFzaWMuQXBwbGljYXRpb25TZXJ2aWNlcwBTeXN0ZW0u
+UnVudGltZS5JbnRlcm9wU2VydmljZXMATWljcm9zb2Z0LlZpc3VhbEJhc2ljLkNvbXBpbGVyU2Vy
+dmljZXMAU3lzdGVtLlJ1bnRpbWUuQ29tcGlsZXJTZXJ2aWNlcwBTeXN0ZW0uUmVzb3VyY2VzAFNU
+X2QzMjM5MzBmMjA2ZjQ3NmRiNzUyMWY5NWY1N2JmMzgzLnZicHJvai5NeS5SZXNvdXJjZXMATXlS
+ZXNvdXJjZXMAU1RfZDMyMzkzMGYyMDZmNDc2ZGI3NTIxZjk1ZjU3YmYzODMudmJwcm9qLlJlc291
+cmNlcy5yZXNvdXJjZXMARGVidWdnaW5nTW9kZXMAZ2V0X1ZhcmlhYmxlcwBNeVNldHRpbmdzAEVx
+dWFscwBDb252ZXJzaW9ucwBnZXRfQ29ubmVjdGlvbnMAUnVudGltZUhlbHBlcnMAT3BlcmF0b3Jz
+AFN1Y2Nlc3MAZ2V0X0R0cwBTY3JpcHRSZXN1bHRzAENvbmNhdABtX1N5bmNPYmplY3QAQ29uY2F0
+ZW5hdGVPYmplY3QATXlQcm9qZWN0AEV4aXQAc2V0X1Rhc2tSZXN1bHQAbV9Db250ZXh0AFNUX2Qz
+MjM5MzBmMjA2ZjQ3NmRiNzUyMWY5NWY1N2JmMzgzLnZicHJvai5NeQBnZXRfQXNzZW1ibHkAADFN
+AHkALgBSAGUAcwBvAHUAcgBjAGUAcwAuAE0AeQBSAGUAcwBvAHUAcgBjAGUAcwAAGVIAZQBwAG8A
+cgB0AFMAZQByAHYAZQByAAAXUAByAG8AdgBpAGQAZQByAF8ASQBEAAAbQwBhAG0AcABhAGkAZwBu
+AF8ARABhAHQAZQAAKyQAUAByAG8AagBlAGMAdAA6ADoARgBhAHgAUwBlAG4AZABQAGEAdABoAAAJ
+LgBwAGQAZgAAgRVoAHQAdABwADoALwAvAHMAcQBsAHMAdABhAHIAcwByAHAAdAAuAHAAaABhAHIA
+bQBtAGQALgBsAG8AYwBhAGwALwBfAHYAdABpAF8AYgBpAG4ALwByAGUAcABvAHIAdABzAGUAcgB2
+AGUAcgA/AGgAdAB0AHAAOgAvAC8AcwBxAGwAcwB0AGEAcgBzAHIAcAB0AC4AcABoAGEAcgBtAG0A
+ZAAuAGwAbwBjAGEAbAAvAEIASQAgAFIAZQBwAG8AcgB0AHMALwBJAG4AdABlAHIAbgBhAGwALwBE
+AGUAdgBlAGwAbwBwAG0AZQBuAHQALwBIAFIATQBDAGEAbABsAEYAYQB4AFAAcgBvAGMAZQBzAHMA
+LwAALSQAUAByAG8AagBlAGMAdAA6ADoARgBhAHgATABlAHQAdABlAHIAUgBEAEwAAEMmAHIAcwA6
+AEMAbwBtAG0AYQBuAGQAPQBSAGUAbgBkAGUAcgAmAFAAcgBlAHMAYwByAGkAYgBlAHIAXwBJAEQA
+PQAAPyYAcgBzADoARgBvAHIAbQBhAHQAPQBQAEQARgAmAHIAYwA6AFQAbwBvAGwAYgBhAHIAPQBG
+AGEAbABzAGUAALpTLfh7ekNPv2vpypGGx4MABCABAQgDIAABBSABARERBCABAQ4EIAEBAgUgAgEO
+DgUgAQERRQcgBAEODg4OBhUSJAESDAYVEiQBEggGFRIkARJlBhUSJAESIAQgABMABwABEm0RgKEF
+IAASgKUHIAIBDhKApQQAARwcBAABARwLBwUSgJUODg4SgJkFIAASgLEFIAASgLUGIAESgJUcBCAB
+HBwEIAEBHAUgABKAvQYgARKAwRwDIAAcBAABDhwGAAMODg4OBQACHBwcBSACAQ4CBgABARKAmQMg
+AA4DAAABBCABAhwDIAAIBAcBHgACHgAFEAEAHgAECgEeAAQHARMABhUSJAETAAcGFRJxARMABhUS
+cQETAAITAAQKARMABSABARMACLd6XFYZNOCJCLA/X38R1Qo6CImEXc2AgMyRBAAAAAAEAQAAAAcG
+FRIkARIMBwYVEiQBEggHBhUSJAESZQcGFRIkARIgAwYSeQMGEn0DBhIYAgYcAgYIAwYRKAQAABIM
+BAAAEggEAAASZQQAABIgBAAAEnkEAAASfQUAAQESfQQAABIYBCAAEm0HEAEBHgAeAAcwAQEBEB4A
+BAgAEgwECAASCAQIABJlBAgAEiAECAASeQQIABJ9BAgAEhgEKAATAAgBAAgAAAAAAB4BAAEAVAIW
+V3JhcE5vbkV4Y2VwdGlvblRocm93cwEIAQACAAAAAAAvAQAqU1RfZDMyMzkzMGYyMDZmNDc2ZGI3
+NTIxZjk1ZjU3YmYzODMudmJwcm9qAAAFAQAAAAAWAQARQ29weXJpZ2h0IEAgIDIwMTUAAAUBAAEA
+ACkBACQ5N2ZmZDcyYi0wNzIzLTRhODUtYWFmMi03NTIyODhlOTEwNzcAAAwBAAcxLjAuMC4wAABJ
+AQAaLk5FVEZyYW1ld29yayxWZXJzaW9uPXY0LjUBAFQOFEZyYW1ld29ya0Rpc3BsYXlOYW1lEi5O
+RVQgRnJhbWV3b3JrIDQuNQgBAAEAAAAAABgBAApNeVRlbXBsYXRlCDExLjAuMC4wAABhAQA0U3lz
+dGVtLldlYi5TZXJ2aWNlcy5Qcm90b2NvbHMuU29hcEh0dHBDbGllbnRQcm90b2NvbBJDcmVhdGVf
+X0luc3RhbmNlX18TRGlzcG9zZV9fSW5zdGFuY2VfXwAAABABAAtNeS5Db21wdXRlcgAAEwEADk15
+LkFwcGxpY2F0aW9uAAAMAQAHTXkuVXNlcgAAEwEADk15LldlYlNlcnZpY2VzAAAAAAC0AAAAzsrv
+vgEAAACRAAAAbFN5c3RlbS5SZXNvdXJjZXMuUmVzb3VyY2VSZWFkZXIsIG1zY29ybGliLCBWZXJz
+aW9uPTQuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49Yjc3YTVjNTYxOTM0
+ZTA4OSNTeXN0ZW0uUmVzb3VyY2VzLlJ1bnRpbWVSZXNvdXJjZVNldAIAAAAAAAAAAAAAAFBBRFBB
+RFC0AAAA6DwAAAAAAAAAAAAAAj0AAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPQ8AAAAAAAAAAAA
+AAAAX0NvckRsbE1haW4AbXNjb3JlZS5kbGwAAAAAAP8lACAAEAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEA
+EAAAABgAAIAAAAAAAAAAAAAAAAAAAAEAAQAAADAAAIAAAAAAAAAAAAAAAAAAAAEAAAAAAEgAAABY
+QAAADAQAAAAAAAAAAAAADAQ0AAAAVgBTAF8AVgBFAFIAUwBJAE8ATgBfAEkATgBGAE8AAAAAAL0E
+7/4AAAEAAAABAAAAAAAAAAEAAAAAAD8AAAAAAAAABAAAAAIAAAAAAAAAAAAAAAAAAABEAAAAAQBW
+AGEAcgBGAGkAbABlAEkAbgBmAG8AAAAAACQABAAAAFQAcgBhAG4AcwBsAGEAdABpAG8AbgAAAAAA
+AACwBGwDAAABAFMAdAByAGkAbgBnAEYAaQBsAGUASQBuAGYAbwAAAEgDAAABADAAMAAwADAAMAA0
+AGIAMAAAABoAAQABAEMAbwBtAG0AZQBuAHQAcwAAAAAAAAAiAAEAAQBDAG8AbQBwAGEAbgB5AE4A
+YQBtAGUAAAAAAAAAAAB+ACsAAQBGAGkAbABlAEQAZQBzAGMAcgBpAHAAdABpAG8AbgAAAAAAUwBU
+AF8AZAAzADIAMwA5ADMAMABmADIAMAA2AGYANAA3ADYAZABiADcANQAyADEAZgA5ADUAZgA1ADcA
+YgBmADMAOAAzAC4AdgBiAHAAcgBvAGoAAAAAADAACAABAEYAaQBsAGUAVgBlAHIAcwBpAG8AbgAA
+AAAAMQAuADAALgAwAC4AMAAAAHAAKAABAEkAbgB0AGUAcgBuAGEAbABOAGEAbQBlAAAAcwB0AF8A
+MQAxADIAYQA4ADYAZQBhADgAZgBhADcANAAyADYAMABiADYAYwBiADUAYQAzADUAYgAwADEAMABm
+ADAAMgAwAC4AZABsAGwAAABIABIAAQBMAGUAZwBhAGwAQwBvAHAAeQByAGkAZwBoAHQAAABDAG8A
+cAB5AHIAaQBnAGgAdAAgAEAAIAAgADIAMAAxADUAAAAqAAEAAQBMAGUAZwBhAGwAVAByAGEAZABl
+AG0AYQByAGsAcwAAAAAAAAAAAHgAKAABAE8AcgBpAGcAaQBuAGEAbABGAGkAbABlAG4AYQBtAGUA
+AABzAHQAXwAxADEAMgBhADgANgBlAGEAOABmAGEANwA0ADIANgAwAGIANgBjAGIANQBhADMANQBi
+ADAAMQAwAGYAMAAyADAALgBkAGwAbAAAAHYAKwABAFAAcgBvAGQAdQBjAHQATgBhAG0AZQAAAAAA
+UwBUAF8AZAAzADIAMwA5ADMAMABmADIAMAA2AGYANAA3ADYAZABiADcANQAyADEAZgA5ADUAZgA1
+ADcAYgBmADMAOAAzAC4AdgBiAHAAcgBvAGoAAAAAADQACAABAFAAcgBvAGQAdQBjAHQAVgBlAHIA
+cwBpAG8AbgAAADEALgAwAC4AMAAuADAAAAA4AAgAAQBBAHMAcwBlAG0AYgBsAHkAIABWAGUAcgBz
+AGkAbwBuAAAAMQAuADAALgAwAC4AMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMAAADAAAABQ9AAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
+                  <Breakpoint
+                    Enabled="True"
+                    File="ScriptMain.vb"
+                    Line="33"
+                    Column="13" />
+                </ScriptProject>
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+          <DTS:ForEachVariableMappings>
+            <DTS:ForEachVariableMapping
+              DTS:CreationName=""
+              DTS:DTSID="{28E7AF87-E40F-43D4-A63D-313B4C8785CF}"
+              DTS:ObjectName="{28E7AF87-E40F-43D4-A63D-313B4C8785CF}"
+              DTS:ValueIndex="0"
+              DTS:VariableName="User::Provider_ID" />
+            <DTS:ForEachVariableMapping
+              DTS:CreationName=""
+              DTS:DTSID="{D77E47E9-FDB8-4A2E-8EE1-A66CE9C688BD}"
+              DTS:ObjectName="{D77E47E9-FDB8-4A2E-8EE1-A66CE9C688BD}"
+              DTS:ValueIndex="1"
+              DTS:VariableName="User::Campaign_Date" />
+          </DTS:ForEachVariableMappings>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Genarete HRM Faxes(hold or Archive)\Popu ref between pat Prov clients for each fax"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="refference between patients and Providers and clients for each fax"
+          DTS:DTSID="{9A4D090A-8E73-481E-874D-A67A6EA70DAA}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Popu ref between pat Prov clients for each fax"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="2">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{6311C9A2-D389-4B9C-B757-1A615A452B59}"
+              SQLTask:SqlStatementSource="--Insert Provider by Client by Patients for keep refference between patients and Providers and clients for each fax&#xA;Insert into [dbo].[DTP_Fax_List]&#xA;(&#xA;&#x9;[PMD_Client_ID]&#xA;&#x9;,[NPI]&#xA;&#x9;,[PMD_Patient_ID]&#xA;&#x9;,[PlanIdentifier_PClm]&#xA;&#x9;,[MeasureUse]&#xA;&#x9;,[DTP_CNSLD_Fax_ID]&#xA;&#x9;,[Drug_Name]&#xA;&#x9;,[Drug_Description]&#xA;&#x9;,[Campaign_Date]&#xA;)&#xA;&#xA;Select distinct &#xA; s.[PMD_Client_ID]   &#xA; ,s.[NPI]     &#xA; ,s.[PMD_Patient_ID] &#xA; ,s.[PlanIdentifier_PClm]&#xA; ,s.[MeasureUse]&#xA; ,c.[DTP_CNSLD_Fax_ID]&#xA; ,s.[Drug_Name]&#xA; ,s.[Drug_Description]&#xA; ,s.Campaign_Date    &#xA;FROM [staging].[HRMDTM_DTP_Call_Fax_List] s&#xA;left join &#xA;(&#xA;&#x9;SELECT [DTP_CNSLD_Fax_ID], [NPI], [Campaign_Date] FROM [dbo].[DTP_CNSLD_Fax_List] &#xA;&#x9;where [Campaign_Date] = (select distinct [Campaign_Date] from [staging].[HRMDTM_DTP_Call_Fax_List] where entity_type = 'provider')&#xA;) c ON (c.NPI = s.[NPI] and c.Campaign_Date = s.Campaign_Date)&#xA;where s.entity_type = 'provider'&#xA;and s.DNC_Flag &lt;&gt; 1&#xA;and len(s.Provider_Phone) = 10&#xA;&#xA;-- To avoid duplicate faxes it checks with same in week we sent faxes with same patients and same durg information&#xA;update [dbo].[DTP_CNSLD_Fax_List]&#xA;Set [FaxSendInd] = 'Y', [LastStatus]='SentBefore'&#xA;--select * from  [dbo].[DTP_CNSLD_Fax_List]&#xA;where [Campaign_Date] = (select distinct [Campaign_Date] from [staging].[HRMDTM_DTP_Call_Fax_List] where entity_type = 'provider')&#xA;and [NPI] not in&#xA;(&#xA;&#x9;Select f1.[NPI]&#xA;&#x9;from [Stars_Call_Lists].[dbo].[DTP_Fax_List] f1&#xA;&#x9;where [Campaign_Date] = (select distinct [Campaign_Date] from [staging].[HRMDTM_DTP_Call_Fax_List] where entity_type = 'provider')&#xA;&#x9;and not exists &#xA;&#x9;(&#xA;&#x9;&#x9;SELECT *&#xA;&#x9;&#x9;FROM [Stars_Call_Lists].[dbo].[DTP_Fax_List] f2&#xA;&#x9;&#x9;inner join [Stars_Call_Lists].[dbo].[DTP_CNSLD_Fax_List] c on c.DTP_CNSLD_Fax_ID = f2.DTP_CNSLD_Fax_ID&#xA;&#x9;&#x9;where f2.[Campaign_Date] between getdate()-5 and (select distinct dateadd(dd, -1, [Campaign_Date]) from [staging].[HRMDTM_DTP_Call_Fax_List] where entity_type = 'provider')&#xA;&#x9;&#x9;and c.[LastStatus] = 'success'&#xA;&#x9;&#x9;and f1.NPI = f2.NPI&#xA;&#x9;&#x9;and f1.[PMD_Client_ID] = f2.PMD_Client_ID&#xA;&#x9;&#x9;and f1.PMD_Patient_ID = f2.PMD_Patient_ID&#xA;&#x9;&#x9;and f1.MeasureUse = f2.MeasureUse&#xA;&#x9;&#x9;and f1.Drug_Name = f2.Drug_Name&#xA;&#x9;)&#xA;)&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Genarete HRM Faxes(hold or Archive)\Populate into Consolidate fax table If fax day is true"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="This table will use by Fax sender program"
+          DTS:DTSID="{15B2DFE9-2D97-4B98-B080-299724B1559E}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Populate into Consolidate fax table If fax day is true"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="2">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{6311C9A2-D389-4B9C-B757-1A615A452B59}"
+              SQLTask:SqlStatementSource="--Consolidate all Clients/patients faxes by Providers then insert into table where fax sender program will pickup and run&#xA;&#xA;Insert into [dbo].[DTP_CNSLD_Fax_List]&#xA;&#xA;(&#xA;&#x9;[NPI]&#xA;&#x9;,[ReceiverFaxNum]&#xA;&#x9;,[SenderFaxNum]&#xA;&#x9;,[FileName]&#xA;&#x9;,[Campaign_Date]&#xA;)&#xA;&#xA;SELECT  distinct&#xA; [NPI]&#xA; ,[Provider_Fax] ReceiverFaxNum&#xA; ,'8708902730' SenderFaxNum&#xA; --,NPI + '_' + convert(varchar(10),[Campaign_Date],112) [FileName]&#xA; ,NPI [FileName]&#xA; ,[Campaign_Date]&#xA;From [staging].[HRMDTM_DTP_Call_Fax_List] AS CFL&#xA;where entity_type = 'provider'&#xA;and DNC_Flag &lt;&gt; 1&#xA;and len(Provider_Phone) = 10&#xA;AND NOT EXISTS&#xA;(&#xA;&#x9;SELECT 1&#xA;&#x9;FROM [dbo].[DTP_CNSLD_Fax_List] AS _CFL&#xA;&#x9;WHERE CFL.NPI = _CFL.NPI&#xA;&#x9;&#x9;AND CFL.Campaign_Date = _CFL.Campaign_Date&#xA;)&#xA;;&#xA;&#xA;--NOT Verified--&#xA;&#xA;update [dbo].[DTP_CNSLD_Fax_List]&#xA;Set [FaxSendInd] = 'N', [LastStatus]='NotVerified'&#xA;--select * from  [dbo].[DTP_CNSLD_Fax_List]&#xA;where [Campaign_Date] = (select distinct [Campaign_Date] from [staging].[HRMDTM_DTP_Call_Fax_List] where entity_type = 'provider')&#xA;and [NPI]  in&#xA;(&#xA;&#x9;SELECT distinct [NPI] from [staging].[HRMDTM_DTP_Call_Fax_List] where entity_type = 'provider' and [Provider_Fax_Verified] = 0&#xA;)&#x9;&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Genarete HRM Faxes(hold or Archive).PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{4D95C58C-05F8-488F-8233-00D5DB120CAC}"
+          DTS:From="Package\Genarete HRM Faxes(hold or Archive)\Get Providers Set"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Genarete HRM Faxes(hold or Archive)\Loop through Providers" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Genarete HRM Faxes(hold or Archive).PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{6F24AEA4-7D85-4690-A327-8ACADFE8B315}"
+          DTS:From="Package\Genarete HRM Faxes(hold or Archive)\Populate into Consolidate fax table If fax day is true"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Genarete HRM Faxes(hold or Archive)\Popu ref between pat Prov clients for each fax" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Genarete HRM Faxes(hold or Archive).PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{0846FC7D-B41F-4845-A5DD-218717DE1D02}"
+          DTS:From="Package\Genarete HRM Faxes(hold or Archive)\Loop through Providers"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\Genarete HRM Faxes(hold or Archive)\Execute Process Task" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Genarete HRM Faxes(hold or Archive).PrecedenceConstraints[Constraint 3]"
+          DTS:CreationName=""
+          DTS:DTSID="{E06B409B-9078-4541-BE1E-663007AE6D89}"
+          DTS:EvalOp="3"
+          DTS:Expression="@FaxDay == &quot;True&quot;"
+          DTS:From="Package\Genarete HRM Faxes(hold or Archive)\Execute Process Task"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 3"
+          DTS:To="Package\Genarete HRM Faxes(hold or Archive)\Populate into Consolidate fax table If fax day is true" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Genarete HRM Faxes(hold or Archive).PrecedenceConstraints[Constraint 4]"
+          DTS:CreationName=""
+          DTS:DTSID="{B6369CBC-E555-4A64-BF64-4DDE5DD16D71}"
+          DTS:EvalOp="3"
+          DTS:Expression="@FaxDay != &quot;True&quot;"
+          DTS:From="Package\Genarete HRM Faxes(hold or Archive)\Execute Process Task"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 4"
+          DTS:To="Package\Genarete HRM Faxes(hold or Archive)\Archive Faxes to Hold folder if it fax day is false" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\z_Send notification on ADH Call summary"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:Disabled="True"
+      DTS:DTSID="{727B828B-CD12-48DB-9F59-BD97D9E033B5}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="z_Send notification on ADH Call summary"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{6311C9A2-D389-4B9C-B757-1A615A452B59}"
+          SQLTask:SqlStatementSource="----Adherence Summary &#xA;Declare @Subject nvarchar(1000)&#xA;DECLARE @CallListEmailRecipients VARCHAR(100) = ?&#xA;DECLARE @CallListEmailDatabaseProfile VARCHAR(50) = ?&#xA;&#xA;--DECLARE @CallListEmailRecipients VARCHAR(100) = 'Saideswar.Thondapu@pharmmd.com;'&#xA;--DECLARE @CallListEmailDatabaseProfile VARCHAR(50) = 'P10PRDSDE003OPS'&#xA;&#xA;set @Subject= 'Adherence Call Summary on ' + Convert(varchar(12),getdate(), 100)&#xA;&#xA;Declare @xml1 nvarchar(MAX)&#xA;Declare @body1 nvarchar(MAX)&#xA;&#xA;SET @body1 ='&lt;html&gt;&lt;head&gt;&lt;style&gt;table, th, td { border: 1px solid black; border-collapse: collapse;}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;H3&gt;Adherence Call Summary&lt;/H3&gt;&lt;table border = 1&gt; &lt;tr&gt; &lt;th&gt; Client Name &lt;/th&gt; &lt;th&gt; Campaign Refresh Date &lt;/th&gt; &lt;th&gt; Calling Patients &lt;/th&gt; &lt;th&gt; Texting Patients &lt;/th&gt;&lt;/tr&gt;'  &#xA;Set @xml1 = CAST(( SELECT [Client Name] AS 'td','', [Campaign Refresh Date] AS 'td','', [Calling Patients] AS 'td','', [Texting Patients] AS 'td'&#xA;FROM &#xA;(&#xA; SELECT&#xA;  [Client Name]&#xA;  ,[Campaign Refresh Date]&#xA;  ,[Calling Patients]&#xA;  ,ISNULL(CAST([Texting Patients] AS VARCHAR(50)),'') [Texting Patients]&#xA; FROM&#xA; (&#xA;  (SELECT c.PMD_Client_ID ,[Client_Name] 'Client Name', MAX([Campaign_Date]) 'Campaign Refresh Date', COUNT(distinct NPI_PMD_Patient_CNSLD_IDs) 'Calling Patients'&#xA;  FROM [Stars_Call_Lists].[dbo].[v_ADH_StarsCallList_Alert] d&#xA;  Inner join (SELECT distinct [PMD_Client_ID], [Client_Name]  FROM [STARS].[dbo].[Client_Contracts]) c on d.[PMD_Client_ID]= c.[PMD_Client_ID]&#xA;  where entity_type = 'patient'&#xA;  group by c.PMD_Client_ID, [Client_Name]&#xA;  ) c&#xA;  LEFT JOIN &#xA;  (&#xA;  SELECT [PMD_Client_ID], COUNT([PMD_Patient_ID]) 'Texting Patients' &#xA;  FROM [Stars_Call_Lists].[dbo].[DTP_Texting_List]&#xA;  where [Campaign_Date] = (Select top 1 [Campaign_Date] FROM [staging].[HRMDTM_DTP_Call_Fax_List])&#xA;  GROUP BY [PMD_Client_ID]&#xA;  ) t ON t.PMD_Client_ID = c.PMD_Client_ID&#xA; )&#xA;) a&#xA;FOR XML PATH('tr'), ELEMENTS ) AS nvarchar(MAX))&#xA;&#xA;SET @body1 = @body1 + @xml1 +'&lt;/table&gt;&lt;br/&gt;&lt;br/&gt;'&#xA;&#xA;Declare @xml2 nvarchar(MAX)&#xA;Declare @body2 nvarchar(MAX)&#xA;&#xA;SET @body2 ='&lt;table border = 1&gt; &lt;tr&gt; &lt;th&gt; Campaign &lt;/th&gt; &lt;th&gt; Patients Count &lt;/th&gt;&lt;/tr&gt;'  &#xA;Set @xml2 = CAST(( SELECT [Campaign] AS 'td','', [Patients Count] AS 'td'&#xA;FROM &#xA;(&#xA; SELECT top 100&#xA;  'Campaign' = Case [Filter]&#xA;    when 'highrisk' then 'Clinician'&#xA;    when 'LongTerm' then 'Long Term'&#xA;    when 'standard' then 'Standard'&#xA;    when 'Other' then 'Non-English/Non-Spanish'&#xA;    else [Filter] end&#xA;  ,count(distinct NPI_PMD_Patient_CNSLD_IDs) [Patients Count]&#xA;FROM [Stars_Call_Lists].[dbo].[v_ADH_StarsCallList_Alert] d&#xA;Inner join (SELECT distinct [PMD_Client_ID], [Client_Name]  FROM [STARS].[dbo].[Client_Contracts]) c on d.[PMD_Client_ID]= c.[PMD_Client_ID]&#xA; where entity_type = 'patient'&#xA; group by [Filter]&#xA; Order by [Filter]&#xA;) a&#xA;FOR XML PATH('tr'), ELEMENTS ) AS nvarchar(MAX))&#xA;&#xA;SET @body2 = @body1 + @body2 + @xml2 +'&lt;/table&gt;&lt;br/&gt;&lt;br/&gt;'&#xA;&#xA;Declare @xml3 nvarchar(MAX)&#xA;Declare @body3 nvarchar(MAX)&#xA;&#xA;SET @body3 ='&lt;table border = 1&gt; &lt;tr&gt; &lt;th&gt; Client Name &lt;/th&gt; &lt;th&gt; Campaign &lt;/th&gt; &lt;th&gt; Patients Count &lt;/th&gt;&lt;/tr&gt;'&#xA;Set @xml3 = CAST(( SELECT [Client Name] AS 'td','', [Campaign] AS 'td','', [Patients Count] AS 'td'&#xA;FROM &#xA;(&#xA; SELECT top 100&#xA; [Client_Name] 'Client Name'&#xA; ,'Campaign' = Case [Filter]&#xA;   when 'highrisk' then 'Clinician'&#xA;   when 'LongTerm' then 'Long Term'&#xA;   when 'standard' then 'Standard'&#xA;   when 'Other' then 'Non-English/Non-Spanish'&#xA;   else [Filter] end&#xA; ,count(distinct NPI_PMD_Patient_CNSLD_IDs) [Patients Count]&#xA; FROM [Stars_Call_Lists].[dbo].[v_ADH_StarsCallList_Alert] d&#xA; Inner join (SELECT distinct [PMD_Client_ID], [Client_Name]  FROM [STARS].[dbo].[Client_Contracts]) c on d.[PMD_Client_ID]= c.[PMD_Client_ID]&#xA; where entity_type = 'patient'&#xA; --and [PlanIdentifier_Special] = 'None' -- Not Aetna&#xA; group by [Client_Name], [Filter]&#xA; Order by [Client_Name], [Filter]&#xA;&#xA; Union &#xA;&#xA; -- Aetna single and Multi&#xA; SELECT top 100&#xA; [PlanIdentifier_Special] 'Client Name'&#xA; ,'Campaign' = Case [Filter]&#xA;   when 'highrisk' then 'Clinician'&#xA;   when 'LongTerm' then 'Long Term'&#xA;   when 'standard' then 'Standard'&#xA;   when 'Other' then 'Non-English/Non-Spanish'&#xA;   else [Filter] end&#xA; ,count(distinct NPI_PMD_Patient_CNSLD_IDs) [Patients Count]&#xA; FROM [Stars_Call_Lists].[dbo].[v_ADH_StarsCallList_Alert] d&#xA; Inner join (SELECT distinct [PMD_Client_ID], [Client_Name]  FROM [STARS].[dbo].[Client_Contracts]) c on d.[PMD_Client_ID]= c.[PMD_Client_ID]&#xA; where [PlanIdentifier_Special] in ('Aetna_Single', 'Aetna_Multi')  -- Aetna single and Multi&#xA; and entity_type = 'patient'&#xA; and d.[PMD_Client_ID] = 57&#xA; group by [PlanIdentifier_Special], [Filter]&#xA; Order by [PlanIdentifier_Special], [Filter]&#xA; &#xA;) a&#xA;FOR XML PATH('tr'), ELEMENTS ) AS nvarchar(MAX))&#xA;&#xA;SET @body3 = @body2 + @body3 + @xml3 +'&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;'&#xA;&#xA;EXEC msdb.dbo.sp_send_dbmail&#xA;--@profile_name = 'p10prdsde003OPS', -- replace with your SQL Database Mail Profile &#xA;@profile_name = @CallListEmailDatabaseProfile,-- replace with your SQL Database Mail Profile &#xA;@body = @body3,&#xA;@body_format ='HTML',&#xA;--@recipients = 'Saideswar.Thondapu@pharmmd.com;starsbusinessintelligenceusers@pharmmd.com;Victor.Mattingly@pharmmd.com;cyndi.barham-sloas@pharmmd.com;Tiffany.Oneill@pharmmd.com;Drew.Sears@pharmmd.com;pat.sheridan@pharmmd.com;Kelly.Mooneyham@pharmmd.com;stevie.thomas@pharmmd.com', -- replace with your email address&#xA;@recipients = @CallListEmailRecipients,&#xA;@subject = @Subject&#xA;--,@query = @EmailQuery, @attach_query_result_as_file = 0, @query_attachment_filename = 'CallList.txt'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="$Project::CallListEmailRecipients"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="$Project::CallListEmailDatabaseProfile"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\z_Send notification on HRM SUPD Call summary"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:Disabled="True"
+      DTS:DTSID="{903CCF27-6917-4029-90E2-DF1A04FB3CF5}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="z_Send notification on HRM SUPD Call summary"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{6311C9A2-D389-4B9C-B757-1A615A452B59}"
+          SQLTask:SqlStatementSource="----Provider Summary &#xA;Declare @Subject nvarchar(1000)&#xA;set @Subject= 'Provider Call Summary on ' + Convert(varchar(12),getdate(), 100)&#xA;&#xA;Declare @xml11 nvarchar(MAX)&#xA;Declare @body11 nvarchar(MAX)&#xA;DECLARE @CallListEmailRecipients VARCHAR(100) = ?&#xA;DECLARE @CallListEmailDatabaseProfile VARCHAR(50) = ?&#xA;&#xA;SET @body11 ='&lt;html&gt;&lt;head&gt;&lt;style&gt;table, th, td { border: 1px solid black; border-collapse: collapse;}&lt;/style&gt;&lt;/head&gt; &lt;body&gt;&lt;H3&gt;Provider Call Summary&lt;/H3&gt;&lt;table border = 1&gt; &lt;tr&gt;&lt;th&gt;Internal Calls&lt;/th&gt;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;tr&gt;&lt;th&gt; Client Name &lt;/th&gt; &lt;th&gt; Providers Count &lt;/th&gt; &lt;th&gt; Patients Count &lt;/th&gt;&lt;/tr&gt;'  &#xA;Set @xml11 = CAST(( SELECT [Client_Name] AS 'td','', [NPI Count] AS 'td','', [Patient Count] AS 'td'&#xA;FROM &#xA;(&#xA;&#x9;SELECT &#xA;&#x9;&#x9;c.[Client_Name]&#xA;&#x9;&#x9;,count(distinct d.[NPI]) [NPI Count]&#xA;&#x9;&#x9;,count(distinct d.[PMD_Patient_ID]) [Patient Count]&#xA;&#x9;FROM [Stars_Call_Lists].[dbo].[DTP_CNSLD_Call_List] l &#xA;&#x9;Inner join [Stars_Call_Lists].[dbo].[DTP_Call_List] d on (d.[DTP_CNSLD_Call_List_ID] = l.[DTP_CNSLD_Call_List_ID])&#xA;&#x9;Inner join (SELECT distinct [PMD_Client_ID], [Client_Name]  FROM [STARS].[dbo].[Client_Contracts]) c on d.[PMD_Client_ID]= c.[PMD_Client_ID]&#xA;&#x9;where l.[Campaign_Date] = (Select top 1 [Campaign_Date] from [staging].[HRMDTM_DTP_Call_Fax_List])&#xA;&#x9;and l.entity_type = 'provider' and l.[Filter] = 'Internal'&#xA;&#x9;group by c.[Client_Name]&#xA;&#x9;union all&#xA;&#x9;SELECT &#xA;&#x9;&#x9;'Consolidate Calls' [Client_Name]&#xA;&#x9;&#x9;,count([DTP_CNSLD_Call_List_ID]) [NPI Count]&#xA;&#x9;&#x9;,count([DTP_CNSLD_Call_List_ID]) [Patient Count]&#xA;&#x9;FROM [Stars_Call_Lists].[dbo].[DTP_CNSLD_Call_List]&#xA;&#x9;where [Campaign_Date] = (Select top 1 [Campaign_Date] from [staging].[HRMDTM_DTP_Call_Fax_List])&#xA;&#x9;and entity_type = 'provider' and [Filter] = 'Internal'&#xA;) a&#xA;FOR XML PATH('tr'), ELEMENTS ) AS nvarchar(MAX))&#xA;&#xA;SET @body11 = @body11 + @xml11 +'&lt;/table&gt;&lt;br/&gt;&lt;br/&gt;'&#xA;&#xA;-----&#xA;Declare @xml12 nvarchar(MAX)&#xA;Declare @body12 nvarchar(MAX)&#xA;&#xA;SET @body12 = '&lt;table border = 1&gt; &lt;tr&gt;&lt;th&gt;External Calls&lt;/th&gt;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;tr&gt;&lt;th&gt; Client Name &lt;/th&gt; &lt;th&gt; Providers Count &lt;/th&gt; &lt;th&gt; Patients Count &lt;/th&gt;&lt;/tr&gt;'  &#xA;Set @xml12 = CAST(( SELECT [Client_Name] AS 'td','', [NPI Count] AS 'td','', [Patient Count] AS 'td'&#xA;FROM &#xA;(&#xA;&#x9;SELECT &#xA;&#x9;&#x9;c.[Client_Name]&#xA;&#x9;&#x9;,count(distinct d.[NPI]) [NPI Count]&#xA;&#x9;&#x9;,count(distinct d.[PMD_Patient_ID]) [Patient Count]&#xA;&#x9;FROM [Stars_Call_Lists].[dbo].[DTP_CNSLD_Call_List] l &#xA;&#x9;Inner join [Stars_Call_Lists].[dbo].[DTP_Call_List] d on (d.[DTP_CNSLD_Call_List_ID] = l.[DTP_CNSLD_Call_List_ID])&#xA;&#x9;Inner join (SELECT distinct [PMD_Client_ID], [Client_Name]  FROM [STARS].[dbo].[Client_Contracts]) c on d.[PMD_Client_ID]= c.[PMD_Client_ID]&#xA;&#x9;where l.[Campaign_Date] = (Select top 1 [Campaign_Date] from [staging].[HRMDTM_DTP_Call_Fax_List])&#xA;&#x9;and l.entity_type = 'provider' and l.[Filter] = 'External'&#xA;&#x9;group by c.[Client_Name]&#xA;&#x9;union all&#xA;&#x9;SELECT &#xA;&#x9;&#x9;'Consolidate Calls' [Client_Name]&#xA;&#x9;&#x9;,count([DTP_CNSLD_Call_List_ID]) [NPI Count]&#xA;&#x9;&#x9;,count([DTP_CNSLD_Call_List_ID]) [Patient Count]&#xA;&#x9;FROM [Stars_Call_Lists].[dbo].[DTP_CNSLD_Call_List]&#xA;&#x9;where [Campaign_Date] = (Select top 1 [Campaign_Date] from [staging].[HRMDTM_DTP_Call_Fax_List])&#xA;&#x9;and entity_type = 'provider' and [Filter] = 'External'&#xA;) a&#xA;FOR XML PATH('tr'), ELEMENTS ) AS nvarchar(MAX))&#xA;&#xA;SET @body12 = @body11 + @body12 + @xml12 +'&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;'&#xA;&#xA;EXEC msdb.dbo.sp_send_dbmail&#xA;--@profile_name = 'p10prdsde003OPS', -- replace with your SQL Database Mail Profile &#xA;@profile_name = @CallListEmailDatabaseProfile,-- replace with your SQL Database Mail Profile &#xA;@body = @body12,&#xA;@body_format ='HTML',&#xA;--@recipients = 'Saideswar.Thondapu@pharmmd.com;starsbusinessintelligenceusers@pharmmd.com;Victor.Mattingly@pharmmd.com;cyndi.barham-sloas@pharmmd.com;Tiffany.Oneill@pharmmd.com;Drew.Sears@pharmmd.com;pat.sheridan@pharmmd.com;Kelly.Mooneyham@pharmmd.com;stevie.thomas@pharmmd.com', -- replace with your email address&#xA;@recipients = @CallListEmailRecipients,&#xA;@subject = @Subject&#xA;--,@query = @EmailQuery, @attach_query_result_as_file = 0, @query_attachment_filename = 'CallList.txt'&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="$Project::CallListEmailRecipients"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="$Project::CallListEmailDatabaseProfile"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{50FACE0E-EC2D-4624-BBD7-23A8B41A97BB}"
+      DTS:EvalOp="3"
+      DTS:Expression="@RunDay== &quot;True&quot;"
+      DTS:From="Package\Current Date &amp; Check Day of Run"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Genarete HRM Faxes(hold or Archive)" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{80F69C8E-C4E2-4382-9298-137DF3528665}"
+      DTS:From="Package\Genarete HRM Faxes(hold or Archive)"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Faxes has been generated successfully" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{44C9A50C-7E49-4585-B09D-D46966BE1E64}"
+      DTS:From="Package\z_Send notification on HRM SUPD Call summary"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\z_Send notification on ADH Call summary" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="175,42"
+          Id="Package\Current Date &amp; Check Day of Run"
+          TopLeft="380.834467134393,56.0662615243485" />
+        <NodeLayout
+          Size="261,42"
+          Id="Package\Faxes has been generated successfully"
+          TopLeft="810.571406987248,393.058819925909" />
+        <NodeLayout
+          Size="217,42"
+          Id="Package\Genarete HRM Faxes(hold or Archive)\Archive Faxes to Hold folder if it fax day is false"
+          TopLeft="362,410.88765657574" />
+        <NodeLayout
+          Size="180,42"
+          Id="Package\Genarete HRM Faxes(hold or Archive)\Execute Process Task"
+          TopLeft="165,325" />
+        <NodeLayout
+          Size="217,42"
+          Id="Package\Genarete HRM Faxes(hold or Archive)\Get Providers Set"
+          TopLeft="153,33.735849056604" />
+        <NodeLayout
+          Size="209,42"
+          Id="Package\Genarete HRM Faxes(hold or Archive)\Loop through Providers\Generate Faxes thru Report"
+          TopLeft="17.4770889585184,38.4013318792354" />
+        <ContainerLayout
+          HeaderHeight="43.924528301886795"
+          IsExpanded="True"
+          PanelSize="244,134"
+          Size="244,178"
+          Id="Package\Genarete HRM Faxes(hold or Archive)\Loop through Providers"
+          TopLeft="147,106.119784896316" />
+        <NodeLayout
+          Size="297,42"
+          Id="Package\Genarete HRM Faxes(hold or Archive)\Popu ref between pat Prov clients for each fax"
+          TopLeft="27.9999999999998,475.085283483648" />
+        <NodeLayout
+          Size="324,42"
+          Id="Package\Genarete HRM Faxes(hold or Archive)\Populate into Consolidate fax table If fax day is true"
+          TopLeft="29.1836734554859,411.271592415452" />
+        <EdgeLayout
+          Id="Package\Genarete HRM Faxes(hold or Archive).PrecedenceConstraints[Constraint]"
+          TopLeft="265.2,75.335849056604">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,30.783935839712"
+              Start="0,0"
+              End="0,23.283935839712">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23.283935839712" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Genarete HRM Faxes(hold or Archive).PrecedenceConstraints[Constraint 1]"
+          TopLeft="191.183673455486,453.271592415452">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="133.816326544514,42.813691068196"
+              Start="0,0"
+              End="126.316326544514,42.813691068196">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,38.813691068196" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,38.813691068196"
+                    Point2="0,42.813691068196"
+                    Point3="4,42.813691068196" />
+                  <mssgle:LineSegment
+                    End="126.316326544514,42.813691068196" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Genarete HRM Faxes(hold or Archive).PrecedenceConstraints[Constraint 2]"
+          TopLeft="269,284.119784896316">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-14,40.880215103684"
+              Start="0,0"
+              End="-14,33.380215103684">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.440107551842" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.440107551842"
+                    Point2="0,20.440107551842"
+                    Point3="-4,20.440107551842" />
+                  <mssgle:LineSegment
+                    End="-10,20.440107551842" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-10,20.440107551842"
+                    Point2="-14,20.440107551842"
+                    Point3="-14,24.440107551842" />
+                  <mssgle:LineSegment
+                    End="-14,33.380215103684" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Genarete HRM Faxes(hold or Archive).PrecedenceConstraints[Constraint 3]"
+          TopLeft="226.333333333333,367">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-35.1496598778474,44.271592415452"
+              Start="0,0"
+              End="-35.1496598778474,36.771592415452">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,13.9426718159541" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,13.9426718159541"
+                    Point2="0,17.9426718159541"
+                    Point3="-4,17.9426718159541" />
+                  <mssgle:LineSegment
+                    End="-31.1496598778474,17.9426718159541" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-31.1496598778474,17.9426718159541"
+                    Point2="-35.1496598778474,17.9426718159541"
+                    Point3="-35.1496598778474,21.9426718159541" />
+                  <mssgle:LineSegment
+                    End="-35.1496598778474,36.771592415452" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-25.5748299389237,22.9426718159541,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Genarete HRM Faxes(hold or Archive).PrecedenceConstraints[Constraint 4]"
+          TopLeft="283.666666666667,367">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="186.833333333333,43.88765657574"
+              Start="0,0"
+              End="186.833333333333,36.38765657574">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,13.7870678632955" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,13.7870678632955"
+                    Point2="0,17.7870678632955"
+                    Point3="4,17.7870678632955" />
+                  <mssgle:LineSegment
+                    End="182.833333333333,17.7870678632955" />
+                  <mssgle:CubicBezierSegment
+                    Point1="182.833333333333,17.7870678632955"
+                    Point2="186.833333333333,17.7870678632955"
+                    Point3="186.833333333333,21.7870678632955" />
+                  <mssgle:LineSegment
+                    End="186.833333333333,36.38765657574" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="85.4166666666667,22.7870678632955,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43.924528301886795"
+          IsExpanded="True"
+          PanelSize="619,577"
+          Size="619,621"
+          Id="Package\Genarete HRM Faxes(hold or Archive)"
+          TopLeft="158.65436562613,170.146072957484" />
+        <NodeLayout
+          Size="274,42"
+          Id="Package\z_Send notification on ADH Call summary"
+          TopLeft="1793.25,534" />
+        <NodeLayout
+          Size="305,42"
+          Id="Package\z_Send notification on HRM SUPD Call summary"
+          TopLeft="1824.81603773585,360.785714285714" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="468.244416380262,98.0662615243485">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,72.0798114331355"
+              Start="0,0"
+              End="0,64.5798114331355">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,64.5798114331355" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-8,24.2899057165677,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="777.65436562613,480.646072957484">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="32.917041361118,-66.587253031575"
+              Start="0,0"
+              End="25.417041361118,-66.587253031575">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="12.458520680559,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="12.458520680559,0"
+                    Point2="16.458520680559,0"
+                    Point3="16.458520680559,-4" />
+                  <mssgle:LineSegment
+                    End="16.458520680559,-62.587253031575" />
+                  <mssgle:CubicBezierSegment
+                    Point1="16.458520680559,-62.587253031575"
+                    Point2="16.458520680559,-66.587253031575"
+                    Point3="20.458520680559,-66.587253031575" />
+                  <mssgle:LineSegment
+                    End="25.417041361118,-66.587253031575" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="1977.31603773585,402.785714285714">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-47.0660377358499,131.214285714286"
+              Start="0,0"
+              End="-47.0660377358499,123.714285714286">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,61.607142857143" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,61.607142857143"
+                    Point2="0,65.607142857143"
+                    Point3="-4,65.607142857143" />
+                  <mssgle:LineSegment
+                    End="-43.0660377358499,65.607142857143" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-43.0660377358499,65.607142857143"
+                    Point2="-47.0660377358499,65.607142857143"
+                    Point3="-47.0660377358499,69.607142857143" />
+                  <mssgle:LineSegment
+                    End="-47.0660377358499,123.714285714286" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

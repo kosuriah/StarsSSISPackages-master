@@ -1,0 +1,2761 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="7/2/2015 8:17:11 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="LT-HBW04X1-0022"
+  DTS:CreatorName="PHARMMD\bill.shoap2"
+  DTS:Description="SSIS Package Description"
+  DTS:DTSID="{20E50F65-EFA5-435F-AB76-2EB3C885D9CD}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.1100.123"
+  DTS:LocaleID="1033"
+  DTS:MaxErrorCount="0"
+  DTS:ObjectName="Stars_Billing"
+  DTS:VersionBuild="23"
+  DTS:VersionGUID="{2E8C1DCD-6F42-47A9-B608-66CA6F1A6043}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Populate Billing Tables ODS"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:DTSID="{DB81E6A1-DE53-4188-964D-AEB90749A1F9}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:FailPackageOnFailure="True"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Populate Billing Tables ODS"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          defaultBufferSize="3145728"
+          version="1">
+          <components>
+            <component
+              refId="Package\Populate Billing Tables ODS\Destination - Billing"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Destination - Billing"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Billing]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">true</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Populate Billing Tables ODS\Destination - Billing.Connections[OleDbConnection]"
+                  connectionManagerID="{6134B592-FC7E-4252-BDDB-4BC8A4FC8745}:invalid"
+                  connectionManagerRefId="{6134B592-FC7E-4252-BDDB-4BC8A4FC8745}:invalid"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].Columns[Billing_ID]"
+                      cachedDataType="i8"
+                      cachedName="Billing_ID"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].ExternalColumns[Billing_ID]"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[Billing_ID]" />
+                    <inputColumn
+                      refId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].Columns[Billing_Control_ID]"
+                      cachedDataType="i4"
+                      cachedName="Billing_Control_ID"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].ExternalColumns[Billing_Control_ID]"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[Billing_Control_ID]" />
+                    <inputColumn
+                      refId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].Columns[Billing_Status]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Billing_Status"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].ExternalColumns[Billing_Status]"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[Billing_Status]" />
+                    <inputColumn
+                      refId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].Columns[Claims_Attributed]"
+                      cachedDataType="i4"
+                      cachedName="Claims_Attributed"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].ExternalColumns[Claims_Attributed]"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[Claims_Attributed]" />
+                    <inputColumn
+                      refId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].Columns[Patient_ID]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Patient_ID"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].ExternalColumns[Patient_ID]"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[Patient_ID]" />
+                    <inputColumn
+                      refId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].Columns[Patient_Unique_Ident]"
+                      cachedDataType="i8"
+                      cachedName="Patient_Unique_Ident"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].ExternalColumns[Patient_Unique_Ident]"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[Patient_Unique_Ident]" />
+                    <inputColumn
+                      refId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].Columns[PlanIdentifier_PClm]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="5"
+                      cachedName="PlanIdentifier_PClm"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].ExternalColumns[PlanIdentifier_PClm]"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[PlanIdentifier_PClm]" />
+                    <inputColumn
+                      refId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].Columns[MeasureNoteDate]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="MeasureNoteDate"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].ExternalColumns[MeasureNoteDate]"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[MeasureNoteDate]" />
+                    <inputColumn
+                      refId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].Columns[Billing_Year]"
+                      cachedDataType="i4"
+                      cachedName="Billing_Year"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].ExternalColumns[Billing_Year]"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[Billing_Year]" />
+                    <inputColumn
+                      refId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].Columns[PDC_Bucket]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="5"
+                      cachedName="PDC_Bucket"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].ExternalColumns[PDC_Bucket]"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[PDC_Bucket]" />
+                    <inputColumn
+                      refId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].Columns[MeasureADH_Status_Today]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="27"
+                      cachedName="MeasureADH_Status_Today"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].ExternalColumns[MeasureADH_Status_Today]"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[MeasureADH_Status_Today]" />
+                    <inputColumn
+                      refId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].Columns[StockInHand_Today]"
+                      cachedDataType="i4"
+                      cachedName="StockInHand_Today"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].ExternalColumns[StockInHand_Today]"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[StockInHand_Today]" />
+                    <inputColumn
+                      refId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].Columns[PMD_Client_ID]"
+                      cachedDataType="i4"
+                      cachedName="PMD_Client_ID"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].ExternalColumns[PMD_Client_ID]"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[PMD_Client_ID]" />
+                    <inputColumn
+                      refId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].Columns[Min_PDC]"
+                      cachedDataType="numeric"
+                      cachedName="Min_PDC"
+                      cachedPrecision="25"
+                      cachedScale="10"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].ExternalColumns[Min_PDC]"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[Min_PDC]" />
+                    <inputColumn
+                      refId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].Columns[PDC_For_Month]"
+                      cachedDataType="numeric"
+                      cachedName="PDC_For_Month"
+                      cachedPrecision="25"
+                      cachedScale="10"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].ExternalColumns[PDC_For_Month]"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[PDC_For_Month]" />
+                    <inputColumn
+                      refId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].Columns[MeasureUse]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="MeasureUse"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].ExternalColumns[MeasureUse]"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[MeasureUse]" />
+                    <inputColumn
+                      refId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].Columns[Measure]"
+                      cachedDataType="wstr"
+                      cachedLength="268"
+                      cachedName="Measure"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].ExternalColumns[Measure]"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[Measure]" />
+                    <inputColumn
+                      refId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].Columns[Create_Datetime]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="Create_Datetime"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].ExternalColumns[Create_Datetime]"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[Create_Datetime]" />
+                    <inputColumn
+                      refId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].Columns[RatePerHead]"
+                      cachedDataType="numeric"
+                      cachedName="RatePerHead"
+                      cachedPrecision="9"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].ExternalColumns[RatePerHead]"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[RatePerHead]" />
+                    <inputColumn
+                      refId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].Columns[PMD_Invoice_No]"
+                      cachedDataType="i4"
+                      cachedName="PMD_Invoice_No"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].ExternalColumns[PMD_Invoice_No]"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[PMD_Invoice_No]" />
+                    <inputColumn
+                      refId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].Columns[Survey_User_Name]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="Survey_User_Name"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].ExternalColumns[Survey_User_Name]"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[Survey_User_Name]" />
+                    <inputColumn
+                      refId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].Columns[Transaction_ID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="Transaction_ID"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].ExternalColumns[Transaction_ID]"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[Transaction_ID]" />
+                    <inputColumn
+                      refId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].Columns[StarsConnect_Call_ID]"
+                      cachedDataType="i8"
+                      cachedName="StarsConnect_Call_ID"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].ExternalColumns[StarsConnect_Call_ID]"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[StarsConnect_Call_ID]" />
+                    <inputColumn
+                      refId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].Columns[QM]"
+                      cachedDataType="i4"
+                      cachedName="QM"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].ExternalColumns[QM]"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[QM]" />
+                    <inputColumn
+                      refId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].Columns[Call_Type]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Call_Type"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].ExternalColumns[Call_Type]"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[Call_Type]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].ExternalColumns[Billing_ID]"
+                      dataType="i8"
+                      name="Billing_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].ExternalColumns[Billing_Control_ID]"
+                      dataType="i4"
+                      name="Billing_Control_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].ExternalColumns[Billing_Status]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Billing_Status" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].ExternalColumns[Claims_Attributed]"
+                      dataType="i4"
+                      name="Claims_Attributed" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].ExternalColumns[Patient_ID]"
+                      dataType="wstr"
+                      length="255"
+                      name="Patient_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].ExternalColumns[Patient_Unique_Ident]"
+                      dataType="i8"
+                      name="Patient_Unique_Ident" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].ExternalColumns[PlanIdentifier_PClm]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      name="PlanIdentifier_PClm" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].ExternalColumns[MeasureNoteDate]"
+                      dataType="dbDate"
+                      name="MeasureNoteDate" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].ExternalColumns[Billing_Year]"
+                      dataType="i4"
+                      name="Billing_Year" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].ExternalColumns[PDC_Bucket]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      name="PDC_Bucket" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].ExternalColumns[MeasureADH_Status_Today]"
+                      codePage="1252"
+                      dataType="str"
+                      length="27"
+                      name="MeasureADH_Status_Today" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].ExternalColumns[StockInHand_Today]"
+                      dataType="i4"
+                      name="StockInHand_Today" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].ExternalColumns[PMD_Client_ID]"
+                      dataType="i4"
+                      name="PMD_Client_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].ExternalColumns[Min_PDC]"
+                      dataType="numeric"
+                      name="Min_PDC"
+                      precision="25"
+                      scale="10" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].ExternalColumns[PDC_For_Month]"
+                      dataType="numeric"
+                      name="PDC_For_Month"
+                      precision="25"
+                      scale="10" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].ExternalColumns[MeasureUse]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="MeasureUse" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].ExternalColumns[Measure]"
+                      dataType="wstr"
+                      length="268"
+                      name="Measure" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].ExternalColumns[Create_Datetime]"
+                      dataType="dbTimeStamp"
+                      name="Create_Datetime" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].ExternalColumns[RatePerHead]"
+                      dataType="numeric"
+                      name="RatePerHead"
+                      precision="9"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].ExternalColumns[PMD_Invoice_No]"
+                      dataType="i4"
+                      name="PMD_Invoice_No" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].ExternalColumns[Survey_User_Name]"
+                      dataType="wstr"
+                      length="100"
+                      name="Survey_User_Name" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].ExternalColumns[Transaction_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="Transaction_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].ExternalColumns[StarsConnect_Call_ID]"
+                      dataType="i8"
+                      name="StarsConnect_Call_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].ExternalColumns[QM]"
+                      dataType="i4"
+                      name="QM" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input].ExternalColumns[Call_Type]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Call_Type" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Populate Billing Tables ODS\Destination - Billing.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Destination - Billing.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Populate Billing Tables ODS\Destination - Billing.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Destination - Billing.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Populate Billing Tables ODS\Destination - Billing.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Destination 3 - Billing_Projected"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Billing_Projected]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">true</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Connections[OleDbConnection]"
+                  connectionManagerID="{6134B592-FC7E-4252-BDDB-4BC8A4FC8745}:invalid"
+                  connectionManagerRefId="{6134B592-FC7E-4252-BDDB-4BC8A4FC8745}:invalid"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input].Columns[Billing_Projected_ID]"
+                      cachedDataType="i8"
+                      cachedName="Billing_Projected_ID"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input].ExternalColumns[Billing_Projected_ID]"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[Billing_Projected_ID]" />
+                    <inputColumn
+                      refId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input].Columns[Billing_Control_ID]"
+                      cachedDataType="i4"
+                      cachedName="Billing_Control_ID"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input].ExternalColumns[Billing_Control_ID]"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[Billing_Control_ID]" />
+                    <inputColumn
+                      refId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input].Columns[Billing_Status]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Billing_Status"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input].ExternalColumns[Billing_Status]"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[Billing_Status]" />
+                    <inputColumn
+                      refId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input].Columns[Claims_Attributed]"
+                      cachedDataType="i4"
+                      cachedName="Claims_Attributed"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input].ExternalColumns[Claims_Attributed]"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[Claims_Attributed]" />
+                    <inputColumn
+                      refId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input].Columns[Patient_ID]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Patient_ID"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input].ExternalColumns[Patient_ID]"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[Patient_ID]" />
+                    <inputColumn
+                      refId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input].Columns[Patient_Unique_Ident]"
+                      cachedDataType="i8"
+                      cachedName="Patient_Unique_Ident"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input].ExternalColumns[Patient_Unique_Ident]"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[Patient_Unique_Ident]" />
+                    <inputColumn
+                      refId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input].Columns[PlanIdentifier_PClm]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="5"
+                      cachedName="PlanIdentifier_PClm"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input].ExternalColumns[PlanIdentifier_PClm]"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[PlanIdentifier_PClm]" />
+                    <inputColumn
+                      refId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input].Columns[MeasureNoteDate]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="MeasureNoteDate"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input].ExternalColumns[MeasureNoteDate]"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[MeasureNoteDate]" />
+                    <inputColumn
+                      refId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input].Columns[Billing_Year]"
+                      cachedDataType="i4"
+                      cachedName="Billing_Year"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input].ExternalColumns[Billing_Year]"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[Billing_Year]" />
+                    <inputColumn
+                      refId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input].Columns[PDC_Bucket]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="5"
+                      cachedName="PDC_Bucket"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input].ExternalColumns[PDC_Bucket]"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[PDC_Bucket]" />
+                    <inputColumn
+                      refId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input].Columns[MeasureADH_Status_Today]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="27"
+                      cachedName="MeasureADH_Status_Today"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input].ExternalColumns[MeasureADH_Status_Today]"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[MeasureADH_Status_Today]" />
+                    <inputColumn
+                      refId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input].Columns[StockInHand_Today]"
+                      cachedDataType="i4"
+                      cachedName="StockInHand_Today"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input].ExternalColumns[StockInHand_Today]"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[StockInHand_Today]" />
+                    <inputColumn
+                      refId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input].Columns[PMD_Client_ID]"
+                      cachedDataType="i4"
+                      cachedName="PMD_Client_ID"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input].ExternalColumns[PMD_Client_ID]"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[PMD_Client_ID]" />
+                    <inputColumn
+                      refId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input].Columns[Min_PDC]"
+                      cachedDataType="numeric"
+                      cachedName="Min_PDC"
+                      cachedPrecision="25"
+                      cachedScale="10"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input].ExternalColumns[Min_PDC]"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[Min_PDC]" />
+                    <inputColumn
+                      refId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input].Columns[PDC_For_Month]"
+                      cachedDataType="numeric"
+                      cachedName="PDC_For_Month"
+                      cachedPrecision="25"
+                      cachedScale="10"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input].ExternalColumns[PDC_For_Month]"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[PDC_For_Month]" />
+                    <inputColumn
+                      refId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input].Columns[MeasureUse]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="MeasureUse"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input].ExternalColumns[MeasureUse]"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[MeasureUse]" />
+                    <inputColumn
+                      refId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input].Columns[Measure]"
+                      cachedDataType="wstr"
+                      cachedLength="268"
+                      cachedName="Measure"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input].ExternalColumns[Measure]"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[Measure]" />
+                    <inputColumn
+                      refId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input].Columns[Create_Datetime]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="Create_Datetime"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input].ExternalColumns[Create_Datetime]"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[Create_Datetime]" />
+                    <inputColumn
+                      refId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input].Columns[RatePerHead]"
+                      cachedDataType="numeric"
+                      cachedName="RatePerHead"
+                      cachedPrecision="9"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input].ExternalColumns[RatePerHead]"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[RatePerHead]" />
+                    <inputColumn
+                      refId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input].Columns[PMD_Invoice_No]"
+                      cachedDataType="i4"
+                      cachedName="PMD_Invoice_No"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input].ExternalColumns[PMD_Invoice_No]"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[PMD_Invoice_No]" />
+                    <inputColumn
+                      refId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input].Columns[Survey_User_Name]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="Survey_User_Name"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input].ExternalColumns[Survey_User_Name]"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[Survey_User_Name]" />
+                    <inputColumn
+                      refId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input].Columns[Call_Type]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Call_Type"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input].ExternalColumns[Call_Type]"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[Call_Type]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input].ExternalColumns[Billing_Projected_ID]"
+                      dataType="i8"
+                      name="Billing_Projected_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input].ExternalColumns[Billing_Control_ID]"
+                      dataType="i4"
+                      name="Billing_Control_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input].ExternalColumns[Billing_Status]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Billing_Status" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input].ExternalColumns[Claims_Attributed]"
+                      dataType="i4"
+                      name="Claims_Attributed" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input].ExternalColumns[Patient_ID]"
+                      dataType="wstr"
+                      length="255"
+                      name="Patient_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input].ExternalColumns[Patient_Unique_Ident]"
+                      dataType="i8"
+                      name="Patient_Unique_Ident" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input].ExternalColumns[PlanIdentifier_PClm]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      name="PlanIdentifier_PClm" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input].ExternalColumns[MeasureNoteDate]"
+                      dataType="dbDate"
+                      name="MeasureNoteDate" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input].ExternalColumns[Billing_Year]"
+                      dataType="i4"
+                      name="Billing_Year" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input].ExternalColumns[PDC_Bucket]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      name="PDC_Bucket" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input].ExternalColumns[MeasureADH_Status_Today]"
+                      codePage="1252"
+                      dataType="str"
+                      length="27"
+                      name="MeasureADH_Status_Today" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input].ExternalColumns[StockInHand_Today]"
+                      dataType="i4"
+                      name="StockInHand_Today" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input].ExternalColumns[PMD_Client_ID]"
+                      dataType="i4"
+                      name="PMD_Client_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input].ExternalColumns[Min_PDC]"
+                      dataType="numeric"
+                      name="Min_PDC"
+                      precision="25"
+                      scale="10" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input].ExternalColumns[PDC_For_Month]"
+                      dataType="numeric"
+                      name="PDC_For_Month"
+                      precision="25"
+                      scale="10" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input].ExternalColumns[MeasureUse]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="MeasureUse" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input].ExternalColumns[Measure]"
+                      dataType="wstr"
+                      length="268"
+                      name="Measure" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input].ExternalColumns[Create_Datetime]"
+                      dataType="dbTimeStamp"
+                      name="Create_Datetime" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input].ExternalColumns[RatePerHead]"
+                      dataType="numeric"
+                      name="RatePerHead"
+                      precision="9"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input].ExternalColumns[PMD_Invoice_No]"
+                      dataType="i4"
+                      name="PMD_Invoice_No" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input].ExternalColumns[Survey_User_Name]"
+                      dataType="wstr"
+                      length="100"
+                      name="Survey_User_Name" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input].ExternalColumns[Call_Type]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Call_Type" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Populate Billing Tables ODS\Destination 6 - Billing_Exceptions"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Destination 6 - Billing_Exceptions"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Billing_Exceptions]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Populate Billing Tables ODS\Destination 6 - Billing_Exceptions.Connections[OleDbConnection]"
+                  connectionManagerID="{6134B592-FC7E-4252-BDDB-4BC8A4FC8745}:invalid"
+                  connectionManagerRefId="{6134B592-FC7E-4252-BDDB-4BC8A4FC8745}:invalid"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Populate Billing Tables ODS\Destination 6 - Billing_Exceptions.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Populate Billing Tables ODS\Destination 6 - Billing_Exceptions.Inputs[OLE DB Destination Input].Columns[PMD_Client_ID]"
+                      cachedDataType="i4"
+                      cachedName="PMD_Client_ID"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Destination 6 - Billing_Exceptions.Inputs[OLE DB Destination Input].ExternalColumns[PMD_Client_ID]"
+                      lineageId="Package\Populate Billing Tables ODS\Source 6 - Billing_Exceptions.Outputs[OLE DB Source Output].Columns[PMD_Client_ID]" />
+                    <inputColumn
+                      refId="Package\Populate Billing Tables ODS\Destination 6 - Billing_Exceptions.Inputs[OLE DB Destination Input].Columns[ClientConfigType]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="ClientConfigType"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Destination 6 - Billing_Exceptions.Inputs[OLE DB Destination Input].ExternalColumns[ClientConfigType]"
+                      lineageId="Package\Populate Billing Tables ODS\Source 6 - Billing_Exceptions.Outputs[OLE DB Source Output].Columns[ClientConfigType]" />
+                    <inputColumn
+                      refId="Package\Populate Billing Tables ODS\Destination 6 - Billing_Exceptions.Inputs[OLE DB Destination Input].Columns[ClientConfigCode]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="ClientConfigCode"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Destination 6 - Billing_Exceptions.Inputs[OLE DB Destination Input].ExternalColumns[ClientConfigCode]"
+                      lineageId="Package\Populate Billing Tables ODS\Source 6 - Billing_Exceptions.Outputs[OLE DB Source Output].Columns[ClientConfigCode]" />
+                    <inputColumn
+                      refId="Package\Populate Billing Tables ODS\Destination 6 - Billing_Exceptions.Inputs[OLE DB Destination Input].Columns[ClientConfigExceptionType]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="ClientConfigExceptionType"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Destination 6 - Billing_Exceptions.Inputs[OLE DB Destination Input].ExternalColumns[ClientConfigExceptionType]"
+                      lineageId="Package\Populate Billing Tables ODS\Source 6 - Billing_Exceptions.Outputs[OLE DB Source Output].Columns[ClientConfigExceptionType]" />
+                    <inputColumn
+                      refId="Package\Populate Billing Tables ODS\Destination 6 - Billing_Exceptions.Inputs[OLE DB Destination Input].Columns[ClientConfigNotes]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="ClientConfigNotes"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Destination 6 - Billing_Exceptions.Inputs[OLE DB Destination Input].ExternalColumns[ClientConfigNotes]"
+                      lineageId="Package\Populate Billing Tables ODS\Source 6 - Billing_Exceptions.Outputs[OLE DB Source Output].Columns[ClientConfigNotes]" />
+                    <inputColumn
+                      refId="Package\Populate Billing Tables ODS\Destination 6 - Billing_Exceptions.Inputs[OLE DB Destination Input].Columns[MeasureType]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="MeasureType"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Destination 6 - Billing_Exceptions.Inputs[OLE DB Destination Input].ExternalColumns[MeasureType]"
+                      lineageId="Package\Populate Billing Tables ODS\Source 6 - Billing_Exceptions.Outputs[OLE DB Source Output].Columns[MeasureType]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Destination 6 - Billing_Exceptions.Inputs[OLE DB Destination Input].ExternalColumns[PMD_Client_ID]"
+                      dataType="i4"
+                      name="PMD_Client_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Destination 6 - Billing_Exceptions.Inputs[OLE DB Destination Input].ExternalColumns[ClientConfigType]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="ClientConfigType" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Destination 6 - Billing_Exceptions.Inputs[OLE DB Destination Input].ExternalColumns[ClientConfigCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="ClientConfigCode" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Destination 6 - Billing_Exceptions.Inputs[OLE DB Destination Input].ExternalColumns[ClientConfigExceptionType]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="ClientConfigExceptionType" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Destination 6 - Billing_Exceptions.Inputs[OLE DB Destination Input].ExternalColumns[ClientConfigNotes]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="ClientConfigNotes" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Destination 6 - Billing_Exceptions.Inputs[OLE DB Destination Input].ExternalColumns[MeasureType]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="MeasureType" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Populate Billing Tables ODS\Destination 6 - Billing_Exceptions.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Populate Billing Tables ODS\Destination 6 - Billing_Exceptions.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Destination 6 - Billing_Exceptions.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Populate Billing Tables ODS\Destination 6 - Billing_Exceptions.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Destination 6 - Billing_Exceptions.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Populate Billing Tables ODS\Destination 6 - Billing_Exceptions.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Populate Billing Tables ODS\Source - Billing"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Source - Billing"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Billing]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Populate Billing Tables ODS\Source - Billing.Connections[OleDbConnection]"
+                  connectionManagerID="{ACDA4EA4-99AA-4495-8ACB-9B66F3C7338F}:invalid"
+                  connectionManagerRefId="{ACDA4EA4-99AA-4495-8ACB-9B66F3C7338F}:invalid"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[Billing_ID]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].ExternalColumns[Billing_ID]"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[Billing_ID]"
+                      name="Billing_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[Billing_Control_ID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].ExternalColumns[Billing_Control_ID]"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[Billing_Control_ID]"
+                      name="Billing_Control_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[Billing_Status]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].ExternalColumns[Billing_Status]"
+                      length="50"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[Billing_Status]"
+                      name="Billing_Status"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[Claims_Attributed]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].ExternalColumns[Claims_Attributed]"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[Claims_Attributed]"
+                      name="Claims_Attributed"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[Patient_ID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].ExternalColumns[Patient_ID]"
+                      length="255"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[Patient_ID]"
+                      name="Patient_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[Patient_Unique_Ident]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].ExternalColumns[Patient_Unique_Ident]"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[Patient_Unique_Ident]"
+                      name="Patient_Unique_Ident"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[PlanIdentifier_PClm]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].ExternalColumns[PlanIdentifier_PClm]"
+                      length="5"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[PlanIdentifier_PClm]"
+                      name="PlanIdentifier_PClm"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[MeasureNoteDate]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].ExternalColumns[MeasureNoteDate]"
+                      length="10"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[MeasureNoteDate]"
+                      name="MeasureNoteDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[Billing_Year]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].ExternalColumns[Billing_Year]"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[Billing_Year]"
+                      name="Billing_Year"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[PDC_Bucket]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].ExternalColumns[PDC_Bucket]"
+                      length="5"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[PDC_Bucket]"
+                      name="PDC_Bucket"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[MeasureADH_Status_Today]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].ExternalColumns[MeasureADH_Status_Today]"
+                      length="27"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[MeasureADH_Status_Today]"
+                      name="MeasureADH_Status_Today"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[StockInHand_Today]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].ExternalColumns[StockInHand_Today]"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[StockInHand_Today]"
+                      name="StockInHand_Today"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[PMD_Client_ID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].ExternalColumns[PMD_Client_ID]"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[PMD_Client_ID]"
+                      name="PMD_Client_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[Min_PDC]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].ExternalColumns[Min_PDC]"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[Min_PDC]"
+                      name="Min_PDC"
+                      precision="25"
+                      scale="10"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[PDC_For_Month]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].ExternalColumns[PDC_For_Month]"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[PDC_For_Month]"
+                      name="PDC_For_Month"
+                      precision="25"
+                      scale="10"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[MeasureUse]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].ExternalColumns[MeasureUse]"
+                      length="50"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[MeasureUse]"
+                      name="MeasureUse"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[Measure]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].ExternalColumns[Measure]"
+                      length="268"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[Measure]"
+                      name="Measure"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[Create_Datetime]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].ExternalColumns[Create_Datetime]"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[Create_Datetime]"
+                      name="Create_Datetime"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[RatePerHead]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].ExternalColumns[RatePerHead]"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[RatePerHead]"
+                      name="RatePerHead"
+                      precision="9"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[PMD_Invoice_No]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].ExternalColumns[PMD_Invoice_No]"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[PMD_Invoice_No]"
+                      name="PMD_Invoice_No"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[Survey_User_Name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].ExternalColumns[Survey_User_Name]"
+                      length="100"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[Survey_User_Name]"
+                      name="Survey_User_Name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[Transaction_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].ExternalColumns[Transaction_ID]"
+                      length="100"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[Transaction_ID]"
+                      name="Transaction_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[StarsConnect_Call_ID]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].ExternalColumns[StarsConnect_Call_ID]"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[StarsConnect_Call_ID]"
+                      name="StarsConnect_Call_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[QM]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].ExternalColumns[QM]"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[QM]"
+                      name="QM"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[Call_Type]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].ExternalColumns[Call_Type]"
+                      length="50"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].Columns[Call_Type]"
+                      name="Call_Type"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].ExternalColumns[Billing_ID]"
+                      dataType="i8"
+                      name="Billing_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].ExternalColumns[Billing_Control_ID]"
+                      dataType="i4"
+                      name="Billing_Control_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].ExternalColumns[Billing_Status]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Billing_Status" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].ExternalColumns[Claims_Attributed]"
+                      dataType="i4"
+                      name="Claims_Attributed" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].ExternalColumns[Patient_ID]"
+                      dataType="wstr"
+                      length="255"
+                      name="Patient_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].ExternalColumns[Patient_Unique_Ident]"
+                      dataType="i8"
+                      name="Patient_Unique_Ident" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].ExternalColumns[PlanIdentifier_PClm]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      name="PlanIdentifier_PClm" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].ExternalColumns[MeasureNoteDate]"
+                      dataType="dbDate"
+                      name="MeasureNoteDate" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].ExternalColumns[Billing_Year]"
+                      dataType="i4"
+                      name="Billing_Year" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].ExternalColumns[PDC_Bucket]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      name="PDC_Bucket" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].ExternalColumns[MeasureADH_Status_Today]"
+                      codePage="1252"
+                      dataType="str"
+                      length="27"
+                      name="MeasureADH_Status_Today" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].ExternalColumns[StockInHand_Today]"
+                      dataType="i4"
+                      name="StockInHand_Today" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].ExternalColumns[PMD_Client_ID]"
+                      dataType="i4"
+                      name="PMD_Client_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].ExternalColumns[Min_PDC]"
+                      dataType="numeric"
+                      name="Min_PDC"
+                      precision="25"
+                      scale="10" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].ExternalColumns[PDC_For_Month]"
+                      dataType="numeric"
+                      name="PDC_For_Month"
+                      precision="25"
+                      scale="10" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].ExternalColumns[MeasureUse]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="MeasureUse" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].ExternalColumns[Measure]"
+                      dataType="wstr"
+                      length="268"
+                      name="Measure" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].ExternalColumns[Create_Datetime]"
+                      dataType="dbTimeStamp"
+                      name="Create_Datetime" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].ExternalColumns[RatePerHead]"
+                      dataType="numeric"
+                      name="RatePerHead"
+                      precision="9"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].ExternalColumns[PMD_Invoice_No]"
+                      dataType="i4"
+                      name="PMD_Invoice_No" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].ExternalColumns[Survey_User_Name]"
+                      dataType="wstr"
+                      length="100"
+                      name="Survey_User_Name" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].ExternalColumns[Transaction_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="Transaction_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].ExternalColumns[StarsConnect_Call_ID]"
+                      dataType="i8"
+                      name="StarsConnect_Call_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].ExternalColumns[QM]"
+                      dataType="i4"
+                      name="QM" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output].ExternalColumns[Call_Type]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Call_Type" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Error Output].Columns[Billing_ID]"
+                      dataType="i8"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Error Output].Columns[Billing_ID]"
+                      name="Billing_ID" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Error Output].Columns[Billing_Control_ID]"
+                      dataType="i4"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Error Output].Columns[Billing_Control_ID]"
+                      name="Billing_Control_ID" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Error Output].Columns[Billing_Status]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Error Output].Columns[Billing_Status]"
+                      name="Billing_Status" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Error Output].Columns[Claims_Attributed]"
+                      dataType="i4"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Error Output].Columns[Claims_Attributed]"
+                      name="Claims_Attributed" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Error Output].Columns[Patient_ID]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Error Output].Columns[Patient_ID]"
+                      name="Patient_ID" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Error Output].Columns[Patient_Unique_Ident]"
+                      dataType="i8"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Error Output].Columns[Patient_Unique_Ident]"
+                      name="Patient_Unique_Ident" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Error Output].Columns[PlanIdentifier_PClm]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Error Output].Columns[PlanIdentifier_PClm]"
+                      name="PlanIdentifier_PClm" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Error Output].Columns[MeasureNoteDate]"
+                      dataType="dbDate"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Error Output].Columns[MeasureNoteDate]"
+                      name="MeasureNoteDate" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Error Output].Columns[Billing_Year]"
+                      dataType="i4"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Error Output].Columns[Billing_Year]"
+                      name="Billing_Year" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Error Output].Columns[PDC_Bucket]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Error Output].Columns[PDC_Bucket]"
+                      name="PDC_Bucket" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Error Output].Columns[MeasureADH_Status_Today]"
+                      codePage="1252"
+                      dataType="str"
+                      length="27"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Error Output].Columns[MeasureADH_Status_Today]"
+                      name="MeasureADH_Status_Today" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Error Output].Columns[StockInHand_Today]"
+                      dataType="i4"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Error Output].Columns[StockInHand_Today]"
+                      name="StockInHand_Today" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Error Output].Columns[PMD_Client_ID]"
+                      dataType="i4"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Error Output].Columns[PMD_Client_ID]"
+                      name="PMD_Client_ID" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Error Output].Columns[Min_PDC]"
+                      dataType="numeric"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Error Output].Columns[Min_PDC]"
+                      name="Min_PDC"
+                      precision="25"
+                      scale="10" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Error Output].Columns[PDC_For_Month]"
+                      dataType="numeric"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Error Output].Columns[PDC_For_Month]"
+                      name="PDC_For_Month"
+                      precision="25"
+                      scale="10" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Error Output].Columns[MeasureUse]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Error Output].Columns[MeasureUse]"
+                      name="MeasureUse" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Error Output].Columns[Measure]"
+                      dataType="wstr"
+                      length="268"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Error Output].Columns[Measure]"
+                      name="Measure" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Error Output].Columns[Create_Datetime]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Error Output].Columns[Create_Datetime]"
+                      name="Create_Datetime" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Error Output].Columns[RatePerHead]"
+                      dataType="numeric"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Error Output].Columns[RatePerHead]"
+                      name="RatePerHead"
+                      precision="9"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Error Output].Columns[PMD_Invoice_No]"
+                      dataType="i4"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Error Output].Columns[PMD_Invoice_No]"
+                      name="PMD_Invoice_No" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Error Output].Columns[Survey_User_Name]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Error Output].Columns[Survey_User_Name]"
+                      name="Survey_User_Name" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Error Output].Columns[Transaction_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Error Output].Columns[Transaction_ID]"
+                      name="Transaction_ID" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Error Output].Columns[StarsConnect_Call_ID]"
+                      dataType="i8"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Error Output].Columns[StarsConnect_Call_ID]"
+                      name="StarsConnect_Call_ID" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Error Output].Columns[QM]"
+                      dataType="i4"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Error Output].Columns[QM]"
+                      name="QM" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Error Output].Columns[Call_Type]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Error Output].Columns[Call_Type]"
+                      name="Call_Type" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Source 3 - Billing_Projected"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Billing_Projected]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Connections[OleDbConnection]"
+                  connectionManagerID="{ACDA4EA4-99AA-4495-8ACB-9B66F3C7338F}:invalid"
+                  connectionManagerRefId="{ACDA4EA4-99AA-4495-8ACB-9B66F3C7338F}:invalid"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[Billing_Projected_ID]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].ExternalColumns[Billing_Projected_ID]"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[Billing_Projected_ID]"
+                      name="Billing_Projected_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[Billing_Control_ID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].ExternalColumns[Billing_Control_ID]"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[Billing_Control_ID]"
+                      name="Billing_Control_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[Billing_Status]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].ExternalColumns[Billing_Status]"
+                      length="50"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[Billing_Status]"
+                      name="Billing_Status"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[Claims_Attributed]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].ExternalColumns[Claims_Attributed]"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[Claims_Attributed]"
+                      name="Claims_Attributed"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[Patient_ID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].ExternalColumns[Patient_ID]"
+                      length="255"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[Patient_ID]"
+                      name="Patient_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[Patient_Unique_Ident]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].ExternalColumns[Patient_Unique_Ident]"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[Patient_Unique_Ident]"
+                      name="Patient_Unique_Ident"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[PlanIdentifier_PClm]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].ExternalColumns[PlanIdentifier_PClm]"
+                      length="5"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[PlanIdentifier_PClm]"
+                      name="PlanIdentifier_PClm"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[MeasureNoteDate]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].ExternalColumns[MeasureNoteDate]"
+                      length="10"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[MeasureNoteDate]"
+                      name="MeasureNoteDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[Billing_Year]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].ExternalColumns[Billing_Year]"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[Billing_Year]"
+                      name="Billing_Year"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[PDC_Bucket]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].ExternalColumns[PDC_Bucket]"
+                      length="5"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[PDC_Bucket]"
+                      name="PDC_Bucket"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[MeasureADH_Status_Today]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].ExternalColumns[MeasureADH_Status_Today]"
+                      length="27"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[MeasureADH_Status_Today]"
+                      name="MeasureADH_Status_Today"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[StockInHand_Today]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].ExternalColumns[StockInHand_Today]"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[StockInHand_Today]"
+                      name="StockInHand_Today"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[PMD_Client_ID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].ExternalColumns[PMD_Client_ID]"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[PMD_Client_ID]"
+                      name="PMD_Client_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[Min_PDC]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].ExternalColumns[Min_PDC]"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[Min_PDC]"
+                      name="Min_PDC"
+                      precision="25"
+                      scale="10"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[PDC_For_Month]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].ExternalColumns[PDC_For_Month]"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[PDC_For_Month]"
+                      name="PDC_For_Month"
+                      precision="25"
+                      scale="10"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[MeasureUse]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].ExternalColumns[MeasureUse]"
+                      length="50"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[MeasureUse]"
+                      name="MeasureUse"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[Measure]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].ExternalColumns[Measure]"
+                      length="268"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[Measure]"
+                      name="Measure"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[Create_Datetime]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].ExternalColumns[Create_Datetime]"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[Create_Datetime]"
+                      name="Create_Datetime"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[RatePerHead]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].ExternalColumns[RatePerHead]"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[RatePerHead]"
+                      name="RatePerHead"
+                      precision="9"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[PMD_Invoice_No]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].ExternalColumns[PMD_Invoice_No]"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[PMD_Invoice_No]"
+                      name="PMD_Invoice_No"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[Survey_User_Name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].ExternalColumns[Survey_User_Name]"
+                      length="100"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[Survey_User_Name]"
+                      name="Survey_User_Name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[Transaction_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].ExternalColumns[Transaction_ID]"
+                      length="100"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[Transaction_ID]"
+                      name="Transaction_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[StarsConnect_Call_ID]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].ExternalColumns[StarsConnect_Call_ID]"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[StarsConnect_Call_ID]"
+                      name="StarsConnect_Call_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[QM]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].ExternalColumns[QM]"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[QM]"
+                      name="QM"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[Call_Type]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].ExternalColumns[Call_Type]"
+                      length="50"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].Columns[Call_Type]"
+                      name="Call_Type"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].ExternalColumns[Billing_Projected_ID]"
+                      dataType="i8"
+                      name="Billing_Projected_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].ExternalColumns[Billing_Control_ID]"
+                      dataType="i4"
+                      name="Billing_Control_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].ExternalColumns[Billing_Status]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Billing_Status" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].ExternalColumns[Claims_Attributed]"
+                      dataType="i4"
+                      name="Claims_Attributed" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].ExternalColumns[Patient_ID]"
+                      dataType="wstr"
+                      length="255"
+                      name="Patient_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].ExternalColumns[Patient_Unique_Ident]"
+                      dataType="i8"
+                      name="Patient_Unique_Ident" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].ExternalColumns[PlanIdentifier_PClm]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      name="PlanIdentifier_PClm" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].ExternalColumns[MeasureNoteDate]"
+                      dataType="dbDate"
+                      name="MeasureNoteDate" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].ExternalColumns[Billing_Year]"
+                      dataType="i4"
+                      name="Billing_Year" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].ExternalColumns[PDC_Bucket]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      name="PDC_Bucket" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].ExternalColumns[MeasureADH_Status_Today]"
+                      codePage="1252"
+                      dataType="str"
+                      length="27"
+                      name="MeasureADH_Status_Today" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].ExternalColumns[StockInHand_Today]"
+                      dataType="i4"
+                      name="StockInHand_Today" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].ExternalColumns[PMD_Client_ID]"
+                      dataType="i4"
+                      name="PMD_Client_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].ExternalColumns[Min_PDC]"
+                      dataType="numeric"
+                      name="Min_PDC"
+                      precision="25"
+                      scale="10" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].ExternalColumns[PDC_For_Month]"
+                      dataType="numeric"
+                      name="PDC_For_Month"
+                      precision="25"
+                      scale="10" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].ExternalColumns[MeasureUse]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="MeasureUse" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].ExternalColumns[Measure]"
+                      dataType="wstr"
+                      length="268"
+                      name="Measure" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].ExternalColumns[Create_Datetime]"
+                      dataType="dbTimeStamp"
+                      name="Create_Datetime" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].ExternalColumns[RatePerHead]"
+                      dataType="numeric"
+                      name="RatePerHead"
+                      precision="9"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].ExternalColumns[PMD_Invoice_No]"
+                      dataType="i4"
+                      name="PMD_Invoice_No" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].ExternalColumns[Survey_User_Name]"
+                      dataType="wstr"
+                      length="100"
+                      name="Survey_User_Name" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].ExternalColumns[Transaction_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="Transaction_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].ExternalColumns[StarsConnect_Call_ID]"
+                      dataType="i8"
+                      name="StarsConnect_Call_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].ExternalColumns[QM]"
+                      dataType="i4"
+                      name="QM" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output].ExternalColumns[Call_Type]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Call_Type" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Error Output].Columns[Billing_Projected_ID]"
+                      dataType="i8"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Error Output].Columns[Billing_Projected_ID]"
+                      name="Billing_Projected_ID" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Error Output].Columns[Billing_Control_ID]"
+                      dataType="i4"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Error Output].Columns[Billing_Control_ID]"
+                      name="Billing_Control_ID" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Error Output].Columns[Billing_Status]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Error Output].Columns[Billing_Status]"
+                      name="Billing_Status" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Error Output].Columns[Claims_Attributed]"
+                      dataType="i4"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Error Output].Columns[Claims_Attributed]"
+                      name="Claims_Attributed" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Error Output].Columns[Patient_ID]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Error Output].Columns[Patient_ID]"
+                      name="Patient_ID" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Error Output].Columns[Patient_Unique_Ident]"
+                      dataType="i8"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Error Output].Columns[Patient_Unique_Ident]"
+                      name="Patient_Unique_Ident" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Error Output].Columns[PlanIdentifier_PClm]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Error Output].Columns[PlanIdentifier_PClm]"
+                      name="PlanIdentifier_PClm" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Error Output].Columns[MeasureNoteDate]"
+                      dataType="dbDate"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Error Output].Columns[MeasureNoteDate]"
+                      name="MeasureNoteDate" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Error Output].Columns[Billing_Year]"
+                      dataType="i4"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Error Output].Columns[Billing_Year]"
+                      name="Billing_Year" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Error Output].Columns[PDC_Bucket]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Error Output].Columns[PDC_Bucket]"
+                      name="PDC_Bucket" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Error Output].Columns[MeasureADH_Status_Today]"
+                      codePage="1252"
+                      dataType="str"
+                      length="27"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Error Output].Columns[MeasureADH_Status_Today]"
+                      name="MeasureADH_Status_Today" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Error Output].Columns[StockInHand_Today]"
+                      dataType="i4"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Error Output].Columns[StockInHand_Today]"
+                      name="StockInHand_Today" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Error Output].Columns[PMD_Client_ID]"
+                      dataType="i4"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Error Output].Columns[PMD_Client_ID]"
+                      name="PMD_Client_ID" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Error Output].Columns[Min_PDC]"
+                      dataType="numeric"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Error Output].Columns[Min_PDC]"
+                      name="Min_PDC"
+                      precision="25"
+                      scale="10" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Error Output].Columns[PDC_For_Month]"
+                      dataType="numeric"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Error Output].Columns[PDC_For_Month]"
+                      name="PDC_For_Month"
+                      precision="25"
+                      scale="10" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Error Output].Columns[MeasureUse]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Error Output].Columns[MeasureUse]"
+                      name="MeasureUse" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Error Output].Columns[Measure]"
+                      dataType="wstr"
+                      length="268"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Error Output].Columns[Measure]"
+                      name="Measure" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Error Output].Columns[Create_Datetime]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Error Output].Columns[Create_Datetime]"
+                      name="Create_Datetime" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Error Output].Columns[RatePerHead]"
+                      dataType="numeric"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Error Output].Columns[RatePerHead]"
+                      name="RatePerHead"
+                      precision="9"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Error Output].Columns[PMD_Invoice_No]"
+                      dataType="i4"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Error Output].Columns[PMD_Invoice_No]"
+                      name="PMD_Invoice_No" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Error Output].Columns[Survey_User_Name]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Error Output].Columns[Survey_User_Name]"
+                      name="Survey_User_Name" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Error Output].Columns[Transaction_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Error Output].Columns[Transaction_ID]"
+                      name="Transaction_ID" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Error Output].Columns[StarsConnect_Call_ID]"
+                      dataType="i8"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Error Output].Columns[StarsConnect_Call_ID]"
+                      name="StarsConnect_Call_ID" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Error Output].Columns[QM]"
+                      dataType="i4"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Error Output].Columns[QM]"
+                      name="QM" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Error Output].Columns[Call_Type]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Error Output].Columns[Call_Type]"
+                      name="Call_Type" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Populate Billing Tables ODS\Source 6 - Billing_Exceptions"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Source 6 - Billing_Exceptions"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Billing_Exceptions]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Populate Billing Tables ODS\Source 6 - Billing_Exceptions.Connections[OleDbConnection]"
+                  connectionManagerID="{ACDA4EA4-99AA-4495-8ACB-9B66F3C7338F}:invalid"
+                  connectionManagerRefId="{ACDA4EA4-99AA-4495-8ACB-9B66F3C7338F}:invalid"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Populate Billing Tables ODS\Source 6 - Billing_Exceptions.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source 6 - Billing_Exceptions.Outputs[OLE DB Source Output].Columns[PMD_Client_ID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Source 6 - Billing_Exceptions.Outputs[OLE DB Source Output].ExternalColumns[PMD_Client_ID]"
+                      lineageId="Package\Populate Billing Tables ODS\Source 6 - Billing_Exceptions.Outputs[OLE DB Source Output].Columns[PMD_Client_ID]"
+                      name="PMD_Client_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source 6 - Billing_Exceptions.Outputs[OLE DB Source Output].Columns[ClientConfigType]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Source 6 - Billing_Exceptions.Outputs[OLE DB Source Output].ExternalColumns[ClientConfigType]"
+                      length="50"
+                      lineageId="Package\Populate Billing Tables ODS\Source 6 - Billing_Exceptions.Outputs[OLE DB Source Output].Columns[ClientConfigType]"
+                      name="ClientConfigType"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source 6 - Billing_Exceptions.Outputs[OLE DB Source Output].Columns[ClientConfigCode]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Source 6 - Billing_Exceptions.Outputs[OLE DB Source Output].ExternalColumns[ClientConfigCode]"
+                      length="20"
+                      lineageId="Package\Populate Billing Tables ODS\Source 6 - Billing_Exceptions.Outputs[OLE DB Source Output].Columns[ClientConfigCode]"
+                      name="ClientConfigCode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source 6 - Billing_Exceptions.Outputs[OLE DB Source Output].Columns[ClientConfigExceptionType]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Source 6 - Billing_Exceptions.Outputs[OLE DB Source Output].ExternalColumns[ClientConfigExceptionType]"
+                      length="20"
+                      lineageId="Package\Populate Billing Tables ODS\Source 6 - Billing_Exceptions.Outputs[OLE DB Source Output].Columns[ClientConfigExceptionType]"
+                      name="ClientConfigExceptionType"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source 6 - Billing_Exceptions.Outputs[OLE DB Source Output].Columns[ClientConfigNotes]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Source 6 - Billing_Exceptions.Outputs[OLE DB Source Output].ExternalColumns[ClientConfigNotes]"
+                      length="500"
+                      lineageId="Package\Populate Billing Tables ODS\Source 6 - Billing_Exceptions.Outputs[OLE DB Source Output].Columns[ClientConfigNotes]"
+                      name="ClientConfigNotes"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source 6 - Billing_Exceptions.Outputs[OLE DB Source Output].Columns[MeasureType]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate Billing Tables ODS\Source 6 - Billing_Exceptions.Outputs[OLE DB Source Output].ExternalColumns[MeasureType]"
+                      length="20"
+                      lineageId="Package\Populate Billing Tables ODS\Source 6 - Billing_Exceptions.Outputs[OLE DB Source Output].Columns[MeasureType]"
+                      name="MeasureType"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Source 6 - Billing_Exceptions.Outputs[OLE DB Source Output].ExternalColumns[PMD_Client_ID]"
+                      dataType="i4"
+                      name="PMD_Client_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Source 6 - Billing_Exceptions.Outputs[OLE DB Source Output].ExternalColumns[ClientConfigType]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="ClientConfigType" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Source 6 - Billing_Exceptions.Outputs[OLE DB Source Output].ExternalColumns[ClientConfigCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="ClientConfigCode" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Source 6 - Billing_Exceptions.Outputs[OLE DB Source Output].ExternalColumns[ClientConfigExceptionType]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="ClientConfigExceptionType" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Source 6 - Billing_Exceptions.Outputs[OLE DB Source Output].ExternalColumns[ClientConfigNotes]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="ClientConfigNotes" />
+                    <externalMetadataColumn
+                      refId="Package\Populate Billing Tables ODS\Source 6 - Billing_Exceptions.Outputs[OLE DB Source Output].ExternalColumns[MeasureType]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="MeasureType" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Populate Billing Tables ODS\Source 6 - Billing_Exceptions.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source 6 - Billing_Exceptions.Outputs[OLE DB Source Error Output].Columns[PMD_Client_ID]"
+                      dataType="i4"
+                      lineageId="Package\Populate Billing Tables ODS\Source 6 - Billing_Exceptions.Outputs[OLE DB Source Error Output].Columns[PMD_Client_ID]"
+                      name="PMD_Client_ID" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source 6 - Billing_Exceptions.Outputs[OLE DB Source Error Output].Columns[ClientConfigType]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Populate Billing Tables ODS\Source 6 - Billing_Exceptions.Outputs[OLE DB Source Error Output].Columns[ClientConfigType]"
+                      name="ClientConfigType" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source 6 - Billing_Exceptions.Outputs[OLE DB Source Error Output].Columns[ClientConfigCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\Populate Billing Tables ODS\Source 6 - Billing_Exceptions.Outputs[OLE DB Source Error Output].Columns[ClientConfigCode]"
+                      name="ClientConfigCode" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source 6 - Billing_Exceptions.Outputs[OLE DB Source Error Output].Columns[ClientConfigExceptionType]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\Populate Billing Tables ODS\Source 6 - Billing_Exceptions.Outputs[OLE DB Source Error Output].Columns[ClientConfigExceptionType]"
+                      name="ClientConfigExceptionType" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source 6 - Billing_Exceptions.Outputs[OLE DB Source Error Output].Columns[ClientConfigNotes]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Populate Billing Tables ODS\Source 6 - Billing_Exceptions.Outputs[OLE DB Source Error Output].Columns[ClientConfigNotes]"
+                      name="ClientConfigNotes" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source 6 - Billing_Exceptions.Outputs[OLE DB Source Error Output].Columns[MeasureType]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\Populate Billing Tables ODS\Source 6 - Billing_Exceptions.Outputs[OLE DB Source Error Output].Columns[MeasureType]"
+                      name="MeasureType" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source 6 - Billing_Exceptions.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Populate Billing Tables ODS\Source 6 - Billing_Exceptions.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Populate Billing Tables ODS\Source 6 - Billing_Exceptions.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Populate Billing Tables ODS\Source 6 - Billing_Exceptions.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Populate Billing Tables ODS.Paths[OLE DB Source Output]"
+              endId="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected.Inputs[Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\Populate Billing Tables ODS.Paths[OLE DB Source Output1]"
+              endId="Package\Populate Billing Tables ODS\Destination - Billing.Inputs[Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Populate Billing Tables ODS\Source - Billing.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\Populate Billing Tables ODS.Paths[OLE DB Source Output2]"
+              endId="Package\Populate Billing Tables ODS\Destination 6 - Billing_Exceptions.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Populate Billing Tables ODS\Source 6 - Billing_Exceptions.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate Billing Tables ODS"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{0392C086-55B1-4CBF-805D-01CEC2F19A6A}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate Billing Tables ODS"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{6134B592-FC7E-4252-BDDB-4BC8A4FC8745}"
+          SQLTask:SqlStatementSource="Truncate table dbo.billing&#xA;Go&#xA;&#xA;Truncate table dbo.billing_projected&#xA;go&#xA;&#xA;Truncate table dbo.Billing_Exceptions&#xA;Go&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Update Statistics"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{EEDBC450-0D71-451B-BBB1-B68B6BB2EDEF}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Update Statistics"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{6134B592-FC7E-4252-BDDB-4BC8A4FC8745}"
+          SQLTask:SqlStatementSource="Update Statistics dbo.Billing" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{45914D39-3896-422E-B8CA-D5C5FFACC03C}"
+      DTS:From="Package\Truncate Billing Tables ODS"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Populate Billing Tables ODS" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{A791A7E2-75C9-49F3-9101-D9EEAFF01884}"
+      DTS:From="Package\Populate Billing Tables ODS"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Update Statistics" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql12">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="211,42"
+          Id="Package\Populate Billing Tables ODS"
+          TopLeft="345,217.5" />
+        <NodeLayout
+          Size="212,42"
+          Id="Package\Truncate Billing Tables ODS"
+          TopLeft="345,152" />
+        <NodeLayout
+          Size="212,42"
+          Id="Package\Update Statistics"
+          TopLeft="345,289" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="450.75,194">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,23.5"
+              Start="0,0"
+              End="0,16">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="450.75,259.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,29.5"
+              Start="0,0"
+              End="0,22">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Populate Billing Tables ODS">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="217,42"
+          Id="Package\Populate Billing Tables ODS\Source 6 - Billing_Exceptions"
+          TopLeft="69,39" />
+        <NodeLayout
+          Size="211,42"
+          Id="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected"
+          TopLeft="403.5,28.4999999999999" />
+        <NodeLayout
+          Size="151,42"
+          Id="Package\Populate Billing Tables ODS\Source - Billing"
+          TopLeft="687.5,26.4999999999999" />
+        <NodeLayout
+          Size="237,42"
+          Id="Package\Populate Billing Tables ODS\Destination 6 - Billing_Exceptions"
+          TopLeft="81,122" />
+        <NodeLayout
+          Size="172,42"
+          Id="Package\Populate Billing Tables ODS\Destination - Billing"
+          TopLeft="677,128.5" />
+        <NodeLayout
+          Size="231,42"
+          Id="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected"
+          TopLeft="393.5,130.5" />
+        <EdgeLayout
+          Id="Package\Populate Billing Tables ODS.Paths[OLE DB Source Output2]"
+          TopLeft="177.5,81">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="22,41"
+              Start="0,0"
+              End="22,33.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.5"
+                    Point2="0,20.5"
+                    Point3="4,20.5" />
+                  <mssgle:LineSegment
+                    End="18,20.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="18,20.5"
+                    Point2="22,20.5"
+                    Point3="22,24.5" />
+                  <mssgle:LineSegment
+                    End="22,33.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Populate Billing Tables ODS.Paths[OLE DB Source Output1]"
+          TopLeft="763,68.4999999999999">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Populate Billing Tables ODS.Paths[OLE DB Source Output]"
+          TopLeft="509,70.4999999999999">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Populate Billing Tables ODS\Source 6 - Billing_Exceptions">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Populate Billing Tables ODS\Source 3 - Billing_Projected">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Populate Billing Tables ODS\Source - Billing">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Populate Billing Tables ODS\Destination 6 - Billing_Exceptions">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Populate Billing Tables ODS\Destination - Billing">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Populate Billing Tables ODS\Destination 3 - Billing_Projected">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

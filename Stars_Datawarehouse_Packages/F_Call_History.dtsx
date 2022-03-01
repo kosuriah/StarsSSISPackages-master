@@ -1,0 +1,1888 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="2/9/2016 4:33:54 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="LT-354L162-0148"
+  DTS:CreatorName="PHARMMD\bill.shoap2"
+  DTS:DTSID="{A22DE11F-63EE-4CE2-80DA-C681E5E3626A}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.1301.433"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="F_Call_History"
+  DTS:PackageType="5"
+  DTS:VersionBuild="6"
+  DTS:VersionGUID="{67412F74-BA5E-4F32-A713-363FC3A7BFD0}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Load F_Call_History"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{A150770D-C8C5-4504-BF44-83061B72C51A}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load F_Call_History"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Load F_Call_History\F_Call_History"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="F_Call_History"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[F_Call_History]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load F_Call_History\F_Call_History.Connections[OleDbConnection]"
+                  connectionManagerID="{F130C9C1-8230-45DD-AA40-3603B0BFBE9E}:invalid"
+                  connectionManagerRefId="{F130C9C1-8230-45DD-AA40-3603B0BFBE9E}:invalid"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load F_Call_History\F_Call_History.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load F_Call_History\F_Call_History.Inputs[OLE DB Destination Input].Columns[Client_Ident]"
+                      cachedDataType="i4"
+                      cachedName="Client_Ident"
+                      externalMetadataColumnId="Package\Load F_Call_History\F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[Client_Ident]"
+                      lineageId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Output].Columns[Client_Ident]" />
+                    <inputColumn
+                      refId="Package\Load F_Call_History\F_Call_History.Inputs[OLE DB Destination Input].Columns[Provider_Ident]"
+                      cachedDataType="i8"
+                      cachedName="Provider_Ident"
+                      externalMetadataColumnId="Package\Load F_Call_History\F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[Provider_Ident]"
+                      lineageId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Output].Columns[Provider_Ident]" />
+                    <inputColumn
+                      refId="Package\Load F_Call_History\F_Call_History.Inputs[OLE DB Destination Input].Columns[Patient_Ident]"
+                      cachedDataType="i8"
+                      cachedName="Patient_Ident"
+                      externalMetadataColumnId="Package\Load F_Call_History\F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[Patient_Ident]"
+                      lineageId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Output].Columns[Patient_Ident]" />
+                    <inputColumn
+                      refId="Package\Load F_Call_History\F_Call_History.Inputs[OLE DB Destination Input].Columns[Measure_Ident]"
+                      cachedDataType="i4"
+                      cachedName="Measure_Ident"
+                      externalMetadataColumnId="Package\Load F_Call_History\F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[Measure_Ident]"
+                      lineageId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Output].Columns[Measure_Ident]" />
+                    <inputColumn
+                      refId="Package\Load F_Call_History\F_Call_History.Inputs[OLE DB Destination Input].Columns[Date_Ident]"
+                      cachedDataType="i4"
+                      cachedName="Date_Ident"
+                      externalMetadataColumnId="Package\Load F_Call_History\F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[Date_Ident]"
+                      lineageId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Output].Columns[Date_Ident]" />
+                    <inputColumn
+                      refId="Package\Load F_Call_History\F_Call_History.Inputs[OLE DB Destination Input].Columns[Call_Minutes]"
+                      cachedDataType="i4"
+                      cachedName="Call_Minutes"
+                      externalMetadataColumnId="Package\Load F_Call_History\F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[Call_Minutes]"
+                      lineageId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Output].Columns[Call_Minutes]" />
+                    <inputColumn
+                      refId="Package\Load F_Call_History\F_Call_History.Inputs[OLE DB Destination Input].Columns[Call_Status_Ident]"
+                      cachedDataType="i4"
+                      cachedName="Call_Status_Ident"
+                      externalMetadataColumnId="Package\Load F_Call_History\F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[Call_Status_Ident]"
+                      lineageId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Output].Columns[Call_Status_Ident]" />
+                    <inputColumn
+                      refId="Package\Load F_Call_History\F_Call_History.Inputs[OLE DB Destination Input].Columns[Category_Ident]"
+                      cachedDataType="i4"
+                      cachedName="Category_Ident"
+                      externalMetadataColumnId="Package\Load F_Call_History\F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[Category_Ident]"
+                      lineageId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Output].Columns[Category_Ident]" />
+                    <inputColumn
+                      refId="Package\Load F_Call_History\F_Call_History.Inputs[OLE DB Destination Input].Columns[Drug_Ident]"
+                      cachedDataType="i4"
+                      cachedName="Drug_Ident"
+                      externalMetadataColumnId="Package\Load F_Call_History\F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[Drug_Ident]"
+                      lineageId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Output].Columns[Drug_Ident]" />
+                    <inputColumn
+                      refId="Package\Load F_Call_History\F_Call_History.Inputs[OLE DB Destination Input].Columns[User_Ident]"
+                      cachedDataType="i4"
+                      cachedName="User_Ident"
+                      externalMetadataColumnId="Package\Load F_Call_History\F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[User_Ident]"
+                      lineageId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Output].Columns[User_Ident]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load F_Call_History\F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[Client_Ident]"
+                      dataType="i4"
+                      name="Client_Ident" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_Call_History\F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[Provider_Ident]"
+                      dataType="i8"
+                      name="Provider_Ident" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_Call_History\F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[Patient_Ident]"
+                      dataType="i8"
+                      name="Patient_Ident" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_Call_History\F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[Measure_Ident]"
+                      dataType="i4"
+                      name="Measure_Ident" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_Call_History\F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[Date_Ident]"
+                      dataType="i4"
+                      name="Date_Ident" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_Call_History\F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[Call_Minutes]"
+                      dataType="i4"
+                      name="Call_Minutes" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_Call_History\F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[Call_Status_Ident]"
+                      dataType="i4"
+                      name="Call_Status_Ident" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_Call_History\F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[Category_Ident]"
+                      dataType="i4"
+                      name="Category_Ident" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_Call_History\F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[Drug_Ident]"
+                      dataType="i4"
+                      name="Drug_Ident" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_Call_History\F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[User_Ident]"
+                      dataType="i4"
+                      name="User_Ident" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load F_Call_History\F_Call_History.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Load F_Call_History\F_Call_History.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load F_Call_History\F_Call_History.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load F_Call_History\F_Call_History.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load F_Call_History\F_Call_History.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load F_Call_History\F_Call_History.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load F_Call_History\S_F_Call_History"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="S_F_Call_History"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT  
+      cl.Client_Ident
+      ,ISNULL(pr.Provider_Ident,-99) AS Provider_Ident
+	  ,ISNULL(p.Patient_Ident,-99) AS Patient_Ident
+      ,m.Measure_Ident
+      ,calldate.Date_Ident 
+	  ,CASE WHEN DATEDIFF(MINUTE,[Call_Start_At],[Call_End_At])=0 THEN 1 ELSE DATEDIFF(MINUTE,[Call_Start_At],[Call_End_At]) end AS Call_Minutes
+      ,ISNULL(cs.[Call_Status_Ident],-99) AS Call_Status_Ident
+	  ,ISNULL(c.Category_Ident,-99) AS Category_Ident
+      ,ISNULL(dr.Drug_Ident,-99) AS Drug_Ident
+	  ,ISNULL(u.user_ident,-99) AS User_Ident
+
+  FROM [staging].[S_F_Call_History] s
+ 
+  LEFT JOIN [dbo].[D_Call_Status] cs
+  ON cs.[Status_Id] = s.[Call_Status_Id]
+  AND cs.[status_detail_id] = s.[Call_Status_Detail_ID]
+
+  LEFT JOIN [dbo].[D_Category] c
+  ON c.Category_ID = s.Category_ID
+  AND c.Subcategory_ID = s.Sub_category_ID
+
+  LEFT JOIN [dbo].[D_Users] u
+  ON u.[user_id] = s.[caller_id]
+
+  INNER JOIN [dbo].[D_Date] calldate
+  ON CAST(calldate.[date] AS DATE) = CAST(s.measurenotedate AS DATE)
+
+  LEFT JOIN [dbo].[D_Patient] p
+  ON p.Patient_ID = s.Member_ID
+  AND p.PMD_Client_ID = s.[PMD_Client_ID]
+  AND p.Patient_Unique_Ident IS NOT null
+
+  INNER JOIN [dbo].[D_Client] cl
+  ON cl.PMD_Client_ID = s.[PMD_Client_ID]
+  AND cl.PlanIdentifier_PClm = s.PlanIdentifier_PClm
+
+  LEFT JOIN [dbo].[D_Providers] pr
+  ON pr.provider_id = s.NPI
+  AND provider_type = 'NPI'
+
+  LEFT JOIN (SELECT DISTINCT NDC,MAX(Drug_Ident) AS Drug_Ident  FROM [dbo].[D_Drug] WHERE ListAsOf=(SELECT MAX(ListAsOf) FROM [dbo].[D_Drug]) GROUP BY NDC) dr
+  ON dr.ndc = s.ndc
+
+  INNER JOIN [dbo].[D_Measure]  m
+  ON m.Measure_Use = s.measureuse</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load F_Call_History\S_F_Call_History.Connections[OleDbConnection]"
+                  connectionManagerID="{F130C9C1-8230-45DD-AA40-3603B0BFBE9E}:invalid"
+                  connectionManagerRefId="{F130C9C1-8230-45DD-AA40-3603B0BFBE9E}:invalid"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Output].Columns[Client_Ident]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Output].ExternalColumns[Client_Ident]"
+                      lineageId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Output].Columns[Client_Ident]"
+                      name="Client_Ident"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Output].Columns[Provider_Ident]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Output].ExternalColumns[Provider_Ident]"
+                      lineageId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Output].Columns[Provider_Ident]"
+                      name="Provider_Ident"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Output].Columns[Patient_Ident]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Output].ExternalColumns[Patient_Ident]"
+                      lineageId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Output].Columns[Patient_Ident]"
+                      name="Patient_Ident"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Output].Columns[Measure_Ident]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Output].ExternalColumns[Measure_Ident]"
+                      lineageId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Output].Columns[Measure_Ident]"
+                      name="Measure_Ident"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Output].Columns[Date_Ident]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Output].ExternalColumns[Date_Ident]"
+                      lineageId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Output].Columns[Date_Ident]"
+                      name="Date_Ident"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Output].Columns[Call_Minutes]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Output].ExternalColumns[Call_Minutes]"
+                      lineageId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Output].Columns[Call_Minutes]"
+                      name="Call_Minutes"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Output].Columns[Call_Status_Ident]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Output].ExternalColumns[Call_Status_Ident]"
+                      lineageId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Output].Columns[Call_Status_Ident]"
+                      name="Call_Status_Ident"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Output].Columns[Category_Ident]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Output].ExternalColumns[Category_Ident]"
+                      lineageId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Output].Columns[Category_Ident]"
+                      name="Category_Ident"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Output].Columns[Drug_Ident]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Output].ExternalColumns[Drug_Ident]"
+                      lineageId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Output].Columns[Drug_Ident]"
+                      name="Drug_Ident"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Output].Columns[User_Ident]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Output].ExternalColumns[User_Ident]"
+                      lineageId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Output].Columns[User_Ident]"
+                      name="User_Ident"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Output].ExternalColumns[Client_Ident]"
+                      dataType="i4"
+                      name="Client_Ident" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Output].ExternalColumns[Provider_Ident]"
+                      dataType="i8"
+                      name="Provider_Ident" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Output].ExternalColumns[Patient_Ident]"
+                      dataType="i8"
+                      name="Patient_Ident" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Output].ExternalColumns[Measure_Ident]"
+                      dataType="i4"
+                      name="Measure_Ident" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Output].ExternalColumns[Date_Ident]"
+                      dataType="i4"
+                      name="Date_Ident" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Output].ExternalColumns[Call_Minutes]"
+                      dataType="i4"
+                      name="Call_Minutes" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Output].ExternalColumns[Call_Status_Ident]"
+                      dataType="i4"
+                      name="Call_Status_Ident" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Output].ExternalColumns[Category_Ident]"
+                      dataType="i4"
+                      name="Category_Ident" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Output].ExternalColumns[Drug_Ident]"
+                      dataType="i4"
+                      name="Drug_Ident" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Output].ExternalColumns[User_Ident]"
+                      dataType="i4"
+                      name="User_Ident" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Error Output].Columns[Client_Ident]"
+                      dataType="i4"
+                      lineageId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Error Output].Columns[Client_Ident]"
+                      name="Client_Ident" />
+                    <outputColumn
+                      refId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Error Output].Columns[Provider_Ident]"
+                      dataType="i8"
+                      lineageId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Error Output].Columns[Provider_Ident]"
+                      name="Provider_Ident" />
+                    <outputColumn
+                      refId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Error Output].Columns[Patient_Ident]"
+                      dataType="i8"
+                      lineageId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Error Output].Columns[Patient_Ident]"
+                      name="Patient_Ident" />
+                    <outputColumn
+                      refId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Error Output].Columns[Measure_Ident]"
+                      dataType="i4"
+                      lineageId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Error Output].Columns[Measure_Ident]"
+                      name="Measure_Ident" />
+                    <outputColumn
+                      refId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Error Output].Columns[Date_Ident]"
+                      dataType="i4"
+                      lineageId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Error Output].Columns[Date_Ident]"
+                      name="Date_Ident" />
+                    <outputColumn
+                      refId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Error Output].Columns[Call_Minutes]"
+                      dataType="i4"
+                      lineageId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Error Output].Columns[Call_Minutes]"
+                      name="Call_Minutes" />
+                    <outputColumn
+                      refId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Error Output].Columns[Call_Status_Ident]"
+                      dataType="i4"
+                      lineageId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Error Output].Columns[Call_Status_Ident]"
+                      name="Call_Status_Ident" />
+                    <outputColumn
+                      refId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Error Output].Columns[Category_Ident]"
+                      dataType="i4"
+                      lineageId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Error Output].Columns[Category_Ident]"
+                      name="Category_Ident" />
+                    <outputColumn
+                      refId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Error Output].Columns[Drug_Ident]"
+                      dataType="i4"
+                      lineageId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Error Output].Columns[Drug_Ident]"
+                      name="Drug_Ident" />
+                    <outputColumn
+                      refId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Error Output].Columns[User_Ident]"
+                      dataType="i4"
+                      lineageId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Error Output].Columns[User_Ident]"
+                      name="User_Ident" />
+                    <outputColumn
+                      refId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Load F_Call_History.Paths[OLE DB Source Output]"
+              endId="Package\Load F_Call_History\F_Call_History.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Load F_Call_History\S_F_Call_History.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Stage Call History"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{BEE1AE0E-13F7-4D15-BDD5-36E02A4D8BE4}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Stage Call History"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Stars_Call_Lists DTP_StarConnect_Call_List"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT  [Call_ID]
+      ,[DTP_ID]
+      ,[DTPDetail_ID]
+      ,[DTP_CNSLD_Call_List_ID]
+      ,[PMD_Client_ID]
+      ,[NPI]
+      ,[PMD_Patient_ID]
+      ,[Member_ID]
+      ,[PlanIdentifier_PClm]
+      ,[MeasureUse]
+      ,[MeasureNoteDate]
+      ,[Call_Start_At]
+      ,[Call_End_At] 
+      ,[Call_Status] 
+      ,[Call_Status_ID] 
+      ,[Category_ID]  
+      ,[Sub_Category_ID] 
+      ,[NDC]  
+      ,[FreeTextNotes]
+      ,[Drug_Name] 
+      ,[Caller_ID] 
+      ,[Category] 
+      ,[Subcategory] 
+      ,[Caller_Name] 
+      ,[LastUpdate_UTC]
+      ,[Call_Status_Detail_ID] 
+      ,[Call_Status_Details]    
+      ,[dtp_Year]
+
+  FROM [Stars_Call_Lists].[dbo].[DTP_StarConnect_Call_List]</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Connections[OleDbConnection]"
+                  connectionManagerID="{2928FD72-A2A2-455C-920C-FB7E78EA64E2}:invalid"
+                  connectionManagerRefId="{2928FD72-A2A2-455C-920C-FB7E78EA64E2}:invalid"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[Call_ID]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].ExternalColumns[Call_ID]"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[Call_ID]"
+                      name="Call_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[DTP_ID]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].ExternalColumns[DTP_ID]"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[DTP_ID]"
+                      name="DTP_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[DTPDetail_ID]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].ExternalColumns[DTPDetail_ID]"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[DTPDetail_ID]"
+                      name="DTPDetail_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[DTP_CNSLD_Call_List_ID]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].ExternalColumns[DTP_CNSLD_Call_List_ID]"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[DTP_CNSLD_Call_List_ID]"
+                      name="DTP_CNSLD_Call_List_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[PMD_Client_ID]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].ExternalColumns[PMD_Client_ID]"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[PMD_Client_ID]"
+                      name="PMD_Client_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[NPI]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].ExternalColumns[NPI]"
+                      length="25"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[NPI]"
+                      name="NPI"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[PMD_Patient_ID]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].ExternalColumns[PMD_Patient_ID]"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[PMD_Patient_ID]"
+                      name="PMD_Patient_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[Member_ID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].ExternalColumns[Member_ID]"
+                      length="50"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[Member_ID]"
+                      name="Member_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[PlanIdentifier_PClm]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].ExternalColumns[PlanIdentifier_PClm]"
+                      length="100"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[PlanIdentifier_PClm]"
+                      name="PlanIdentifier_PClm"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[MeasureUse]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].ExternalColumns[MeasureUse]"
+                      length="50"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[MeasureUse]"
+                      name="MeasureUse"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[MeasureNoteDate]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].ExternalColumns[MeasureNoteDate]"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[MeasureNoteDate]"
+                      name="MeasureNoteDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[Call_Start_At]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].ExternalColumns[Call_Start_At]"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[Call_Start_At]"
+                      name="Call_Start_At"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[Call_End_At]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].ExternalColumns[Call_End_At]"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[Call_End_At]"
+                      name="Call_End_At"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[Call_Status]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].ExternalColumns[Call_Status]"
+                      length="100"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[Call_Status]"
+                      name="Call_Status"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[Call_Status_ID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].ExternalColumns[Call_Status_ID]"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[Call_Status_ID]"
+                      name="Call_Status_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[Category_ID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].ExternalColumns[Category_ID]"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[Category_ID]"
+                      name="Category_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[Sub_Category_ID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].ExternalColumns[Sub_Category_ID]"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[Sub_Category_ID]"
+                      name="Sub_Category_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[NDC]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].ExternalColumns[NDC]"
+                      length="15"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[NDC]"
+                      name="NDC"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[FreeTextNotes]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].ExternalColumns[FreeTextNotes]"
+                      length="1000"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[FreeTextNotes]"
+                      name="FreeTextNotes"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[Drug_Name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].ExternalColumns[Drug_Name]"
+                      length="250"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[Drug_Name]"
+                      name="Drug_Name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[Caller_ID]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].ExternalColumns[Caller_ID]"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[Caller_ID]"
+                      name="Caller_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[Category]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].ExternalColumns[Category]"
+                      length="100"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[Category]"
+                      name="Category"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[Subcategory]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].ExternalColumns[Subcategory]"
+                      length="100"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[Subcategory]"
+                      name="Subcategory"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[Caller_Name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].ExternalColumns[Caller_Name]"
+                      length="250"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[Caller_Name]"
+                      name="Caller_Name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[LastUpdate_UTC]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].ExternalColumns[LastUpdate_UTC]"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[LastUpdate_UTC]"
+                      name="LastUpdate_UTC"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[Call_Status_Detail_ID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].ExternalColumns[Call_Status_Detail_ID]"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[Call_Status_Detail_ID]"
+                      name="Call_Status_Detail_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[Call_Status_Details]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].ExternalColumns[Call_Status_Details]"
+                      length="255"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[Call_Status_Details]"
+                      name="Call_Status_Details"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[dtp_Year]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].ExternalColumns[dtp_Year]"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[dtp_Year]"
+                      name="dtp_Year"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].ExternalColumns[Call_ID]"
+                      dataType="i8"
+                      name="Call_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].ExternalColumns[DTP_ID]"
+                      dataType="i8"
+                      name="DTP_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].ExternalColumns[DTPDetail_ID]"
+                      dataType="i8"
+                      name="DTPDetail_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].ExternalColumns[DTP_CNSLD_Call_List_ID]"
+                      dataType="i8"
+                      name="DTP_CNSLD_Call_List_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].ExternalColumns[PMD_Client_ID]"
+                      dataType="i8"
+                      name="PMD_Client_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].ExternalColumns[NPI]"
+                      dataType="wstr"
+                      length="25"
+                      name="NPI" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].ExternalColumns[PMD_Patient_ID]"
+                      dataType="i8"
+                      name="PMD_Patient_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].ExternalColumns[Member_ID]"
+                      dataType="wstr"
+                      length="50"
+                      name="Member_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].ExternalColumns[PlanIdentifier_PClm]"
+                      dataType="wstr"
+                      length="100"
+                      name="PlanIdentifier_PClm" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].ExternalColumns[MeasureUse]"
+                      dataType="wstr"
+                      length="50"
+                      name="MeasureUse" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].ExternalColumns[MeasureNoteDate]"
+                      dataType="dbDate"
+                      name="MeasureNoteDate" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].ExternalColumns[Call_Start_At]"
+                      dataType="dbTimeStamp"
+                      name="Call_Start_At" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].ExternalColumns[Call_End_At]"
+                      dataType="dbTimeStamp"
+                      name="Call_End_At" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].ExternalColumns[Call_Status]"
+                      dataType="wstr"
+                      length="100"
+                      name="Call_Status" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].ExternalColumns[Call_Status_ID]"
+                      dataType="i4"
+                      name="Call_Status_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].ExternalColumns[Category_ID]"
+                      dataType="i4"
+                      name="Category_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].ExternalColumns[Sub_Category_ID]"
+                      dataType="i4"
+                      name="Sub_Category_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].ExternalColumns[NDC]"
+                      dataType="wstr"
+                      length="15"
+                      name="NDC" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].ExternalColumns[FreeTextNotes]"
+                      dataType="wstr"
+                      length="1000"
+                      name="FreeTextNotes" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].ExternalColumns[Drug_Name]"
+                      dataType="wstr"
+                      length="250"
+                      name="Drug_Name" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].ExternalColumns[Caller_ID]"
+                      dataType="i8"
+                      name="Caller_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].ExternalColumns[Category]"
+                      dataType="wstr"
+                      length="100"
+                      name="Category" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].ExternalColumns[Subcategory]"
+                      dataType="wstr"
+                      length="100"
+                      name="Subcategory" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].ExternalColumns[Caller_Name]"
+                      dataType="wstr"
+                      length="250"
+                      name="Caller_Name" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].ExternalColumns[LastUpdate_UTC]"
+                      dataType="dbTimeStamp"
+                      name="LastUpdate_UTC" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].ExternalColumns[Call_Status_Detail_ID]"
+                      dataType="i4"
+                      name="Call_Status_Detail_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].ExternalColumns[Call_Status_Details]"
+                      dataType="wstr"
+                      length="255"
+                      name="Call_Status_Details" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].ExternalColumns[dtp_Year]"
+                      dataType="i4"
+                      name="dtp_Year" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Error Output].Columns[Call_ID]"
+                      dataType="i8"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Error Output].Columns[Call_ID]"
+                      name="Call_ID" />
+                    <outputColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Error Output].Columns[DTP_ID]"
+                      dataType="i8"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Error Output].Columns[DTP_ID]"
+                      name="DTP_ID" />
+                    <outputColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Error Output].Columns[DTPDetail_ID]"
+                      dataType="i8"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Error Output].Columns[DTPDetail_ID]"
+                      name="DTPDetail_ID" />
+                    <outputColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Error Output].Columns[DTP_CNSLD_Call_List_ID]"
+                      dataType="i8"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Error Output].Columns[DTP_CNSLD_Call_List_ID]"
+                      name="DTP_CNSLD_Call_List_ID" />
+                    <outputColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Error Output].Columns[PMD_Client_ID]"
+                      dataType="i8"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Error Output].Columns[PMD_Client_ID]"
+                      name="PMD_Client_ID" />
+                    <outputColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Error Output].Columns[NPI]"
+                      dataType="wstr"
+                      length="25"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Error Output].Columns[NPI]"
+                      name="NPI" />
+                    <outputColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Error Output].Columns[PMD_Patient_ID]"
+                      dataType="i8"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Error Output].Columns[PMD_Patient_ID]"
+                      name="PMD_Patient_ID" />
+                    <outputColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Error Output].Columns[Member_ID]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Error Output].Columns[Member_ID]"
+                      name="Member_ID" />
+                    <outputColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Error Output].Columns[PlanIdentifier_PClm]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Error Output].Columns[PlanIdentifier_PClm]"
+                      name="PlanIdentifier_PClm" />
+                    <outputColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Error Output].Columns[MeasureUse]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Error Output].Columns[MeasureUse]"
+                      name="MeasureUse" />
+                    <outputColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Error Output].Columns[MeasureNoteDate]"
+                      dataType="dbDate"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Error Output].Columns[MeasureNoteDate]"
+                      name="MeasureNoteDate" />
+                    <outputColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Error Output].Columns[Call_Start_At]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Error Output].Columns[Call_Start_At]"
+                      name="Call_Start_At" />
+                    <outputColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Error Output].Columns[Call_End_At]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Error Output].Columns[Call_End_At]"
+                      name="Call_End_At" />
+                    <outputColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Error Output].Columns[Call_Status]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Error Output].Columns[Call_Status]"
+                      name="Call_Status" />
+                    <outputColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Error Output].Columns[Call_Status_ID]"
+                      dataType="i4"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Error Output].Columns[Call_Status_ID]"
+                      name="Call_Status_ID" />
+                    <outputColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Error Output].Columns[Category_ID]"
+                      dataType="i4"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Error Output].Columns[Category_ID]"
+                      name="Category_ID" />
+                    <outputColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Error Output].Columns[Sub_Category_ID]"
+                      dataType="i4"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Error Output].Columns[Sub_Category_ID]"
+                      name="Sub_Category_ID" />
+                    <outputColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Error Output].Columns[NDC]"
+                      dataType="wstr"
+                      length="15"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Error Output].Columns[NDC]"
+                      name="NDC" />
+                    <outputColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Error Output].Columns[FreeTextNotes]"
+                      dataType="wstr"
+                      length="1000"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Error Output].Columns[FreeTextNotes]"
+                      name="FreeTextNotes" />
+                    <outputColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Error Output].Columns[Drug_Name]"
+                      dataType="wstr"
+                      length="250"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Error Output].Columns[Drug_Name]"
+                      name="Drug_Name" />
+                    <outputColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Error Output].Columns[Caller_ID]"
+                      dataType="i8"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Error Output].Columns[Caller_ID]"
+                      name="Caller_ID" />
+                    <outputColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Error Output].Columns[Category]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Error Output].Columns[Category]"
+                      name="Category" />
+                    <outputColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Error Output].Columns[Subcategory]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Error Output].Columns[Subcategory]"
+                      name="Subcategory" />
+                    <outputColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Error Output].Columns[Caller_Name]"
+                      dataType="wstr"
+                      length="250"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Error Output].Columns[Caller_Name]"
+                      name="Caller_Name" />
+                    <outputColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Error Output].Columns[LastUpdate_UTC]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Error Output].Columns[LastUpdate_UTC]"
+                      name="LastUpdate_UTC" />
+                    <outputColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Error Output].Columns[Call_Status_Detail_ID]"
+                      dataType="i4"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Error Output].Columns[Call_Status_Detail_ID]"
+                      name="Call_Status_Detail_ID" />
+                    <outputColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Error Output].Columns[Call_Status_Details]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Error Output].Columns[Call_Status_Details]"
+                      name="Call_Status_Details" />
+                    <outputColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Error Output].Columns[dtp_Year]"
+                      dataType="i4"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Error Output].Columns[dtp_Year]"
+                      name="dtp_Year" />
+                    <outputColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Stage Call History\S_F_Call_History"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="S_F_Call_History"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[staging].[S_F_Call_History]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Stage Call History\S_F_Call_History.Connections[OleDbConnection]"
+                  connectionManagerID="{F130C9C1-8230-45DD-AA40-3603B0BFBE9E}:invalid"
+                  connectionManagerRefId="{F130C9C1-8230-45DD-AA40-3603B0BFBE9E}:invalid"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].Columns[Call_ID]"
+                      cachedDataType="i8"
+                      cachedName="Call_ID"
+                      externalMetadataColumnId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[Call_ID]"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[Call_ID]" />
+                    <inputColumn
+                      refId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].Columns[DTP_ID]"
+                      cachedDataType="i8"
+                      cachedName="DTP_ID"
+                      externalMetadataColumnId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[DTP_ID]"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[DTP_ID]" />
+                    <inputColumn
+                      refId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].Columns[DTPDetail_ID]"
+                      cachedDataType="i8"
+                      cachedName="DTPDetail_ID"
+                      externalMetadataColumnId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[DTPDetail_ID]"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[DTPDetail_ID]" />
+                    <inputColumn
+                      refId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].Columns[DTP_CNSLD_Call_List_ID]"
+                      cachedDataType="i8"
+                      cachedName="DTP_CNSLD_Call_List_ID"
+                      externalMetadataColumnId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[DTP_CNSLD_Call_List_ID]"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[DTP_CNSLD_Call_List_ID]" />
+                    <inputColumn
+                      refId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].Columns[PMD_Client_ID]"
+                      cachedDataType="i8"
+                      cachedName="PMD_Client_ID"
+                      externalMetadataColumnId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[PMD_Client_ID]"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[PMD_Client_ID]" />
+                    <inputColumn
+                      refId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].Columns[NPI]"
+                      cachedDataType="wstr"
+                      cachedLength="25"
+                      cachedName="NPI"
+                      externalMetadataColumnId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[NPI]"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[NPI]" />
+                    <inputColumn
+                      refId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].Columns[PMD_Patient_ID]"
+                      cachedDataType="i8"
+                      cachedName="PMD_Patient_ID"
+                      externalMetadataColumnId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[PMD_Patient_ID]"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[PMD_Patient_ID]" />
+                    <inputColumn
+                      refId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].Columns[Member_ID]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Member_ID"
+                      externalMetadataColumnId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[Member_ID]"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[Member_ID]" />
+                    <inputColumn
+                      refId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].Columns[PlanIdentifier_PClm]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="PlanIdentifier_PClm"
+                      externalMetadataColumnId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[PlanIdentifier_PClm]"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[PlanIdentifier_PClm]" />
+                    <inputColumn
+                      refId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].Columns[MeasureUse]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="MeasureUse"
+                      externalMetadataColumnId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[MeasureUse]"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[MeasureUse]" />
+                    <inputColumn
+                      refId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].Columns[MeasureNoteDate]"
+                      cachedDataType="dbDate"
+                      cachedName="MeasureNoteDate"
+                      externalMetadataColumnId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[MeasureNoteDate]"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[MeasureNoteDate]" />
+                    <inputColumn
+                      refId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].Columns[Call_Start_At]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="Call_Start_At"
+                      externalMetadataColumnId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[Call_Start_At]"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[Call_Start_At]" />
+                    <inputColumn
+                      refId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].Columns[Call_End_At]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="Call_End_At"
+                      externalMetadataColumnId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[Call_End_At]"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[Call_End_At]" />
+                    <inputColumn
+                      refId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].Columns[Call_Status]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="Call_Status"
+                      externalMetadataColumnId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[Call_Status]"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[Call_Status]" />
+                    <inputColumn
+                      refId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].Columns[Call_Status_ID]"
+                      cachedDataType="i4"
+                      cachedName="Call_Status_ID"
+                      externalMetadataColumnId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[Call_Status_ID]"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[Call_Status_ID]" />
+                    <inputColumn
+                      refId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].Columns[Category_ID]"
+                      cachedDataType="i4"
+                      cachedName="Category_ID"
+                      externalMetadataColumnId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[Category_ID]"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[Category_ID]" />
+                    <inputColumn
+                      refId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].Columns[Sub_Category_ID]"
+                      cachedDataType="i4"
+                      cachedName="Sub_Category_ID"
+                      externalMetadataColumnId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[Sub_Category_ID]"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[Sub_Category_ID]" />
+                    <inputColumn
+                      refId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].Columns[NDC]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="NDC"
+                      externalMetadataColumnId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[NDC]"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[NDC]" />
+                    <inputColumn
+                      refId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].Columns[FreeTextNotes]"
+                      cachedDataType="wstr"
+                      cachedLength="1000"
+                      cachedName="FreeTextNotes"
+                      externalMetadataColumnId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[FreeTextNotes]"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[FreeTextNotes]" />
+                    <inputColumn
+                      refId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].Columns[Drug_Name]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="Drug_Name"
+                      externalMetadataColumnId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[Drug_Name]"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[Drug_Name]" />
+                    <inputColumn
+                      refId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].Columns[Caller_ID]"
+                      cachedDataType="i8"
+                      cachedName="Caller_ID"
+                      externalMetadataColumnId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[Caller_ID]"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[Caller_ID]" />
+                    <inputColumn
+                      refId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].Columns[Category]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="Category"
+                      externalMetadataColumnId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[Category]"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[Category]" />
+                    <inputColumn
+                      refId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].Columns[Subcategory]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="Subcategory"
+                      externalMetadataColumnId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[Subcategory]"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[Subcategory]" />
+                    <inputColumn
+                      refId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].Columns[Caller_Name]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="Caller_Name"
+                      externalMetadataColumnId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[Caller_Name]"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[Caller_Name]" />
+                    <inputColumn
+                      refId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].Columns[LastUpdate_UTC]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="LastUpdate_UTC"
+                      externalMetadataColumnId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[LastUpdate_UTC]"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[LastUpdate_UTC]" />
+                    <inputColumn
+                      refId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].Columns[Call_Status_Detail_ID]"
+                      cachedDataType="i4"
+                      cachedName="Call_Status_Detail_ID"
+                      externalMetadataColumnId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[Call_Status_Detail_ID]"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[Call_Status_Detail_ID]" />
+                    <inputColumn
+                      refId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].Columns[Call_Status_Details]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Call_Status_Details"
+                      externalMetadataColumnId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[Call_Status_Details]"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[Call_Status_Details]" />
+                    <inputColumn
+                      refId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].Columns[dtp_Year]"
+                      cachedDataType="i4"
+                      cachedName="dtp_Year"
+                      externalMetadataColumnId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[dtp_Year]"
+                      lineageId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output].Columns[dtp_Year]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[Call_ID]"
+                      dataType="i8"
+                      name="Call_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[DTP_ID]"
+                      dataType="i8"
+                      name="DTP_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[DTPDetail_ID]"
+                      dataType="i8"
+                      name="DTPDetail_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[DTP_CNSLD_Call_List_ID]"
+                      dataType="i8"
+                      name="DTP_CNSLD_Call_List_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[PMD_Client_ID]"
+                      dataType="i8"
+                      name="PMD_Client_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[NPI]"
+                      dataType="wstr"
+                      length="25"
+                      name="NPI" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[PMD_Patient_ID]"
+                      dataType="i8"
+                      name="PMD_Patient_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[Member_ID]"
+                      dataType="wstr"
+                      length="50"
+                      name="Member_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[PlanIdentifier_PClm]"
+                      dataType="wstr"
+                      length="100"
+                      name="PlanIdentifier_PClm" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[MeasureUse]"
+                      dataType="wstr"
+                      length="50"
+                      name="MeasureUse" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[MeasureNoteDate]"
+                      dataType="dbDate"
+                      name="MeasureNoteDate" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[Call_Start_At]"
+                      dataType="dbTimeStamp"
+                      name="Call_Start_At" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[Call_End_At]"
+                      dataType="dbTimeStamp"
+                      name="Call_End_At" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[Call_Status]"
+                      dataType="wstr"
+                      length="100"
+                      name="Call_Status" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[Call_Status_ID]"
+                      dataType="i4"
+                      name="Call_Status_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[Category_ID]"
+                      dataType="i4"
+                      name="Category_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[Sub_Category_ID]"
+                      dataType="i4"
+                      name="Sub_Category_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[NDC]"
+                      dataType="wstr"
+                      length="15"
+                      name="NDC" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[FreeTextNotes]"
+                      dataType="wstr"
+                      length="1000"
+                      name="FreeTextNotes" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[Drug_Name]"
+                      dataType="wstr"
+                      length="250"
+                      name="Drug_Name" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[Caller_ID]"
+                      dataType="i8"
+                      name="Caller_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[Category]"
+                      dataType="wstr"
+                      length="100"
+                      name="Category" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[Subcategory]"
+                      dataType="wstr"
+                      length="100"
+                      name="Subcategory" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[Caller_Name]"
+                      dataType="wstr"
+                      length="250"
+                      name="Caller_Name" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[LastUpdate_UTC]"
+                      dataType="dbTimeStamp"
+                      name="LastUpdate_UTC" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[Call_Status_Detail_ID]"
+                      dataType="i4"
+                      name="Call_Status_Detail_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[Call_Status_Details]"
+                      dataType="wstr"
+                      length="255"
+                      name="Call_Status_Details" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input].ExternalColumns[dtp_Year]"
+                      dataType="i4"
+                      name="dtp_Year" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Stage Call History\S_F_Call_History.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage Call History\S_F_Call_History.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage Call History\S_F_Call_History.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage Call History\S_F_Call_History.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage Call History\S_F_Call_History.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Stage Call History.Paths[OLE DB Source Output]"
+              endId="Package\Stage Call History\S_F_Call_History.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate Staging"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{3FCEAD06-D34E-456B-99BA-6A72025C175B}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate Staging"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{F130C9C1-8230-45DD-AA40-3603B0BFBE9E}"
+          SQLTask:SqlStatementSource="Truncate Table staging.S_F_Call_History&#xA;Go&#xA;&#xA;Truncate Table dbo.F_Call_History&#xA;Go" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{5452A40E-6703-40A9-8B6B-724B95C65720}"
+      DTS:From="Package\Truncate Staging"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Stage Call History" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{A02977F2-D59F-4E1B-A21A-38B6A9685EF3}"
+      DTS:From="Package\Stage Call History"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Load F_Call_History" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql12">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="172,42"
+          Id="Package\Load F_Call_History"
+          TopLeft="104,199" />
+        <NodeLayout
+          Size="162,42"
+          Id="Package\Stage Call History"
+          TopLeft="102,127" />
+        <NodeLayout
+          Size="159,42"
+          Id="Package\Truncate Staging"
+          TopLeft="97,53" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="179.75,95">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,32"
+              Start="0,0"
+              End="0,24.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="186.5,169">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,30"
+              Start="0,0"
+              End="0,22.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Load F_Call_History">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="158,42"
+          Id="Package\Load F_Call_History\S_F_Call_History"
+          TopLeft="131,49" />
+        <NodeLayout
+          Size="146,42"
+          Id="Package\Load F_Call_History\F_Call_History"
+          TopLeft="133,119" />
+        <EdgeLayout
+          Id="Package\Load F_Call_History.Paths[OLE DB Source Output]"
+          TopLeft="208,91">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,28"
+              Start="0,0"
+              End="0,20.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load F_Call_History\F_Call_History">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load F_Call_History\S_F_Call_History">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Stage Call History">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="158,42"
+          Id="Package\Stage Call History\S_F_Call_History"
+          TopLeft="166,136" />
+        <NodeLayout
+          Size="282,42"
+          Id="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List"
+          TopLeft="121,53" />
+        <EdgeLayout
+          Id="Package\Stage Call History.Paths[OLE DB Source Output]"
+          TopLeft="262,95">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-17,41"
+              Start="0,0"
+              End="-17,33.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.5"
+                    Point2="0,20.5"
+                    Point3="-4,20.5" />
+                  <mssgle:LineSegment
+                    End="-13,20.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-13,20.5"
+                    Point2="-17,20.5"
+                    Point3="-17,24.5" />
+                  <mssgle:LineSegment
+                    End="-17,33.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Stage Call History\Stars_Call_Lists DTP_StarConnect_Call_List">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Stage Call History\S_F_Call_History">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

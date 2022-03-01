@@ -1,0 +1,1801 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="2/9/2016 3:05:48 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="LT-354L162-0148"
+  DTS:CreatorName="PHARMMD\bill.shoap2"
+  DTS:DTSID="{11B20E84-463C-4AF9-ABD1-ECD8C15FF20C}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.1301.433"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="D_Call_Status"
+  DTS:PackageType="5"
+  DTS:VersionBuild="11"
+  DTS:VersionGUID="{596D17E1-0044-44FF-B4FA-38F22C274FF5}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Load Call Status Dimension"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{AACC7245-B353-4900-A669-E34C16011836}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load Call Status Dimension"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Load Call Status Dimension\D_Call_Status"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="D_Call_Status"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[D_Call_Status]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Call Status Dimension\D_Call_Status.Connections[OleDbConnection]"
+                  connectionManagerID="{F130C9C1-8230-45DD-AA40-3603B0BFBE9E}:invalid"
+                  connectionManagerRefId="{F130C9C1-8230-45DD-AA40-3603B0BFBE9E}:invalid"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load Call Status Dimension\D_Call_Status.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load Call Status Dimension\D_Call_Status.Inputs[OLE DB Destination Input].Columns[description]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="description"
+                      externalMetadataColumnId="Package\Load Call Status Dimension\D_Call_Status.Inputs[OLE DB Destination Input].ExternalColumns[description]"
+                      lineageId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Output].Columns[description]" />
+                    <inputColumn
+                      refId="Package\Load Call Status Dimension\D_Call_Status.Inputs[OLE DB Destination Input].Columns[key]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="key"
+                      externalMetadataColumnId="Package\Load Call Status Dimension\D_Call_Status.Inputs[OLE DB Destination Input].ExternalColumns[key]"
+                      lineageId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Output].Columns[key]" />
+                    <inputColumn
+                      refId="Package\Load Call Status Dimension\D_Call_Status.Inputs[OLE DB Destination Input].Columns[status_type]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="status_type"
+                      externalMetadataColumnId="Package\Load Call Status Dimension\D_Call_Status.Inputs[OLE DB Destination Input].ExternalColumns[status_type]"
+                      lineageId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Output].Columns[status_type]" />
+                    <inputColumn
+                      refId="Package\Load Call Status Dimension\D_Call_Status.Inputs[OLE DB Destination Input].Columns[created_at]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="created_at"
+                      externalMetadataColumnId="Package\Load Call Status Dimension\D_Call_Status.Inputs[OLE DB Destination Input].ExternalColumns[created_at]"
+                      lineageId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Output].Columns[created_at]" />
+                    <inputColumn
+                      refId="Package\Load Call Status Dimension\D_Call_Status.Inputs[OLE DB Destination Input].Columns[updated_at]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="updated_at"
+                      externalMetadataColumnId="Package\Load Call Status Dimension\D_Call_Status.Inputs[OLE DB Destination Input].ExternalColumns[updated_at]"
+                      lineageId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Output].Columns[updated_at]" />
+                    <inputColumn
+                      refId="Package\Load Call Status Dimension\D_Call_Status.Inputs[OLE DB Destination Input].Columns[status_id]"
+                      cachedDataType="i4"
+                      cachedName="status_id"
+                      externalMetadataColumnId="Package\Load Call Status Dimension\D_Call_Status.Inputs[OLE DB Destination Input].ExternalColumns[status_Id]"
+                      lineageId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Output].Columns[status_id]" />
+                    <inputColumn
+                      refId="Package\Load Call Status Dimension\D_Call_Status.Inputs[OLE DB Destination Input].Columns[status_name]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="status_name"
+                      externalMetadataColumnId="Package\Load Call Status Dimension\D_Call_Status.Inputs[OLE DB Destination Input].ExternalColumns[status_name]"
+                      lineageId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Output].Columns[status_name]" />
+                    <inputColumn
+                      refId="Package\Load Call Status Dimension\D_Call_Status.Inputs[OLE DB Destination Input].Columns[status_detail_id]"
+                      cachedDataType="i4"
+                      cachedName="status_detail_id"
+                      externalMetadataColumnId="Package\Load Call Status Dimension\D_Call_Status.Inputs[OLE DB Destination Input].ExternalColumns[status_detail_id]"
+                      lineageId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Output].Columns[status_detail_id]" />
+                    <inputColumn
+                      refId="Package\Load Call Status Dimension\D_Call_Status.Inputs[OLE DB Destination Input].Columns[status_detail_name]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="status_detail_name"
+                      externalMetadataColumnId="Package\Load Call Status Dimension\D_Call_Status.Inputs[OLE DB Destination Input].ExternalColumns[status_detail_name]"
+                      lineageId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Output].Columns[status_detail_name]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load Call Status Dimension\D_Call_Status.Inputs[OLE DB Destination Input].ExternalColumns[Call_Status_Ident]"
+                      dataType="i4"
+                      name="Call_Status_Ident" />
+                    <externalMetadataColumn
+                      refId="Package\Load Call Status Dimension\D_Call_Status.Inputs[OLE DB Destination Input].ExternalColumns[description]"
+                      dataType="wstr"
+                      length="250"
+                      name="description" />
+                    <externalMetadataColumn
+                      refId="Package\Load Call Status Dimension\D_Call_Status.Inputs[OLE DB Destination Input].ExternalColumns[key]"
+                      dataType="wstr"
+                      length="100"
+                      name="key" />
+                    <externalMetadataColumn
+                      refId="Package\Load Call Status Dimension\D_Call_Status.Inputs[OLE DB Destination Input].ExternalColumns[status_type]"
+                      dataType="wstr"
+                      length="50"
+                      name="status_type" />
+                    <externalMetadataColumn
+                      refId="Package\Load Call Status Dimension\D_Call_Status.Inputs[OLE DB Destination Input].ExternalColumns[created_at]"
+                      dataType="dbTimeStamp"
+                      name="created_at" />
+                    <externalMetadataColumn
+                      refId="Package\Load Call Status Dimension\D_Call_Status.Inputs[OLE DB Destination Input].ExternalColumns[updated_at]"
+                      dataType="dbTimeStamp"
+                      name="updated_at" />
+                    <externalMetadataColumn
+                      refId="Package\Load Call Status Dimension\D_Call_Status.Inputs[OLE DB Destination Input].ExternalColumns[status_Id]"
+                      dataType="i4"
+                      name="status_Id" />
+                    <externalMetadataColumn
+                      refId="Package\Load Call Status Dimension\D_Call_Status.Inputs[OLE DB Destination Input].ExternalColumns[status_name]"
+                      dataType="wstr"
+                      length="100"
+                      name="status_name" />
+                    <externalMetadataColumn
+                      refId="Package\Load Call Status Dimension\D_Call_Status.Inputs[OLE DB Destination Input].ExternalColumns[status_detail_id]"
+                      dataType="i4"
+                      name="status_detail_id" />
+                    <externalMetadataColumn
+                      refId="Package\Load Call Status Dimension\D_Call_Status.Inputs[OLE DB Destination Input].ExternalColumns[status_detail_name]"
+                      dataType="wstr"
+                      length="100"
+                      name="status_detail_name" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Call Status Dimension\D_Call_Status.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Load Call Status Dimension\D_Call_Status.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Call Status Dimension\D_Call_Status.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Call Status Dimension\D_Call_Status.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Call Status Dimension\D_Call_Status.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Call Status Dimension\D_Call_Status.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Call Status Dimension\Lookup"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">Select status_id, status_detail_id from [Stars_DWH].[dbo].[D_Call_Status] with (Nolock)</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from (Select status_id, status_detail_id from [Stars_DWH].[dbo].[D_Call_Status] with (Nolock)) [refTable]
+where [refTable].[status_id] = ? and [refTable].[status_detail_id] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="status_id" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="status_detail_id" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Output].Columns[status_id]};#{Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Output].Columns[status_detail_id]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Call Status Dimension\Lookup.Connections[OleDbConnection]"
+                  connectionManagerID="{F130C9C1-8230-45DD-AA40-3603B0BFBE9E}:invalid"
+                  connectionManagerRefId="{F130C9C1-8230-45DD-AA40-3603B0BFBE9E}:invalid"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load Call Status Dimension\Lookup.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load Call Status Dimension\Lookup.Inputs[Lookup Input].Columns[status_id]"
+                      cachedDataType="i4"
+                      cachedName="status_id"
+                      lineageId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Output].Columns[status_id]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">status_id</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load Call Status Dimension\Lookup.Inputs[Lookup Input].Columns[status_detail_id]"
+                      cachedDataType="i4"
+                      cachedName="status_detail_id"
+                      lineageId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Output].Columns[status_detail_id]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">status_detail_id</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Call Status Dimension\Lookup.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Load Call Status Dimension\Lookup.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load Call Status Dimension\Lookup.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Load Call Status Dimension\Lookup.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load Call Status Dimension\Lookup.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Load Call Status Dimension\Lookup.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Call Status Dimension\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Call Status Dimension\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Call Status Dimension\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Call Status Dimension\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Call Status Dimension\S_D_Call_Status"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="S_D_Call_Status"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT [status_id]
+      ,[status_name]
+      ,[description]
+      ,[key]
+      ,[status_type]
+      ,[created_at]
+      ,[updated_at]
+      ,[status_detail_id]
+      ,[status_detail_name]
+  FROM [staging].[S_D_Call_Status]</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Call Status Dimension\S_D_Call_Status.Connections[OleDbConnection]"
+                  connectionManagerID="{F130C9C1-8230-45DD-AA40-3603B0BFBE9E}:invalid"
+                  connectionManagerRefId="{F130C9C1-8230-45DD-AA40-3603B0BFBE9E}:invalid"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Output].Columns[description]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Output].ExternalColumns[description]"
+                      length="250"
+                      lineageId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Output].Columns[description]"
+                      name="description"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Output].Columns[key]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Output].ExternalColumns[key]"
+                      length="100"
+                      lineageId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Output].Columns[key]"
+                      name="key"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Output].Columns[status_type]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Output].ExternalColumns[status_type]"
+                      length="50"
+                      lineageId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Output].Columns[status_type]"
+                      name="status_type"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Output].Columns[created_at]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Output].ExternalColumns[created_at]"
+                      lineageId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Output].Columns[created_at]"
+                      name="created_at"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Output].Columns[updated_at]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Output].ExternalColumns[updated_at]"
+                      lineageId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Output].Columns[updated_at]"
+                      name="updated_at"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Output].Columns[status_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Output].ExternalColumns[status_id]"
+                      lineageId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Output].Columns[status_id]"
+                      name="status_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Output].Columns[status_name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Output].ExternalColumns[status_name]"
+                      length="100"
+                      lineageId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Output].Columns[status_name]"
+                      name="status_name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Output].Columns[status_detail_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Output].ExternalColumns[status_detail_id]"
+                      lineageId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Output].Columns[status_detail_id]"
+                      name="status_detail_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Output].Columns[status_detail_name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Output].ExternalColumns[status_detail_name]"
+                      length="100"
+                      lineageId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Output].Columns[status_detail_name]"
+                      name="status_detail_name"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Output].ExternalColumns[description]"
+                      dataType="wstr"
+                      length="250"
+                      name="description" />
+                    <externalMetadataColumn
+                      refId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Output].ExternalColumns[key]"
+                      dataType="wstr"
+                      length="100"
+                      name="key" />
+                    <externalMetadataColumn
+                      refId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Output].ExternalColumns[status_type]"
+                      dataType="wstr"
+                      length="50"
+                      name="status_type" />
+                    <externalMetadataColumn
+                      refId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Output].ExternalColumns[created_at]"
+                      dataType="dbTimeStamp"
+                      name="created_at" />
+                    <externalMetadataColumn
+                      refId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Output].ExternalColumns[updated_at]"
+                      dataType="dbTimeStamp"
+                      name="updated_at" />
+                    <externalMetadataColumn
+                      refId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Output].ExternalColumns[status_id]"
+                      dataType="i4"
+                      name="status_id" />
+                    <externalMetadataColumn
+                      refId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Output].ExternalColumns[status_name]"
+                      dataType="wstr"
+                      length="100"
+                      name="status_name" />
+                    <externalMetadataColumn
+                      refId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Output].ExternalColumns[status_detail_id]"
+                      dataType="i4"
+                      name="status_detail_id" />
+                    <externalMetadataColumn
+                      refId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Output].ExternalColumns[status_detail_name]"
+                      dataType="wstr"
+                      length="100"
+                      name="status_detail_name" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Error Output].Columns[status_id]"
+                      dataType="i4"
+                      lineageId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Error Output].Columns[status_id]"
+                      name="status_id" />
+                    <outputColumn
+                      refId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Error Output].Columns[status_name]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Error Output].Columns[status_name]"
+                      name="status_name" />
+                    <outputColumn
+                      refId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Error Output].Columns[description]"
+                      dataType="wstr"
+                      length="250"
+                      lineageId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Error Output].Columns[description]"
+                      name="description" />
+                    <outputColumn
+                      refId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Error Output].Columns[key]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Error Output].Columns[key]"
+                      name="key" />
+                    <outputColumn
+                      refId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Error Output].Columns[status_type]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Error Output].Columns[status_type]"
+                      name="status_type" />
+                    <outputColumn
+                      refId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Error Output].Columns[created_at]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Error Output].Columns[created_at]"
+                      name="created_at" />
+                    <outputColumn
+                      refId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Error Output].Columns[updated_at]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Error Output].Columns[updated_at]"
+                      name="updated_at" />
+                    <outputColumn
+                      refId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Error Output].Columns[status_detail_id]"
+                      dataType="i4"
+                      lineageId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Error Output].Columns[status_detail_id]"
+                      name="status_detail_id" />
+                    <outputColumn
+                      refId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Error Output].Columns[status_detail_name]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Error Output].Columns[status_detail_name]"
+                      name="status_detail_name" />
+                    <outputColumn
+                      refId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Call Status Dimension\S_D_Call_Status_Update"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="S_D_Call_Status_Update"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[staging].[S_D_Call_Status_Update]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Call Status Dimension\S_D_Call_Status_Update.Connections[OleDbConnection]"
+                  connectionManagerID="{F130C9C1-8230-45DD-AA40-3603B0BFBE9E}:invalid"
+                  connectionManagerRefId="{F130C9C1-8230-45DD-AA40-3603B0BFBE9E}:invalid"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load Call Status Dimension\S_D_Call_Status_Update.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load Call Status Dimension\S_D_Call_Status_Update.Inputs[OLE DB Destination Input].Columns[description]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="description"
+                      externalMetadataColumnId="Package\Load Call Status Dimension\S_D_Call_Status_Update.Inputs[OLE DB Destination Input].ExternalColumns[description]"
+                      lineageId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Output].Columns[description]" />
+                    <inputColumn
+                      refId="Package\Load Call Status Dimension\S_D_Call_Status_Update.Inputs[OLE DB Destination Input].Columns[key]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="key"
+                      externalMetadataColumnId="Package\Load Call Status Dimension\S_D_Call_Status_Update.Inputs[OLE DB Destination Input].ExternalColumns[key]"
+                      lineageId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Output].Columns[key]" />
+                    <inputColumn
+                      refId="Package\Load Call Status Dimension\S_D_Call_Status_Update.Inputs[OLE DB Destination Input].Columns[status_type]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="status_type"
+                      externalMetadataColumnId="Package\Load Call Status Dimension\S_D_Call_Status_Update.Inputs[OLE DB Destination Input].ExternalColumns[status_type]"
+                      lineageId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Output].Columns[status_type]" />
+                    <inputColumn
+                      refId="Package\Load Call Status Dimension\S_D_Call_Status_Update.Inputs[OLE DB Destination Input].Columns[created_at]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="created_at"
+                      externalMetadataColumnId="Package\Load Call Status Dimension\S_D_Call_Status_Update.Inputs[OLE DB Destination Input].ExternalColumns[created_at]"
+                      lineageId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Output].Columns[created_at]" />
+                    <inputColumn
+                      refId="Package\Load Call Status Dimension\S_D_Call_Status_Update.Inputs[OLE DB Destination Input].Columns[updated_at]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="updated_at"
+                      externalMetadataColumnId="Package\Load Call Status Dimension\S_D_Call_Status_Update.Inputs[OLE DB Destination Input].ExternalColumns[updated_at]"
+                      lineageId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Output].Columns[updated_at]" />
+                    <inputColumn
+                      refId="Package\Load Call Status Dimension\S_D_Call_Status_Update.Inputs[OLE DB Destination Input].Columns[status_id]"
+                      cachedDataType="i4"
+                      cachedName="status_id"
+                      externalMetadataColumnId="Package\Load Call Status Dimension\S_D_Call_Status_Update.Inputs[OLE DB Destination Input].ExternalColumns[status_id]"
+                      lineageId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Output].Columns[status_id]" />
+                    <inputColumn
+                      refId="Package\Load Call Status Dimension\S_D_Call_Status_Update.Inputs[OLE DB Destination Input].Columns[status_name]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="status_name"
+                      externalMetadataColumnId="Package\Load Call Status Dimension\S_D_Call_Status_Update.Inputs[OLE DB Destination Input].ExternalColumns[status_name]"
+                      lineageId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Output].Columns[status_name]" />
+                    <inputColumn
+                      refId="Package\Load Call Status Dimension\S_D_Call_Status_Update.Inputs[OLE DB Destination Input].Columns[status_detail_id]"
+                      cachedDataType="i4"
+                      cachedName="status_detail_id"
+                      externalMetadataColumnId="Package\Load Call Status Dimension\S_D_Call_Status_Update.Inputs[OLE DB Destination Input].ExternalColumns[status_detail_id]"
+                      lineageId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Output].Columns[status_detail_id]" />
+                    <inputColumn
+                      refId="Package\Load Call Status Dimension\S_D_Call_Status_Update.Inputs[OLE DB Destination Input].Columns[status_detail_name]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="status_detail_name"
+                      externalMetadataColumnId="Package\Load Call Status Dimension\S_D_Call_Status_Update.Inputs[OLE DB Destination Input].ExternalColumns[status_detail_name]"
+                      lineageId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Output].Columns[status_detail_name]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load Call Status Dimension\S_D_Call_Status_Update.Inputs[OLE DB Destination Input].ExternalColumns[description]"
+                      dataType="wstr"
+                      length="250"
+                      name="description" />
+                    <externalMetadataColumn
+                      refId="Package\Load Call Status Dimension\S_D_Call_Status_Update.Inputs[OLE DB Destination Input].ExternalColumns[key]"
+                      dataType="wstr"
+                      length="100"
+                      name="key" />
+                    <externalMetadataColumn
+                      refId="Package\Load Call Status Dimension\S_D_Call_Status_Update.Inputs[OLE DB Destination Input].ExternalColumns[status_type]"
+                      dataType="wstr"
+                      length="50"
+                      name="status_type" />
+                    <externalMetadataColumn
+                      refId="Package\Load Call Status Dimension\S_D_Call_Status_Update.Inputs[OLE DB Destination Input].ExternalColumns[created_at]"
+                      dataType="dbTimeStamp"
+                      name="created_at" />
+                    <externalMetadataColumn
+                      refId="Package\Load Call Status Dimension\S_D_Call_Status_Update.Inputs[OLE DB Destination Input].ExternalColumns[updated_at]"
+                      dataType="dbTimeStamp"
+                      name="updated_at" />
+                    <externalMetadataColumn
+                      refId="Package\Load Call Status Dimension\S_D_Call_Status_Update.Inputs[OLE DB Destination Input].ExternalColumns[status_id]"
+                      dataType="i4"
+                      name="status_id" />
+                    <externalMetadataColumn
+                      refId="Package\Load Call Status Dimension\S_D_Call_Status_Update.Inputs[OLE DB Destination Input].ExternalColumns[status_name]"
+                      dataType="wstr"
+                      length="100"
+                      name="status_name" />
+                    <externalMetadataColumn
+                      refId="Package\Load Call Status Dimension\S_D_Call_Status_Update.Inputs[OLE DB Destination Input].ExternalColumns[status_detail_id]"
+                      dataType="i4"
+                      name="status_detail_id" />
+                    <externalMetadataColumn
+                      refId="Package\Load Call Status Dimension\S_D_Call_Status_Update.Inputs[OLE DB Destination Input].ExternalColumns[status_detail_name]"
+                      dataType="wstr"
+                      length="100"
+                      name="status_detail_name" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Call Status Dimension\S_D_Call_Status_Update.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Load Call Status Dimension\S_D_Call_Status_Update.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Call Status Dimension\S_D_Call_Status_Update.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Call Status Dimension\S_D_Call_Status_Update.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Call Status Dimension\S_D_Call_Status_Update.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Call Status Dimension\S_D_Call_Status_Update.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Load Call Status Dimension.Paths[Lookup Match Output]"
+              endId="Package\Load Call Status Dimension\S_D_Call_Status_Update.Inputs[OLE DB Destination Input]"
+              name="Lookup Match Output"
+              startId="Package\Load Call Status Dimension\Lookup.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Load Call Status Dimension.Paths[Lookup No Match Output]"
+              endId="Package\Load Call Status Dimension\D_Call_Status.Inputs[OLE DB Destination Input]"
+              name="Lookup No Match Output"
+              startId="Package\Load Call Status Dimension\Lookup.Outputs[Lookup No Match Output]" />
+            <path
+              refId="Package\Load Call Status Dimension.Paths[OLE DB Source Output]"
+              endId="Package\Load Call Status Dimension\Lookup.Inputs[Lookup Input]"
+              name="OLE DB Source Output"
+              startId="Package\Load Call Status Dimension\S_D_Call_Status.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Stage Call Statuses"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{32844697-F8A5-4661-B42C-0B555C04626C}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Stage Call Statuses"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Stage Call Statuses\StarsConnect Statuses"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="StarsConnect Statuses"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">--S_D_Call_Status
+
+SELECT s.[id] AS status_id
+      ,s.[name] AS status_name
+      ,s.[description]
+      ,s.[key]
+      ,s.[status_type]
+	  ,sd.id AS status_detail_id
+	  ,sd.description AS status_detail_name
+      ,s.[created_at]
+      ,s.[updated_at]
+  FROM [dbo].[statuses] s
+  INNER JOIN [dbo].[status_details] sd
+  ON s.id =sd.status_id</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Stage Call Statuses\StarsConnect Statuses.Connections[OleDbConnection]"
+                  connectionManagerID="{98CA1A2E-D1A2-4041-AD05-8E13C575C71A}:invalid"
+                  connectionManagerRefId="{98CA1A2E-D1A2-4041-AD05-8E13C575C71A}:invalid"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Output].Columns[description]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Output].ExternalColumns[description]"
+                      length="250"
+                      lineageId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Output].Columns[description]"
+                      name="description"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Output].Columns[key]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Output].ExternalColumns[key]"
+                      length="100"
+                      lineageId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Output].Columns[key]"
+                      name="key"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Output].Columns[status_type]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Output].ExternalColumns[status_type]"
+                      length="50"
+                      lineageId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Output].Columns[status_type]"
+                      name="status_type"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Output].Columns[created_at]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Output].ExternalColumns[created_at]"
+                      lineageId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Output].Columns[created_at]"
+                      name="created_at"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Output].Columns[updated_at]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Output].ExternalColumns[updated_at]"
+                      lineageId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Output].Columns[updated_at]"
+                      name="updated_at"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Output].Columns[status_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Output].ExternalColumns[status_id]"
+                      lineageId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Output].Columns[status_id]"
+                      name="status_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Output].Columns[status_name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Output].ExternalColumns[status_name]"
+                      length="100"
+                      lineageId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Output].Columns[status_name]"
+                      name="status_name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Output].Columns[status_detail_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Output].ExternalColumns[status_detail_id]"
+                      lineageId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Output].Columns[status_detail_id]"
+                      name="status_detail_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Output].Columns[status_detail_name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Output].ExternalColumns[status_detail_name]"
+                      length="255"
+                      lineageId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Output].Columns[status_detail_name]"
+                      name="status_detail_name"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Output].ExternalColumns[description]"
+                      dataType="wstr"
+                      length="250"
+                      name="description" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Output].ExternalColumns[key]"
+                      dataType="wstr"
+                      length="100"
+                      name="key" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Output].ExternalColumns[status_type]"
+                      dataType="wstr"
+                      length="50"
+                      name="status_type" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Output].ExternalColumns[created_at]"
+                      dataType="dbTimeStamp"
+                      name="created_at" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Output].ExternalColumns[updated_at]"
+                      dataType="dbTimeStamp"
+                      name="updated_at" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Output].ExternalColumns[status_id]"
+                      dataType="i4"
+                      name="status_id" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Output].ExternalColumns[status_name]"
+                      dataType="wstr"
+                      length="100"
+                      name="status_name" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Output].ExternalColumns[status_detail_id]"
+                      dataType="i4"
+                      name="status_detail_id" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Output].ExternalColumns[status_detail_name]"
+                      dataType="wstr"
+                      length="255"
+                      name="status_detail_name" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Error Output].Columns[status_id]"
+                      dataType="i4"
+                      lineageId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Error Output].Columns[status_id]"
+                      name="status_id" />
+                    <outputColumn
+                      refId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Error Output].Columns[status_name]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Error Output].Columns[status_name]"
+                      name="status_name" />
+                    <outputColumn
+                      refId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Error Output].Columns[description]"
+                      dataType="wstr"
+                      length="250"
+                      lineageId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Error Output].Columns[description]"
+                      name="description" />
+                    <outputColumn
+                      refId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Error Output].Columns[key]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Error Output].Columns[key]"
+                      name="key" />
+                    <outputColumn
+                      refId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Error Output].Columns[status_type]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Error Output].Columns[status_type]"
+                      name="status_type" />
+                    <outputColumn
+                      refId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Error Output].Columns[status_detail_id]"
+                      dataType="i4"
+                      lineageId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Error Output].Columns[status_detail_id]"
+                      name="status_detail_id" />
+                    <outputColumn
+                      refId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Error Output].Columns[status_detail_name]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Error Output].Columns[status_detail_name]"
+                      name="status_detail_name" />
+                    <outputColumn
+                      refId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Error Output].Columns[created_at]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Error Output].Columns[created_at]"
+                      name="created_at" />
+                    <outputColumn
+                      refId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Error Output].Columns[updated_at]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Error Output].Columns[updated_at]"
+                      name="updated_at" />
+                    <outputColumn
+                      refId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Stage Call Statuses\S_D_Call_Status"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="S_D_Call_Status"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[staging].[S_D_Call_Status]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Stage Call Statuses\S_D_Call_Status.Connections[OleDbConnection]"
+                  connectionManagerID="{F130C9C1-8230-45DD-AA40-3603B0BFBE9E}:invalid"
+                  connectionManagerRefId="{F130C9C1-8230-45DD-AA40-3603B0BFBE9E}:invalid"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Stage Call Statuses\S_D_Call_Status.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Stage Call Statuses\S_D_Call_Status.Inputs[OLE DB Destination Input].Columns[description]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="description"
+                      externalMetadataColumnId="Package\Stage Call Statuses\S_D_Call_Status.Inputs[OLE DB Destination Input].ExternalColumns[description]"
+                      lineageId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Output].Columns[description]" />
+                    <inputColumn
+                      refId="Package\Stage Call Statuses\S_D_Call_Status.Inputs[OLE DB Destination Input].Columns[key]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="key"
+                      externalMetadataColumnId="Package\Stage Call Statuses\S_D_Call_Status.Inputs[OLE DB Destination Input].ExternalColumns[key]"
+                      lineageId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Output].Columns[key]" />
+                    <inputColumn
+                      refId="Package\Stage Call Statuses\S_D_Call_Status.Inputs[OLE DB Destination Input].Columns[status_type]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="status_type"
+                      externalMetadataColumnId="Package\Stage Call Statuses\S_D_Call_Status.Inputs[OLE DB Destination Input].ExternalColumns[status_type]"
+                      lineageId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Output].Columns[status_type]" />
+                    <inputColumn
+                      refId="Package\Stage Call Statuses\S_D_Call_Status.Inputs[OLE DB Destination Input].Columns[created_at]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="created_at"
+                      externalMetadataColumnId="Package\Stage Call Statuses\S_D_Call_Status.Inputs[OLE DB Destination Input].ExternalColumns[created_at]"
+                      lineageId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Output].Columns[created_at]" />
+                    <inputColumn
+                      refId="Package\Stage Call Statuses\S_D_Call_Status.Inputs[OLE DB Destination Input].Columns[updated_at]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="updated_at"
+                      externalMetadataColumnId="Package\Stage Call Statuses\S_D_Call_Status.Inputs[OLE DB Destination Input].ExternalColumns[updated_at]"
+                      lineageId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Output].Columns[updated_at]" />
+                    <inputColumn
+                      refId="Package\Stage Call Statuses\S_D_Call_Status.Inputs[OLE DB Destination Input].Columns[status_id]"
+                      cachedDataType="i4"
+                      cachedName="status_id"
+                      externalMetadataColumnId="Package\Stage Call Statuses\S_D_Call_Status.Inputs[OLE DB Destination Input].ExternalColumns[status_id]"
+                      lineageId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Output].Columns[status_id]" />
+                    <inputColumn
+                      refId="Package\Stage Call Statuses\S_D_Call_Status.Inputs[OLE DB Destination Input].Columns[status_name]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="status_name"
+                      externalMetadataColumnId="Package\Stage Call Statuses\S_D_Call_Status.Inputs[OLE DB Destination Input].ExternalColumns[status_name]"
+                      lineageId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Output].Columns[status_name]" />
+                    <inputColumn
+                      refId="Package\Stage Call Statuses\S_D_Call_Status.Inputs[OLE DB Destination Input].Columns[status_detail_id]"
+                      cachedDataType="i4"
+                      cachedName="status_detail_id"
+                      externalMetadataColumnId="Package\Stage Call Statuses\S_D_Call_Status.Inputs[OLE DB Destination Input].ExternalColumns[status_detail_id]"
+                      lineageId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Output].Columns[status_detail_id]" />
+                    <inputColumn
+                      refId="Package\Stage Call Statuses\S_D_Call_Status.Inputs[OLE DB Destination Input].Columns[status_detail_name]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="status_detail_name"
+                      externalMetadataColumnId="Package\Stage Call Statuses\S_D_Call_Status.Inputs[OLE DB Destination Input].ExternalColumns[status_detail_name]"
+                      lineageId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Output].Columns[status_detail_name]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Stage Call Statuses\S_D_Call_Status.Inputs[OLE DB Destination Input].ExternalColumns[description]"
+                      dataType="wstr"
+                      length="250"
+                      name="description" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call Statuses\S_D_Call_Status.Inputs[OLE DB Destination Input].ExternalColumns[key]"
+                      dataType="wstr"
+                      length="100"
+                      name="key" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call Statuses\S_D_Call_Status.Inputs[OLE DB Destination Input].ExternalColumns[status_type]"
+                      dataType="wstr"
+                      length="50"
+                      name="status_type" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call Statuses\S_D_Call_Status.Inputs[OLE DB Destination Input].ExternalColumns[created_at]"
+                      dataType="dbTimeStamp"
+                      name="created_at" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call Statuses\S_D_Call_Status.Inputs[OLE DB Destination Input].ExternalColumns[updated_at]"
+                      dataType="dbTimeStamp"
+                      name="updated_at" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call Statuses\S_D_Call_Status.Inputs[OLE DB Destination Input].ExternalColumns[status_id]"
+                      dataType="i4"
+                      name="status_id" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call Statuses\S_D_Call_Status.Inputs[OLE DB Destination Input].ExternalColumns[status_name]"
+                      dataType="wstr"
+                      length="100"
+                      name="status_name" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call Statuses\S_D_Call_Status.Inputs[OLE DB Destination Input].ExternalColumns[status_detail_id]"
+                      dataType="i4"
+                      name="status_detail_id" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Call Statuses\S_D_Call_Status.Inputs[OLE DB Destination Input].ExternalColumns[status_detail_name]"
+                      dataType="wstr"
+                      length="100"
+                      name="status_detail_name" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Stage Call Statuses\S_D_Call_Status.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Stage Call Statuses\S_D_Call_Status.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage Call Statuses\S_D_Call_Status.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage Call Statuses\S_D_Call_Status.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage Call Statuses\S_D_Call_Status.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage Call Statuses\S_D_Call_Status.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Stage Call Statuses.Paths[OLE DB Source Output]"
+              endId="Package\Stage Call Statuses\S_D_Call_Status.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Stage Call Statuses\StarsConnect Statuses.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate Staging"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{34C8AD5A-76F2-4648-844D-3BCE62C33BE9}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate Staging"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{F130C9C1-8230-45DD-AA40-3603B0BFBE9E}"
+          SQLTask:SqlStatementSource="Truncate Table staging.S_D_Call_Status&#xA;Go&#xA;&#xA;Truncate Table staging.S_D_Call_Status_Update&#xA;Go" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Update Call Status"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{686092BA-F95D-4CEF-AB05-9E95EF93BCDF}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Update Call Status"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{F130C9C1-8230-45DD-AA40-3603B0BFBE9E}"
+          SQLTask:SqlStatementSource="  &#xA;UPDATE d&#xA;      SET d.[status_name]= u.status_name&#xA;      ,d.[description]=u.[description]&#xA;      ,d.[key]=u.[key]&#xA;      ,d.[status_type]=u.[status_type]&#xA;      ,d.[created_at]=u.[created_at]&#xA;      ,d.[updated_at]=u.[updated_at]&#x9;&#xA;&#x9;  ,d.[status_detail_name]=u.[status_detail_name]&#xA;  FROM [dbo].[D_Call_Status] d&#xA;  INNER JOIN [staging].[S_D_Call_Status_Update] u&#xA;  ON d.status_id = u.status_id&#xA;  AND d.status_detail_id =u.status_detail_id" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{62A3375F-C5DE-4F61-8391-584562FD4853}"
+      DTS:From="Package\Truncate Staging"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Stage Call Statuses" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{C8890832-EF46-417A-9EBB-487F253FDA9E}"
+      DTS:From="Package\Stage Call Statuses"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Load Call Status Dimension" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{DF5ED7DB-19B0-4B6A-9F1C-6EDF20C41C51}"
+      DTS:From="Package\Load Call Status Dimension"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Update Call Status" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql12">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="207,42"
+          Id="Package\Load Call Status Dimension"
+          TopLeft="113,130" />
+        <NodeLayout
+          Size="169,42"
+          Id="Package\Stage Call Statuses"
+          TopLeft="112,73" />
+        <NodeLayout
+          Size="159,42"
+          Id="Package\Truncate Staging"
+          TopLeft="113,11" />
+        <NodeLayout
+          Size="165,42"
+          Id="Package\Update Call Status"
+          TopLeft="113,195" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="113,32">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-1,62"
+              Start="0,0"
+              End="-8.5,62">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-19.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-19.5,0"
+                    Point2="-23.5,0"
+                    Point3="-23.5,4" />
+                  <mssgle:LineSegment
+                    End="-23.5,58" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-23.5,58"
+                    Point2="-23.5,62"
+                    Point3="-19.5,62" />
+                  <mssgle:LineSegment
+                    End="-8.5,62" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="281,94">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-64.5,36"
+              Start="0,0"
+              End="-64.5,28.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-60.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-60.5,0"
+                    Point2="-64.5,0"
+                    Point3="-64.5,4" />
+                  <mssgle:LineSegment
+                    End="-64.5,28.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="216.5,172">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-21,23"
+              Start="0,0"
+              End="-21,15.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,7.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,7.5"
+                    Point2="0,11.5"
+                    Point3="-4,11.5" />
+                  <mssgle:LineSegment
+                    End="-17,11.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-17,11.5"
+                    Point2="-21,11.5"
+                    Point3="-21,15.5" />
+                  <mssgle:LineSegment
+                    End="-21,15.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Load Call Status Dimension">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="156,42"
+          Id="Package\Load Call Status Dimension\Lookup"
+          TopLeft="114,129" />
+        <NodeLayout
+          Size="195,42"
+          Id="Package\Load Call Status Dimension\S_D_Call_Status_Update"
+          TopLeft="385,130" />
+        <NodeLayout
+          Size="144,42"
+          Id="Package\Load Call Status Dimension\D_Call_Status"
+          TopLeft="125,218" />
+        <NodeLayout
+          Size="156,42"
+          Id="Package\Load Call Status Dimension\S_D_Call_Status"
+          TopLeft="111,55" />
+        <EdgeLayout
+          Id="Package\Load Call Status Dimension.Paths[Lookup No Match Output]"
+          TopLeft="194.5,171">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,47"
+              Start="0,0"
+              End="0,39.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,39.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-55.80638671875,13.9453125,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Call Status Dimension.Paths[Lookup Match Output]"
+          TopLeft="270,150.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="115,0"
+              Start="0,0"
+              End="107.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="107.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="5.55861328125,5,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Call Status Dimension.Paths[OLE DB Source Output]"
+          TopLeft="190.5,97">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,32"
+              Start="0,0"
+              End="0,24.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Call Status Dimension\S_D_Call_Status_Update">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Call Status Dimension\Lookup">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Call Status Dimension\D_Call_Status">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Call Status Dimension\S_D_Call_Status">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Stage Call Statuses">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="156,42"
+          Id="Package\Stage Call Statuses\S_D_Call_Status"
+          TopLeft="139,120" />
+        <NodeLayout
+          Size="184,42"
+          Id="Package\Stage Call Statuses\StarsConnect Statuses"
+          TopLeft="131,51" />
+        <EdgeLayout
+          Id="Package\Stage Call Statuses.Paths[OLE DB Source Output]"
+          TopLeft="220,93">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,27"
+              Start="0,0"
+              End="0,19.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Stage Call Statuses\StarsConnect Statuses">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Stage Call Statuses\S_D_Call_Status">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

@@ -1,0 +1,2332 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/17/2015 3:45:24 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="SQLRDP"
+  DTS:CreatorName="AD\corey.collins"
+  DTS:DelayValidation="True"
+  DTS:DTSID="{D5DE8455-D7FB-4D92-8538-1BB3A30C09DD}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.1100.123"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="MRM_Provider"
+  DTS:PackageType="5"
+  DTS:VersionBuild="111"
+  DTS:VersionGUID="{F4438A4D-71D4-4B19-922E-69FB0AA3C4C5}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{8BA5F8BE-F32E-4465-88BE-4A9C86EACBF5}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="mcmProviderTable">
+      <DTS:VariableValue
+        DTS:DataType="8">scmrm.dbo.mcmproviders</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Deprecated Tasks"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:Disabled="True"
+      DTS:DTSID="{B8044F50-6CF9-4A87-986E-C5A89EB2FCB7}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Deprecated Tasks">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Deprecated Tasks\Set pmdProviderID and providerNPI"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:DelayValidation="True"
+          DTS:Description="Execute SQL Task"
+          DTS:Disabled="True"
+          DTS:DTSID="{49314E83-11C2-4A15-8347-84E54960998F}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Set pmdProviderID and providerNPI"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="2">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{41920AF9-8DB7-4D45-A69E-694E95087E27}"
+              SQLTask:SqlStatementSource="&#xA;        UPDATE&#xA;            c&#xA;        SET&#xA;            c.PMDProviderID = p.PMD_Provider_ID&#xA;&#x9;&#x9;&#x9;,c.providerNPI=c.providerid&#xA;        FROM&#xA;            scmrm.dbo.MCMProviders c&#xA;        INNER JOIN CommonCore.dbo.Provider p ON p.Provider_NPI = c.providerId&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Deprecated Tasks\Update Time Zone Match on City and State"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:Disabled="True"
+          DTS:DTSID="{28ABBB4B-6012-4163-BD0D-77F24BDE6D69}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Update Time Zone Match on City and State"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{41920AF9-8DB7-4D45-A69E-694E95087E27}"
+              SQLTask:SqlStatementSource="UPDATE&#xA;    dr&#xA;SET&#xA;    dr.time_zone = CASE WHEN dr.providerState = 'AZ' THEN 'Arizona'&#xA;                        ELSE CASE zip.timezone&#xA;                               WHEN 4 THEN 'Atlantic'&#xA;                               WHEN 5 THEN 'Eastern'&#xA;                               WHEN 6 THEN 'Central'&#xA;                               WHEN 7 THEN 'Mountain'&#xA;                               WHEN 8 THEN 'Pacific'&#xA;                               WHEN 9 THEN 'Alaska'&#xA;                               WHEN 10 THEN 'Hawaii'&#xA;                               WHEN 14 THEN 'Guam'&#xA;                               ELSE NULL&#xA;                             END&#xA;   &#xA;   &#xA;                   END&#xA;&#xA;FROM&#xA;    scmrm.dbo.MCMProviders dr&#xA;INNER JOIN [SCMRM].[staging].[MRM_CityStateTimeZone] zip ON dr.providerCity=zip.city AND dr.providerState=zip.state &#xA;WHERE dr.time_zone IS NULL AND dr.providerState&lt;&gt;'APO'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Deprecated Tasks\Update Time_Zone"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:DelayValidation="True"
+          DTS:Description="Execute SQL Task"
+          DTS:Disabled="True"
+          DTS:DTSID="{A57176C8-248B-4AC6-B9A6-639656AE0DFA}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Update Time_Zone"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{41920AF9-8DB7-4D45-A69E-694E95087E27}"
+              SQLTask:SqlStatementSource="UPDATE&#xA;    dr&#xA;SET&#xA;    dr.time_zone = CASE WHEN dr.providerState = 'AZ' THEN 'Arizona'&#xA;                        ELSE CASE zip.timezone&#xA;                               WHEN 4 THEN 'Atlantic'&#xA;                               WHEN 5 THEN 'Eastern'&#xA;                               WHEN 6 THEN 'Central'&#xA;                               WHEN 7 THEN 'Mountain'&#xA;                               WHEN 8 THEN 'Pacific'&#xA;                               WHEN 9 THEN 'Alaska'&#xA;                               WHEN 10 THEN 'Hawaii'&#xA;                               WHEN 14 THEN 'Guam'&#xA;                               ELSE NULL&#xA;                             END&#xA;                   END&#xA;FROM&#xA;    scmrm.dbo.MCMProviders dr&#xA;INNER JOIN [SCMRM].[staging].[MRM_ZipTimeZone] zip ON LEFT(dr.providerZip , 5) = zip.zipcode&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Load CityStateTimeZone"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{0917A6DF-DC79-4365-9AD2-12CB192B72A0}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load CityStateTimeZone"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Load CityStateTimeZone\MRM_CityStateTimeZone"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="MRM_CityStateTimeZone"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[staging].[MRM_CityStateTimeZone]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load CityStateTimeZone\MRM_CityStateTimeZone.Connections[OleDbConnection]"
+                  connectionManagerID="{DDE1F761-850D-4DF7-A486-DFB2888F8CEE}:invalid"
+                  connectionManagerRefId="{DDE1F761-850D-4DF7-A486-DFB2888F8CEE}:invalid"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load CityStateTimeZone\MRM_CityStateTimeZone.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load CityStateTimeZone\MRM_CityStateTimeZone.Inputs[OLE DB Destination Input].Columns[city]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="35"
+                      cachedName="city"
+                      externalMetadataColumnId="Package\Load CityStateTimeZone\MRM_CityStateTimeZone.Inputs[OLE DB Destination Input].ExternalColumns[City]"
+                      lineageId="Package\Load CityStateTimeZone\refZip.Outputs[OLE DB Source Output].Columns[city]" />
+                    <inputColumn
+                      refId="Package\Load CityStateTimeZone\MRM_CityStateTimeZone.Inputs[OLE DB Destination Input].Columns[state]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="state"
+                      externalMetadataColumnId="Package\Load CityStateTimeZone\MRM_CityStateTimeZone.Inputs[OLE DB Destination Input].ExternalColumns[State]"
+                      lineageId="Package\Load CityStateTimeZone\refZip.Outputs[OLE DB Source Output].Columns[state]" />
+                    <inputColumn
+                      refId="Package\Load CityStateTimeZone\MRM_CityStateTimeZone.Inputs[OLE DB Destination Input].Columns[timezone]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="timezone"
+                      externalMetadataColumnId="Package\Load CityStateTimeZone\MRM_CityStateTimeZone.Inputs[OLE DB Destination Input].ExternalColumns[TimeZone]"
+                      lineageId="Package\Load CityStateTimeZone\refZip.Outputs[OLE DB Source Output].Columns[timezone]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load CityStateTimeZone\MRM_CityStateTimeZone.Inputs[OLE DB Destination Input].ExternalColumns[City]"
+                      codePage="1252"
+                      dataType="str"
+                      length="35"
+                      name="City" />
+                    <externalMetadataColumn
+                      refId="Package\Load CityStateTimeZone\MRM_CityStateTimeZone.Inputs[OLE DB Destination Input].ExternalColumns[State]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="State" />
+                    <externalMetadataColumn
+                      refId="Package\Load CityStateTimeZone\MRM_CityStateTimeZone.Inputs[OLE DB Destination Input].ExternalColumns[TimeZone]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="TimeZone" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load CityStateTimeZone\MRM_CityStateTimeZone.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Load CityStateTimeZone\MRM_CityStateTimeZone.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load CityStateTimeZone\MRM_CityStateTimeZone.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load CityStateTimeZone\MRM_CityStateTimeZone.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load CityStateTimeZone\MRM_CityStateTimeZone.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load CityStateTimeZone\MRM_CityStateTimeZone.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load CityStateTimeZone\refZip"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="refZip"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select distinct zip.city, zip.state,timezone from RefZip.dbo.ZipCode zip</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load CityStateTimeZone\refZip.Connections[OleDbConnection]"
+                  connectionManagerID="{0ACBF09E-21FB-48DF-B44B-E317DC67945F}:invalid"
+                  connectionManagerRefId="{0ACBF09E-21FB-48DF-B44B-E317DC67945F}:invalid"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Load CityStateTimeZone\refZip.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load CityStateTimeZone\refZip.Outputs[OLE DB Source Output].Columns[city]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load CityStateTimeZone\refZip.Outputs[OLE DB Source Output].ExternalColumns[city]"
+                      length="35"
+                      lineageId="Package\Load CityStateTimeZone\refZip.Outputs[OLE DB Source Output].Columns[city]"
+                      name="city"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load CityStateTimeZone\refZip.Outputs[OLE DB Source Output].Columns[state]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load CityStateTimeZone\refZip.Outputs[OLE DB Source Output].ExternalColumns[state]"
+                      length="2"
+                      lineageId="Package\Load CityStateTimeZone\refZip.Outputs[OLE DB Source Output].Columns[state]"
+                      name="state"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load CityStateTimeZone\refZip.Outputs[OLE DB Source Output].Columns[timezone]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load CityStateTimeZone\refZip.Outputs[OLE DB Source Output].ExternalColumns[timezone]"
+                      length="2"
+                      lineageId="Package\Load CityStateTimeZone\refZip.Outputs[OLE DB Source Output].Columns[timezone]"
+                      name="timezone"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load CityStateTimeZone\refZip.Outputs[OLE DB Source Output].ExternalColumns[city]"
+                      codePage="1252"
+                      dataType="str"
+                      length="35"
+                      name="city" />
+                    <externalMetadataColumn
+                      refId="Package\Load CityStateTimeZone\refZip.Outputs[OLE DB Source Output].ExternalColumns[state]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="state" />
+                    <externalMetadataColumn
+                      refId="Package\Load CityStateTimeZone\refZip.Outputs[OLE DB Source Output].ExternalColumns[timezone]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="timezone" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Load CityStateTimeZone\refZip.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load CityStateTimeZone\refZip.Outputs[OLE DB Source Error Output].Columns[city]"
+                      codePage="1252"
+                      dataType="str"
+                      length="35"
+                      lineageId="Package\Load CityStateTimeZone\refZip.Outputs[OLE DB Source Error Output].Columns[city]"
+                      name="city" />
+                    <outputColumn
+                      refId="Package\Load CityStateTimeZone\refZip.Outputs[OLE DB Source Error Output].Columns[state]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      lineageId="Package\Load CityStateTimeZone\refZip.Outputs[OLE DB Source Error Output].Columns[state]"
+                      name="state" />
+                    <outputColumn
+                      refId="Package\Load CityStateTimeZone\refZip.Outputs[OLE DB Source Error Output].Columns[timezone]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      lineageId="Package\Load CityStateTimeZone\refZip.Outputs[OLE DB Source Error Output].Columns[timezone]"
+                      name="timezone" />
+                    <outputColumn
+                      refId="Package\Load CityStateTimeZone\refZip.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load CityStateTimeZone\refZip.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load CityStateTimeZone\refZip.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load CityStateTimeZone\refZip.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Load CityStateTimeZone.Paths[OLE DB Source Output]"
+              endId="Package\Load CityStateTimeZone\MRM_CityStateTimeZone.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Load CityStateTimeZone\refZip.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Load NPI Taxonomy"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{004A374E-42A2-4BC8-8C1D-AB0928BB9105}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load NPI Taxonomy"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Load NPI Taxonomy\refNPI Taxonomy"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="refNPI Taxonomy"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT  NPI, [Healthcare Provider Taxonomy Code_1]
+
+
+FROM refNPI.dbo.NPI n
+where n.[Healthcare Provider Primary Taxonomy Switch_1]='Y'
+GROUP BY  NPI, [Healthcare Provider Taxonomy Code_1]</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load NPI Taxonomy\refNPI Taxonomy.Connections[OleDbConnection]"
+                  connectionManagerID="{0ACBF09E-21FB-48DF-B44B-E317DC67945F}:invalid"
+                  connectionManagerRefId="{0ACBF09E-21FB-48DF-B44B-E317DC67945F}:invalid"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Load NPI Taxonomy\refNPI Taxonomy.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load NPI Taxonomy\refNPI Taxonomy.Outputs[OLE DB Source Output].Columns[NPI]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load NPI Taxonomy\refNPI Taxonomy.Outputs[OLE DB Source Output].ExternalColumns[NPI]"
+                      length="10"
+                      lineageId="Package\Load NPI Taxonomy\refNPI Taxonomy.Outputs[OLE DB Source Output].Columns[NPI]"
+                      name="NPI"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load NPI Taxonomy\refNPI Taxonomy.Outputs[OLE DB Source Output].Columns[Healthcare Provider Taxonomy Code_1]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load NPI Taxonomy\refNPI Taxonomy.Outputs[OLE DB Source Output].ExternalColumns[Healthcare Provider Taxonomy Code_1]"
+                      length="10"
+                      lineageId="Package\Load NPI Taxonomy\refNPI Taxonomy.Outputs[OLE DB Source Output].Columns[Healthcare Provider Taxonomy Code_1]"
+                      name="Healthcare Provider Taxonomy Code_1"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load NPI Taxonomy\refNPI Taxonomy.Outputs[OLE DB Source Output].ExternalColumns[NPI]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="NPI" />
+                    <externalMetadataColumn
+                      refId="Package\Load NPI Taxonomy\refNPI Taxonomy.Outputs[OLE DB Source Output].ExternalColumns[Healthcare Provider Taxonomy Code_1]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="Healthcare Provider Taxonomy Code_1" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Load NPI Taxonomy\refNPI Taxonomy.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load NPI Taxonomy\refNPI Taxonomy.Outputs[OLE DB Source Error Output].Columns[NPI]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\Load NPI Taxonomy\refNPI Taxonomy.Outputs[OLE DB Source Error Output].Columns[NPI]"
+                      name="NPI" />
+                    <outputColumn
+                      refId="Package\Load NPI Taxonomy\refNPI Taxonomy.Outputs[OLE DB Source Error Output].Columns[Healthcare Provider Taxonomy Code_1]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\Load NPI Taxonomy\refNPI Taxonomy.Outputs[OLE DB Source Error Output].Columns[Healthcare Provider Taxonomy Code_1]"
+                      name="Healthcare Provider Taxonomy Code_1" />
+                    <outputColumn
+                      refId="Package\Load NPI Taxonomy\refNPI Taxonomy.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load NPI Taxonomy\refNPI Taxonomy.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load NPI Taxonomy\refNPI Taxonomy.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load NPI Taxonomy\refNPI Taxonomy.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load NPI Taxonomy\Staging MRM_NPI_Taxonomy"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Staging MRM_NPI_Taxonomy"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[staging].[MRM_NPI_Taxonomy]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load NPI Taxonomy\Staging MRM_NPI_Taxonomy.Connections[OleDbConnection]"
+                  connectionManagerID="{DDE1F761-850D-4DF7-A486-DFB2888F8CEE}:invalid"
+                  connectionManagerRefId="{DDE1F761-850D-4DF7-A486-DFB2888F8CEE}:invalid"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load NPI Taxonomy\Staging MRM_NPI_Taxonomy.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load NPI Taxonomy\Staging MRM_NPI_Taxonomy.Inputs[OLE DB Destination Input].Columns[NPI]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="NPI"
+                      externalMetadataColumnId="Package\Load NPI Taxonomy\Staging MRM_NPI_Taxonomy.Inputs[OLE DB Destination Input].ExternalColumns[NPI]"
+                      lineageId="Package\Load NPI Taxonomy\refNPI Taxonomy.Outputs[OLE DB Source Output].Columns[NPI]" />
+                    <inputColumn
+                      refId="Package\Load NPI Taxonomy\Staging MRM_NPI_Taxonomy.Inputs[OLE DB Destination Input].Columns[Healthcare Provider Taxonomy Code_1]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="Healthcare Provider Taxonomy Code_1"
+                      externalMetadataColumnId="Package\Load NPI Taxonomy\Staging MRM_NPI_Taxonomy.Inputs[OLE DB Destination Input].ExternalColumns[Healthcare Provider Taxonomy Code_1]"
+                      lineageId="Package\Load NPI Taxonomy\refNPI Taxonomy.Outputs[OLE DB Source Output].Columns[Healthcare Provider Taxonomy Code_1]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load NPI Taxonomy\Staging MRM_NPI_Taxonomy.Inputs[OLE DB Destination Input].ExternalColumns[NPI]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="NPI" />
+                    <externalMetadataColumn
+                      refId="Package\Load NPI Taxonomy\Staging MRM_NPI_Taxonomy.Inputs[OLE DB Destination Input].ExternalColumns[Healthcare Provider Taxonomy Code_1]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="Healthcare Provider Taxonomy Code_1" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load NPI Taxonomy\Staging MRM_NPI_Taxonomy.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Load NPI Taxonomy\Staging MRM_NPI_Taxonomy.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load NPI Taxonomy\Staging MRM_NPI_Taxonomy.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load NPI Taxonomy\Staging MRM_NPI_Taxonomy.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load NPI Taxonomy\Staging MRM_NPI_Taxonomy.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load NPI Taxonomy\Staging MRM_NPI_Taxonomy.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Load NPI Taxonomy.Paths[OLE DB Source Output]"
+              endId="Package\Load NPI Taxonomy\Staging MRM_NPI_Taxonomy.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Load NPI Taxonomy\refNPI Taxonomy.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Load ZipTimeZones"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{DFC31DE8-CB8F-45E8-BEF3-C256F02122D3}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load ZipTimeZones"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Load ZipTimeZones\MRM_ZipTimeZone"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="MRM_ZipTimeZone"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[staging].[MRM_ZipTimeZone]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load ZipTimeZones\MRM_ZipTimeZone.Connections[OleDbConnection]"
+                  connectionManagerID="{DDE1F761-850D-4DF7-A486-DFB2888F8CEE}:invalid"
+                  connectionManagerRefId="{DDE1F761-850D-4DF7-A486-DFB2888F8CEE}:invalid"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load ZipTimeZones\MRM_ZipTimeZone.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load ZipTimeZones\MRM_ZipTimeZone.Inputs[OLE DB Destination Input].Columns[zipcode]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="5"
+                      cachedName="zipcode"
+                      externalMetadataColumnId="Package\Load ZipTimeZones\MRM_ZipTimeZone.Inputs[OLE DB Destination Input].ExternalColumns[Zipcode]"
+                      lineageId="Package\Load ZipTimeZones\refZip.Outputs[OLE DB Source Output].Columns[zipcode]" />
+                    <inputColumn
+                      refId="Package\Load ZipTimeZones\MRM_ZipTimeZone.Inputs[OLE DB Destination Input].Columns[timezone]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="timezone"
+                      externalMetadataColumnId="Package\Load ZipTimeZones\MRM_ZipTimeZone.Inputs[OLE DB Destination Input].ExternalColumns[TimeZone]"
+                      lineageId="Package\Load ZipTimeZones\refZip.Outputs[OLE DB Source Output].Columns[timezone]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load ZipTimeZones\MRM_ZipTimeZone.Inputs[OLE DB Destination Input].ExternalColumns[Zipcode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      name="Zipcode" />
+                    <externalMetadataColumn
+                      refId="Package\Load ZipTimeZones\MRM_ZipTimeZone.Inputs[OLE DB Destination Input].ExternalColumns[TimeZone]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="TimeZone" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load ZipTimeZones\MRM_ZipTimeZone.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Load ZipTimeZones\MRM_ZipTimeZone.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load ZipTimeZones\MRM_ZipTimeZone.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load ZipTimeZones\MRM_ZipTimeZone.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load ZipTimeZones\MRM_ZipTimeZone.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load ZipTimeZones\MRM_ZipTimeZone.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load ZipTimeZones\refZip"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="refZip"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select distinct zip.zipcode, zip.timezone from RefZip.dbo.ZipCode zip</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load ZipTimeZones\refZip.Connections[OleDbConnection]"
+                  connectionManagerID="{0ACBF09E-21FB-48DF-B44B-E317DC67945F}:invalid"
+                  connectionManagerRefId="{0ACBF09E-21FB-48DF-B44B-E317DC67945F}:invalid"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Load ZipTimeZones\refZip.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load ZipTimeZones\refZip.Outputs[OLE DB Source Output].Columns[zipcode]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load ZipTimeZones\refZip.Outputs[OLE DB Source Output].ExternalColumns[zipcode]"
+                      length="5"
+                      lineageId="Package\Load ZipTimeZones\refZip.Outputs[OLE DB Source Output].Columns[zipcode]"
+                      name="zipcode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load ZipTimeZones\refZip.Outputs[OLE DB Source Output].Columns[timezone]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load ZipTimeZones\refZip.Outputs[OLE DB Source Output].ExternalColumns[timezone]"
+                      length="2"
+                      lineageId="Package\Load ZipTimeZones\refZip.Outputs[OLE DB Source Output].Columns[timezone]"
+                      name="timezone"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load ZipTimeZones\refZip.Outputs[OLE DB Source Output].ExternalColumns[zipcode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      name="zipcode" />
+                    <externalMetadataColumn
+                      refId="Package\Load ZipTimeZones\refZip.Outputs[OLE DB Source Output].ExternalColumns[timezone]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="timezone" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Load ZipTimeZones\refZip.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load ZipTimeZones\refZip.Outputs[OLE DB Source Error Output].Columns[zipcode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      lineageId="Package\Load ZipTimeZones\refZip.Outputs[OLE DB Source Error Output].Columns[zipcode]"
+                      name="zipcode" />
+                    <outputColumn
+                      refId="Package\Load ZipTimeZones\refZip.Outputs[OLE DB Source Error Output].Columns[timezone]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      lineageId="Package\Load ZipTimeZones\refZip.Outputs[OLE DB Source Error Output].Columns[timezone]"
+                      name="timezone" />
+                    <outputColumn
+                      refId="Package\Load ZipTimeZones\refZip.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load ZipTimeZones\refZip.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load ZipTimeZones\refZip.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load ZipTimeZones\refZip.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Load ZipTimeZones.Paths[OLE DB Source Output]"
+              endId="Package\Load ZipTimeZones\MRM_ZipTimeZone.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Load ZipTimeZones\refZip.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Populate wrongNumberCallNPI"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{8C66E43C-FC1B-416E-BDC6-3F13534747EB}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Populate wrongNumberCallNPI"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server v10; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          version="1">
+          <components>
+            <component
+              refId="Package\Populate wrongNumberCallNPI\Data Conversion"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Data Conversion"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Populate wrongNumberCallNPI\Data Conversion.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Populate wrongNumberCallNPI\Data Conversion.Inputs[Data Conversion Input].Columns[npi]"
+                      cachedDataType="wstr"
+                      cachedLength="25"
+                      cachedName="npi"
+                      lineageId="Package\Populate wrongNumberCallNPI\StarsConnect.Outputs[OLE DB Source Output].Columns[npi]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Populate wrongNumberCallNPI\Data Conversion.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\Populate wrongNumberCallNPI\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Populate wrongNumberCallNPI\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of npi]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="25"
+                      lineageId="Package\Populate wrongNumberCallNPI\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of npi]"
+                      name="Copy of npi"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Populate wrongNumberCallNPI\StarsConnect.Outputs[OLE DB Source Output].Columns[npi]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Populate wrongNumberCallNPI\Data Conversion.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\Populate wrongNumberCallNPI\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Populate wrongNumberCallNPI\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Populate wrongNumberCallNPI\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Populate wrongNumberCallNPI\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Populate wrongNumberCallNPI\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Populate wrongNumberCallNPI\StarsConnect"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="StarsConnect"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT  DISTINCT --COUNT(DISTINCT dr.npi), CAST(c.created_at AS DATE)
+    dr.npi--,ph.number
+	--,c.call_type_id
+FROM
+    StarsConnect.dbo.calls c
+INNER JOIN StarsConnect.dbo.providers dr ON c.entity_id = dr.id
+INNER JOIN StarsConnect.dbo.status_details sd ON c.status_detail_id = sd.id
+                                    AND sd.description = 'Wrong Number'
+INNER JOIN StarsConnect.dbo.statuses s ON c.status_id = s.id
+                                          AND s.product_line_id = 2
+/*left JOIN dbo.phones ph ON  ph.phone_type = 'Phone'
+                           AND ph.entity_id = c.entity_id
+						   AND ph.entity_type='Provider'
+						   AND ISNULL(ph.number,'')&lt;&gt;''
+						   AND LEN(ph.number)=10*/
+
+LEFT JOIN StarsConnect.dbo.calls ac ON c.entity_id = ac.entity_id
+                                       AND ac.product_line_id = 1
+                                       AND ac.call_type_id = 2
+                                       AND ac.created_at &gt; c.created_at
+                                       AND ac.entity_type = 'Provider'
+LEFT JOIN ( SELECT
+                MAX(x.created_at) callDate
+              , entity_id
+            FROM
+                StarsConnect.dbo.calls x
+            INNER JOIN StarsConnect.dbo.statuses sx ON x.status_id = sx.id
+                                                       AND sx.name = 'Complete call'
+            GROUP BY
+                x.entity_id ) xx ON c.entity_id = xx.entity_id
+                                    AND xx.callDate &gt; c.created_at
+
+
+--AND (CAST(ph.created_at AS DATE)&gt;=CAST(c.created_at AS DATE)
+--OR CAST(ISNULL(ph.updated_at,ph.created_at) AS DATE )&gt;=CAST(c.created_at AS DATE))
+WHERE
+    xx.entity_id IS     NULL
+    AND ac.id IS   NULL
+    AND c.entity_type = 'Provider'
+    AND c.call_type_id IN ( 1 , 2 )
+    AND c.product_line_id = 2;</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Populate wrongNumberCallNPI\StarsConnect.Connections[OleDbConnection]"
+                  connectionManagerID="{C4D05BF8-D95C-4500-92C3-AB5C733EC574}:invalid"
+                  connectionManagerRefId="{C4D05BF8-D95C-4500-92C3-AB5C733EC574}:invalid"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Populate wrongNumberCallNPI\StarsConnect.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Populate wrongNumberCallNPI\StarsConnect.Outputs[OLE DB Source Output].Columns[npi]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate wrongNumberCallNPI\StarsConnect.Outputs[OLE DB Source Output].ExternalColumns[npi]"
+                      length="25"
+                      lineageId="Package\Populate wrongNumberCallNPI\StarsConnect.Outputs[OLE DB Source Output].Columns[npi]"
+                      name="npi"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Populate wrongNumberCallNPI\StarsConnect.Outputs[OLE DB Source Output].ExternalColumns[npi]"
+                      dataType="wstr"
+                      length="25"
+                      name="npi" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Populate wrongNumberCallNPI\StarsConnect.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Populate wrongNumberCallNPI\StarsConnect.Outputs[OLE DB Source Error Output].Columns[npi]"
+                      dataType="wstr"
+                      length="25"
+                      lineageId="Package\Populate wrongNumberCallNPI\StarsConnect.Outputs[OLE DB Source Error Output].Columns[npi]"
+                      name="npi" />
+                    <outputColumn
+                      refId="Package\Populate wrongNumberCallNPI\StarsConnect.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Populate wrongNumberCallNPI\StarsConnect.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Populate wrongNumberCallNPI\StarsConnect.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Populate wrongNumberCallNPI\StarsConnect.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Populate wrongNumberCallNPI\WrongNumberCallNPIs"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="WrongNumberCallNPIs"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[staging].[wrongNumberCallNPIs]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Populate wrongNumberCallNPI\WrongNumberCallNPIs.Connections[OleDbConnection]"
+                  connectionManagerID="{DDE1F761-850D-4DF7-A486-DFB2888F8CEE}:invalid"
+                  connectionManagerRefId="{DDE1F761-850D-4DF7-A486-DFB2888F8CEE}:invalid"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Populate wrongNumberCallNPI\WrongNumberCallNPIs.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Populate wrongNumberCallNPI\WrongNumberCallNPIs.Inputs[OLE DB Destination Input].Columns[Copy of npi]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="Copy of npi"
+                      externalMetadataColumnId="Package\Populate wrongNumberCallNPI\WrongNumberCallNPIs.Inputs[OLE DB Destination Input].ExternalColumns[providerNPI]"
+                      lineageId="Package\Populate wrongNumberCallNPI\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of npi]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Populate wrongNumberCallNPI\WrongNumberCallNPIs.Inputs[OLE DB Destination Input].ExternalColumns[providerNPI]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="providerNPI" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Populate wrongNumberCallNPI\WrongNumberCallNPIs.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Populate wrongNumberCallNPI\WrongNumberCallNPIs.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Populate wrongNumberCallNPI\WrongNumberCallNPIs.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Populate wrongNumberCallNPI\WrongNumberCallNPIs.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Populate wrongNumberCallNPI\WrongNumberCallNPIs.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Populate wrongNumberCallNPI\WrongNumberCallNPIs.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Populate wrongNumberCallNPI.Paths[Data Conversion Output]"
+              endId="Package\Populate wrongNumberCallNPI\WrongNumberCallNPIs.Inputs[OLE DB Destination Input]"
+              name="Data Conversion Output"
+              startId="Package\Populate wrongNumberCallNPI\Data Conversion.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\Populate wrongNumberCallNPI.Paths[OLE DB Source Output]"
+              endId="Package\Populate wrongNumberCallNPI\Data Conversion.Inputs[Data Conversion Input]"
+              name="OLE DB Source Output"
+              startId="Package\Populate wrongNumberCallNPI\StarsConnect.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Set DNC if DaysWait NUll"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DelayValidation="True"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{8F0FB94E-7A1C-4310-8A0A-1863B69508C8}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Set DNC if DaysWait NUll"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="3">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{DDE1F761-850D-4DF7-A486-DFB2888F8CEE}"
+          SQLTask:SqlStatementSource="UPDATE m&#xA;SET DNC_MRM_FLAG = 1&#xA;FROM Stars_Rdsm.dbo.Stars_Providers m&#xA;INNER JOIN MRM.dbo.Interventions i &#xA;&#x9;ON m.provider_Id = i.NPI&#xA;    AND i.Days_Wait IS NULL; " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Set DNC if in temporary DNC Table"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DelayValidation="True"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{F3A60AA2-24FB-4125-8E79-57945C8A6B7B}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Set DNC if in temporary DNC Table"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="3">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{DDE1F761-850D-4DF7-A486-DFB2888F8CEE}"
+          SQLTask:SqlStatementSource="UPDATE p&#xA;SET p.dnc_MRM_flag=1 &#xA;,p.DNC_MRM_Updated_At = getdate()&#xA;FROM Stars_Rdsm.dbo.Stars_Providers p&#xA;INNER JOIN MRM.dbo.doNotCallProviders d &#xA;&#x9;ON p.Provider_ID=d.providerId" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Set DNC if in WrongNumberNPI"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{CA1950FF-BA8F-4535-B08A-F4CB8F199F6E}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Set DNC if in WrongNumberNPI"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="3">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{DDE1F761-850D-4DF7-A486-DFB2888F8CEE}"
+          SQLTask:SqlStatementSource="UPDATE d &#xA;SET d.dnc_MRM_flag=1 &#xA;,d.DNC_MRM_Updated_At = getdate()&#xA;FROM Stars_Rdsm.dbo.Stars_Providers d &#xA;INNER JOIN MRM.staging.wrongNumberCallNPIs w &#xA;&#x9;ON d.provider_Id=w.providerNPI" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Set DNC if Specialist"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DelayValidation="True"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{CF3B5A33-44BB-412B-8CE7-935174659911}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Set DNC if Specialist"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="3">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{DDE1F761-850D-4DF7-A486-DFB2888F8CEE}"
+          SQLTask:SqlStatementSource="UPDATE p&#xA;SET p.dnc_MRM_flag=1 &#xA;,p.DNC_MRM_Updated_At = getdate()&#xA;FROM Stars_Rdsm.dbo.Stars_Providers p&#xA;INNER JOIN [MRM].[staging].[MRM_NPI_Taxonomy] n &#xA;&#x9;ON p.Provider_ID=n.NPI&#xA;INNER JOIN [MRM].dbo.[TaxonomyExclusions] m ON n.[Healthcare Provider Taxonomy Code_1]=m.specialtyCode" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate CityStateTimeZone"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{5CAA6075-478D-4325-A6CE-7ED1E41F578C}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate CityStateTimeZone"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="3">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{DDE1F761-850D-4DF7-A486-DFB2888F8CEE}"
+          SQLTask:SqlStatementSource="Truncate Table [MRM].[staging].[MRM_CityStateTimeZone]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate NPI Taxonomy"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{5B33BBDB-5CED-4607-B4F4-5ED4BE8F6E94}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate NPI Taxonomy"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="3">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{DDE1F761-850D-4DF7-A486-DFB2888F8CEE}"
+          SQLTask:SqlStatementSource="Truncate Table [MRM].[staging].[MRM_NPI_Taxonomy]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate Table ZipTimeZone"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{753BE896-A451-48AC-8912-DA6C25945BED}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate Table ZipTimeZone"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="3">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{DDE1F761-850D-4DF7-A486-DFB2888F8CEE}"
+          SQLTask:SqlStatementSource="Truncate Table [MRM].[staging].[MRM_ZipTimeZone]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate wrongNumberCallNPI"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{2E61755E-2F78-428C-8BE0-222C81B2165D}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate wrongNumberCallNPI"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="3">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{DDE1F761-850D-4DF7-A486-DFB2888F8CEE}"
+          SQLTask:SqlStatementSource="truncate table MRM.staging.wrongNumberCallNPIs " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 10]"
+      DTS:CreationName=""
+      DTS:DTSID="{55866F9A-CE0D-493C-8BAD-B6C1980F647B}"
+      DTS:From="Package\Truncate NPI Taxonomy"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 10"
+      DTS:To="Package\Load NPI Taxonomy" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 11]"
+      DTS:CreationName=""
+      DTS:DTSID="{A977529A-B8C1-46D5-BB0D-2CB6A7B1B952}"
+      DTS:From="Package\Load NPI Taxonomy"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 11"
+      DTS:To="Package\Set DNC if Specialist" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 12]"
+      DTS:CreationName=""
+      DTS:DTSID="{BAE734CF-7C32-4031-9B44-11E88E096E5E}"
+      DTS:From="Package\Truncate Table ZipTimeZone"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 12"
+      DTS:To="Package\Load ZipTimeZones" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 14]"
+      DTS:CreationName=""
+      DTS:DTSID="{EADF8258-A06F-4C7A-8C35-B22720C1C4D4}"
+      DTS:From="Package\Truncate CityStateTimeZone"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 14"
+      DTS:To="Package\Load CityStateTimeZone" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{F3A594DC-B5B0-430C-AEAC-D87AE42F8BCC}"
+      DTS:From="Package\Set DNC if in WrongNumberNPI"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Truncate Table ZipTimeZone" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{FF3065EB-A6B8-4E10-9F15-C70713A41E47}"
+      DTS:From="Package\Set DNC if DaysWait NUll"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Truncate NPI Taxonomy" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{A2EF4582-774B-4BCA-8CDF-3B2538C72505}"
+      DTS:From="Package\Set DNC if Specialist"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\Set DNC if in temporary DNC Table" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{3195944C-AAB5-46C6-972B-23C1F217A525}"
+      DTS:From="Package\Set DNC if in temporary DNC Table"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\Truncate wrongNumberCallNPI" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 6]"
+      DTS:CreationName=""
+      DTS:DTSID="{69588949-89D7-4022-8A27-735F7EAB887A}"
+      DTS:From="Package\Load ZipTimeZones"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 6"
+      DTS:To="Package\Truncate CityStateTimeZone" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 7]"
+      DTS:CreationName=""
+      DTS:DTSID="{3D5E65C2-C1AA-47E0-8CAB-6AB697AA0011}"
+      DTS:From="Package\Truncate wrongNumberCallNPI"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 7"
+      DTS:To="Package\Populate wrongNumberCallNPI" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 8]"
+      DTS:CreationName=""
+      DTS:DTSID="{D2BFE41C-94C3-4F05-BEB1-836B38C4584B}"
+      DTS:From="Package\Populate wrongNumberCallNPI"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 8"
+      DTS:To="Package\Set DNC if in WrongNumberNPI" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql12">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="244,44"
+          Id="Package\Load CityStateTimeZone"
+          TopLeft="426,137.5" />
+        <NodeLayout
+          Size="244,44"
+          Id="Package\Load NPI Taxonomy"
+          TopLeft="142.207547169811,239.027044025157" />
+        <NodeLayout
+          Size="244,44"
+          Id="Package\Load ZipTimeZones"
+          TopLeft="426,236.037735849057" />
+        <NodeLayout
+          Size="244,44"
+          Id="Package\Populate wrongNumberCallNPI"
+          TopLeft="426,385.844339622642" />
+        <NodeLayout
+          Size="244,44"
+          Id="Package\Set DNC if DaysWait NUll"
+          TopLeft="142.207547169811,139.263522012579" />
+        <NodeLayout
+          Size="244,44"
+          Id="Package\Set DNC if in temporary DNC Table"
+          TopLeft="142.207547169811,338.790566037736" />
+        <NodeLayout
+          Size="244,44"
+          Id="Package\Set DNC if in WrongNumberNPI"
+          TopLeft="426,336.575471698113" />
+        <NodeLayout
+          Size="244,44"
+          Id="Package\Set DNC if Specialist"
+          TopLeft="142.207547169811,288.908805031447" />
+        <NodeLayout
+          Size="244,44"
+          Id="Package\Truncate CityStateTimeZone"
+          TopLeft="426,186.768867924528" />
+        <NodeLayout
+          Size="244,44"
+          Id="Package\Truncate NPI Taxonomy"
+          TopLeft="142.207547169811,189.145283018868" />
+        <NodeLayout
+          Size="244,44"
+          Id="Package\Truncate Table ZipTimeZone"
+          TopLeft="426,287.306603773585" />
+        <NodeLayout
+          Size="244,44"
+          Id="Package\Truncate wrongNumberCallNPI"
+          TopLeft="143,388.11320754717" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 10]"
+          TopLeft="142.207547169811,217.145283018868">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,37.8817610062894"
+              Start="0,0"
+              End="-7.5,37.8817610062894">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-18.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-18.5,0"
+                    Point2="-22.5,0"
+                    Point3="-22.5,4" />
+                  <mssgle:LineSegment
+                    End="-22.5,33.8817610062894" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-22.5,33.8817610062894"
+                    Point2="-22.5,37.8817610062894"
+                    Point3="-18.5,37.8817610062894" />
+                  <mssgle:LineSegment
+                    End="-7.5,37.8817610062894" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 11]"
+          TopLeft="142.207547169811,267.027044025157">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,37.8817610062894"
+              Start="0,0"
+              End="-7.5,37.8817610062894">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-18.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-18.5,0"
+                    Point2="-22.5,0"
+                    Point3="-22.5,4" />
+                  <mssgle:LineSegment
+                    End="-22.5,33.8817610062894" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-22.5,33.8817610062894"
+                    Point2="-22.5,37.8817610062894"
+                    Point3="-18.5,37.8817610062894" />
+                  <mssgle:LineSegment
+                    End="-7.5,37.8817610062894" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 12]"
+          TopLeft="426,303.306603773585">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,-39.2688679245284"
+              Start="0,0"
+              End="-7.5,-39.2688679245284">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-18.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-18.5,0"
+                    Point2="-22.5,0"
+                    Point3="-22.5,-4" />
+                  <mssgle:LineSegment
+                    End="-22.5,-35.2688679245284" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-22.5,-35.2688679245284"
+                    Point2="-22.5,-39.2688679245284"
+                    Point3="-18.5,-39.2688679245284" />
+                  <mssgle:LineSegment
+                    End="-7.5,-39.2688679245284" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 14]"
+          TopLeft="426,202.768867924528">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,-43.2688679245283"
+              Start="0,0"
+              End="-7.5,-43.2688679245283">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-18.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-18.5,0"
+                    Point2="-22.5,0"
+                    Point3="-22.5,-4" />
+                  <mssgle:LineSegment
+                    End="-22.5,-39.2688679245283" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-22.5,-39.2688679245283"
+                    Point2="-22.5,-43.2688679245283"
+                    Point3="-18.5,-43.2688679245283" />
+                  <mssgle:LineSegment
+                    End="-7.5,-43.2688679245283" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="142.207547169811,167.263522012579">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,37.8817610062893"
+              Start="0,0"
+              End="-7.5,37.8817610062893">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-18.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-18.5,0"
+                    Point2="-22.5,0"
+                    Point3="-22.5,4" />
+                  <mssgle:LineSegment
+                    End="-22.5,33.8817610062893" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-22.5,33.8817610062893"
+                    Point2="-22.5,37.8817610062893"
+                    Point3="-18.5,37.8817610062893" />
+                  <mssgle:LineSegment
+                    End="-7.5,37.8817610062893" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="142.207547169811,316.908805031447">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,43.8817610062894"
+              Start="0,0"
+              End="-7.5,43.8817610062894">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-18.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-18.5,0"
+                    Point2="-22.5,0"
+                    Point3="-22.5,4" />
+                  <mssgle:LineSegment
+                    End="-22.5,39.8817610062894" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-22.5,39.8817610062894"
+                    Point2="-22.5,43.8817610062894"
+                    Point3="-18.5,43.8817610062894" />
+                  <mssgle:LineSegment
+                    End="-7.5,43.8817610062894" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="142.207547169811,366.790566037736">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0.792452830189006,43.3226415094339"
+              Start="0,0"
+              End="-6.70754716981099,43.3226415094339">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-18.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-18.5,0"
+                    Point2="-22.5,0"
+                    Point3="-22.5,4" />
+                  <mssgle:LineSegment
+                    End="-22.5,39.3226415094339" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-22.5,39.3226415094339"
+                    Point2="-22.5,43.3226415094339"
+                    Point3="-18.5,43.3226415094339" />
+                  <mssgle:LineSegment
+                    End="-6.70754716981099,43.3226415094339" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 7]"
+          TopLeft="387,411.978773584906">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="39,0"
+              Start="0,0"
+              End="31.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="31.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 8]"
+          TopLeft="426,401.844339622642">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,-37.2688679245283"
+              Start="0,0"
+              End="-7.5,-37.2688679245283">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-18.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-18.5,0"
+                    Point2="-22.5,0"
+                    Point3="-22.5,-4" />
+                  <mssgle:LineSegment
+                    End="-22.5,-33.2688679245283" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-22.5,-33.2688679245283"
+                    Point2="-22.5,-37.2688679245283"
+                    Point3="-18.5,-37.2688679245283" />
+                  <mssgle:LineSegment
+                    End="-7.5,-37.2688679245283" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="426,352.575471698113">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,-37.2688679245283"
+              Start="0,0"
+              End="-7.5,-37.2688679245283">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-18.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-18.5,0"
+                    Point2="-22.5,0"
+                    Point3="-22.5,-4" />
+                  <mssgle:LineSegment
+                    End="-22.5,-33.2688679245283" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-22.5,-33.2688679245283"
+                    Point2="-22.5,-37.2688679245283"
+                    Point3="-18.5,-37.2688679245283" />
+                  <mssgle:LineSegment
+                    End="-7.5,-37.2688679245283" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 6]"
+          TopLeft="426,252.037735849057">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,-37.2688679245283"
+              Start="0,0"
+              End="-7.5,-37.2688679245283">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-18.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-18.5,0"
+                    Point2="-22.5,0"
+                    Point3="-22.5,-4" />
+                  <mssgle:LineSegment
+                    End="-22.5,-33.2688679245283" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-22.5,-33.2688679245283"
+                    Point2="-22.5,-37.2688679245283"
+                    Point3="-18.5,-37.2688679245283" />
+                  <mssgle:LineSegment
+                    End="-7.5,-37.2688679245283" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="244,44"
+          Id="Package\Deprecated Tasks\Set pmdProviderID and providerNPI"
+          TopLeft="0.20754716981105,16.0811320754721" />
+        <NodeLayout
+          Size="244,44"
+          Id="Package\Deprecated Tasks\Update Time_Zone"
+          TopLeft="5.5,71.403773584906" />
+        <NodeLayout
+          Size="244,44"
+          Id="Package\Deprecated Tasks\Update Time Zone Match on City and State"
+          TopLeft="4.20754716981105,123.72641509434" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="254,223"
+          Size="254,266"
+          Id="Package\Deprecated Tasks"
+          TopLeft="983,45" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Load CityStateTimeZone">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="186,46"
+          Id="Package\Load CityStateTimeZone\refZip"
+          TopLeft="136,77" />
+        <NodeLayout
+          Size="196,42"
+          Id="Package\Load CityStateTimeZone\MRM_CityStateTimeZone"
+          TopLeft="131,157" />
+        <EdgeLayout
+          Id="Package\Load CityStateTimeZone.Paths[OLE DB Source Output]"
+          TopLeft="229,123">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,34"
+              Start="0,0"
+              End="0,26.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load CityStateTimeZone\MRM_CityStateTimeZone">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load CityStateTimeZone\refZip">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Load NPI Taxonomy">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="218,42"
+          Id="Package\Load NPI Taxonomy\Staging MRM_NPI_Taxonomy"
+          TopLeft="122,117" />
+        <NodeLayout
+          Size="218,42"
+          Id="Package\Load NPI Taxonomy\refNPI Taxonomy"
+          TopLeft="119,44" />
+        <EdgeLayout
+          Id="Package\Load NPI Taxonomy.Paths[OLE DB Source Output]"
+          TopLeft="229.5,86">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,31"
+              Start="0,0"
+              End="0,23.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load NPI Taxonomy\refNPI Taxonomy">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load NPI Taxonomy\Staging MRM_NPI_Taxonomy">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Load ZipTimeZones">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="166,42"
+          Id="Package\Load ZipTimeZones\refZip"
+          TopLeft="120,64" />
+        <NodeLayout
+          Size="169,42"
+          Id="Package\Load ZipTimeZones\MRM_ZipTimeZone"
+          TopLeft="124,136" />
+        <EdgeLayout
+          Id="Package\Load ZipTimeZones.Paths[OLE DB Source Output]"
+          TopLeft="205.75,106">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,30"
+              Start="0,0"
+              End="0,22.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load ZipTimeZones\MRM_ZipTimeZone">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load ZipTimeZones\refZip">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Populate wrongNumberCallNPI">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="141,42"
+          Id="Package\Populate wrongNumberCallNPI\StarsConnect"
+          TopLeft="16,5.5" />
+        <NodeLayout
+          Size="186,42"
+          Id="Package\Populate wrongNumberCallNPI\WrongNumberCallNPIs"
+          TopLeft="5.50000000000003,209.5" />
+        <NodeLayout
+          Size="156,42"
+          Id="Package\Populate wrongNumberCallNPI\Data Conversion"
+          TopLeft="13,107.5" />
+        <EdgeLayout
+          Id="Package\Populate wrongNumberCallNPI.Paths[OLE DB Source Output]"
+          TopLeft="88.75,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Populate wrongNumberCallNPI.Paths[Data Conversion Output]"
+          TopLeft="94.75,149.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Populate wrongNumberCallNPI\StarsConnect">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Populate wrongNumberCallNPI\WrongNumberCallNPIs">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

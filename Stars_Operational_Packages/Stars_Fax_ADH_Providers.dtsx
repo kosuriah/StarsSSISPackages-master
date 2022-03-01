@@ -1,0 +1,1834 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/8/2016 2:20:57 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="LT-J6QQN12-0112"
+  DTS:CreatorName="PHARMMD\Saideswar.Thondapu"
+  DTS:DTSID="{879EC153-39B2-4D61-9153-14B49BD4775A}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.1100.123"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Stars_Fax_ADH_Providers"
+  DTS:PackageType="5"
+  DTS:VersionBuild="44"
+  DTS:VersionGUID="{6D0E58AD-606C-4B10-81CA-3C72C84F4D87}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[p10prdsde002(ODS).StarsConnect]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{490D147B-8491-4AB4-A081-A66CDBD27DC4}"
+      DTS:ObjectName="p10prdsde002(ODS).StarsConnect">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">"Data Source="+ @[$Project::ServerOperationalDataStore] +";Initial Catalog=StarsConnect;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;"</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=P10DEVSDE002;Initial Catalog=StarsConnect;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ReportServer]"
+      DTS:CreationName="HTTP"
+      DTS:DelayValidation="True"
+      DTS:DTSID="{977AD16E-1F11-4748-A4D3-2239062002DF}"
+      DTS:ObjectName="ReportServer">
+      <DTS:PropertyExpression
+        DTS:Name="ServerPassword">@[$Project::SharepointSSRSPassword]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="http://sqlstarsrpt.pharmmd.local/_vti_bin/reportserver">
+          <DTS:HttpConnection
+            DTS:ServerURL="http://sqlstarsrpt.pharmmd.local/_vti_bin/reportserver"
+            DTS:UseServerCredentials="True"
+            DTS:ServerUserName="starsreports"
+            DTS:ServerDomain="pharmmd"
+            DTS:TimeOut="300"
+            DTS:ChunkSize="1000">
+            <DTS:Property
+              DTS:Name="ServerPassword"
+              Sensitive="1"
+              Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAuzI1/0X6hUGRxpl1vyGlmgAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAACoDvE1Ia11eK/BkslVPjZdAAAAAASAAACgAAAAEAAAAOQ2sSjHwt8xFgahiKiYNj0wAAAAvZxBoFxFyc4XCPcFai4G2fEuLjw7k+kE5dwQs5au8zKsqByR+Q8EEosie98EEgPfFAAAAPiQrMQTni4M8/p8C8VDD9HxY10V</DTS:Property>
+            <DTS:Property
+              DTS:Name="ProxyPassword"
+              Sensitive="1"
+              Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAuzI1/0X6hUGRxpl1vyGlmgAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAADmA+sawBguJlTaIOY7TQ+0AAAAAASAAACgAAAAEAAAALrKjyJ3VBMxl6gKj1zPvSoIAAAAgzk9+3puPWcUAAAAtp13yvkKpW4vN+mzhOI9/GgQA2w</DTS:Property>
+          </DTS:HttpConnection>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{DDACBD49-990C-4810-8317-7A158AD653E5}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="Campaign_Date">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{63895301-4176-41CB-8C3A-7C036688DC4F}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="Fax_Verified">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{CCDD7E20-10BB-43EE-859E-6DB154A869A5}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="PMD_Client_ID">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{3D2DD211-EDF5-4264-BEBE-D7C76A442B46}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="ProviderSet">
+      <DTS:VariableValue
+        DTS:DataSubType="ManagedSerializable"
+        DTS:DataType="13">
+        <SOAP-ENV:Envelope xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+          <SOAP-ENV:Body>
+            <xsd:anyType
+              id="ref-1"></xsd:anyType>
+          </SOAP-ENV:Body>
+        </SOAP-ENV:Envelope>
+      </DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{1C43036A-5351-434B-BD06-51A7FF14FB4B}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="Provider_ID">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\ADH Fax Letters from StarConnect"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{FF7814D1-879C-4BDD-82BE-816FDAEC01D3}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ADH Fax Letters from StarConnect"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="ADH_DTP_Special_Fax_List"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[ADH_DTP_Special_Fax_List]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Connections[OleDbConnection]"
+                  connectionManagerID="{6311C9A2-D389-4B9C-B757-1A615A452B59}:invalid"
+                  connectionManagerRefId="{6311C9A2-D389-4B9C-B757-1A615A452B59}:invalid"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Inputs[OLE DB Destination Input].Columns[pmd_client_id]"
+                      cachedDataType="i4"
+                      cachedName="pmd_client_id"
+                      externalMetadataColumnId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Inputs[OLE DB Destination Input].ExternalColumns[PMD_Client_ID]"
+                      lineageId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].Columns[pmd_client_id]" />
+                    <inputColumn
+                      refId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Inputs[OLE DB Destination Input].Columns[Campaign_Date]"
+                      cachedDataType="dbDate"
+                      cachedName="Campaign_Date"
+                      externalMetadataColumnId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Inputs[OLE DB Destination Input].ExternalColumns[Campaign_Date]"
+                      lineageId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].Columns[Campaign_Date]" />
+                    <inputColumn
+                      refId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Inputs[OLE DB Destination Input].Columns[Provider_Fname]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="Provider_Fname"
+                      externalMetadataColumnId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Inputs[OLE DB Destination Input].ExternalColumns[Provider_Fname]"
+                      lineageId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].Columns[Provider_Fname]" />
+                    <inputColumn
+                      refId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Inputs[OLE DB Destination Input].Columns[Provider_LName]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="Provider_LName"
+                      externalMetadataColumnId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Inputs[OLE DB Destination Input].ExternalColumns[Provider_LName]"
+                      lineageId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].Columns[Provider_LName]" />
+                    <inputColumn
+                      refId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Inputs[OLE DB Destination Input].Columns[Provider_Phone]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="Provider_Phone"
+                      externalMetadataColumnId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Inputs[OLE DB Destination Input].ExternalColumns[Provider_Phone]"
+                      lineageId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].Columns[Provider_Phone]" />
+                    <inputColumn
+                      refId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Inputs[OLE DB Destination Input].Columns[Provider_Fax]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="Provider_Fax"
+                      externalMetadataColumnId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Inputs[OLE DB Destination Input].ExternalColumns[Provider_Fax]"
+                      lineageId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].Columns[Provider_Fax]" />
+                    <inputColumn
+                      refId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Inputs[OLE DB Destination Input].Columns[Patient_FName]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="Patient_FName"
+                      externalMetadataColumnId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Inputs[OLE DB Destination Input].ExternalColumns[Patient_FName]"
+                      lineageId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].Columns[Patient_FName]" />
+                    <inputColumn
+                      refId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Inputs[OLE DB Destination Input].Columns[Patient_LName]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="Patient_LName"
+                      externalMetadataColumnId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Inputs[OLE DB Destination Input].ExternalColumns[Patient_LName]"
+                      lineageId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].Columns[Patient_LName]" />
+                    <inputColumn
+                      refId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Inputs[OLE DB Destination Input].Columns[Patient_DOB]"
+                      cachedDataType="dbDate"
+                      cachedName="Patient_DOB"
+                      externalMetadataColumnId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Inputs[OLE DB Destination Input].ExternalColumns[Patient_DOB]"
+                      lineageId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].Columns[Patient_DOB]" />
+                    <inputColumn
+                      refId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Inputs[OLE DB Destination Input].Columns[Pharmacy_Name]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="Pharmacy_Name"
+                      externalMetadataColumnId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Inputs[OLE DB Destination Input].ExternalColumns[Pharmacy_name]"
+                      lineageId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].Columns[Pharmacy_Name]" />
+                    <inputColumn
+                      refId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Inputs[OLE DB Destination Input].Columns[Pharmacy_Phone]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="Pharmacy_Phone"
+                      externalMetadataColumnId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Inputs[OLE DB Destination Input].ExternalColumns[Pharmacy_Phone]"
+                      lineageId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].Columns[Pharmacy_Phone]" />
+                    <inputColumn
+                      refId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Inputs[OLE DB Destination Input].Columns[Pharmacy_Fax]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="Pharmacy_Fax"
+                      externalMetadataColumnId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Inputs[OLE DB Destination Input].ExternalColumns[Pharmacy_Fax]"
+                      lineageId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].Columns[Pharmacy_Fax]" />
+                    <inputColumn
+                      refId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Inputs[OLE DB Destination Input].Columns[measure]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="measure"
+                      externalMetadataColumnId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Inputs[OLE DB Destination Input].ExternalColumns[MeasureUse]"
+                      lineageId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].Columns[measure]" />
+                    <inputColumn
+                      refId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Inputs[OLE DB Destination Input].Columns[provider_npi]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="provider_npi"
+                      externalMetadataColumnId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Inputs[OLE DB Destination Input].ExternalColumns[NPI]"
+                      lineageId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].Columns[provider_npi]" />
+                    <inputColumn
+                      refId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Inputs[OLE DB Destination Input].Columns[plan_group]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="plan_group"
+                      externalMetadataColumnId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Inputs[OLE DB Destination Input].ExternalColumns[PlanIdentifier_PClm]"
+                      lineageId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].Columns[plan_group]" />
+                    <inputColumn
+                      refId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Inputs[OLE DB Destination Input].Columns[pmd_patient_id]"
+                      cachedDataType="i8"
+                      cachedName="pmd_patient_id"
+                      externalMetadataColumnId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Inputs[OLE DB Destination Input].ExternalColumns[PMD_Patient_ID]"
+                      lineageId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].Columns[pmd_patient_id]" />
+                    <inputColumn
+                      refId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Inputs[OLE DB Destination Input].Columns[Provider_Fax_Verified]"
+                      cachedDataType="i4"
+                      cachedName="Provider_Fax_Verified"
+                      externalMetadataColumnId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Inputs[OLE DB Destination Input].ExternalColumns[Provider_Verified]"
+                      lineageId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].Columns[Provider_Fax_Verified]" />
+                    <inputColumn
+                      refId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Inputs[OLE DB Destination Input].Columns[drug_name]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="drug_name"
+                      externalMetadataColumnId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Inputs[OLE DB Destination Input].ExternalColumns[Drug_Name_Strength]"
+                      lineageId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].Columns[drug_name]" />
+                    <inputColumn
+                      refId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Inputs[OLE DB Destination Input].Columns[date_of_service]"
+                      cachedDataType="dbDate"
+                      cachedName="date_of_service"
+                      externalMetadataColumnId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Inputs[OLE DB Destination Input].ExternalColumns[Last_Fill_Date]"
+                      lineageId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].Columns[date_of_service]" />
+                    <inputColumn
+                      refId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Inputs[OLE DB Destination Input].Columns[last_verified_at]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="last_verified_at"
+                      externalMetadataColumnId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Inputs[OLE DB Destination Input].ExternalColumns[Fax_Last_Verified_At]"
+                      lineageId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].Columns[last_verified_at]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Inputs[OLE DB Destination Input].ExternalColumns[PMD_Client_ID]"
+                      dataType="i4"
+                      name="PMD_Client_ID" />
+                    <externalMetadataColumn
+                      refId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Inputs[OLE DB Destination Input].ExternalColumns[PlanIdentifier_PClm]"
+                      dataType="wstr"
+                      length="100"
+                      name="PlanIdentifier_PClm" />
+                    <externalMetadataColumn
+                      refId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Inputs[OLE DB Destination Input].ExternalColumns[PMD_Patient_ID]"
+                      dataType="i8"
+                      name="PMD_Patient_ID" />
+                    <externalMetadataColumn
+                      refId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Inputs[OLE DB Destination Input].ExternalColumns[MeasureUse]"
+                      dataType="wstr"
+                      length="50"
+                      name="MeasureUse" />
+                    <externalMetadataColumn
+                      refId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Inputs[OLE DB Destination Input].ExternalColumns[NPI]"
+                      dataType="wstr"
+                      length="50"
+                      name="NPI" />
+                    <externalMetadataColumn
+                      refId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Inputs[OLE DB Destination Input].ExternalColumns[Campaign_Date]"
+                      dataType="dbDate"
+                      name="Campaign_Date" />
+                    <externalMetadataColumn
+                      refId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Inputs[OLE DB Destination Input].ExternalColumns[Provider_Fname]"
+                      dataType="wstr"
+                      length="100"
+                      name="Provider_Fname" />
+                    <externalMetadataColumn
+                      refId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Inputs[OLE DB Destination Input].ExternalColumns[Provider_LName]"
+                      dataType="wstr"
+                      length="100"
+                      name="Provider_LName" />
+                    <externalMetadataColumn
+                      refId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Inputs[OLE DB Destination Input].ExternalColumns[Provider_Phone]"
+                      dataType="wstr"
+                      length="15"
+                      name="Provider_Phone" />
+                    <externalMetadataColumn
+                      refId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Inputs[OLE DB Destination Input].ExternalColumns[Provider_Fax]"
+                      dataType="wstr"
+                      length="15"
+                      name="Provider_Fax" />
+                    <externalMetadataColumn
+                      refId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Inputs[OLE DB Destination Input].ExternalColumns[Patient_FName]"
+                      dataType="wstr"
+                      length="100"
+                      name="Patient_FName" />
+                    <externalMetadataColumn
+                      refId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Inputs[OLE DB Destination Input].ExternalColumns[Patient_LName]"
+                      dataType="wstr"
+                      length="100"
+                      name="Patient_LName" />
+                    <externalMetadataColumn
+                      refId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Inputs[OLE DB Destination Input].ExternalColumns[Patient_DOB]"
+                      dataType="dbDate"
+                      name="Patient_DOB" />
+                    <externalMetadataColumn
+                      refId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Inputs[OLE DB Destination Input].ExternalColumns[Provider_Verified]"
+                      dataType="bool"
+                      name="Provider_Verified" />
+                    <externalMetadataColumn
+                      refId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Inputs[OLE DB Destination Input].ExternalColumns[Pharmacy_name]"
+                      dataType="wstr"
+                      length="100"
+                      name="Pharmacy_name" />
+                    <externalMetadataColumn
+                      refId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Inputs[OLE DB Destination Input].ExternalColumns[Pharmacy_Phone]"
+                      dataType="wstr"
+                      length="15"
+                      name="Pharmacy_Phone" />
+                    <externalMetadataColumn
+                      refId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Inputs[OLE DB Destination Input].ExternalColumns[Pharmacy_Fax]"
+                      dataType="wstr"
+                      length="15"
+                      name="Pharmacy_Fax" />
+                    <externalMetadataColumn
+                      refId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Inputs[OLE DB Destination Input].ExternalColumns[Drug_Name_Strength]"
+                      dataType="wstr"
+                      length="250"
+                      name="Drug_Name_Strength" />
+                    <externalMetadataColumn
+                      refId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Inputs[OLE DB Destination Input].ExternalColumns[Last_Fill_Date]"
+                      dataType="dbDate"
+                      name="Last_Fill_Date" />
+                    <externalMetadataColumn
+                      refId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Inputs[OLE DB Destination Input].ExternalColumns[Fax_Last_Verified_At]"
+                      dataType="dbDate"
+                      name="Fax_Last_Verified_At" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Starconnect ADH Call Faxes"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT DISTINCT 
+	dtp.pmd_client_id
+	,p.plan_group
+	,dtp.pmd_patient_id
+	,dtp.measure
+	,claims.provider_npi
+	,CAST(GETDATE() AS DATE) [Campaign_Date]
+	,pr.first_name [Provider_Fname]
+	,pr.last_name [Provider_LName]
+	,ph.number [Provider_Phone]
+	,fx.number [Provider_Fax]
+	,p.first_name [Patient_FName]
+	,p.last_name [Patient_LName]
+	,p.dob [Patient_DOB]
+	,fx.last_verified_at
+	,Provider_Fax_Verified = CASE WHEN (fx.last_verified_at IS NULL OR DATEDIFF(DAY,fx.last_verified_at,GETDATE()) &gt; 180) THEN 0 ELSE 1 END
+	,pr1.organization_name [Pharmacy_Name]
+	,ph1.number [Pharmacy_Phone]
+	,fx1.number [Pharmacy_Fax]
+	,claims.[drug_name]
+	,claims.[date_of_service]
+
+FROM [StarsConnect].[dbo].[dtps] dtp
+inner Join dbo.patients p  with (nolock) on p.id = dtp.patient_id
+inner Join [dbo].[call_dtps] cd  with (nolock) on cd.dtp_id = dtp.id
+inner Join [dbo].[calls] calls  with (nolock) on cd.call_id = calls.id
+inner Join [dbo].[dtp_claims] claims  with (nolock) on (claims.patient_id = dtp.patient_id AND claims.measure = dtp.measure)
+inner Join dbo.providers pr  with (nolock) on pr.[npi] = claims.provider_npi
+inner Join dbo.providers pr1  with (nolock) on pr1.[npi] = claims.pharmacy_npi
+
+left Join dbo.phones ph  with (nolock) on (ph.entity_id = pr.id and ph.entity_type ='provider' and ph.phone_type = 'phone' and ph.[primary]=1)
+left Join dbo.phones fx  with (nolock) on (fx.entity_id = pr.id and fx.entity_type ='provider' and fx.phone_type = 'Fax' and fx.[primary]=1)
+
+LEFT Join dbo.phones ph1  with (nolock) on (ph1.entity_id = pr1.id and ph1.entity_type ='provider' and ph1.phone_type = 'phone' and ph1.[primary]=1)
+left Join dbo.phones fx1  with (nolock) on (fx1.entity_id = pr1.id and fx1.entity_type ='provider' and fx1.phone_type = 'Fax' and fx1.[primary]=1)
+
+WHERE [dtp_Year] = 2016
+AND dtp.measure &lt;&gt; 'HRM'
+AND dtp_visibility_id IN (6,9)
+AND calls.[status_detail_id] = 9
+AND dtp.pmd_client_id = 52
+AND NOT EXISTS
+(SELECT 1 FROM [dbo].[calls] cal WHERE YEAR([stopped_at]) = 2016 AND [status_detail_id] IN (7,8,16) AND entity_type='patient' AND cal.entity_id=dtp.patient_id)</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[p10prdsde002(ODS).StarsConnect]"
+                  connectionManagerRefId="Package.ConnectionManagers[p10prdsde002(ODS).StarsConnect]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].Columns[pmd_client_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].ExternalColumns[pmd_client_id]"
+                      lineageId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].Columns[pmd_client_id]"
+                      name="pmd_client_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].Columns[plan_group]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].ExternalColumns[plan_group]"
+                      length="100"
+                      lineageId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].Columns[plan_group]"
+                      name="plan_group"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].Columns[pmd_patient_id]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].ExternalColumns[pmd_patient_id]"
+                      lineageId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].Columns[pmd_patient_id]"
+                      name="pmd_patient_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].Columns[measure]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].ExternalColumns[measure]"
+                      length="50"
+                      lineageId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].Columns[measure]"
+                      name="measure"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].Columns[provider_npi]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].ExternalColumns[provider_npi]"
+                      length="50"
+                      lineageId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].Columns[provider_npi]"
+                      name="provider_npi"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].Columns[Campaign_Date]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].ExternalColumns[Campaign_Date]"
+                      lineageId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].Columns[Campaign_Date]"
+                      name="Campaign_Date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].Columns[Provider_Fname]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].ExternalColumns[Provider_Fname]"
+                      length="100"
+                      lineageId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].Columns[Provider_Fname]"
+                      name="Provider_Fname"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].Columns[Provider_LName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].ExternalColumns[Provider_LName]"
+                      length="100"
+                      lineageId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].Columns[Provider_LName]"
+                      name="Provider_LName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].Columns[Provider_Phone]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].ExternalColumns[Provider_Phone]"
+                      length="15"
+                      lineageId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].Columns[Provider_Phone]"
+                      name="Provider_Phone"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].Columns[Provider_Fax]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].ExternalColumns[Provider_Fax]"
+                      length="15"
+                      lineageId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].Columns[Provider_Fax]"
+                      name="Provider_Fax"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].Columns[Patient_FName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].ExternalColumns[Patient_FName]"
+                      length="100"
+                      lineageId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].Columns[Patient_FName]"
+                      name="Patient_FName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].Columns[Patient_LName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].ExternalColumns[Patient_LName]"
+                      length="100"
+                      lineageId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].Columns[Patient_LName]"
+                      name="Patient_LName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].Columns[Patient_DOB]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].ExternalColumns[Patient_DOB]"
+                      lineageId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].Columns[Patient_DOB]"
+                      name="Patient_DOB"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].Columns[Provider_Fax_Verified]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].ExternalColumns[Provider_Fax_Verified]"
+                      lineageId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].Columns[Provider_Fax_Verified]"
+                      name="Provider_Fax_Verified"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].Columns[Pharmacy_Name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].ExternalColumns[Pharmacy_Name]"
+                      length="100"
+                      lineageId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].Columns[Pharmacy_Name]"
+                      name="Pharmacy_Name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].Columns[Pharmacy_Phone]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].ExternalColumns[Pharmacy_Phone]"
+                      length="15"
+                      lineageId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].Columns[Pharmacy_Phone]"
+                      name="Pharmacy_Phone"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].Columns[Pharmacy_Fax]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].ExternalColumns[Pharmacy_Fax]"
+                      length="15"
+                      lineageId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].Columns[Pharmacy_Fax]"
+                      name="Pharmacy_Fax"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].Columns[drug_name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].ExternalColumns[drug_name]"
+                      length="250"
+                      lineageId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].Columns[drug_name]"
+                      name="drug_name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].Columns[date_of_service]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].ExternalColumns[date_of_service]"
+                      lineageId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].Columns[date_of_service]"
+                      name="date_of_service"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].Columns[last_verified_at]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].ExternalColumns[last_verified_at]"
+                      lineageId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].Columns[last_verified_at]"
+                      name="last_verified_at"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].ExternalColumns[pmd_client_id]"
+                      dataType="i4"
+                      name="pmd_client_id" />
+                    <externalMetadataColumn
+                      refId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].ExternalColumns[plan_group]"
+                      dataType="wstr"
+                      length="100"
+                      name="plan_group" />
+                    <externalMetadataColumn
+                      refId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].ExternalColumns[pmd_patient_id]"
+                      dataType="i8"
+                      name="pmd_patient_id" />
+                    <externalMetadataColumn
+                      refId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].ExternalColumns[measure]"
+                      dataType="wstr"
+                      length="50"
+                      name="measure" />
+                    <externalMetadataColumn
+                      refId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].ExternalColumns[provider_npi]"
+                      dataType="wstr"
+                      length="50"
+                      name="provider_npi" />
+                    <externalMetadataColumn
+                      refId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].ExternalColumns[Campaign_Date]"
+                      dataType="dbDate"
+                      name="Campaign_Date" />
+                    <externalMetadataColumn
+                      refId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].ExternalColumns[Provider_Fname]"
+                      dataType="wstr"
+                      length="100"
+                      name="Provider_Fname" />
+                    <externalMetadataColumn
+                      refId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].ExternalColumns[Provider_LName]"
+                      dataType="wstr"
+                      length="100"
+                      name="Provider_LName" />
+                    <externalMetadataColumn
+                      refId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].ExternalColumns[Provider_Phone]"
+                      dataType="wstr"
+                      length="15"
+                      name="Provider_Phone" />
+                    <externalMetadataColumn
+                      refId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].ExternalColumns[Provider_Fax]"
+                      dataType="wstr"
+                      length="15"
+                      name="Provider_Fax" />
+                    <externalMetadataColumn
+                      refId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].ExternalColumns[Patient_FName]"
+                      dataType="wstr"
+                      length="100"
+                      name="Patient_FName" />
+                    <externalMetadataColumn
+                      refId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].ExternalColumns[Patient_LName]"
+                      dataType="wstr"
+                      length="100"
+                      name="Patient_LName" />
+                    <externalMetadataColumn
+                      refId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].ExternalColumns[Patient_DOB]"
+                      dataType="dbDate"
+                      name="Patient_DOB" />
+                    <externalMetadataColumn
+                      refId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].ExternalColumns[Provider_Fax_Verified]"
+                      dataType="i4"
+                      name="Provider_Fax_Verified" />
+                    <externalMetadataColumn
+                      refId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].ExternalColumns[Pharmacy_Name]"
+                      dataType="wstr"
+                      length="100"
+                      name="Pharmacy_Name" />
+                    <externalMetadataColumn
+                      refId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].ExternalColumns[Pharmacy_Phone]"
+                      dataType="wstr"
+                      length="15"
+                      name="Pharmacy_Phone" />
+                    <externalMetadataColumn
+                      refId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].ExternalColumns[Pharmacy_Fax]"
+                      dataType="wstr"
+                      length="15"
+                      name="Pharmacy_Fax" />
+                    <externalMetadataColumn
+                      refId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].ExternalColumns[drug_name]"
+                      dataType="wstr"
+                      length="250"
+                      name="drug_name" />
+                    <externalMetadataColumn
+                      refId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].ExternalColumns[date_of_service]"
+                      dataType="dbDate"
+                      name="date_of_service" />
+                    <externalMetadataColumn
+                      refId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output].ExternalColumns[last_verified_at]"
+                      dataType="dbTimeStamp"
+                      name="last_verified_at" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Error Output].Columns[pmd_client_id]"
+                      dataType="i4"
+                      lineageId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Error Output].Columns[pmd_client_id]"
+                      name="pmd_client_id" />
+                    <outputColumn
+                      refId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Error Output].Columns[plan_group]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Error Output].Columns[plan_group]"
+                      name="plan_group" />
+                    <outputColumn
+                      refId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Error Output].Columns[pmd_patient_id]"
+                      dataType="i8"
+                      lineageId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Error Output].Columns[pmd_patient_id]"
+                      name="pmd_patient_id" />
+                    <outputColumn
+                      refId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Error Output].Columns[measure]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Error Output].Columns[measure]"
+                      name="measure" />
+                    <outputColumn
+                      refId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Error Output].Columns[provider_npi]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Error Output].Columns[provider_npi]"
+                      name="provider_npi" />
+                    <outputColumn
+                      refId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Error Output].Columns[Campaign_Date]"
+                      dataType="dbDate"
+                      lineageId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Error Output].Columns[Campaign_Date]"
+                      name="Campaign_Date" />
+                    <outputColumn
+                      refId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Error Output].Columns[Provider_Fname]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Error Output].Columns[Provider_Fname]"
+                      name="Provider_Fname" />
+                    <outputColumn
+                      refId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Error Output].Columns[Provider_LName]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Error Output].Columns[Provider_LName]"
+                      name="Provider_LName" />
+                    <outputColumn
+                      refId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Error Output].Columns[Provider_Phone]"
+                      dataType="wstr"
+                      length="15"
+                      lineageId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Error Output].Columns[Provider_Phone]"
+                      name="Provider_Phone" />
+                    <outputColumn
+                      refId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Error Output].Columns[Provider_Fax]"
+                      dataType="wstr"
+                      length="15"
+                      lineageId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Error Output].Columns[Provider_Fax]"
+                      name="Provider_Fax" />
+                    <outputColumn
+                      refId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Error Output].Columns[Patient_FName]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Error Output].Columns[Patient_FName]"
+                      name="Patient_FName" />
+                    <outputColumn
+                      refId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Error Output].Columns[Patient_LName]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Error Output].Columns[Patient_LName]"
+                      name="Patient_LName" />
+                    <outputColumn
+                      refId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Error Output].Columns[Patient_DOB]"
+                      dataType="dbDate"
+                      lineageId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Error Output].Columns[Patient_DOB]"
+                      name="Patient_DOB" />
+                    <outputColumn
+                      refId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Error Output].Columns[last_verified_at]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Error Output].Columns[last_verified_at]"
+                      name="last_verified_at" />
+                    <outputColumn
+                      refId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Error Output].Columns[Provider_Fax_Verified]"
+                      dataType="i4"
+                      lineageId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Error Output].Columns[Provider_Fax_Verified]"
+                      name="Provider_Fax_Verified" />
+                    <outputColumn
+                      refId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Error Output].Columns[Pharmacy_Name]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Error Output].Columns[Pharmacy_Name]"
+                      name="Pharmacy_Name" />
+                    <outputColumn
+                      refId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Error Output].Columns[Pharmacy_Phone]"
+                      dataType="wstr"
+                      length="15"
+                      lineageId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Error Output].Columns[Pharmacy_Phone]"
+                      name="Pharmacy_Phone" />
+                    <outputColumn
+                      refId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Error Output].Columns[Pharmacy_Fax]"
+                      dataType="wstr"
+                      length="15"
+                      lineageId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Error Output].Columns[Pharmacy_Fax]"
+                      name="Pharmacy_Fax" />
+                    <outputColumn
+                      refId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Error Output].Columns[drug_name]"
+                      dataType="wstr"
+                      length="250"
+                      lineageId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Error Output].Columns[drug_name]"
+                      name="drug_name" />
+                    <outputColumn
+                      refId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Error Output].Columns[date_of_service]"
+                      dataType="dbDate"
+                      lineageId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Error Output].Columns[date_of_service]"
+                      name="date_of_service" />
+                    <outputColumn
+                      refId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\ADH Fax Letters from StarConnect.Paths[OLE DB Source Output]"
+              endId="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Get Providers Set"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{49f54cdd-b6ad-4a8d-89b2-baedc8630fd2}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Get Providers Set"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{6311C9A2-D389-4B9C-B757-1A615A452B59}"
+          SQLTask:SqlStatementSource="Select distinct [NPI], convert(varchar(10),[Campaign_Date],112) [Campaign_Date], &#xA;&#x9;&#x9;CAST(PMD_Client_ID AS VARCHAR(50)) PMD_Client_ID,CAST(ISNULL(Provider_Verified,0) AS VARCHAR(50)) Fax_Verified &#xA;from [dbo].[ADH_DTP_Special_Fax_List] WITH (nolock) &#xA;WHERE PMD_Client_ID = 52"
+          SQLTask:ResultType="ResultSetType_Rowset" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::ProviderSet" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Loop through Providers"
+      DTS:CreationName="STOCK:FOREACHLOOP"
+      DTS:Description="Foreach Loop Container"
+      DTS:DTSID="{17bc476a-1446-4256-a002-c1c5039932ed}"
+      DTS:ExecutableType="STOCK:FOREACHLOOP"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Loop through Providers">
+      <DTS:ForEachEnumerator
+        DTS:CreationName="Microsoft.ForEachADOEnumerator"
+        DTS:DTSID="{659ee21d-c3b1-49be-8781-3c3528d186d5}"
+        DTS:ObjectName="{AE174D42-B3C5-4130-99E1-6153D264FB7A}">
+        <DTS:ObjectData>
+          <FEEADO
+            EnumType="EnumerateRowsInFirstTable"
+            VarName="User::ProviderSet" />
+        </DTS:ObjectData>
+      </DTS:ForEachEnumerator>
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Loop through Providers\Generate Faxs thru Report"
+          DTS:CreationName="Microsoft.ScriptTask"
+          DTS:Description="Script Task"
+          DTS:DTSID="{0b71fac0-47a7-4668-9fa9-e7b773c47c17}"
+          DTS:ExecutableType="Microsoft.ScriptTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Generate Faxs thru Report"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ScriptProject
+              Name="ST_2b2b5fe72b74496f9ecbc98ca54b8b7b"
+              VSTAMajorVersion="3"
+              VSTAMinorVersion="0"
+              Language="VisualBasic"
+              ReadOnlyVariables="User::Campaign_Date,User::Fax_Verified,User::PMD_Client_ID,User::Provider_ID,$Project::FaxSendPath">
+              <ProjectItem
+                Name="My Project\AssemblyInfo.vb"
+                Encoding="UTF8"><![CDATA[Imports System
+Imports System.Reflection
+Imports System.Runtime.InteropServices
+
+' General Information about an assembly is controlled through the following 
+' set of attributes. Change these attribute values to modify the information
+' associated with an assembly.
+
+' Review the values of the assembly attributes
+
+<Assembly: AssemblyTitle("ST_d323930f206f476db7521f95f57bf383.vbproj")> 
+<Assembly: AssemblyDescription("")> 
+<Assembly: AssemblyCompany("")> 
+<Assembly: AssemblyProduct("ST_d323930f206f476db7521f95f57bf383.vbproj")> 
+<Assembly: AssemblyCopyright("Copyright @  2015")> 
+<Assembly: AssemblyTrademark("")> 
+<Assembly: CLSCompliant(True)> 
+
+<Assembly: ComVisible(False)> 
+
+'The following GUID is for the ID of the typelib if this project is exposed to COM
+<Assembly: Guid("97ffd72b-0723-4a85-aaf2-752288e91077")> 
+
+' Version information for an assembly consists of the following four values:
+'
+'      Major Version
+'      Minor Version 
+'      Build Number
+'      Revision
+'
+' You can specify all the values or you can default the Build and Revision Numbers 
+' by using the '*' as shown below:
+' <Assembly: AssemblyVersion("1.0.*")>
+
+<Assembly: AssemblyVersion("1.0.0.0")> 
+<Assembly: AssemblyFileVersion("1.0.0.0")> ]]></ProjectItem>
+              <ProjectItem
+                Name="ST_2b2b5fe72b74496f9ecbc98ca54b8b7b.vbproj"
+                Encoding="UTF16LE"><![CDATA[<?xml version="1.0" encoding="utf-16"?><Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003"><!-- This section defines project-level properties.
+
+       Configuration - Specifies whether the default configuration is Release or Debug.
+       Platform - Specifies what CPU the output of this project can run on.
+       OutputType - Must be "Library" for VSTA.
+       NoStandardLibraries - Set to "false" for VSTA.
+       RootNamespace - In C#, this specifies the namespace given to new files.
+                       In Visual Basic, all objects are wrapped in this namespace at runtime.
+       AssemblyName - Name of the output assembly.
+  --><PropertyGroup><ProjectTypeGuids>{30D016F9-3734-4E33-A861-5E7D899E18F3};{F184B08F-C81C-45F6-A57F-5ABD9991F28F}</ProjectTypeGuids><Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration><Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform><OutputType>Library</OutputType><RootNamespace>ST_d323930f206f476db7521f95f57bf383.vbproj</RootNamespace><AssemblyName>ST_2b2b5fe72b74496f9ecbc98ca54b8b7b</AssemblyName><StartupObject></StartupObject><OptionExplicit>On</OptionExplicit><OptionCompare>Binary</OptionCompare><OptionStrict>Off</OptionStrict><OptionInfer>On</OptionInfer><ProjectGuid>{5FB338C8-DAEA-4132-892B-C540D7380DAC}</ProjectGuid><TargetFrameworkVersion>v4.0</TargetFrameworkVersion><TargetFrameworkProfile></TargetFrameworkProfile></PropertyGroup><!-- This section defines properties that are set when the "Debug" configuration is
+       selected.
+
+       DebugSymbols - If true, create symbols (.pdb). If false, do not create symbols.
+       Optimize - If true, optimize the build output. If false, do not optimize.
+       OutputPath - Output path of the project relative to the project file.
+       EnableUnmanagedDebugging - If true, starting the debugger will attach both managed and unmanaged debuggers.
+       DefineConstants - Constants defined for the preprocessor.
+       Warning Level - Warning level for the compiler.
+  --><PropertyGroup Condition=" '$(Configuration)' == 'Debug' "><DefineConstants></DefineConstants><DefineDebug>true</DefineDebug><DefineTrace>true</DefineTrace><DebugSymbols>true</DebugSymbols><Optimize>false</Optimize><OutputPath>bin\</OutputPath><RegisterForComInterop>false</RegisterForComInterop><RemoveIntegerChecks>false</RemoveIntegerChecks><NoWarn>42016,42017,42018,42019,42032,42353,42354,42355</NoWarn></PropertyGroup><!-- This section defines properties that are set when the "Release" configuration is
+       selected.
+
+       DebugSymbols - If true, create symbols (.pdb). If false, do not create symbols.
+       Optimize - If true, optimize the build output. If false, do not optimize.
+       OutputPath - Output path of the project relative to the project file.
+       EnableUnmanagedDebugging - If true, starting the debugger will attach both managed and unmanaged debuggers.
+       DefineConstants - Constants defined for the preprocessor.
+       Warning Level - Warning level for the compiler.
+  --><PropertyGroup Condition=" '$(Configuration)' == 'Release' "><DefineConstants></DefineConstants><DefineDebug>false</DefineDebug><DefineTrace>true</DefineTrace><DebugSymbols>false</DebugSymbols><Optimize>true</Optimize><OutputPath>bin\</OutputPath><RegisterForComInterop>false</RegisterForComInterop><RemoveIntegerChecks>false</RemoveIntegerChecks><NoWarn>42016,42017,42018,42019,42032,42353,42354,42355</NoWarn></PropertyGroup><!-- This section enables pre- and post-build steps. However,
+       it is recommended that MSBuild tasks be used instead of these properties.
+  --><PropertyGroup><PreBuildEvent></PreBuildEvent><PostBuildEvent></PostBuildEvent></PropertyGroup><!-- This sections specifies references for the project. --><ItemGroup><Reference Include="System" /><Reference Include="System.Data" /><Reference Include="System.Windows.Forms" /><Reference Include="System.Xml" /><Reference Include="Microsoft.SqlServer.ManagedDTS, Version=12.0.0.0, Culture=Neutral, PublicKeyToken=89845dcd8080cc91" /><Reference Include="Microsoft.SqlServer.ScriptTask, Version=12.0.0.0, Culture=Neutral, PublicKeyToken=89845dcd8080cc91" /></ItemGroup><!-- Visual Basic supports Importing namespaces (equivalent to using statements in C#).--><ItemGroup><Import Include="Microsoft.VisualBasic" /><Import Include="System" /><Import Include="System.Collections" /><Import Include="System.Data" /><Import Include="System.Diagnostics" /><Import Include="System.Windows.Forms" /></ItemGroup><!-- This section defines the user source files that are part of the
+       project.
+
+       Compile - Specifies a source file to compile.
+       EmbeddedResource - Specifies a .resx file for embedded resources.
+       None - Specifies a file that is not to be passed to the compiler (for instance,
+              a text file or XML file).
+       AppDesigner - Specifies the directory where the application properties files can
+                     be found.
+  --><ItemGroup><AppDesigner Include="My Project\" /><Compile Include="My Project\AssemblyInfo.vb"><SubType>Code</SubType></Compile><EmbeddedResource Include="My Project\Resources.resx"><Generator>VbMyResourcesResXFileCodeGenerator</Generator><LastGenOutput>Resources.Designer.vb</LastGenOutput><CustomToolNamespace>My.Resources</CustomToolNamespace></EmbeddedResource><Compile Include="My Project\Resources.Designer.vb"><AutoGen>True</AutoGen><DesignTime>True</DesignTime><DependentUpon>Resources.resx</DependentUpon><SubType>Code</SubType></Compile><None Include="My Project\Settings.settings"><Generator>SettingsSingleFileGenerator</Generator><LastGenOutput>Settings.Designer.vb</LastGenOutput></None><Compile Include="My Project\Settings.Designer.vb"><AutoGen>True</AutoGen><DependentUpon>Settings.settings</DependentUpon><SubType>Code</SubType></Compile><Compile Include="ScriptMain.vb"><SubType>Code</SubType></Compile><!-- Include the default configuration information and metadata files for the add-in.
+         These files are copied to the build output directory when the project is
+         built, and the path to the configuration file is passed to add-in on the command
+         line when debugging.
+    --></ItemGroup><!-- Include the build rules for a VB project.--><Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" /><!-- This section defines VSTA properties that describe the host-changable project properties. --><ProjectExtensions><VisualStudio><FlavorProperties GUID="{30D016F9-3734-4E33-A861-5E7D899E18F3}"><ProjectProperties HostName="VSTAHostName" HostPackage="{B3A685AA-7EAF-4BC6-9940-57959FA5AC07}" ApplicationType="usd" Language="vb" TemplatesPath="" DebugInfoExeName="" /><Host Name="SSIS_ScriptTask" /><ProjectClient><HostIdentifier>SSIS_ST120</HostIdentifier></ProjectClient></FlavorProperties></VisualStudio></ProjectExtensions></Project>]]></ProjectItem>
+              <ProjectItem
+                Name="My Project\Settings.settings"
+                Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)" GeneratedClassNamespace="$safeprojectname" GeneratedClassName="MySettings">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
+</SettingsFile>]]></ProjectItem>
+              <ProjectItem
+                Name="My Project\Settings.Designer.vb"
+                Encoding="UTF8"><![CDATA['------------------------------------------------------------------------------
+' <autogenerated>
+'     This code was generated by a tool.
+'
+'     Changes to this file may cause incorrect behavior and will be lost if
+'     the code is regenerated.
+' </autogenerated>
+'------------------------------------------------------------------------------
+
+Option Strict Off
+Option Explicit On
+
+
+
+Partial Friend NotInheritable Class MySettings
+    Inherits System.Configuration.ApplicationSettingsBase
+
+    Private Shared m_Value As MySettings
+
+    Private Shared m_SyncObject As Object = New Object
+
+    <System.Diagnostics.DebuggerNonUserCode()> _
+    Public Shared ReadOnly Property Value() As MySettings
+        Get
+            If (MySettings.m_Value Is Nothing) Then
+                System.Threading.Monitor.Enter(MySettings.m_SyncObject)
+                If (MySettings.m_Value Is Nothing) Then
+                    Try
+                        MySettings.m_Value = New MySettings
+                    Finally
+                        System.Threading.Monitor.Exit(MySettings.m_SyncObject)
+                    End Try
+                End If
+            End If
+            Return MySettings.m_Value
+        End Get
+    End Property
+End Class]]></ProjectItem>
+              <ProjectItem
+                Name="Project"
+                Encoding="UTF16LE"><![CDATA[<?xml version="1.0" encoding="UTF-16" standalone="yes"?>
+<c:Project xmlns:c="http://schemas.microsoft.com/codeprojectml/2010/08/main" xmlns:msb="http://schemas.microsoft.com/developer/msbuild/2003" runtimeVersion="4.0" schemaVersion="1.0">
+	<msb:PropertyGroup>
+		<msb:CodeName>st_112a86ea8fa74260b6cb5a35b010f020</msb:CodeName>
+		<msb:Language>msBuild</msb:Language>
+		<msb:DisplayName>st_112a86ea8fa74260b6cb5a35b010f020</msb:DisplayName>
+		<msb:ProjectId>{AB0E4F0E-B819-4464-BC87-667B1FB28B17}</msb:ProjectId>
+	</msb:PropertyGroup>
+	<msb:ItemGroup>
+		<msb:Project Include="ST_2b2b5fe72b74496f9ecbc98ca54b8b7b.vbproj"/>
+		<msb:File Include="My Project\AssemblyInfo.vb"/>
+		<msb:File Include="ScriptMain.vb"/>
+		<msb:File Include="My Project\Resources.resx"/>
+		<msb:File Include="My Project\Resources.Designer.vb"/>
+		<msb:File Include="My Project\Settings.settings"/>
+		<msb:File Include="My Project\Settings.Designer.vb"/>
+	</msb:ItemGroup>
+</c:Project>]]></ProjectItem>
+              <ProjectItem
+                Name="ScriptMain.vb"
+                Encoding="UTF8"><![CDATA[' Microsoft SQL Server Integration Services Script Task
+' Write scripts using Microsoft Visual Basic 2008.
+' The ScriptMain is the entry point class of the script.
+
+Imports System
+Imports System.Data
+Imports System.Math
+Imports Microsoft.SqlServer.Dts.Runtime
+
+<Microsoft.SqlServer.Dts.Tasks.ScriptTask.SSISScriptTaskEntryPointAttribute> _
+<System.CLSCompliantAttribute(False)> _
+Partial Public Class ScriptMain
+    Inherits Microsoft.SqlServer.Dts.Tasks.ScriptTask.VSTARTScriptObjectModelBase
+
+    Enum ScriptResults
+        Success = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Success
+        Failure = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Failure
+    End Enum
+
+
+
+
+
+    Public Sub Main()
+        Try
+            Dim httpConn As ConnectionManager = Dts.Connections("ReportServer")
+            Dim clientConn As HttpClientConnection = New HttpClientConnection(httpConn.AcquireConnection(Nothing))
+            Dim sProvider_ID As String = Dts.Variables("Provider_ID").Value
+            Dim sPMD_Client_ID As String = Dts.Variables("PMD_Client_ID").Value
+            Dim currentdate As String = Dts.Variables("Campaign_Date").Value  'Date.Today.Date.ToString("yyyy-MM-dd")
+            'Dim ReportFileName As String = "\\p10prdsde003.pharmmd.local\Stars\FaxSend\" & sProvider_ID & "_" & currentdate & ".pdf"
+            Dim FaxGeneratePath As String = Dts.Variables("$Project::FaxSendPath").Value & "ADH\"
+
+            If Dts.Variables("Fax_Verified").Value = "0" Then
+                FaxGeneratePath = FaxGeneratePath & "Not Verified\"
+            End If
+
+            Dim ReportFileName As String = FaxGeneratePath & sProvider_ID & ".pdf" 'p10prdsde003 - This is SQLSTARS where process created all files
+
+            clientConn.ServerURL = "http://sqlstarsrpt.pharmmd.local/_vti_bin/reportserver?http://sqlstarsrpt.pharmmd.local/BI Reports/Internal/Development/HRMCallFaxProcess/ADHProviderFaxLetter.rdl&rs:Command=Render&Prescriber_ID=" & sProvider_ID & "&PMD_Client_ID=" & sPMD_Client_ID & "&rs:Format=PDF&rc:Toolbar=False"
+
+            clientConn.DownloadFile(ReportFileName, True)
+
+            Dts.TaskResult = ScriptResults.Success
+        Catch ex As Exception
+            Dim erro As String = ex.ToString()
+            Dts.TaskResult = ScriptResults.Failure
+        End Try
+        
+    End Sub
+
+End Class]]></ProjectItem>
+              <ProjectItem
+                Name="My Project\Resources.resx"
+                Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+</root>]]></ProjectItem>
+              <ProjectItem
+                Name="My Project\Resources.Designer.vb"
+                Encoding="UTF8"><![CDATA['------------------------------------------------------------------------------
+' <autogenerated>
+'     This code was generated by a tool.
+'
+'     Changes to this file may cause incorrect behavior and will be lost if
+'     the code is regenerated.
+' </autogenerated>
+'------------------------------------------------------------------------------
+
+Option Strict Off
+Option Explicit On
+
+
+Namespace My.Resources
+    
+    '''<summary>
+    '''   A strongly-typed resource class, for looking up localized strings, etc.
+    '''</summary>
+    'This class was auto-generated by the Strongly Typed Resource Builder
+    'class via a tool like ResGen or Visual Studio.NET.
+    'To add or remove a member, edit your .ResX file then rerun ResGen
+    'with the /str option, or rebuild your VS project.
+    Class MyResources
+        
+        Private Shared _resMgr As System.Resources.ResourceManager
+        
+        Private Shared _resCulture As System.Globalization.CultureInfo
+        
+        Friend Sub New()
+            MyBase.New
+        End Sub
+        
+        '''<summary>
+        '''   Returns the cached ResourceManager instance used by this class.
+        '''</summary>
+        <System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)>  _
+        Public Shared ReadOnly Property ResourceManager() As System.Resources.ResourceManager
+            Get
+                If (_resMgr Is Nothing) Then
+                    Dim temp As System.Resources.ResourceManager = New System.Resources.ResourceManager("My.Resources.MyResources", GetType(MyResources).Assembly)
+                    _resMgr = temp
+                End If
+                Return _resMgr
+            End Get
+        End Property
+        
+        '''<summary>
+        '''   Overrides the current thread's CurrentUICulture property for all
+        '''   resource lookups using this strongly typed resource class.
+        '''</summary>
+        <System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)>  _
+        Public Shared Property Culture() As System.Globalization.CultureInfo
+            Get
+                Return _resCulture
+            End Get
+            Set
+                _resCulture = value
+            End Set
+        End Property
+    End Class
+End Namespace]]></ProjectItem>
+              <BinaryItem
+                Name="ST_2b2b5fe72b74496f9ecbc98ca54b8b7b.dll">TVqQAAMAAAAEAAAA//8AALgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAgAAAAA4fug4AtAnNIbgBTM0hVGhpcyBwcm9ncmFtIGNhbm5vdCBiZSBydW4gaW4gRE9TIG1v
+ZGUuDQ0KJAAAAAAAAABQRQAATAEDAKdIK1gAAAAAAAAAAOAAAiELAQsAACAAAAAGAAAAAAAAXj8A
+AAAgAAAAQAAAAAAAEAAgAAAAAgAABAAAAAAAAAAEAAAAAAAAAACAAAAAAgAAAAAAAAIAQIUAABAA
+ABAAAAAAEAAAEAAAAAAAABAAAAAAAAAAAAAAAAQ/AABXAAAAAEAAAPgDAAAAAAAAAAAAAAAAAAAA
+AAAAAGAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAIAAACAAAAAAAAAAAAAAACCAAAEgAAAAAAAAAAAAAAC50ZXh0AAAAZB8AAAAgAAAAIAAAAAIA
+AAAAAAAAAAAAAAAAACAAAGAucnNyYwAAAPgDAAAAQAAAAAQAAAAiAAAAAAAAAAAAAAAAAABAAABA
+LnJlbG9jAAAMAAAAAGAAAAACAAAAJgAAAAAAAAAAAAAAAAAAQAAAQgAAAAAAAAAAAAAAAAAAAABA
+PwAAAAAAAEgAAAACAAUAACUAAAQaAAABAAAAAAAAAEgkAAC4AAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4CKAEAAAoqHgIoBAAACiqmcwYAAAqAAQAABHMHAAAKgAIA
+AARzCAAACoADAAAEcwkAAAqABAAABCoAABMwAQALAAAAAQAAEX4BAAAEbwoAAAoqABMwAQALAAAA
+AgAAEX4CAAAEbwsAAAoqABMwAQALAAAAAwAAEX4DAAAEbwwAAAoqABMwAQALAAAABAAAEX4EAAAE
+bw0AAAoqABMwAgANAAAABQAAEQIDKBEAAAooEgAACioAAAATMAEABwAAAAYAABECKBMAAAoqABMw
+AQALAAAABwAAEdAFAAACKBQAAAoqABMwAQAHAAAACAAAEQIoFQAACioAEzABABAAAAAJAAARAowB
+AAAbLQYoAQAAKyoCKhMwAgAQAAAACgAAEQMSAP4VAgAAGwaBAgAAGyoeAigXAAAKKhMwAgAoAAAA
+CwAAEQJ7GQAACm8aAAAKCweMAwAAGy0SKAIAACsLAnsZAAAKB28bAAAKBypKAigXAAAKAnMcAAAK
+fRkAAAoqAB4CKBcAAAoqEzACAC0AAAAMAAARfgYAAAQtIHIBAABw0AcAAAIoFAAACm8eAAAKcx8A
+AAoLB4AGAAAEfgYAAAQqAAAAEzABAAYAAAANAAARfgcAAAQqAAAeAoAHAAAEKkJzFwAACigRAAAK
+gAkAAAQqAAAAHgIoIAAACiobMAEAPwAAAA4AABF+CAAABC0yfgkAAAQoEQAACighAAAKfggAAAQt
+HHMWAAAGgAgAAATeEH4JAAAEKBEAAAooIgAACtx+CAAABCoAARAAAAIAHQAMKQAQAAAAAB4CKCQA
+AAoqGzAEAG4BAAAPAAARAm8lAAAKbyYAAApyMwAAcG8nAAAKDQkUbygAAAooEQAACnMpAAAKCgJv
+JQAACm8qAAAKck0AAHBvKwAACm8sAAAKKC0AAAoTBgJvJQAACm8qAAAKcmUAAHBvKwAACm8sAAAK
+KC0AAAoTBQJvJQAACm8qAAAKcoEAAHBvKwAACm8sAAAKKC0AAAoLAm8lAAAKbyoAAApynQAAcG8r
+AAAKbywAAApyyQAAcCguAAAKKC0AAAoMAm8lAAAKbyoAAApy0wAAcG8rAAAKbywAAApy7QAAcBYo
+LwAACiwMCHLxAABwKDAAAAoMCBEGcg0BAHAoMQAAChMEBhuNJAAAARMJEQkWchcBAHCiEQkXEQai
+EQkYcqACAHCiEQkZEQWiEQkacsACAHCiEQkoMgAACm8zAAAKBhEEF280AAAKAm8lAAAKFm81AAAK
+3iQlKDYAAAoTCBEIbzcAAAoTBwJvJQAAChdvNQAACig4AAAK3gAqAABBHAAAAAAAAAAAAABJAQAA
+SQEAACQAAAAdAAABtAAAAM7K774BAAAAkQAAAGxTeXN0ZW0uUmVzb3VyY2VzLlJlc291cmNlUmVh
+ZGVyLCBtc2NvcmxpYiwgVmVyc2lvbj00LjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tl
+eVRva2VuPWI3N2E1YzU2MTkzNGUwODkjU3lzdGVtLlJlc291cmNlcy5SdW50aW1lUmVzb3VyY2VT
+ZXQCAAAAAAAAAAAAAABQQURQQURQtAAAAEJTSkIBAAEAAAAAAAwAAAB2NC4wLjMwMzE5AAAAAAUA
+bAAAADAIAAAjfgAAnAgAAHAKAAAjU3RyaW5ncwAAAAAMEwAAAAMAACNVUwAMFgAAEAAAACNHVUlE
+AAAAHBYAAOgDAAAjQmxvYgAAAAAAAAACAAABVx2iCQkPAAAA+iUzABYAAAEAAAAyAAAACgAAAAwA
+AAAZAAAABAAAAEUAAAACAAAANgAAAA8AAAAEAAAACAAAAAkAAAAJAAAAAQAAAAUAAAABAAAAAwAA
+AAMAAAACAAAAAABHCgEAAAAAAAoAYAE2AQoAlAF2AQYApAGdAQoA/AE2AQYAegKdAQoA/ALSAgYA
+MgMhAwYAXwNKAw4AxgOxAxIARQQcBAYAZgSdAQ4AmQSDBA4AsgSDBA4A3wTHBAYACQX2BAoASAUh
+BQoAYAUTAA4AlQV4BQYAygWqBQYA6AWdAQYADAadAQoAJQYTAAYAaQZKBgYAjwZ9BgYAtgalBgYA
+yQb2BBYAJQcFBxYAOgcFBwYATAedARIAVgccBBYAcAcFBxYApwcFBxYAvwcFBwoAyAchBQoA1Ach
+BQYADgidAQoARgghBQYAdAidARIAiggcBAYA6wiqBQYACwmqBQYAQwkpCQYAXAl9BgYAeQlKBgYA
+hwl9BgYAogl9BgYAvQl9BgYA1gl9BgYA7wl9BgYADAp9BgAAAAABAAAAAAABAAEAAAAAACkANwAF
+AAEAAQAAAAAAZQA3AAkAAQACAAABEABwADcADQABAAMABQEAAHoAAAANAAUACAAFAQAAiAAAAA0A
+BQAPAAAAAACjAK8ADQAGABEAAAEQAOcA8gAlAAgAFQABAAAAHQHyACkACgAYAAIBAAAoAQAALQAK
+ABoAMQC/ASAAMQDoAS0AMQAKAjoAMQAvAkcAIQALA5AAEQBCA50AEQBrA6EAEQDeA78AEQDmA8MA
+BgZrBNkAVoBzBNwAVoB7BNwAUCAAAAAABhhwARMAAQBYIAAAAAAGGHABEwABAGAgAAAAABEYqwEX
+AAEAjCAAAAAAEwiyARsAAQCkIAAAAAATCNgBKAABALwgAAAAABMIAQI1AAEA1CAAAAAAEwgfAkIA
+AQDsIAAAAABGAmUCYwABAAghAAAAAEYCbgJoAAIAHCEAAAAAgwB/AmwAAgA0IQAAAABGAocCcQAC
+AEghAAAAABEAkAJ4AAIAZCEAAAAAAQCuAoAAAwCAIQAAAAAGGHABEwAEAIghAAAAAAMIwgKLAAQA
+vCEAAAAABhhwARMABADQIQAAAAADGHABEwAEANghAAAAABYIdwOlAAQAFCIAAAAAFgiLA6oABAAo
+IgAAAAAWCJcDrwAEADAiAAAAABEYqwEXAAUARCIAAAAABhhwARMABQBMIgAAAAAWCPMDxgAFAKgi
+AAAAAAYYcAETAAUAsCIAAAAABgBhBBMABQAAAAEAbAIAAAEApQIAAAEApQIAAAEAowMJAHABEwBh
+AHAB6gBxAHAB+QARAHABEwB5AHABEwAkAHABEwAsAHABEwA0AHABEwA8AHABEwAkAMICiwAsAMIC
+iwA0AMICiwA8AMICiwCBAHABEwCJAHABEwCRAHABSAGZANkFkwEZAGUCYwAZAG4CaAApAPoFoAEZ
+AIcCcQCpABYGsAEZAHABEwCxAHABwAFEAAsDkABMAPMDiwBMAEAGPQJMAHABEwC5AHABTAIpAJgG
+VwI5AHABXAJJAHABEwDJAL4GeALJAMQGeALRAHABEwBRAHABEwBRAGgHggLxAHwHhwL5AIwHjALh
+AJUHkgLZAHABlwLxALEHnAIBAYwHogIJAfMDqQIRAYcCrQIZAd4HsgIZAfAHuAIhARUIvwIhARUI
+xQIhARUIzALZABwISAHZACoI0gLxADcI2AIpAVII3QLpAIcCcQApAWIIFwAxAXABTAI5AXABEwBB
+AXAB2AJJAXABEwBRAXABSAFZAXABSAFhAXABSAFpAXABSAFxAXABSAF5AXABSAGBAXABSAGJAXAB
+SAGRAXABSAEIACwA4AAIADAA5QApAIMAYQEuABMCuAMuACsCuAMuAAsCoQMuAOMB/QIuAOsBHAMu
+AAMCUQIuACMCUQIuANsB9AIuABsCUQIuAPMBZAMuAPsBcQMuAOsAUQIuAMsBmwNAACsA5QBAABMA
+8ABDABMA8ABDABsA/wBJAIMATQFjABMA8ABjABsA/wBpAIMAhgGAACsA5QCDAHMA5QCDABsA/wCD
+AHsA5QCJAIMAcgGgACsA5QCjAMMAyAGjABMA8ADAACsA5QDDABMA8ADDAOsAUQLJABMAbwLgACsA
+5QDpABMAbwIAASsA5QAAARMA8AAJARsB5QAgARMA8AAgASsA5QAjAcsBUQIjAdMB5QBAASsA5QBA
+ARMA8ABgARMA8ABgASsA5QCAASsA5QCgASsA5QDAARMA8ADAASsA5QDgASsA5QAAAisA5QAAAhMA
+8AA0ATkBPgFDAZgBnAGnAawBuwG7AUMCYwJqAn0C4wIEAAEABgAFAAcABgAIAAgAAACUAU8AAABN
+AlQAAAD8AVkAAABZAl4AAAAVA5gAAAAyA7UAAACpA7oAAACjA8sAAgAEAAMAAgAFAAUAAgAGAAcA
+AgAHAAkAAgAPAAsAAgASAA0AAgATAA8AAQAUAA8AAgAXABEAdQB1AIgAGAEfASYBLQEqAjECBIAA
+AAEAAAAAAAAAAAAAAAAAIwoAAAQAAAAAAAAAAAAAAAEACgAAAAAACgAAAAAAAAAAAAAACgATAAAA
+AAAEAAAAAAAAAAAAAAABAJ0BAAAAAAwAAAAAAAAAAAAAANAA/QMAAAAADAAAAAAAAAAAAAAA0ADm
+BgAAAAAAAAAAAQAAAKwIAAAFAAQABgAEAAoACQAAABAADACjAgAAEAAZAKMCAAAAABsAowItALYB
+LQA4AgAAADxNb2R1bGU+AG1zY29ybGliAE1pY3Jvc29mdC5WaXN1YWxCYXNpYwBNeUFwcGxpY2F0
+aW9uAFNUX2QzMjM5MzBmMjA2ZjQ3NmRiNzUyMWY5NWY1N2JmMzgzLnZicHJvai5NeQBNeUNvbXB1
+dGVyAE15UHJvamVjdABNeVdlYlNlcnZpY2VzAFRocmVhZFNhZmVPYmplY3RQcm92aWRlcmAxAE15
+UmVzb3VyY2VzAFNUX2QzMjM5MzBmMjA2ZjQ3NmRiNzUyMWY5NWY1N2JmMzgzLnZicHJvai5NeS5S
+ZXNvdXJjZXMATXlTZXR0aW5ncwBTVF9kMzIzOTMwZjIwNmY0NzZkYjc1MjFmOTVmNTdiZjM4My52
+YnByb2oAU2NyaXB0TWFpbgBTY3JpcHRSZXN1bHRzAE1pY3Jvc29mdC5WaXN1YWxCYXNpYy5BcHBs
+aWNhdGlvblNlcnZpY2VzAEFwcGxpY2F0aW9uQmFzZQAuY3RvcgBNaWNyb3NvZnQuVmlzdWFsQmFz
+aWMuRGV2aWNlcwBDb21wdXRlcgBTeXN0ZW0AT2JqZWN0AC5jY3RvcgBnZXRfQ29tcHV0ZXIAbV9D
+b21wdXRlck9iamVjdFByb3ZpZGVyAGdldF9BcHBsaWNhdGlvbgBtX0FwcE9iamVjdFByb3ZpZGVy
+AFVzZXIAZ2V0X1VzZXIAbV9Vc2VyT2JqZWN0UHJvdmlkZXIAZ2V0X1dlYlNlcnZpY2VzAG1fTXlX
+ZWJTZXJ2aWNlc09iamVjdFByb3ZpZGVyAEFwcGxpY2F0aW9uAFdlYlNlcnZpY2VzAEVxdWFscwBv
+AEdldEhhc2hDb2RlAFR5cGUAR2V0VHlwZQBUb1N0cmluZwBDcmVhdGVfX0luc3RhbmNlX18AVABp
+bnN0YW5jZQBEaXNwb3NlX19JbnN0YW5jZV9fAGdldF9HZXRJbnN0YW5jZQBNaWNyb3NvZnQuVmlz
+dWFsQmFzaWMuTXlTZXJ2aWNlcy5JbnRlcm5hbABDb250ZXh0VmFsdWVgMQBtX0NvbnRleHQAR2V0
+SW5zdGFuY2UAU3lzdGVtLlJlc291cmNlcwBSZXNvdXJjZU1hbmFnZXIAX3Jlc01ncgBTeXN0ZW0u
+R2xvYmFsaXphdGlvbgBDdWx0dXJlSW5mbwBfcmVzQ3VsdHVyZQBnZXRfUmVzb3VyY2VNYW5hZ2Vy
+AGdldF9DdWx0dXJlAHNldF9DdWx0dXJlAFZhbHVlAEN1bHR1cmUAU3lzdGVtLkNvbmZpZ3VyYXRp
+b24AQXBwbGljYXRpb25TZXR0aW5nc0Jhc2UAbV9WYWx1ZQBtX1N5bmNPYmplY3QAZ2V0X1ZhbHVl
+AE1pY3Jvc29mdC5TcWxTZXJ2ZXIuU2NyaXB0VGFzawBNaWNyb3NvZnQuU3FsU2VydmVyLkR0cy5U
+YXNrcy5TY3JpcHRUYXNrAFZTVEFSVFNjcmlwdE9iamVjdE1vZGVsQmFzZQBNYWluAEVudW0AdmFs
+dWVfXwBTdWNjZXNzAEZhaWx1cmUAU3lzdGVtLkNvbXBvbmVudE1vZGVsAEVkaXRvckJyb3dzYWJs
+ZUF0dHJpYnV0ZQBFZGl0b3JCcm93c2FibGVTdGF0ZQBTeXN0ZW0uQ29kZURvbS5Db21waWxlcgBH
+ZW5lcmF0ZWRDb2RlQXR0cmlidXRlAFN5c3RlbS5EaWFnbm9zdGljcwBEZWJ1Z2dlckhpZGRlbkF0
+dHJpYnV0ZQBNaWNyb3NvZnQuVmlzdWFsQmFzaWMuQ29tcGlsZXJTZXJ2aWNlcwBTdGFuZGFyZE1v
+ZHVsZUF0dHJpYnV0ZQBIaWRlTW9kdWxlTmFtZUF0dHJpYnV0ZQBTeXN0ZW0uQ29tcG9uZW50TW9k
+ZWwuRGVzaWduAEhlbHBLZXl3b3JkQXR0cmlidXRlAFN5c3RlbS5SdW50aW1lLkNvbXBpbGVyU2Vy
+dmljZXMAUnVudGltZUhlbHBlcnMAR2V0T2JqZWN0VmFsdWUAUnVudGltZVR5cGVIYW5kbGUAR2V0
+VHlwZUZyb21IYW5kbGUAQWN0aXZhdG9yAENyZWF0ZUluc3RhbmNlAE15R3JvdXBDb2xsZWN0aW9u
+QXR0cmlidXRlAHNldF9WYWx1ZQBTeXN0ZW0uUnVudGltZS5JbnRlcm9wU2VydmljZXMAQ29tVmlz
+aWJsZUF0dHJpYnV0ZQBTeXN0ZW0uUmVmbGVjdGlvbgBBc3NlbWJseQBnZXRfQXNzZW1ibHkAU3lz
+dGVtLlRocmVhZGluZwBNb25pdG9yAEVudGVyAEV4aXQARGVidWdnZXJOb25Vc2VyQ29kZUF0dHJp
+YnV0ZQBNaWNyb3NvZnQuU3FsU2VydmVyLk1hbmFnZWREVFMATWljcm9zb2Z0LlNxbFNlcnZlci5E
+dHMuUnVudGltZQBIdHRwQ2xpZW50Q29ubmVjdGlvbgBDb25uZWN0aW9uTWFuYWdlcgBFeGNlcHRp
+b24AU2NyaXB0T2JqZWN0TW9kZWwAZ2V0X0R0cwBDb25uZWN0aW9ucwBnZXRfQ29ubmVjdGlvbnMA
+Z2V0X0l0ZW0AQWNxdWlyZUNvbm5lY3Rpb24AVmFyaWFibGVzAGdldF9WYXJpYWJsZXMAVmFyaWFi
+bGUAQ29udmVyc2lvbnMAT3BlcmF0b3JzAENvbmNhdGVuYXRlT2JqZWN0AENvbmRpdGlvbmFsQ29t
+cGFyZU9iamVjdEVxdWFsAFN0cmluZwBDb25jYXQAc2V0X1NlcnZlclVSTABEb3dubG9hZEZpbGUA
+c2V0X1Rhc2tSZXN1bHQAUHJvamVjdERhdGEAU2V0UHJvamVjdEVycm9yAENsZWFyUHJvamVjdEVy
+cm9yAENMU0NvbXBsaWFudEF0dHJpYnV0ZQBTU0lTU2NyaXB0VGFza0VudHJ5UG9pbnRBdHRyaWJ1
+dGUAU1RfZDMyMzkzMGYyMDZmNDc2ZGI3NTIxZjk1ZjU3YmYzODMudmJwcm9qLlJlc291cmNlcy5y
+ZXNvdXJjZXMAQ29tcGlsYXRpb25SZWxheGF0aW9uc0F0dHJpYnV0ZQBSdW50aW1lQ29tcGF0aWJp
+bGl0eUF0dHJpYnV0ZQBTeXN0ZW0uUnVudGltZS5WZXJzaW9uaW5nAFRhcmdldEZyYW1ld29ya0F0
+dHJpYnV0ZQBBc3NlbWJseUZpbGVWZXJzaW9uQXR0cmlidXRlAEd1aWRBdHRyaWJ1dGUAQXNzZW1i
+bHlUcmFkZW1hcmtBdHRyaWJ1dGUAQXNzZW1ibHlDb3B5cmlnaHRBdHRyaWJ1dGUAQXNzZW1ibHlQ
+cm9kdWN0QXR0cmlidXRlAEFzc2VtYmx5Q29tcGFueUF0dHJpYnV0ZQBBc3NlbWJseURlc2NyaXB0
+aW9uQXR0cmlidXRlAEFzc2VtYmx5VGl0bGVBdHRyaWJ1dGUAU1RfMmIyYjVmZTcyYjc0NDk2Zjll
+Y2JjOThjYTU0YjhiN2IAU1RfMmIyYjVmZTcyYjc0NDk2ZjllY2JjOThjYTU0YjhiN2IuZGxsAAAA
+MU0AeQAuAFIAZQBzAG8AdQByAGMAZQBzAC4ATQB5AFIAZQBzAG8AdQByAGMAZQBzAAAZUgBlAHAA
+bwByAHQAUwBlAHIAdgBlAHIAABdQAHIAbwB2AGkAZABlAHIAXwBJAEQAABtQAE0ARABfAEMAbABp
+AGUAbgB0AF8ASQBEAAAbQwBhAG0AcABhAGkAZwBuAF8ARABhAHQAZQAAKyQAUAByAG8AagBlAGMA
+dAA6ADoARgBhAHgAUwBlAG4AZABQAGEAdABoAAAJQQBEAEgAXAAAGUYAYQB4AF8AVgBlAHIAaQBm
+AGkAZQBkAAADMAAAG04AbwB0ACAAVgBlAHIAaQBmAGkAZQBkAFwAAAkuAHAAZABmAACBh2gAdAB0
+AHAAOgAvAC8AcwBxAGwAcwB0AGEAcgBzAHIAcAB0AC4AcABoAGEAcgBtAG0AZAAuAGwAbwBjAGEA
+bAAvAF8AdgB0AGkAXwBiAGkAbgAvAHIAZQBwAG8AcgB0AHMAZQByAHYAZQByAD8AaAB0AHQAcAA6
+AC8ALwBzAHEAbABzAHQAYQByAHMAcgBwAHQALgBwAGgAYQByAG0AbQBkAC4AbABvAGMAYQBsAC8A
+QgBJACAAUgBlAHAAbwByAHQAcwAvAEkAbgB0AGUAcgBuAGEAbAAvAEQAZQB2AGUAbABvAHAAbQBl
+AG4AdAAvAEgAUgBNAEMAYQBsAGwARgBhAHgAUAByAG8AYwBlAHMAcwAvAEEARABIAFAAcgBvAHYA
+aQBkAGUAcgBGAGEAeABMAGUAdAB0AGUAcgAuAHIAZABsACYAcgBzADoAQwBvAG0AbQBhAG4AZAA9
+AFIAZQBuAGQAZQByACYAUAByAGUAcwBjAHIAaQBiAGUAcgBfAEkARAA9AAAfJgBQAE0ARABfAEMA
+bABpAGUAbgB0AF8ASQBEAD0AAD8mAHIAcwA6AEYAbwByAG0AYQB0AD0AUABEAEYAJgByAGMAOgBU
+AG8AbwBsAGIAYQByAD0ARgBhAGwAcwBlAABqF7PH3YuvTKJDas4zxX4+AAi3elxWGTTgiQiwP19/
+EdUKOgMgAAEDAAABBAAAEgwHBhUSGAESDAQAABIIBwYVEhgBEggEAAASEQcGFRIYARIRBAAAEhQH
+BhUSGAESFAQIABIMBAgAEggECAASEQQIABIUBCABAhwDIAAIBCAAEhUDIAAOAh4ABxABAR4AHgAH
+MAEBARAeAAITAAQgABMABwYVEhkBEwAEKAATAAMGEh0DBhIhBAAAEh0EAAASIQUAAQESIQQIABId
+BAgAEiEDBhIgAgYcBAAAEiAECAASIAiJhF3NgIDMkQIGCAMGESgEAAAAAAQBAAAABSABARE1CAEA
+AQAAAAAABSACAQ4OGAEACk15VGVtcGxhdGUIMTAuMC4wLjAAAAYVEhgBEgwGFRIYARIIBhUSGAES
+EQYVEhgBEhQEBwESDAQHARIIBAcBEhEEBwESFAQgAQEOEwEADk15LkFwcGxpY2F0aW9uAAAQAQAL
+TXkuQ29tcHV0ZXIAABMBAA5NeS5XZWJTZXJ2aWNlcwAADAEAB015LlVzZXIAAAQAARwcAwcBAgMH
+AQgGAAESFRFRBAcBEhUDBwEOBRABAB4ABAoBHgAEBwEeAAcgBAEODg4OYQEANFN5c3RlbS5XZWIu
+U2VydmljZXMuUHJvdG9jb2xzLlNvYXBIdHRwQ2xpZW50UHJvdG9jb2wSQ3JlYXRlX19JbnN0YW5j
+ZV9fE0Rpc3Bvc2VfX0luc3RhbmNlX18AAAAGFRIYARMABhUSGQETAAQKARMABSABARMACAcDEwAT
+ABMABCABAQIFAQAAAAAEIAASYQYgAgEOEmEGBwISHRIdBAcBEiEIAQACAAAAAAAEAAEBHAQHARIg
+BCAAEnkEIAASfQUgARJxHAQgARwcBCABARwFIAASgIEGIAESgIUcAyAAHAQAAQ4cBQACHBwcBgAD
+AhwcAgUAAg4ODgYAAw4ODg4FAAEOHQ4FIAIBDgIEIAEBCAUAAQESdRAHChJtDg4ScQ4ODg4SdR0O
+CAEACAAAAAAAHgEAAQBUAhZXcmFwTm9uRXhjZXB0aW9uVGhyb3dzAUcBABouTkVURnJhbWV3b3Jr
+LFZlcnNpb249djQuMAEAVA4URnJhbWV3b3JrRGlzcGxheU5hbWUQLk5FVCBGcmFtZXdvcmsgNAwB
+AAcxLjAuMC4wAAApAQAkOTdmZmQ3MmItMDcyMy00YTg1LWFhZjItNzUyMjg4ZTkxMDc3AAAFAQAB
+AAAWAQARQ29weXJpZ2h0IEAgIDIwMTUAAC8BACpTVF9kMzIzOTMwZjIwNmY0NzZkYjc1MjFmOTVm
+NTdiZjM4My52YnByb2oAACw/AAAAAAAAAAAAAE4/AAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAABA
+PwAAAAAAAAAAAAAAAAAAAAAAAAAAX0NvckRsbE1haW4AbXNjb3JlZS5kbGwAAAAAAP8lACAAEAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAQ
+AAAAGAAAgAAAAAAAAAAAAAAAAAAAAQABAAAAMAAAgAAAAAAAAAAAAAAAAAAAAQAAAAAASAAAAFhA
+AACgAwAAAAAAAAAAAACgAzQAAABWAFMAXwBWAEUAUgBTAEkATwBOAF8ASQBOAEYATwAAAAAAvQTv
+/gAAAQAAAAEAAAAAAAAAAQAAAAAAPwAAAAAAAAAEAAAAAgAAAAAAAAAAAAAAAAAAAEQAAAABAFYA
+YQByAEYAaQBsAGUASQBuAGYAbwAAAAAAJAAEAAAAVAByAGEAbgBzAGwAYQB0AGkAbwBuAAAAAAAA
+ALAEAAMAAAEAUwB0AHIAaQBuAGcARgBpAGwAZQBJAG4AZgBvAAAA3AIAAAEAMAAwADAAMAAwADQA
+YgAwAAAAgAArAAEARgBpAGwAZQBEAGUAcwBjAHIAaQBwAHQAaQBvAG4AAAAAAFMAVABfAGQAMwAy
+ADMAOQAzADAAZgAyADAANgBmADQANwA2AGQAYgA3ADUAMgAxAGYAOQA1AGYANQA3AGIAZgAzADgA
+MwAuAHYAYgBwAHIAbwBqAAAAAAAwAAgAAQBGAGkAbABlAFYAZQByAHMAaQBvAG4AAAAAADEALgAw
+AC4AMAAuADAAAABwACgAAQBJAG4AdABlAHIAbgBhAGwATgBhAG0AZQAAAFMAVABfADIAYgAyAGIA
+NQBmAGUANwAyAGIANwA0ADQAOQA2AGYAOQBlAGMAYgBjADkAOABjAGEANQA0AGIAOABiADcAYgAu
+AGQAbABsAAAASAASAAEATABlAGcAYQBsAEMAbwBwAHkAcgBpAGcAaAB0AAAAQwBvAHAAeQByAGkA
+ZwBoAHQAIABAACAAIAAyADAAMQA1AAAAeAAoAAEATwByAGkAZwBpAG4AYQBsAEYAaQBsAGUAbgBh
+AG0AZQAAAFMAVABfADIAYgAyAGIANQBmAGUANwAyAGIANwA0ADQAOQA2AGYAOQBlAGMAYgBjADkA
+OABjAGEANQA0AGIAOABiADcAYgAuAGQAbABsAAAAeAArAAEAUAByAG8AZAB1AGMAdABOAGEAbQBl
+AAAAAABTAFQAXwBkADMAMgAzADkAMwAwAGYAMgAwADYAZgA0ADcANgBkAGIANwA1ADIAMQBmADkA
+NQBmADUANwBiAGYAMwA4ADMALgB2AGIAcAByAG8AagAAAAAANAAIAAEAUAByAG8AZAB1AGMAdABW
+AGUAcgBzAGkAbwBuAAAAMQAuADAALgAwAC4AMAAAADgACAABAEEAcwBzAGUAbQBiAGwAeQAgAFYA
+ZQByAHMAaQBvAG4AAAAxAC4AMAAuADAALgAwAAAAAAAAAAAAAAAAMAAADAAAAGA/AAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
+            </ScriptProject>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:ForEachVariableMappings>
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{790E7664-6C54-40FF-9687-5BB046C33BFF}"
+          DTS:ObjectName="{790E7664-6C54-40FF-9687-5BB046C33BFF}"
+          DTS:ValueIndex="0"
+          DTS:VariableName="User::Provider_ID" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{4B758D60-B1B7-4A50-8DDA-D78A64A7F1DC}"
+          DTS:ObjectName="{4B758D60-B1B7-4A50-8DDA-D78A64A7F1DC}"
+          DTS:ValueIndex="1"
+          DTS:VariableName="User::Campaign_Date" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{A561D404-BFA9-46A0-B2A8-3770D7BD764E}"
+          DTS:ObjectName="{A561D404-BFA9-46A0-B2A8-3770D7BD764E}"
+          DTS:ValueIndex="2"
+          DTS:VariableName="User::PMD_Client_ID" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{DC8EDFEB-753A-4D8D-B21C-8725A791CAD2}"
+          DTS:ObjectName="{DC8EDFEB-753A-4D8D-B21C-8725A791CAD2}"
+          DTS:ValueIndex="3"
+          DTS:VariableName="User::Fax_Verified" />
+      </DTS:ForEachVariableMappings>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{CDCED5C1-DDAF-409B-9EFE-927081666777}"
+      DTS:From="Package\ADH Fax Letters from StarConnect"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Get Providers Set" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{DBEA1336-8F98-4E1B-AC37-6333AD6A1DBC}"
+      DTS:From="Package\Get Providers Set"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Loop through Providers" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql12">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="241,42"
+          Id="Package\ADH Fax Letters from StarConnect"
+          TopLeft="127,84" />
+        <NodeLayout
+          Size="160,42"
+          Id="Package\Get Providers Set"
+          TopLeft="161,164" />
+        <NodeLayout
+          Size="167,44"
+          Id="Package\Loop through Providers\Generate Faxs thru Report"
+          TopLeft="18.9056603773585,9.56603773584908" />
+        <ContainerLayout
+          HeaderHeight="43.924528301886795"
+          IsExpanded="True"
+          PanelSize="213,66"
+          Size="213,110"
+          Id="Package\Loop through Providers"
+          TopLeft="141,235.950943396226" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="244.25,126">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,38"
+              Start="0,0"
+              End="0,30.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="244.25,206">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,29.9509433962264"
+              Start="0,0"
+              End="0,22.4509433962264">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.4509433962264" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\ADH Fax Letters from StarConnect">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="209,42"
+          Id="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes"
+          TopLeft="250,76" />
+        <NodeLayout
+          Size="208,42"
+          Id="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List"
+          TopLeft="332,180" />
+        <EdgeLayout
+          Id="Package\ADH Fax Letters from StarConnect.Paths[OLE DB Source Output]"
+          TopLeft="354.5,118">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="81.5,62"
+              Start="0,0"
+              End="81.5,54.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,27" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,27"
+                    Point2="0,31"
+                    Point3="4,31" />
+                  <mssgle:LineSegment
+                    End="77.5,31" />
+                  <mssgle:CubicBezierSegment
+                    Point1="77.5,31"
+                    Point2="81.5,31"
+                    Point3="81.5,35" />
+                  <mssgle:LineSegment
+                    End="81.5,54.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\ADH Fax Letters from StarConnect\ADH_DTP_Special_Fax_List">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\ADH Fax Letters from StarConnect\Starconnect ADH Call Faxes">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

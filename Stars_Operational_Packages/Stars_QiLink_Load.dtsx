@@ -1,0 +1,951 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/21/2015 4:29:40 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="SQLSTARS"
+  DTS:CreatorName="PHARMMD\Saideswar.Thondapu"
+  DTS:DTSID="{579F7875-28BE-4E4F-8CDA-6D26F4C5CB12}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.1300.371"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Stars_StarConnect_Dtp_Patient_Insert"
+  DTS:PackageType="5"
+  DTS:VersionBuild="793"
+  DTS:VersionGUID="{E294DDC4-40D4-439A-83E9-15D9BDB73387}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{3C21DEA7-A50F-45B9-9274-3901133FDC95}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="Adherence">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{A010C42B-6998-4780-83E9-41F5A7F96A54}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="HRM">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\DTP_Insert_ADH"
+      DTS:CreationName="Microsoft.ExecutePackageTask"
+      DTS:Description="Execute Package Task"
+      DTS:DTSID="{E39AD2DE-329B-4FDE-9644-751F1ACFB3DB}"
+      DTS:ExecutableType="Microsoft.ExecutePackageTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DTP_Insert_ADH"
+      DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ExecutePackageTask>
+          <UseProjectReference>True</UseProjectReference>
+          <PackageName>Stars_Patient_DTP_Insert_ADH.dtsx</PackageName>
+        </ExecutePackageTask>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\DTP_Insert_HRM"
+      DTS:CreationName="Microsoft.ExecutePackageTask"
+      DTS:Description="Execute Package Task"
+      DTS:Disabled="True"
+      DTS:DTSID="{3161D7D4-9A4F-4C39-B2A0-102ABC4A2730}"
+      DTS:ExecutableType="Microsoft.ExecutePackageTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DTP_Insert_HRM"
+      DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ExecutePackageTask>
+          <UseProjectReference>True</UseProjectReference>
+          <PackageName>Stars_Patient_DTP_Insert_HRM.dtsx</PackageName>
+        </ExecutePackageTask>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\DTP_Insert_PBH"
+      DTS:CreationName="Microsoft.ExecutePackageTask"
+      DTS:Description="Execute Package Task"
+      DTS:DTSID="{689ed111-e3fa-4d25-ba99-9c5553e501a7}"
+      DTS:ExecutableType="Microsoft.ExecutePackageTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DTP_Insert_PBH"
+      DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ExecutePackageTask>
+          <UseProjectReference>True</UseProjectReference>
+          <PackageName>Stars_Patient_DTP_Insert_PBH.dtsx</PackageName>
+        </ExecutePackageTask>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\DTP_Insert_QIM"
+      DTS:CreationName="Microsoft.ExecutePackageTask"
+      DTS:Description="Execute Package Task"
+      DTS:DTSID="{6262DFFD-DE4A-4159-958B-1F6097D1B45E}"
+      DTS:ExecutableType="Microsoft.ExecutePackageTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DTP_Insert_QIM"
+      DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ExecutePackageTask>
+          <UseProjectReference>True</UseProjectReference>
+          <PackageName>Stars_Patient_DTP_Insert_QIM.dtsx</PackageName>
+        </ExecutePackageTask>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\DTP_Insert_SUPD"
+      DTS:CreationName="Microsoft.ExecutePackageTask"
+      DTS:Description="Execute Package Task"
+      DTS:DTSID="{B3BC7316-74CF-4DC7-AB4A-A90D00787CB2}"
+      DTS:ExecutableType="Microsoft.ExecutePackageTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DTP_Insert_SUPD"
+      DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ExecutePackageTask>
+          <UseProjectReference>True</UseProjectReference>
+          <PackageName>Stars_Patient_DTP_Insert_SUPD.dtsx</PackageName>
+        </ExecutePackageTask>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Get all Evals and  Clients  to load into StartConnect"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{CE2FD4E8-0A34-4211-B793-72470C01ADEC}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Get all Evals and  Clients  to load into StartConnect"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{6311C9A2-D389-4B9C-B757-1A615A452B59}"
+          SQLTask:SqlStatementSource="Truncate table [Stars_Call_Lists].[staging].[StarsConnect_Evals]&#xA;&#xA;GO&#xA;&#xA;Insert into [Stars_Call_Lists].[staging].[StarsConnect_Evals]&#xA;(&#xA;&#x9;[PMD_Client_ID]&#xA;&#x9;,[Measure_Use]&#xA;&#x9;,[RunYear]&#xA;&#x9;,[EvalRun_ID]&#xA;)&#xA;&#xA;---- ADH (Get latest eval run for ADH)&#xA;Select r.Client_ID, m.Measure_Use, r.[RunYear], max(r.EvalRun_ID) EvalRun_ID&#xA;From [STARS].[dbo].[Stars_RunData] r&#xA;Inner join [STARS].[dbo].[Measures] m ON r.[Run_Type] = m.[Run_Type]  &#xA;Where r.Run_Type in ('Adherence')&#xA;and r.RunYear = year(getdate())&#xA;--and r.[StarConnect_Load] = 'N'&#xA;--and r.File_Type like '%C%'&#xA;and r.[Run_Completed] is not null&#xA;and exists&#xA;&#x9;(Select 1 from [STARS].[dbo].[Client_Contracts] c &#xA;&#x9;Where c.Contract_Year = r.RunYear&#xA;&#x9;and c.Measure_Use = m.Measure_Use&#xA;&#x9;and c.PMD_Client_ID = r.Client_ID&#xA;&#x9;--and c.Outreach_Contract = 1&#xA;&#x9;and c.Outreach_Contract = CASE WHEN c.Measure_Use='Asthma' and c.PMD_Client_ID in (95,97) then 0 ELSE 1 END&#xA;)&#xA;Group by r.Client_ID, m.Measure_Use, r.[RunYear]&#xA;&#xA;Union all&#xA;&#xA;--HRM&#xA;Select r.Client_ID, m.Measure_Use, r.[RunYear], max(r.EvalRun_ID) EvalRun_ID&#xA;From [STARS].[dbo].[Stars_RunData] r&#xA;Inner join [STARS].[dbo].[Measures] m ON r.[Run_Type] = m.[Run_Type]  &#xA;Where r.Run_Type in ('HRM')&#xA;and r.RunYear = YEAR(getdate())&#xA;--and r.[StarConnect_Load] = 'N'&#xA;--and r.File_Type like '%C%'&#xA;and r.[Run_Completed] is not null&#xA;and exists&#xA;&#x9;(Select 1 from [STARS].[dbo].[Client_Contracts] c &#xA;&#x9;Where c.Contract_Year = r.RunYear&#xA;&#x9;and c.Measure_Use = m.Measure_Use&#xA;&#x9;and c.PMD_Client_ID = r.Client_ID&#xA;&#x9;and c.Outreach_Contract = 1)&#xA;Group by r.Client_ID, m.Measure_Use, r.[RunYear]&#xA;&#xA;Union all&#xA;&#xA;-- SUPD (DTS)&#xA;Select r.Client_ID, m.Measure_Use, r.[RunYear], max(r.EvalRun_ID) EvalRun_ID&#xA;From [STARS].[dbo].[Stars_RunData] r&#xA;Inner join [STARS].[dbo].[Measures] m ON r.[Run_Type] = m.[Run_Type]  &#xA;Where r.Run_Type in ('SUPD')&#xA;and r.RunYear = YEAR(getdate())&#xA;--and r.[StarConnect_Load] = 'N'&#xA;--and r.File_Type like '%C%'&#xA;and r.[Run_Completed] is not null&#xA;and exists&#xA;&#x9;(Select 1 from [STARS].[dbo].[Client_Contracts] c &#xA;&#x9;Where c.Contract_Year = r.RunYear&#xA;&#x9;and c.Measure_Use = m.Measure_Use&#xA;&#x9;and c.PMD_Client_ID = r.Client_ID&#xA;&#x9;and c.Outreach_Contract = 1)&#xA;Group by r.Client_ID, m.Measure_Use, r.[RunYear]&#xA;&#xA;Union all&#xA;&#xA;-- QIM&#xA;Select r.Client_ID, m.Measure_Use, r.[RunYear], max(r.EvalRun_ID) EvalRun_ID&#xA;From [STARS].[dbo].[Stars_RunData] r&#xA;Inner join [STARS].[dbo].[Measures] m ON r.[Run_Type] = m.[Run_Type]  &#xA;Where r.Run_Type in ('QIM')&#xA;and r.RunYear = YEAR(getdate())&#xA;--and r.[StarConnect_Load] = 'N'&#xA;--and r.File_Type like '%E%'&#xA;and r.[Run_Completed] is not null&#xA;and exists&#xA;&#x9;(Select 1 from [STARS].[dbo].[Client_Contracts] c &#xA;&#x9;Where c.Contract_Year = r.RunYear&#xA;&#x9;and c.Measure_Use = m.Measure_Use&#xA;&#x9;and c.PMD_Client_ID = r.Client_ID&#xA;&#x9;and c.Outreach_Contract = 1)&#xA;Group by r.Client_ID, m.Measure_Use, r.[RunYear]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Set Language And DNC Flag from StarConnect"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{1178D141-00D3-4EF0-87B1-B9B7073C7177}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Set Language And DNC Flag from StarConnect"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server v10; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          version="1">
+          <components>
+            <component
+              refId="Package\Set Language And DNC Flag from StarConnect\StarConnect"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="StarConnect"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">--Declare @dtp_visibility table([dtp_visibility_id] int); 
+Declare @measures table([measure_id] int);
+
+--Insert into @dtp_visibility Select [id] from [StarsConnect].[dbo].[dtp_visibilities] Where [key]='2018 Prevention' AND product_line_id=1
+Insert into @measures  Select [id] from [StarsConnect].[dbo].[measures] Where [active_for_patient] = 1
+
+--Call List Logic group 3 patients only
+--Set DNC Flag for patients who set as Wrong number
+Select distinct patients.[pmd_patient_id], cast('DNC' as varchar(50)) DNC_Language_Flag
+from [dbo].[dtps] dtp 
+Inner Join [dbo].[patients] patients ON patients.id = dtp.patient_id
+Inner Join dbo.phones paph on (paph.entity_id = patients.id and paph.entity_type ='patient' and paph.phone_type = 'phone' and paph.[primary]=1 and [wrong_number] is not null)
+Where dtp.[product_line_id] = 1 -- star
+and dtp.[dtp_Year] = Year(getdate()) -- Current year
+and dtp.measure_id in (Select [measure_id] from @measures) -- Measure RAS, Diabetes, Statin,'Insulin','Asthma'
+
+union
+
+--Call List Logic group 3 patients only
+--Set DNC Flag for patients Remove and mark as Do not call in patients
+Select distinct patients.[pmd_patient_id], cast('DNC' as varchar(50)) DNC_Language_Flag
+from [dbo].[dtps] dtp 
+Inner Join [dbo].[patients] patients ON patients.id = dtp.patient_id
+Inner Join [dbo].[call_dtps] calldtps ON calldtps.dtp_id = dtp.id
+Inner Join [dbo].[calls] cal ON cal.id = calldtps.call_id
+Where dtp.[product_line_id] = 1 -- star
+and dtp.[dtp_Year] = Year(getdate()) -- Current year
+--and dtp.[dtp_visibility_id] not in (Select [dtp_visibility_id] from @dtp_visibility)
+and dtp.measure_id in (Select [measure_id] from @measures) -- Measure RAS, Diabetes, Statin,'Insulin','Asthma'
+--Do not call again (refused/non-participate)/Wrong number/Patient deceased
+and cal.status_detail_id in (1,2,4)
+
+union
+
+--Call List Logic group 3 patients only
+--Call level special check the calls with no call_dtps records (set DNC flag)
+Select distinct dtp.[pmd_patient_id], cast('DNC' as varchar(50)) DNC_Language_Flag
+from [dbo].[dtps] dtp 
+inner Join 
+(
+	Select * from [StarsConnect].[dbo].[calls] c
+	Where not exists (Select top 1 * from [dbo].[call_dtps] cd Where c.id=cd.[call_id])
+	and year([created_at]) = Year(getdate()) and [entity_type]= 'Patient'
+) cal on cal.[entity_id] = dtp.[patient_id]
+Where dtp.[product_line_id] = 1  -- star
+and dtp.[dtp_Year] = Year(getdate()) -- Current year
+--and dtp.[dtp_visibility_id] not in (Select [dtp_visibility_id] from @dtp_visibility)
+and dtp.measure_id in (Select [measure_id] from @measures) -- Measure RAS, Diabetes, Statin,'Insulin','Asthma'
+--Do not call again (refused/non-participate)/Wrong number/Patient deceased
+and cal.status_detail_id in (1,2,4) -- we will set DNC flag as well
+
+Union
+
+--Call list logic group 12
+--This special once we separate Wrong and bad number
+--Set DNC Flag allow 4 attempts in 4 different weeks then remove from the call list permanently
+Select dtp.[pmd_patient_id], cast('DNC' as varchar(50)) DNC_Language_Flag
+from [dbo].[dtps] dtp
+inner Join [dbo].[call_dtps] cd on cd.dtp_id = dtp.id
+inner Join [dbo].[calls] cal ON cal.id = cd.call_id
+Where dtp.[product_line_id] = 1 -- star
+and [dtp_Year] = Year(getdate()) -- Current year
+--and dtp.[dtp_visibility_id] not in (Select [dtp_visibility_id] from @dtp_visibility)
+and dtp.measure_id in (Select [measure_id] from @measures) -- Measure RAS, Diabetes, Statin,'Insulin','Asthma'
+--Bad number
+and cal.status_detail_id in (18)
+group by dtp.[pmd_patient_id]
+having count(distinct cal.id) &gt; 5
+
+Union
+
+--Cal list logic group 14
+--Set Flag for patients Spanish speaker (Move to spanish call list)
+Select distinct patients.[pmd_patient_id], cast('Spanish' as varchar(50)) DNC_Language_Flag
+from [dbo].[dtps] dtp 
+Inner Join [dbo].[patients] patients ON patients.id = dtp.patient_id
+Inner Join [dbo].[call_dtps] calldtps ON calldtps.dtp_id = dtp.id
+Inner Join [dbo].[calls] cal ON cal.id = calldtps.call_id
+Where dtp.[product_line_id] = 1 -- star
+and [dtp_Year] = Year(getdate()) -- Current year
+and dtp.measure_id in (Select [measure_id] from @measures) -- Measure RAS, Diabetes, Statin,'Insulin','Asthma'
+--Spanish speaker
+and cal.status_detail_id = 10
+
+Union
+
+--Cal list logic group 14
+--Set Flag for patients Long term care (Move to a new Long Term Care call list)
+Select distinct patients.[pmd_patient_id], cast('LongTerm' as varchar(50)) DNC_Language_Flag
+from [dbo].[dtps] dtp 
+Inner Join [dbo].[patients] patients ON patients.id = dtp.patient_id
+Inner Join [dbo].[call_dtps] calldtps ON calldtps.dtp_id = dtp.id
+Inner Join [dbo].[calls] cal ON cal.id = calldtps.call_id
+Where dtp.[product_line_id] = 1 -- star 
+and [dtp_Year] = Year(getdate()) -- Current year
+and dtp.measure_id in (Select [measure_id] from @measures) -- Measure RAS, Diabetes, Statin,'Insulin','Asthma'
+--Long term care
+and cal.status_detail_id = 13
+
+Union
+
+--Cal list logic group 16
+--Set Flag for patients Does not speak english (nonspanish)(Move to new Nonenglish/Nonspanish call list)
+Select distinct patients.[pmd_patient_id], cast('Other' as varchar(50)) DNC_Language_Flag
+from [dbo].[dtps] dtp 
+Inner Join [dbo].[patients] patients ON patients.id = dtp.patient_id
+Inner Join [dbo].[call_dtps] calldtps ON calldtps.dtp_id = dtp.id
+Inner Join [dbo].[calls] cal ON cal.id = calldtps.call_id
+Where dtp.[product_line_id] = 1 -- star
+and [dtp_Year] = Year(getdate()) -- Current year
+and dtp.measure_id in (Select [measure_id] from @measures) -- Measure RAS, Diabetes, Statin,'Insulin','Asthma'
+--Does not speak english (nonspanish)
+and cal.status_detail_id = 6
+
+Union
+
+Select distinct patients.pmd_patient_id, cast(l.name as varchar(50)) DNC_Language_Flag
+from [StarsConnect].[dbo].[spoken_languages] sl
+Inner Join [dbo].[languages] l ON (l.id = sl.language_id)
+Inner Join [dbo].[patients] patients ON (patients.id = sl.entity_id)
+where patients.[product_line_id] = 1
+and sl.[entity_type] ='patient'
+and sl.[primary] = 1
+and year(sl.[updated_at]) = Year(getdate())</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Set Language And DNC Flag from StarConnect\StarConnect.Connections[OleDbConnection]"
+                  connectionManagerID="{C4D05BF8-D95C-4500-92C3-AB5C733EC574}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[StarsConnect]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Set Language And DNC Flag from StarConnect\StarConnect.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Set Language And DNC Flag from StarConnect\StarConnect.Outputs[OLE DB Source Output].Columns[pmd_patient_id]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Set Language And DNC Flag from StarConnect\StarConnect.Outputs[OLE DB Source Output].ExternalColumns[pmd_patient_id]"
+                      lineageId="Package\Set Language And DNC Flag from StarConnect\StarConnect.Outputs[OLE DB Source Output].Columns[pmd_patient_id]"
+                      name="pmd_patient_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Set Language And DNC Flag from StarConnect\StarConnect.Outputs[OLE DB Source Output].Columns[DNC_Language_Flag]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Set Language And DNC Flag from StarConnect\StarConnect.Outputs[OLE DB Source Output].ExternalColumns[DNC_Language_Flag]"
+                      length="50"
+                      lineageId="Package\Set Language And DNC Flag from StarConnect\StarConnect.Outputs[OLE DB Source Output].Columns[DNC_Language_Flag]"
+                      name="DNC_Language_Flag"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Set Language And DNC Flag from StarConnect\StarConnect.Outputs[OLE DB Source Output].ExternalColumns[pmd_patient_id]"
+                      dataType="i8"
+                      name="pmd_patient_id" />
+                    <externalMetadataColumn
+                      refId="Package\Set Language And DNC Flag from StarConnect\StarConnect.Outputs[OLE DB Source Output].ExternalColumns[DNC_Language_Flag]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="DNC_Language_Flag" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Set Language And DNC Flag from StarConnect\StarConnect.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Set Language And DNC Flag from StarConnect\StarConnect.Outputs[OLE DB Source Error Output].Columns[pmd_patient_id]"
+                      dataType="i8"
+                      lineageId="Package\Set Language And DNC Flag from StarConnect\StarConnect.Outputs[OLE DB Source Error Output].Columns[pmd_patient_id]"
+                      name="pmd_patient_id" />
+                    <outputColumn
+                      refId="Package\Set Language And DNC Flag from StarConnect\StarConnect.Outputs[OLE DB Source Error Output].Columns[DNC_Language_Flag]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Set Language And DNC Flag from StarConnect\StarConnect.Outputs[OLE DB Source Error Output].Columns[DNC_Language_Flag]"
+                      name="DNC_Language_Flag" />
+                    <outputColumn
+                      refId="Package\Set Language And DNC Flag from StarConnect\StarConnect.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Set Language And DNC Flag from StarConnect\StarConnect.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Set Language And DNC Flag from StarConnect\StarConnect.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Set Language And DNC Flag from StarConnect\StarConnect.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Set Language And DNC Flag from StarConnect\StarsConnect_Patient_Language"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="StarsConnect_Patient_Language"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[staging].[StarsConnect_Patient_Language]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Set Language And DNC Flag from StarConnect\StarsConnect_Patient_Language.Connections[OleDbConnection]"
+                  connectionManagerID="{833D12C4-85D0-48E0-89ED-50C49F533C60}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[Stars_RDSM]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Set Language And DNC Flag from StarConnect\StarsConnect_Patient_Language.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Set Language And DNC Flag from StarConnect\StarsConnect_Patient_Language.Inputs[OLE DB Destination Input].Columns[pmd_patient_id]"
+                      cachedDataType="i8"
+                      cachedName="pmd_patient_id"
+                      externalMetadataColumnId="Package\Set Language And DNC Flag from StarConnect\StarsConnect_Patient_Language.Inputs[OLE DB Destination Input].ExternalColumns[PMD_Patient_ID]"
+                      lineageId="Package\Set Language And DNC Flag from StarConnect\StarConnect.Outputs[OLE DB Source Output].Columns[pmd_patient_id]" />
+                    <inputColumn
+                      refId="Package\Set Language And DNC Flag from StarConnect\StarsConnect_Patient_Language.Inputs[OLE DB Destination Input].Columns[DNC_Language_Flag]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="DNC_Language_Flag"
+                      externalMetadataColumnId="Package\Set Language And DNC Flag from StarConnect\StarsConnect_Patient_Language.Inputs[OLE DB Destination Input].ExternalColumns[DNC_Language_Flag]"
+                      lineageId="Package\Set Language And DNC Flag from StarConnect\StarConnect.Outputs[OLE DB Source Output].Columns[DNC_Language_Flag]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Set Language And DNC Flag from StarConnect\StarsConnect_Patient_Language.Inputs[OLE DB Destination Input].ExternalColumns[PMD_Patient_ID]"
+                      dataType="i8"
+                      name="PMD_Patient_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Set Language And DNC Flag from StarConnect\StarsConnect_Patient_Language.Inputs[OLE DB Destination Input].ExternalColumns[DNC_Language_Flag]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="DNC_Language_Flag" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Set Language And DNC Flag from StarConnect\StarsConnect_Patient_Language.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Set Language And DNC Flag from StarConnect\StarsConnect_Patient_Language.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Set Language And DNC Flag from StarConnect\StarsConnect_Patient_Language.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Set Language And DNC Flag from StarConnect\StarsConnect_Patient_Language.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Set Language And DNC Flag from StarConnect\StarsConnect_Patient_Language.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Set Language And DNC Flag from StarConnect\StarsConnect_Patient_Language.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Set Language And DNC Flag from StarConnect.Paths[OLE DB Source Output]"
+              endId="Package\Set Language And DNC Flag from StarConnect\StarsConnect_Patient_Language.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Set Language And DNC Flag from StarConnect\StarConnect.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate staging StarsConnect_Patient_Language"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{17C6DAFE-AF67-450D-815E-8D5E3E259410}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate staging StarsConnect_Patient_Language"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{833D12C4-85D0-48E0-89ED-50C49F533C60}"
+          SQLTask:SqlStatementSource="truncate table [staging].[StarsConnect_Patient_Language]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Update Star Patients"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{BD82694D-2ED1-4878-B29B-C5764DF928E1}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Update Star Patients"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{833D12C4-85D0-48E0-89ED-50C49F533C60}"
+          SQLTask:SqlStatementSource="--Set DNC Flag&#xA;update [dbo].[Stars_Patients]&#xA;SET [DNC_Flag] = 1&#xA;where [Patient_Unique_Ident] &#xA;in (Select [PMD_Patient_ID] from [staging].[StarsConnect_Patient_Language] where [DNC_Language_Flag] = 'DNC')&#xA;&#xA;--update [dbo].[Stars_Patients]&#xA;--SET [DNC_Flag] = 0&#xA;--where [Patient_Unique_Ident] &#xA;-- IN (Select [PMD_Patient_ID] from [staging].[StarsConnect_Patient_Language] where [DNC_Language_Flag] = 'CAL')&#xA;-- AND [DNC_Flag] = 1&#xA;&#xA;--Set language flag&#xA;update p&#xA;SET [Language] = l.DNC_Language_Flag&#xA;From [dbo].[Stars_Patients] p&#xA;Inner join [staging].[StarsConnect_Patient_Language] l on (l.[DNC_Language_Flag] &lt;&gt; 'DNC' and l.PMD_Patient_ID=p.[Patient_Unique_Ident])&#xA;&#xA;--Update language flag from raw membership if it is not set starconnect&#xA;update p&#xA;SET [Language] = [Patient_Language]&#xA;FROM [dbo].[Stars_Patients] p&#xA;WHERE p.[Patient_Unique_Ident] NOT IN&#xA;(SELECT PMD_Patient_ID from [staging].[StarsConnect_Patient_Language] l WHERE l.[DNC_Language_Flag] &lt;&gt; 'DNC')&#xA;AND p.PMD_Client_ID = 73&#xA;AND p.Patient_Language = 'Spanish'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{54EF6063-5296-42B8-9DD3-49E46A2206F7}"
+      DTS:From="Package\Get all Evals and  Clients  to load into StartConnect"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\DTP_Insert_ADH" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{957708A7-0DD5-4012-B45C-D95A54D528EE}"
+      DTS:From="Package\DTP_Insert_HRM"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\DTP_Insert_SUPD" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{1637C1D5-6FB2-4C7D-B528-BC14E2AE22AA}"
+      DTS:From="Package\DTP_Insert_ADH"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\DTP_Insert_HRM" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{C170F21A-1DA6-4AD4-8477-2384B754BA5E}"
+      DTS:From="Package\DTP_Insert_QIM"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\DTP_Insert_PBH" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{F7E14121-4242-4F83-B9CD-906522923501}"
+      DTS:From="Package\Set Language And DNC Flag from StarConnect"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\Update Star Patients" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{853B148A-D256-4A1B-AED4-11D5453B877F}"
+      DTS:From="Package\Update Star Patients"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\Get all Evals and  Clients  to load into StartConnect" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 6]"
+      DTS:CreationName=""
+      DTS:DTSID="{13EFAB4B-EA98-4EC5-80EC-349BEB6A88E4}"
+      DTS:From="Package\Truncate staging StarsConnect_Patient_Language"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 6"
+      DTS:To="Package\Set Language And DNC Flag from StarConnect" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 8]"
+      DTS:CreationName=""
+      DTS:DTSID="{C21500EB-1E15-47DD-B1DA-DF6047AC9EA2}"
+      DTS:From="Package\DTP_Insert_SUPD"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 8"
+      DTS:To="Package\DTP_Insert_QIM" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="202,44"
+          Id="Package\DTP_Insert_ADH"
+          TopLeft="382.342317016216,265" />
+        <NodeLayout
+          Size="202,44"
+          Id="Package\DTP_Insert_HRM"
+          TopLeft="382.342317016216,192.333333333333" />
+        <NodeLayout
+          Size="202,44"
+          Id="Package\DTP_Insert_PBH"
+          TopLeft="613.428583458978,52.117649879423" />
+        <NodeLayout
+          Size="202,44"
+          Id="Package\DTP_Insert_QIM"
+          TopLeft="382.342317016216,47.7764705710757" />
+        <NodeLayout
+          Size="202,44"
+          Id="Package\DTP_Insert_SUPD"
+          TopLeft="382.342317016216,119.666666666667" />
+        <NodeLayout
+          Size="206,42"
+          Id="Package\Get all Evals and  Clients  to load into StartConnect"
+          TopLeft="136.53571326126,263.052830200301" />
+        <NodeLayout
+          Size="202,44"
+          Id="Package\Set Language And DNC Flag from StarConnect"
+          TopLeft="137.785713242633,119.234276729559" />
+        <NodeLayout
+          Size="202,44"
+          Id="Package\Truncate staging StarsConnect_Patient_Language"
+          TopLeft="137.785713242633,47" />
+        <NodeLayout
+          Size="202,44"
+          Id="Package\Update Star Patients"
+          TopLeft="137.785713242633,191.468553459119" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="341.869046594593,285.52641510015">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="40.4732704216229,0"
+              Start="0,0"
+              End="32.9732704216229,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="32.9732704216229,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="483.342317016216,192.333333333333">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,-28.6666666666667"
+              Start="0,0"
+              End="0,-21.1666666666667">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-21.1666666666667" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="483.342317016216,265">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,-28.6666666666667"
+              Start="0,0"
+              End="0,-21.1666666666667">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-21.1666666666667" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="584.342317016216,71.9470602252493">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="29.0862664427621,0"
+              Start="0,0"
+              End="21.5862664427621,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="21.5862664427621,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="238.785713242633,163.234276729559">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,28.2342767295593"
+              Start="0,0"
+              End="0,20.7342767295593">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.7342767295593" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="238.99404658528,235.468553459119">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,27.5842767411819"
+              Start="0,0"
+              End="0,20.0842767411819">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.0842767411819" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 6]"
+          TopLeft="238.785713242633,91">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,28.2342767295593"
+              Start="0,0"
+              End="0,20.7342767295593">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.7342767295593" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 8]"
+          TopLeft="483.142317016216,119.666666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,-27.8901960955913"
+              Start="0,0"
+              End="0,-20.3901960955913">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-20.3901960955913" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Set Language And DNC Flag from StarConnect">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="231,42"
+          Id="Package\Set Language And DNC Flag from StarConnect\StarsConnect_Patient_Language"
+          TopLeft="145.5,138.5" />
+        <NodeLayout
+          Size="136,42"
+          Id="Package\Set Language And DNC Flag from StarConnect\StarConnect"
+          TopLeft="147,54.5" />
+        <EdgeLayout
+          Id="Package\Set Language And DNC Flag from StarConnect.Paths[OLE DB Source Output]"
+          TopLeft="215,96.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="46,42"
+              Start="0,0"
+              End="46,34.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,17"
+                    Point2="0,21"
+                    Point3="4,21" />
+                  <mssgle:LineSegment
+                    End="42,21" />
+                  <mssgle:CubicBezierSegment
+                    Point1="42,21"
+                    Point2="46,21"
+                    Point3="46,25" />
+                  <mssgle:LineSegment
+                    End="46,34.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Set Language And DNC Flag from StarConnect\StarConnect">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Set Language And DNC Flag from StarConnect\StarsConnect_Patient_Language">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

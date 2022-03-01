@@ -1,0 +1,380 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="12/4/2015 11:23:42 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="LT-3CP0N12-0096"
+  DTS:CreatorName="PHARMMD\Paul.Osborne"
+  DTS:DTSID="{928ADAAF-86CA-4BC8-87BB-4E76B0E3C912}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.1100.123"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Stars_Intake_Acumen_Archive"
+  DTS:PackageType="5"
+  DTS:VersionBuild="322"
+  DTS:VersionGUID="{A0C728C9-F7BF-45E2-A1A4-0ACC7D2977F4}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{88D1F6DE-7A46-48BC-ACED-6B7016C81D19}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="AcumenFile">
+      <DTS:VariableValue
+        DTS:DataType="8">\\p10devsde003\Stars\ClientFiles\Acumen\Files_To_Process\H1609_2015_02_Adherence_Bene_Denominator.csv</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{D9551AFF-17F8-4BB6-B209-806C537C9953}"
+      DTS:Expression="SUBSTRING(@[User::AcumenFile],FINDSTRING(@[User::AcumenFile],&quot;\\&quot;,7) + 1,5)"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="PlanIdentifier">
+      <DTS:VariableValue
+        DTS:DataType="8">H1609</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{29FEA05D-8D55-41A1-844E-E331A5C75F3D}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="PMD_Client_ID">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{26E175F5-B2AC-429E-87CB-7833A7D8070C}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[User::SourceFileLocation]+&quot;\\&quot;+&quot;Processed&quot;+&quot;\\&quot;+&quot;Acumen&quot;+&quot;\\&quot;+&quot;Archived&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ProcessedFileFolder">
+      <DTS:VariableValue
+        DTS:DataType="8">\\p10devsde003\Stars\ClientFiles\Aspire\Processed\Acumen\Archived</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{119DD8E4-CB99-45D6-897B-13C09F01DD7B}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[User::SourceFileLocation]+&quot;\\&quot;+@[User::SourceFileName]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SourceFileFullPath">
+      <DTS:VariableValue
+        DTS:DataType="8">\\p10devsde003\Stars\ClientFiles\Aspire\H8764_2016_03_Adherence_Bene_Denominator.csv</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{ED7FD290-6934-46C7-AFDB-5963395B22C9}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SourceFileLocation">
+      <DTS:VariableValue
+        DTS:DataType="8">\\p10devsde003\Stars\ClientFiles\Aspire</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{C4E9D8D8-E0FB-400F-80B0-0202ED7093A7}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="SourceFileLocations">
+      <DTS:VariableValue
+        DTS:DataSubType="ManagedSerializable"
+        DTS:DataType="13">
+        <SOAP-ENV:Envelope xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+          <SOAP-ENV:Body>
+            <xsd:anyType
+              id="ref-1"></xsd:anyType>
+          </SOAP-ENV:Body>
+        </SOAP-ENV:Envelope>
+      </DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{A34BED8F-3F09-4D06-8623-A875E420E6F5}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SourceFileName">
+      <DTS:VariableValue
+        DTS:DataType="8">H8764_2016_03_Adherence_Bene_Denominator.csv</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{CC776EAA-C0AA-41E2-AB4A-F334FEC3B84E}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SourceFileType">
+      <DTS:VariableValue
+        DTS:DataType="8">ADHBEN</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{473419E6-87EB-4757-B3C1-B343D6CF4001}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SourceFileTypesCollection">
+      <DTS:VariableValue
+        DTS:DataSubType="ManagedSerializable"
+        DTS:DataType="13">
+        <SOAP-ENV:Envelope xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+          <SOAP-ENV:Body>
+            <xsd:anyType
+              id="ref-1"></xsd:anyType>
+          </SOAP-ENV:Body>
+        </SOAP-ENV:Envelope>
+      </DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{BDDB2D77-0F82-4795-A65F-4A0AE5BB8A71}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SourceFileWildCard">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Get Filename Wildcard and Location"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{BBBA996C-8BBD-4D12-BB17-F11A98AB5343}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Get Filename Wildcard and Location"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{C7056F3C-2265-4BF9-A6F0-DD504A2F4587}"
+          SQLTask:SqlStatementSource="SELECT [SourceFileLocation], [SourceFileNameWildcard],[PMD_Client_ID], [PlanIdentifier_PClm] FROM [Acumen].[dbo].[Acumen_Config] WHERE active=0 "
+          SQLTask:ResultType="ResultSetType_Rowset" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::SourceFileLocations" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::SourceFileType"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Identify SourceFileLocation and SourceFileWildcard"
+      DTS:CreationName="STOCK:FOREACHLOOP"
+      DTS:Description="Foreach Loop Container"
+      DTS:DTSID="{CFF6D54B-54D8-42F6-9281-28912D7C00D3}"
+      DTS:ExecutableType="STOCK:FOREACHLOOP"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Identify SourceFileLocation and SourceFileWildcard">
+      <DTS:ForEachEnumerator
+        DTS:CreationName="Microsoft.ForEachADOEnumerator"
+        DTS:DTSID="{A5E9C63C-BD11-44B4-8AF0-412D47BCE02A}"
+        DTS:ObjectName="{14DCFB3A-1AD1-4E2D-AC58-F8D755179677}">
+        <DTS:ObjectData>
+          <FEEADO
+            EnumType="EnumerateRowsInFirstTable"
+            VarName="User::SourceFileLocations" />
+        </DTS:ObjectData>
+      </DTS:ForEachEnumerator>
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Identify SourceFileLocation and SourceFileWildcard\Archive Files"
+          DTS:CreationName="STOCK:FOREACHLOOP"
+          DTS:Description="Foreach Loop Container"
+          DTS:DTSID="{EE8E9521-0BE5-4121-A7EB-F33C269CCCA0}"
+          DTS:ExecutableType="STOCK:FOREACHLOOP"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Archive Files">
+          <DTS:ForEachEnumerator
+            DTS:CreationName="Microsoft.ForEachFileEnumerator"
+            DTS:DTSID="{C5AE714F-B47D-4F3D-AE02-629AE2A158EF}"
+            DTS:ObjectName="{057994A3-E510-4C4D-9191-F11F0AA87B49}">
+            <DTS:PropertyExpression
+              DTS:Name="Directory">@[User::SourceFileLocation]</DTS:PropertyExpression>
+            <DTS:PropertyExpression
+              DTS:Name="FileSpec">@[User::SourceFileWildCard]</DTS:PropertyExpression>
+            <DTS:ObjectData>
+              <ForEachFileEnumeratorProperties>
+                <FEFEProperty
+                  Folder="\\p10devsde003\Stars\ClientFiles\Aspire" />
+                <FEFEProperty
+                  FileSpec="" />
+                <FEFEProperty
+                  FileNameRetrievalType="1" />
+                <FEFEProperty
+                  Recurse="0" />
+              </ForEachFileEnumeratorProperties>
+            </DTS:ObjectData>
+          </DTS:ForEachEnumerator>
+          <DTS:Variables />
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\Identify SourceFileLocation and SourceFileWildcard\Archive Files\Move to Acumen Archived folder"
+              DTS:CreationName="Microsoft.FileSystemTask"
+              DTS:DelayValidation="True"
+              DTS:Description="File System Task"
+              DTS:DTSID="{54491EB8-B38B-44BB-A6B9-3F60E2467FB7}"
+              DTS:ExecutableType="Microsoft.FileSystemTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Move to Acumen Archived folder"
+              DTS:TaskContact="File System Task;Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <FileSystemData
+                  TaskOperationType="MoveFile"
+                  TaskOverwriteDestFile="True"
+                  TaskSourcePath="User::SourceFileFullPath"
+                  TaskIsSourceVariable="True"
+                  TaskDestinationPath="User::ProcessedFileFolder"
+                  TaskIsDestinationVariable="True" />
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+          <DTS:ForEachVariableMappings>
+            <DTS:ForEachVariableMapping
+              DTS:CreationName=""
+              DTS:DTSID="{7AA4AB30-3588-4815-A851-63408F405281}"
+              DTS:ObjectName="{7AA4AB30-3588-4815-A851-63408F405281}"
+              DTS:ValueIndex="1"
+              DTS:VariableName="User::SourceFileName" />
+          </DTS:ForEachVariableMappings>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:ForEachVariableMappings>
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{EF4D55B0-F20A-4E72-B4F3-4336CD554D7F}"
+          DTS:ObjectName="{EF4D55B0-F20A-4E72-B4F3-4336CD554D7F}"
+          DTS:ValueIndex="0"
+          DTS:VariableName="User::SourceFileLocation" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{BE988B66-C9EC-444D-81E6-0555B83E3056}"
+          DTS:ObjectName="{BE988B66-C9EC-444D-81E6-0555B83E3056}"
+          DTS:ValueIndex="1"
+          DTS:VariableName="User::SourceFileWildCard" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{431A8727-E330-494B-BDA8-EE483F93CFBB}"
+          DTS:ObjectName="{431A8727-E330-494B-BDA8-EE483F93CFBB}"
+          DTS:ValueIndex="2"
+          DTS:VariableName="User::PMD_Client_ID" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{46443027-69DE-48DB-A646-32AFF2FD9D94}"
+          DTS:ObjectName="{46443027-69DE-48DB-A646-32AFF2FD9D94}"
+          DTS:ValueIndex="3"
+          DTS:VariableName="User::PlanIdentifier" />
+      </DTS:ForEachVariableMappings>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{BFA613DA-342D-4E77-A9F5-ABB6A875DF59}"
+      DTS:From="Package\Get Filename Wildcard and Location"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Identify SourceFileLocation and SourceFileWildcard" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql12">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="248,42"
+          Id="Package\Get Filename Wildcard and Location"
+          TopLeft="232.142857142857,1095.5" />
+        <NodeLayout
+          Size="232,42"
+          Id="Package\Identify SourceFileLocation and SourceFileWildcard\Archive Files\Move to Acumen Archived folder"
+          TopLeft="67,23" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="389,120"
+          Size="389,163"
+          Id="Package\Identify SourceFileLocation and SourceFileWildcard\Archive Files"
+          TopLeft="21.5714285714286,10.8571428571429" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="419,229"
+          Size="419,272"
+          Id="Package\Identify SourceFileLocation and SourceFileWildcard"
+          TopLeft="162.571428571429,1167.78571428571" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="356.142857142857,1137.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="15.9285714285716,30.2857142857138"
+              Start="0,0"
+              End="15.9285714285716,22.7857142857138">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,11.1428571428569" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,11.1428571428569"
+                    Point2="0,15.1428571428569"
+                    Point3="4,15.1428571428569" />
+                  <mssgle:LineSegment
+                    End="11.9285714285716,15.1428571428569" />
+                  <mssgle:CubicBezierSegment
+                    Point1="11.9285714285716,15.1428571428569"
+                    Point2="15.9285714285716,15.1428571428569"
+                    Point3="15.9285714285716,19.1428571428569" />
+                  <mssgle:LineSegment
+                    End="15.9285714285716,22.7857142857138" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="1. Loop 1: Uses the Active File Types&#xA;2. Loop 2: Used the Filename Wildcard and&#xA;    an File Location to locate the files&#xA;3. Loop 3: Moves the identified files to the &#xA;    processing directory.&#xA;"
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="255,120"
+          Id="03af3096-645a-42b3-b668-b7a07d13d038"
+          TopLeft="579,1639" />
+        <AnnotationLayout
+          Text="Pick up any Acumen files that are flagged as active=0 and archive them"
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="406,40"
+          Id="b6221637-8935-43fe-aa24-4c41413dd7fe"
+          TopLeft="175,1009" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

@@ -1,0 +1,1127 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="10/26/2016 2:04:43 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="LT-372CM72-0402"
+  DTS:CreatorName="PHARMMD\bill.shoap2"
+  DTS:DTSID="{5A002EEE-A1C5-4C42-B354-9DD1C9B3CAD5}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.1100.123"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Stars_Campaign_Update"
+  DTS:PackageType="5"
+  DTS:VersionBuild="6"
+  DTS:VersionGUID="{3B3500F3-A3CA-4C18-9ABB-B43E14E0E5EE}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Create Views (CosmoComm)"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{0822890D-A3D3-4661-8B34-FD7E34A440D1}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Create Views (CosmoComm)"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{E882F2C6-5A27-4607-9934-7BEF3FBB60D6}"
+          SQLTask:SqlStatementSource="Execute dbo.Stars_MstrCamp_Creator" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Populate CosmoComm View Definition Tables"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{AE019BA9-43C1-4DB4-8266-1DA0A7F171BC}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Populate CosmoComm View Definition Tables"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (CosmoComm)"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="MstrCamp_Campaign_Master (CosmoComm)"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[MstrCamp_Campaign_Master]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">true</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (CosmoComm).Connections[OleDbConnection]"
+                  connectionManagerID="{E882F2C6-5A27-4607-9934-7BEF3FBB60D6}:invalid"
+                  connectionManagerRefId="{E882F2C6-5A27-4607-9934-7BEF3FBB60D6}:invalid"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (CosmoComm).Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (CosmoComm).Inputs[OLE DB Destination Input].Columns[CampaignKey]"
+                      cachedDataType="i4"
+                      cachedName="CampaignKey"
+                      externalMetadataColumnId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (CosmoComm).Inputs[OLE DB Destination Input].ExternalColumns[CampaignKey]"
+                      lineageId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (Stars_Config).Outputs[OLE DB Source Output].Columns[CampaignKey]" />
+                    <inputColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (CosmoComm).Inputs[OLE DB Destination Input].Columns[Measure_Type]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Measure_Type"
+                      externalMetadataColumnId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (CosmoComm).Inputs[OLE DB Destination Input].ExternalColumns[Measure_Type]"
+                      lineageId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (Stars_Config).Outputs[OLE DB Source Output].Columns[Measure_Type]" />
+                    <inputColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (CosmoComm).Inputs[OLE DB Destination Input].Columns[Campaign_Name]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="Campaign_Name"
+                      externalMetadataColumnId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (CosmoComm).Inputs[OLE DB Destination Input].ExternalColumns[Campaign_Name]"
+                      lineageId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (Stars_Config).Outputs[OLE DB Source Output].Columns[Campaign_Name]" />
+                    <inputColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (CosmoComm).Inputs[OLE DB Destination Input].Columns[BaseSQL]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="8000"
+                      cachedName="BaseSQL"
+                      externalMetadataColumnId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (CosmoComm).Inputs[OLE DB Destination Input].ExternalColumns[BaseSQL]"
+                      lineageId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (Stars_Config).Outputs[OLE DB Source Output].Columns[BaseSQL]" />
+                    <inputColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (CosmoComm).Inputs[OLE DB Destination Input].Columns[WhereSQL]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="WhereSQL"
+                      externalMetadataColumnId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (CosmoComm).Inputs[OLE DB Destination Input].ExternalColumns[WhereSQL]"
+                      lineageId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (Stars_Config).Outputs[OLE DB Source Output].Columns[WhereSQL]" />
+                    <inputColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (CosmoComm).Inputs[OLE DB Destination Input].Columns[InitializeCampaign]"
+                      cachedDataType="bool"
+                      cachedName="InitializeCampaign"
+                      externalMetadataColumnId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (CosmoComm).Inputs[OLE DB Destination Input].ExternalColumns[InitializeCampaign]"
+                      lineageId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (Stars_Config).Outputs[OLE DB Source Output].Columns[InitializeCampaign]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (CosmoComm).Inputs[OLE DB Destination Input].ExternalColumns[CampaignKey]"
+                      dataType="i4"
+                      name="CampaignKey" />
+                    <externalMetadataColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (CosmoComm).Inputs[OLE DB Destination Input].ExternalColumns[Measure_Type]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Measure_Type" />
+                    <externalMetadataColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (CosmoComm).Inputs[OLE DB Destination Input].ExternalColumns[Campaign_Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="Campaign_Name" />
+                    <externalMetadataColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (CosmoComm).Inputs[OLE DB Destination Input].ExternalColumns[BaseSQL]"
+                      codePage="1252"
+                      dataType="str"
+                      length="8000"
+                      name="BaseSQL" />
+                    <externalMetadataColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (CosmoComm).Inputs[OLE DB Destination Input].ExternalColumns[WhereSQL]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="WhereSQL" />
+                    <externalMetadataColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (CosmoComm).Inputs[OLE DB Destination Input].ExternalColumns[InitializeCampaign]"
+                      dataType="bool"
+                      name="InitializeCampaign" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (CosmoComm).Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (CosmoComm).Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (CosmoComm).Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (CosmoComm).Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (CosmoComm).Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (CosmoComm).Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (Stars_Config)"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="MstrCamp_Campaign_Master (Stars_Config)"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT [CampaignKey]
+      ,[Campaign_Name]
+      ,[BaseSQL]
+      ,[WhereSQL]
+      ,[InitializeCampaign]
+      ,[Measure_Type]
+  FROM [Stars_Configurations].[dbo].[MstrCamp_Campaign_Master] WHERE InitializeCampaign = 1</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (Stars_Config).Connections[OleDbConnection]"
+                  connectionManagerID="{27AF422D-9829-49EC-B0FE-68C71E24BC24}:invalid"
+                  connectionManagerRefId="{27AF422D-9829-49EC-B0FE-68C71E24BC24}:invalid"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (Stars_Config).Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (Stars_Config).Outputs[OLE DB Source Output].Columns[CampaignKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (Stars_Config).Outputs[OLE DB Source Output].ExternalColumns[CampaignKey]"
+                      lineageId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (Stars_Config).Outputs[OLE DB Source Output].Columns[CampaignKey]"
+                      name="CampaignKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (Stars_Config).Outputs[OLE DB Source Output].Columns[Campaign_Name]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (Stars_Config).Outputs[OLE DB Source Output].ExternalColumns[Campaign_Name]"
+                      length="100"
+                      lineageId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (Stars_Config).Outputs[OLE DB Source Output].Columns[Campaign_Name]"
+                      name="Campaign_Name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (Stars_Config).Outputs[OLE DB Source Output].Columns[BaseSQL]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (Stars_Config).Outputs[OLE DB Source Output].ExternalColumns[BaseSQL]"
+                      length="8000"
+                      lineageId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (Stars_Config).Outputs[OLE DB Source Output].Columns[BaseSQL]"
+                      name="BaseSQL"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (Stars_Config).Outputs[OLE DB Source Output].Columns[WhereSQL]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (Stars_Config).Outputs[OLE DB Source Output].ExternalColumns[WhereSQL]"
+                      length="500"
+                      lineageId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (Stars_Config).Outputs[OLE DB Source Output].Columns[WhereSQL]"
+                      name="WhereSQL"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (Stars_Config).Outputs[OLE DB Source Output].Columns[InitializeCampaign]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (Stars_Config).Outputs[OLE DB Source Output].ExternalColumns[InitializeCampaign]"
+                      lineageId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (Stars_Config).Outputs[OLE DB Source Output].Columns[InitializeCampaign]"
+                      name="InitializeCampaign"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (Stars_Config).Outputs[OLE DB Source Output].Columns[Measure_Type]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (Stars_Config).Outputs[OLE DB Source Output].ExternalColumns[Measure_Type]"
+                      length="50"
+                      lineageId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (Stars_Config).Outputs[OLE DB Source Output].Columns[Measure_Type]"
+                      name="Measure_Type"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (Stars_Config).Outputs[OLE DB Source Output].ExternalColumns[CampaignKey]"
+                      dataType="i4"
+                      name="CampaignKey" />
+                    <externalMetadataColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (Stars_Config).Outputs[OLE DB Source Output].ExternalColumns[Campaign_Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="Campaign_Name" />
+                    <externalMetadataColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (Stars_Config).Outputs[OLE DB Source Output].ExternalColumns[BaseSQL]"
+                      codePage="1252"
+                      dataType="str"
+                      length="8000"
+                      name="BaseSQL" />
+                    <externalMetadataColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (Stars_Config).Outputs[OLE DB Source Output].ExternalColumns[WhereSQL]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="WhereSQL" />
+                    <externalMetadataColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (Stars_Config).Outputs[OLE DB Source Output].ExternalColumns[InitializeCampaign]"
+                      dataType="bool"
+                      name="InitializeCampaign" />
+                    <externalMetadataColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (Stars_Config).Outputs[OLE DB Source Output].ExternalColumns[Measure_Type]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Measure_Type" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (Stars_Config).Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (Stars_Config).Outputs[OLE DB Source Error Output].Columns[CampaignKey]"
+                      dataType="i4"
+                      lineageId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (Stars_Config).Outputs[OLE DB Source Error Output].Columns[CampaignKey]"
+                      name="CampaignKey" />
+                    <outputColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (Stars_Config).Outputs[OLE DB Source Error Output].Columns[Campaign_Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (Stars_Config).Outputs[OLE DB Source Error Output].Columns[Campaign_Name]"
+                      name="Campaign_Name" />
+                    <outputColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (Stars_Config).Outputs[OLE DB Source Error Output].Columns[BaseSQL]"
+                      codePage="1252"
+                      dataType="str"
+                      length="8000"
+                      lineageId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (Stars_Config).Outputs[OLE DB Source Error Output].Columns[BaseSQL]"
+                      name="BaseSQL" />
+                    <outputColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (Stars_Config).Outputs[OLE DB Source Error Output].Columns[WhereSQL]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (Stars_Config).Outputs[OLE DB Source Error Output].Columns[WhereSQL]"
+                      name="WhereSQL" />
+                    <outputColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (Stars_Config).Outputs[OLE DB Source Error Output].Columns[InitializeCampaign]"
+                      dataType="bool"
+                      lineageId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (Stars_Config).Outputs[OLE DB Source Error Output].Columns[InitializeCampaign]"
+                      name="InitializeCampaign" />
+                    <outputColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (Stars_Config).Outputs[OLE DB Source Error Output].Columns[Measure_Type]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (Stars_Config).Outputs[OLE DB Source Error Output].Columns[Measure_Type]"
+                      name="Measure_Type" />
+                    <outputColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (Stars_Config).Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (Stars_Config).Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (Stars_Config).Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (Stars_Config).Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (CosmoComm)"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="MstrCamp_Campaign_Master_Sort (CosmoComm)"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[MstrCamp_Campaign_Master_Sort]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">true</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (CosmoComm).Connections[OleDbConnection]"
+                  connectionManagerID="{E882F2C6-5A27-4607-9934-7BEF3FBB60D6}:invalid"
+                  connectionManagerRefId="{E882F2C6-5A27-4607-9934-7BEF3FBB60D6}:invalid"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (CosmoComm).Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (CosmoComm).Inputs[OLE DB Destination Input].Columns[CampaignSortKey]"
+                      cachedDataType="i4"
+                      cachedName="CampaignSortKey"
+                      externalMetadataColumnId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (CosmoComm).Inputs[OLE DB Destination Input].ExternalColumns[CampaignSortKey]"
+                      lineageId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (Stars_Config.Outputs[OLE DB Source Output].Columns[CampaignSortKey]" />
+                    <inputColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (CosmoComm).Inputs[OLE DB Destination Input].Columns[Sortcolumn_Name]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="Sortcolumn_Name"
+                      externalMetadataColumnId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (CosmoComm).Inputs[OLE DB Destination Input].ExternalColumns[Sortcolumn_Name]"
+                      lineageId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (Stars_Config.Outputs[OLE DB Source Output].Columns[Sortcolumn_Name]" />
+                    <inputColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (CosmoComm).Inputs[OLE DB Destination Input].Columns[Sortcolumn_Name_Order]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="4"
+                      cachedName="Sortcolumn_Name_Order"
+                      externalMetadataColumnId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (CosmoComm).Inputs[OLE DB Destination Input].ExternalColumns[Sortcolumn_Name_Order]"
+                      lineageId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (Stars_Config.Outputs[OLE DB Source Output].Columns[Sortcolumn_Name_Order]" />
+                    <inputColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (CosmoComm).Inputs[OLE DB Destination Input].Columns[Sortcolumn_Priority]"
+                      cachedDataType="i4"
+                      cachedName="Sortcolumn_Priority"
+                      externalMetadataColumnId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (CosmoComm).Inputs[OLE DB Destination Input].ExternalColumns[Sortcolumn_Priority]"
+                      lineageId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (Stars_Config.Outputs[OLE DB Source Output].Columns[Sortcolumn_Priority]" />
+                    <inputColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (CosmoComm).Inputs[OLE DB Destination Input].Columns[CampaignKey]"
+                      cachedDataType="i4"
+                      cachedName="CampaignKey"
+                      externalMetadataColumnId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (CosmoComm).Inputs[OLE DB Destination Input].ExternalColumns[CampaignKey]"
+                      lineageId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (Stars_Config.Outputs[OLE DB Source Output].Columns[CampaignKey]" />
+                    <inputColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (CosmoComm).Inputs[OLE DB Destination Input].Columns[Measure_Type]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Measure_Type"
+                      externalMetadataColumnId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (CosmoComm).Inputs[OLE DB Destination Input].ExternalColumns[Measure_Type]"
+                      lineageId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (Stars_Config.Outputs[OLE DB Source Output].Columns[Measure_Type]" />
+                    <inputColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (CosmoComm).Inputs[OLE DB Destination Input].Columns[Campaign_Name]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="Campaign_Name"
+                      externalMetadataColumnId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (CosmoComm).Inputs[OLE DB Destination Input].ExternalColumns[Campaign_Name]"
+                      lineageId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (Stars_Config.Outputs[OLE DB Source Output].Columns[Campaign_Name]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (CosmoComm).Inputs[OLE DB Destination Input].ExternalColumns[CampaignSortKey]"
+                      dataType="i4"
+                      name="CampaignSortKey" />
+                    <externalMetadataColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (CosmoComm).Inputs[OLE DB Destination Input].ExternalColumns[Sortcolumn_Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="Sortcolumn_Name" />
+                    <externalMetadataColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (CosmoComm).Inputs[OLE DB Destination Input].ExternalColumns[Sortcolumn_Name_Order]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="Sortcolumn_Name_Order" />
+                    <externalMetadataColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (CosmoComm).Inputs[OLE DB Destination Input].ExternalColumns[Sortcolumn_Priority]"
+                      dataType="i4"
+                      name="Sortcolumn_Priority" />
+                    <externalMetadataColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (CosmoComm).Inputs[OLE DB Destination Input].ExternalColumns[CampaignKey]"
+                      dataType="i4"
+                      name="CampaignKey" />
+                    <externalMetadataColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (CosmoComm).Inputs[OLE DB Destination Input].ExternalColumns[Measure_Type]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Measure_Type" />
+                    <externalMetadataColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (CosmoComm).Inputs[OLE DB Destination Input].ExternalColumns[Campaign_Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="Campaign_Name" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (CosmoComm).Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (CosmoComm).Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (CosmoComm).Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (CosmoComm).Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (CosmoComm).Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (CosmoComm).Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (Stars_Config"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="MstrCamp_Campaign_Master_Sort (Stars_Config"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT ms.[CampaignSortKey]
+      ,ms.[Sortcolumn_Name]
+      ,ms.[Sortcolumn_Name_Order]
+      ,ms.[Sortcolumn_Priority]
+      ,ms.[CampaignKey]
+      ,ms.[Measure_Type]
+      ,ms.[Campaign_Name]
+  FROM [Stars_Configurations].[dbo].[MstrCamp_Campaign_Master_Sort] ms
+  INNER JOIN [Stars_Configurations].[dbo].[MstrCamp_Campaign_Master] m
+  ON m.CampaignKey = ms.CampaignKey   
+  WHERE InitializeCampaign = 1</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (Stars_Config.Connections[OleDbConnection]"
+                  connectionManagerID="{27AF422D-9829-49EC-B0FE-68C71E24BC24}:invalid"
+                  connectionManagerRefId="{27AF422D-9829-49EC-B0FE-68C71E24BC24}:invalid"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (Stars_Config.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (Stars_Config.Outputs[OLE DB Source Output].Columns[CampaignSortKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (Stars_Config.Outputs[OLE DB Source Output].ExternalColumns[CampaignSortKey]"
+                      lineageId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (Stars_Config.Outputs[OLE DB Source Output].Columns[CampaignSortKey]"
+                      name="CampaignSortKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (Stars_Config.Outputs[OLE DB Source Output].Columns[Sortcolumn_Name]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (Stars_Config.Outputs[OLE DB Source Output].ExternalColumns[Sortcolumn_Name]"
+                      length="100"
+                      lineageId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (Stars_Config.Outputs[OLE DB Source Output].Columns[Sortcolumn_Name]"
+                      name="Sortcolumn_Name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (Stars_Config.Outputs[OLE DB Source Output].Columns[Sortcolumn_Name_Order]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (Stars_Config.Outputs[OLE DB Source Output].ExternalColumns[Sortcolumn_Name_Order]"
+                      length="4"
+                      lineageId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (Stars_Config.Outputs[OLE DB Source Output].Columns[Sortcolumn_Name_Order]"
+                      name="Sortcolumn_Name_Order"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (Stars_Config.Outputs[OLE DB Source Output].Columns[Sortcolumn_Priority]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (Stars_Config.Outputs[OLE DB Source Output].ExternalColumns[Sortcolumn_Priority]"
+                      lineageId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (Stars_Config.Outputs[OLE DB Source Output].Columns[Sortcolumn_Priority]"
+                      name="Sortcolumn_Priority"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (Stars_Config.Outputs[OLE DB Source Output].Columns[CampaignKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (Stars_Config.Outputs[OLE DB Source Output].ExternalColumns[CampaignKey]"
+                      lineageId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (Stars_Config.Outputs[OLE DB Source Output].Columns[CampaignKey]"
+                      name="CampaignKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (Stars_Config.Outputs[OLE DB Source Output].Columns[Measure_Type]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (Stars_Config.Outputs[OLE DB Source Output].ExternalColumns[Measure_Type]"
+                      length="50"
+                      lineageId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (Stars_Config.Outputs[OLE DB Source Output].Columns[Measure_Type]"
+                      name="Measure_Type"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (Stars_Config.Outputs[OLE DB Source Output].Columns[Campaign_Name]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (Stars_Config.Outputs[OLE DB Source Output].ExternalColumns[Campaign_Name]"
+                      length="100"
+                      lineageId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (Stars_Config.Outputs[OLE DB Source Output].Columns[Campaign_Name]"
+                      name="Campaign_Name"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (Stars_Config.Outputs[OLE DB Source Output].ExternalColumns[CampaignSortKey]"
+                      dataType="i4"
+                      name="CampaignSortKey" />
+                    <externalMetadataColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (Stars_Config.Outputs[OLE DB Source Output].ExternalColumns[Sortcolumn_Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="Sortcolumn_Name" />
+                    <externalMetadataColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (Stars_Config.Outputs[OLE DB Source Output].ExternalColumns[Sortcolumn_Name_Order]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="Sortcolumn_Name_Order" />
+                    <externalMetadataColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (Stars_Config.Outputs[OLE DB Source Output].ExternalColumns[Sortcolumn_Priority]"
+                      dataType="i4"
+                      name="Sortcolumn_Priority" />
+                    <externalMetadataColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (Stars_Config.Outputs[OLE DB Source Output].ExternalColumns[CampaignKey]"
+                      dataType="i4"
+                      name="CampaignKey" />
+                    <externalMetadataColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (Stars_Config.Outputs[OLE DB Source Output].ExternalColumns[Measure_Type]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Measure_Type" />
+                    <externalMetadataColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (Stars_Config.Outputs[OLE DB Source Output].ExternalColumns[Campaign_Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="Campaign_Name" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (Stars_Config.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (Stars_Config.Outputs[OLE DB Source Error Output].Columns[CampaignSortKey]"
+                      dataType="i4"
+                      lineageId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (Stars_Config.Outputs[OLE DB Source Error Output].Columns[CampaignSortKey]"
+                      name="CampaignSortKey" />
+                    <outputColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (Stars_Config.Outputs[OLE DB Source Error Output].Columns[Sortcolumn_Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (Stars_Config.Outputs[OLE DB Source Error Output].Columns[Sortcolumn_Name]"
+                      name="Sortcolumn_Name" />
+                    <outputColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (Stars_Config.Outputs[OLE DB Source Error Output].Columns[Sortcolumn_Name_Order]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      lineageId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (Stars_Config.Outputs[OLE DB Source Error Output].Columns[Sortcolumn_Name_Order]"
+                      name="Sortcolumn_Name_Order" />
+                    <outputColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (Stars_Config.Outputs[OLE DB Source Error Output].Columns[Sortcolumn_Priority]"
+                      dataType="i4"
+                      lineageId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (Stars_Config.Outputs[OLE DB Source Error Output].Columns[Sortcolumn_Priority]"
+                      name="Sortcolumn_Priority" />
+                    <outputColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (Stars_Config.Outputs[OLE DB Source Error Output].Columns[CampaignKey]"
+                      dataType="i4"
+                      lineageId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (Stars_Config.Outputs[OLE DB Source Error Output].Columns[CampaignKey]"
+                      name="CampaignKey" />
+                    <outputColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (Stars_Config.Outputs[OLE DB Source Error Output].Columns[Measure_Type]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (Stars_Config.Outputs[OLE DB Source Error Output].Columns[Measure_Type]"
+                      name="Measure_Type" />
+                    <outputColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (Stars_Config.Outputs[OLE DB Source Error Output].Columns[Campaign_Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (Stars_Config.Outputs[OLE DB Source Error Output].Columns[Campaign_Name]"
+                      name="Campaign_Name" />
+                    <outputColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (Stars_Config.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (Stars_Config.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (Stars_Config.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (Stars_Config.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Populate CosmoComm View Definition Tables.Paths[OLE DB Source Output]"
+              endId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (CosmoComm).Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (Stars_Config).Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\Populate CosmoComm View Definition Tables.Paths[OLE DB Source Output1]"
+              endId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (CosmoComm).Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (Stars_Config.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate CosmoComm View Definition Tables"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{C5AC1AA1-EBF8-4DD8-81C0-57B02E7A7472}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate CosmoComm View Definition Tables"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{E882F2C6-5A27-4607-9934-7BEF3FBB60D6}"
+          SQLTask:SqlStatementSource="Truncate Table [dbo].[MstrCamp_Campaign_Master]&#xA;Truncate Table [dbo].[MstrCamp_Campaign_Master_Sort]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{23AFCE8D-FE9A-4AEE-B4DA-EFE955D16786}"
+      DTS:From="Package\Truncate CosmoComm View Definition Tables"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Populate CosmoComm View Definition Tables" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{A6CA6ACC-1E9D-4881-855D-E32E66617893}"
+      DTS:From="Package\Populate CosmoComm View Definition Tables"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Create Views (CosmoComm)" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql12">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="283,42"
+          Id="Package\Create Views (CosmoComm)"
+          TopLeft="136,204" />
+        <NodeLayout
+          Size="293,42"
+          Id="Package\Populate CosmoComm View Definition Tables"
+          TopLeft="131,131" />
+        <NodeLayout
+          Size="294,42"
+          Id="Package\Truncate CosmoComm View Definition Tables"
+          TopLeft="127,59" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="275.75,101">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,30"
+              Start="0,0"
+              End="0,22.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="277.5,173">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,31"
+              Start="0,0"
+              End="0,23.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Populate CosmoComm View Definition Tables">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="287,42"
+          Id="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (Stars_Config)"
+          TopLeft="71,80" />
+        <NodeLayout
+          Size="290,42"
+          Id="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (CosmoComm)"
+          TopLeft="69,153" />
+        <EdgeLayout
+          Id="Package\Populate CosmoComm View Definition Tables.Paths[OLE DB Source Output]"
+          TopLeft="214.25,122">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,31"
+              Start="0,0"
+              End="0,23.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="308,42"
+          Id="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (Stars_Config"
+          TopLeft="434,78" />
+        <NodeLayout
+          Size="315,42"
+          Id="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (CosmoComm)"
+          TopLeft="433,153" />
+        <EdgeLayout
+          Id="Package\Populate CosmoComm View Definition Tables.Paths[OLE DB Source Output1]"
+          TopLeft="589.25,120">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,33"
+              Start="0,0"
+              End="0,25.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (Stars_Config">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (Stars_Config)">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master (CosmoComm)">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Populate CosmoComm View Definition Tables\MstrCamp_Campaign_Master_Sort (CosmoComm)">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

@@ -1,0 +1,2309 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="1/29/2015 12:55:28 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="LT-HBW04X1-0022"
+  DTS:CreatorName="PHARMMD\bill.shoap"
+  DTS:DTSID="{BFCC5A11-2548-4BE7-B782-8513B10991F7}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.1301.433"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="F_ADH"
+  DTS:PackageType="5"
+  DTS:VersionBuild="24"
+  DTS:VersionGUID="{83E981E2-3718-4471-AE0A-8CE4776C1AE6}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Load F_ADH"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{A31DD507-DB4F-4786-94AF-07B93E8F3775}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load F_ADH"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server v10; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          version="1">
+          <components>
+            <component
+              refId="Package\Load F_ADH\F_ADH"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="F_ADH"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[F_ADH]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load F_ADH\F_ADH.Connections[OleDbConnection]"
+                  connectionManagerID="{F130C9C1-8230-45DD-AA40-3603B0BFBE9E}:invalid"
+                  connectionManagerRefId="{F130C9C1-8230-45DD-AA40-3603B0BFBE9E}:invalid"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load F_ADH\F_ADH.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load F_ADH\F_ADH.Inputs[OLE DB Destination Input].Columns[EvalRun_ID]"
+                      cachedDataType="i4"
+                      cachedName="EvalRun_ID"
+                      externalMetadataColumnId="Package\Load F_ADH\F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[EvalRun_ID]"
+                      lineageId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].Columns[EvalRun_ID]" />
+                    <inputColumn
+                      refId="Package\Load F_ADH\F_ADH.Inputs[OLE DB Destination Input].Columns[Client_Ident]"
+                      cachedDataType="i4"
+                      cachedName="Client_Ident"
+                      externalMetadataColumnId="Package\Load F_ADH\F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[Client_Ident]"
+                      lineageId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].Columns[Client_Ident]" />
+                    <inputColumn
+                      refId="Package\Load F_ADH\F_ADH.Inputs[OLE DB Destination Input].Columns[Patient_Ident]"
+                      cachedDataType="i8"
+                      cachedName="Patient_Ident"
+                      externalMetadataColumnId="Package\Load F_ADH\F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[Patient_Ident]"
+                      lineageId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].Columns[Patient_Ident]" />
+                    <inputColumn
+                      refId="Package\Load F_ADH\F_ADH.Inputs[OLE DB Destination Input].Columns[Measure_Ident]"
+                      cachedDataType="i4"
+                      cachedName="Measure_Ident"
+                      externalMetadataColumnId="Package\Load F_ADH\F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[Measure_Ident]"
+                      lineageId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].Columns[Measure_Ident]" />
+                    <inputColumn
+                      refId="Package\Load F_ADH\F_ADH.Inputs[OLE DB Destination Input].Columns[QualifyingMonthMedCount]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="QualifyingMonthMedCount"
+                      externalMetadataColumnId="Package\Load F_ADH\F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[QualifyingMonthMedCount]"
+                      lineageId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].Columns[QualifyingMonthMedCount]" />
+                    <inputColumn
+                      refId="Package\Load F_ADH\F_ADH.Inputs[OLE DB Destination Input].Columns[Eligibility_Status_Ident]"
+                      cachedDataType="i4"
+                      cachedName="Eligibility_Status_Ident"
+                      externalMetadataColumnId="Package\Load F_ADH\F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[Eligibility_Status_Ident]"
+                      lineageId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].Columns[Eligibility_Status_Ident]" />
+                    <inputColumn
+                      refId="Package\Load F_ADH\F_ADH.Inputs[OLE DB Destination Input].Columns[ADH_Status_Ident]"
+                      cachedDataType="i4"
+                      cachedName="ADH_Status_Ident"
+                      externalMetadataColumnId="Package\Load F_ADH\F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[ADH_Status_Ident]"
+                      lineageId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].Columns[ADH_Status_Ident]" />
+                    <inputColumn
+                      refId="Package\Load F_ADH\F_ADH.Inputs[OLE DB Destination Input].Columns[Stock_Status_Ident]"
+                      cachedDataType="i4"
+                      cachedName="Stock_Status_Ident"
+                      externalMetadataColumnId="Package\Load F_ADH\F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[Stock_Status_Ident]"
+                      lineageId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].Columns[Stock_Status_Ident]" />
+                    <inputColumn
+                      refId="Package\Load F_ADH\F_ADH.Inputs[OLE DB Destination Input].Columns[SupplyEnd_Julian]"
+                      cachedDataType="i4"
+                      cachedName="SupplyEnd_Julian"
+                      externalMetadataColumnId="Package\Load F_ADH\F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[SupplyEnd_Julian]"
+                      lineageId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].Columns[SupplyEnd_Julian]" />
+                    <inputColumn
+                      refId="Package\Load F_ADH\F_ADH.Inputs[OLE DB Destination Input].Columns[MeasureQualified]"
+                      cachedDataType="i4"
+                      cachedName="MeasureQualified"
+                      externalMetadataColumnId="Package\Load F_ADH\F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[MeasureQualified]"
+                      lineageId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].Columns[MeasureQualified]" />
+                    <inputColumn
+                      refId="Package\Load F_ADH\F_ADH.Inputs[OLE DB Destination Input].Columns[MemberInNumerator]"
+                      cachedDataType="i4"
+                      cachedName="MemberInNumerator"
+                      externalMetadataColumnId="Package\Load F_ADH\F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[MemberInNumerator]"
+                      lineageId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].Columns[MemberInNumerator]" />
+                    <inputColumn
+                      refId="Package\Load F_ADH\F_ADH.Inputs[OLE DB Destination Input].Columns[DistinctMedications]"
+                      cachedDataType="i4"
+                      cachedName="DistinctMedications"
+                      externalMetadataColumnId="Package\Load F_ADH\F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[DistinctMedications]"
+                      lineageId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].Columns[DistinctMedications]" />
+                    <inputColumn
+                      refId="Package\Load F_ADH\F_ADH.Inputs[OLE DB Destination Input].Columns[PDC_For_Month]"
+                      cachedDataType="numeric"
+                      cachedName="PDC_For_Month"
+                      cachedPrecision="25"
+                      cachedScale="10"
+                      externalMetadataColumnId="Package\Load F_ADH\F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[PDC_For_Month]"
+                      lineageId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].Columns[PDC_For_Month]" />
+                    <inputColumn
+                      refId="Package\Load F_ADH\F_ADH.Inputs[OLE DB Destination Input].Columns[PDC_Numerator_Month]"
+                      cachedDataType="i4"
+                      cachedName="PDC_Numerator_Month"
+                      externalMetadataColumnId="Package\Load F_ADH\F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[PDC_Numerator_Month]"
+                      lineageId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].Columns[PDC_Numerator_Month]" />
+                    <inputColumn
+                      refId="Package\Load F_ADH\F_ADH.Inputs[OLE DB Destination Input].Columns[PDC_Denominator_Month]"
+                      cachedDataType="i4"
+                      cachedName="PDC_Denominator_Month"
+                      externalMetadataColumnId="Package\Load F_ADH\F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[PDC_Denominator_Month]"
+                      lineageId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].Columns[PDC_Denominator_Month]" />
+                    <inputColumn
+                      refId="Package\Load F_ADH\F_ADH.Inputs[OLE DB Destination Input].Columns[DaysNeeded]"
+                      cachedDataType="i4"
+                      cachedName="DaysNeeded"
+                      externalMetadataColumnId="Package\Load F_ADH\F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[DaysNeeded]"
+                      lineageId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].Columns[DaysNeeded]" />
+                    <inputColumn
+                      refId="Package\Load F_ADH\F_ADH.Inputs[OLE DB Destination Input].Columns[DaysRemaining]"
+                      cachedDataType="i4"
+                      cachedName="DaysRemaining"
+                      externalMetadataColumnId="Package\Load F_ADH\F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[DaysRemaining]"
+                      lineageId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].Columns[DaysRemaining]" />
+                    <inputColumn
+                      refId="Package\Load F_ADH\F_ADH.Inputs[OLE DB Destination Input].Columns[StockInHand]"
+                      cachedDataType="i4"
+                      cachedName="StockInHand"
+                      externalMetadataColumnId="Package\Load F_ADH\F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[StockInHand]"
+                      lineageId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].Columns[StockInHand]" />
+                    <inputColumn
+                      refId="Package\Load F_ADH\F_ADH.Inputs[OLE DB Destination Input].Columns[DaysCalc]"
+                      cachedDataType="i4"
+                      cachedName="DaysCalc"
+                      externalMetadataColumnId="Package\Load F_ADH\F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[DaysCalc]"
+                      lineageId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].Columns[DaysCalc]" />
+                    <inputColumn
+                      refId="Package\Load F_ADH\F_ADH.Inputs[OLE DB Destination Input].Columns[Date_Ident]"
+                      cachedDataType="i4"
+                      cachedName="Date_Ident"
+                      externalMetadataColumnId="Package\Load F_ADH\F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[Date_Ident]"
+                      lineageId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].Columns[Date_Ident]" />
+                    <inputColumn
+                      refId="Package\Load F_ADH\F_ADH.Inputs[OLE DB Destination Input].Columns[EvaluationMonth]"
+                      cachedDataType="i2"
+                      cachedName="EvaluationMonth"
+                      externalMetadataColumnId="Package\Load F_ADH\F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[EvaluationMonth]"
+                      lineageId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].Columns[EvaluationMonth]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load F_ADH\F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[EvalRun_ID]"
+                      dataType="i4"
+                      name="EvalRun_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_ADH\F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[Client_Ident]"
+                      dataType="i4"
+                      name="Client_Ident" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_ADH\F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[Patient_Ident]"
+                      dataType="i8"
+                      name="Patient_Ident" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_ADH\F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[Measure_Ident]"
+                      dataType="i4"
+                      name="Measure_Ident" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_ADH\F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[QualifyingMonthMedCount]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="QualifyingMonthMedCount" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_ADH\F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[Eligibility_Status_Ident]"
+                      dataType="i4"
+                      name="Eligibility_Status_Ident" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_ADH\F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[ADH_Status_Ident]"
+                      dataType="i4"
+                      name="ADH_Status_Ident" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_ADH\F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[Stock_Status_Ident]"
+                      dataType="i4"
+                      name="Stock_Status_Ident" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_ADH\F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[SupplyEnd_Julian]"
+                      dataType="i4"
+                      name="SupplyEnd_Julian" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_ADH\F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[MeasureQualified]"
+                      dataType="i4"
+                      name="MeasureQualified" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_ADH\F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[MemberInNumerator]"
+                      dataType="i4"
+                      name="MemberInNumerator" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_ADH\F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[DistinctMedications]"
+                      dataType="i4"
+                      name="DistinctMedications" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_ADH\F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[PDC_For_Month]"
+                      dataType="numeric"
+                      name="PDC_For_Month"
+                      precision="25"
+                      scale="10" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_ADH\F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[PDC_Numerator_Month]"
+                      dataType="i4"
+                      name="PDC_Numerator_Month" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_ADH\F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[PDC_Denominator_Month]"
+                      dataType="i4"
+                      name="PDC_Denominator_Month" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_ADH\F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[DaysNeeded]"
+                      dataType="i4"
+                      name="DaysNeeded" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_ADH\F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[DaysRemaining]"
+                      dataType="i4"
+                      name="DaysRemaining" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_ADH\F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[StockInHand]"
+                      dataType="i4"
+                      name="StockInHand" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_ADH\F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[DaysCalc]"
+                      dataType="i4"
+                      name="DaysCalc" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_ADH\F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[Date_Ident]"
+                      dataType="i4"
+                      name="Date_Ident" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_ADH\F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[EvaluationMonth]"
+                      dataType="i2"
+                      name="EvaluationMonth" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load F_ADH\F_ADH.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Load F_ADH\F_ADH.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load F_ADH\F_ADH.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load F_ADH\F_ADH.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load F_ADH\F_ADH.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load F_ADH\F_ADH.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load F_ADH\S_F_ADH"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="S_F_ADH"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT  [EvalRun_ID]
+      ,c.Client_Ident
+      ,p.Patient_Ident
+      ,m.Measure_Ident
+      ,[QualifyingMonthMedCount]
+      ,e.Eligibility_Status_Ident
+	  ,a.ADH_Status_Ident
+      ,sts.Stock_Status_Ident
+      ,[SupplyEnd_Julian]
+      ,[MeasureQualified]
+      ,[MemberInNumerator]
+      ,[DistinctMedications]
+      ,[PDC_For_Month]
+      ,[PDC_Numerator_Month]
+      ,[PDC_Denominator_Month]
+      ,[DaysNeeded]
+      ,[DaysRemaining]
+      ,[StockInHand]
+      ,[DaysCalc]
+ ,[EvaluationDate]
+      ,d.Date_Ident
+ ,EvaluationMonth
+	
+
+  FROM [staging].[S_F_ADH] s WITH (NOLOCK)
+  INNER JOIN dbo.D_Client c WITH (NOLOCK)
+  ON c.PMD_Client_ID = s.pmd_client_id
+  AND c.PlanIdentifier_PClm = s.[PlanIdentifier_PClm]
+  INNER JOIN [dbo].[D_Patient] p WITH (NOLOCK)
+  ON p.Patient_Unique_Ident = s.pmd_patient_ID
+  INNER JOIN dbo.D_Measure m WITH (NOLOCK)
+  ON m.Measure_Use = s.measureuse
+  INNER JOIN dbo.D_Eligibility_Status e WITH (NOLOCK)
+  ON e.Eligibility_Status_Dn = s.pmdstatusdescr
+  AND e.Qualified_Status_Dn = s.measurequal_status_EOY
+  INNER JOIN dbo.D_ADH_Status a WITH (NOLOCK)
+  ON a.ADH_Status_Key = s.measureadh_status
+  INNER JOIN dbo.D_Stock_Status sts WITH (NOLOCK)
+  ON sts.Stock_Status_Key = s.stockstatus
+  INNER JOIN dbo.D_Date d WITH (NOLOCK)
+  ON CAST(d.Date AS DATE) = CAST(s.adhmonth AS DATE)</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load F_ADH\S_F_ADH.Connections[OleDbConnection]"
+                  connectionManagerID="{F130C9C1-8230-45DD-AA40-3603B0BFBE9E}:invalid"
+                  connectionManagerRefId="{F130C9C1-8230-45DD-AA40-3603B0BFBE9E}:invalid"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].Columns[EvalRun_ID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].ExternalColumns[EvalRun_ID]"
+                      lineageId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].Columns[EvalRun_ID]"
+                      name="EvalRun_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].Columns[Client_Ident]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].ExternalColumns[Client_Ident]"
+                      lineageId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].Columns[Client_Ident]"
+                      name="Client_Ident"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].Columns[Patient_Ident]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].ExternalColumns[Patient_Ident]"
+                      lineageId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].Columns[Patient_Ident]"
+                      name="Patient_Ident"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].Columns[Measure_Ident]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].ExternalColumns[Measure_Ident]"
+                      lineageId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].Columns[Measure_Ident]"
+                      name="Measure_Ident"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].Columns[QualifyingMonthMedCount]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].ExternalColumns[QualifyingMonthMedCount]"
+                      length="2"
+                      lineageId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].Columns[QualifyingMonthMedCount]"
+                      name="QualifyingMonthMedCount"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].Columns[Eligibility_Status_Ident]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].ExternalColumns[Eligibility_Status_Ident]"
+                      lineageId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].Columns[Eligibility_Status_Ident]"
+                      name="Eligibility_Status_Ident"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].Columns[ADH_Status_Ident]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].ExternalColumns[ADH_Status_Ident]"
+                      lineageId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].Columns[ADH_Status_Ident]"
+                      name="ADH_Status_Ident"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].Columns[Stock_Status_Ident]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].ExternalColumns[Stock_Status_Ident]"
+                      lineageId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].Columns[Stock_Status_Ident]"
+                      name="Stock_Status_Ident"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].Columns[SupplyEnd_Julian]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].ExternalColumns[SupplyEnd_Julian]"
+                      lineageId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].Columns[SupplyEnd_Julian]"
+                      name="SupplyEnd_Julian"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].Columns[MeasureQualified]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].ExternalColumns[MeasureQualified]"
+                      lineageId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].Columns[MeasureQualified]"
+                      name="MeasureQualified"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].Columns[MemberInNumerator]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].ExternalColumns[MemberInNumerator]"
+                      lineageId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].Columns[MemberInNumerator]"
+                      name="MemberInNumerator"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].Columns[DistinctMedications]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].ExternalColumns[DistinctMedications]"
+                      lineageId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].Columns[DistinctMedications]"
+                      name="DistinctMedications"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].Columns[PDC_For_Month]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].ExternalColumns[PDC_For_Month]"
+                      lineageId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].Columns[PDC_For_Month]"
+                      name="PDC_For_Month"
+                      precision="25"
+                      scale="10"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].Columns[PDC_Numerator_Month]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].ExternalColumns[PDC_Numerator_Month]"
+                      lineageId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].Columns[PDC_Numerator_Month]"
+                      name="PDC_Numerator_Month"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].Columns[PDC_Denominator_Month]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].ExternalColumns[PDC_Denominator_Month]"
+                      lineageId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].Columns[PDC_Denominator_Month]"
+                      name="PDC_Denominator_Month"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].Columns[DaysNeeded]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].ExternalColumns[DaysNeeded]"
+                      lineageId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].Columns[DaysNeeded]"
+                      name="DaysNeeded"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].Columns[DaysRemaining]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].ExternalColumns[DaysRemaining]"
+                      lineageId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].Columns[DaysRemaining]"
+                      name="DaysRemaining"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].Columns[StockInHand]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].ExternalColumns[StockInHand]"
+                      lineageId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].Columns[StockInHand]"
+                      name="StockInHand"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].Columns[DaysCalc]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].ExternalColumns[DaysCalc]"
+                      lineageId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].Columns[DaysCalc]"
+                      name="DaysCalc"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].Columns[Date_Ident]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].ExternalColumns[Date_Ident]"
+                      lineageId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].Columns[Date_Ident]"
+                      name="Date_Ident"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].Columns[EvaluationDate]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].ExternalColumns[EvaluationDate]"
+                      lineageId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].Columns[EvaluationDate]"
+                      name="EvaluationDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].Columns[EvaluationMonth]"
+                      dataType="i2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].ExternalColumns[EvaluationMonth]"
+                      lineageId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].Columns[EvaluationMonth]"
+                      name="EvaluationMonth"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].ExternalColumns[EvalRun_ID]"
+                      dataType="i4"
+                      name="EvalRun_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].ExternalColumns[Client_Ident]"
+                      dataType="i4"
+                      name="Client_Ident" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].ExternalColumns[Patient_Ident]"
+                      dataType="i8"
+                      name="Patient_Ident" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].ExternalColumns[Measure_Ident]"
+                      dataType="i4"
+                      name="Measure_Ident" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].ExternalColumns[QualifyingMonthMedCount]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="QualifyingMonthMedCount" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].ExternalColumns[Eligibility_Status_Ident]"
+                      dataType="i4"
+                      name="Eligibility_Status_Ident" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].ExternalColumns[ADH_Status_Ident]"
+                      dataType="i4"
+                      name="ADH_Status_Ident" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].ExternalColumns[Stock_Status_Ident]"
+                      dataType="i4"
+                      name="Stock_Status_Ident" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].ExternalColumns[SupplyEnd_Julian]"
+                      dataType="i4"
+                      name="SupplyEnd_Julian" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].ExternalColumns[MeasureQualified]"
+                      dataType="i4"
+                      name="MeasureQualified" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].ExternalColumns[MemberInNumerator]"
+                      dataType="i4"
+                      name="MemberInNumerator" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].ExternalColumns[DistinctMedications]"
+                      dataType="i4"
+                      name="DistinctMedications" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].ExternalColumns[PDC_For_Month]"
+                      dataType="numeric"
+                      name="PDC_For_Month"
+                      precision="25"
+                      scale="10" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].ExternalColumns[PDC_Numerator_Month]"
+                      dataType="i4"
+                      name="PDC_Numerator_Month" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].ExternalColumns[PDC_Denominator_Month]"
+                      dataType="i4"
+                      name="PDC_Denominator_Month" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].ExternalColumns[DaysNeeded]"
+                      dataType="i4"
+                      name="DaysNeeded" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].ExternalColumns[DaysRemaining]"
+                      dataType="i4"
+                      name="DaysRemaining" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].ExternalColumns[StockInHand]"
+                      dataType="i4"
+                      name="StockInHand" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].ExternalColumns[DaysCalc]"
+                      dataType="i4"
+                      name="DaysCalc" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].ExternalColumns[Date_Ident]"
+                      dataType="i4"
+                      name="Date_Ident" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].ExternalColumns[EvaluationDate]"
+                      dataType="dbDate"
+                      name="EvaluationDate" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output].ExternalColumns[EvaluationMonth]"
+                      dataType="i2"
+                      name="EvaluationMonth" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Error Output].Columns[EvalRun_ID]"
+                      dataType="i4"
+                      lineageId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Error Output].Columns[EvalRun_ID]"
+                      name="EvalRun_ID" />
+                    <outputColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Error Output].Columns[Client_Ident]"
+                      dataType="i4"
+                      lineageId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Error Output].Columns[Client_Ident]"
+                      name="Client_Ident" />
+                    <outputColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Error Output].Columns[Patient_Ident]"
+                      dataType="i8"
+                      lineageId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Error Output].Columns[Patient_Ident]"
+                      name="Patient_Ident" />
+                    <outputColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Error Output].Columns[Measure_Ident]"
+                      dataType="i4"
+                      lineageId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Error Output].Columns[Measure_Ident]"
+                      name="Measure_Ident" />
+                    <outputColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Error Output].Columns[QualifyingMonthMedCount]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      lineageId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Error Output].Columns[QualifyingMonthMedCount]"
+                      name="QualifyingMonthMedCount" />
+                    <outputColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Error Output].Columns[Eligibility_Status_Ident]"
+                      dataType="i4"
+                      lineageId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Error Output].Columns[Eligibility_Status_Ident]"
+                      name="Eligibility_Status_Ident" />
+                    <outputColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Error Output].Columns[ADH_Status_Ident]"
+                      dataType="i4"
+                      lineageId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Error Output].Columns[ADH_Status_Ident]"
+                      name="ADH_Status_Ident" />
+                    <outputColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Error Output].Columns[Stock_Status_Ident]"
+                      dataType="i4"
+                      lineageId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Error Output].Columns[Stock_Status_Ident]"
+                      name="Stock_Status_Ident" />
+                    <outputColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Error Output].Columns[SupplyEnd_Julian]"
+                      dataType="i4"
+                      lineageId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Error Output].Columns[SupplyEnd_Julian]"
+                      name="SupplyEnd_Julian" />
+                    <outputColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Error Output].Columns[MeasureQualified]"
+                      dataType="i4"
+                      lineageId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Error Output].Columns[MeasureQualified]"
+                      name="MeasureQualified" />
+                    <outputColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Error Output].Columns[MemberInNumerator]"
+                      dataType="i4"
+                      lineageId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Error Output].Columns[MemberInNumerator]"
+                      name="MemberInNumerator" />
+                    <outputColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Error Output].Columns[DistinctMedications]"
+                      dataType="i4"
+                      lineageId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Error Output].Columns[DistinctMedications]"
+                      name="DistinctMedications" />
+                    <outputColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Error Output].Columns[PDC_For_Month]"
+                      dataType="numeric"
+                      lineageId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Error Output].Columns[PDC_For_Month]"
+                      name="PDC_For_Month"
+                      precision="25"
+                      scale="10" />
+                    <outputColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Error Output].Columns[PDC_Numerator_Month]"
+                      dataType="i4"
+                      lineageId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Error Output].Columns[PDC_Numerator_Month]"
+                      name="PDC_Numerator_Month" />
+                    <outputColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Error Output].Columns[PDC_Denominator_Month]"
+                      dataType="i4"
+                      lineageId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Error Output].Columns[PDC_Denominator_Month]"
+                      name="PDC_Denominator_Month" />
+                    <outputColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Error Output].Columns[DaysNeeded]"
+                      dataType="i4"
+                      lineageId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Error Output].Columns[DaysNeeded]"
+                      name="DaysNeeded" />
+                    <outputColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Error Output].Columns[DaysRemaining]"
+                      dataType="i4"
+                      lineageId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Error Output].Columns[DaysRemaining]"
+                      name="DaysRemaining" />
+                    <outputColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Error Output].Columns[StockInHand]"
+                      dataType="i4"
+                      lineageId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Error Output].Columns[StockInHand]"
+                      name="StockInHand" />
+                    <outputColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Error Output].Columns[DaysCalc]"
+                      dataType="i4"
+                      lineageId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Error Output].Columns[DaysCalc]"
+                      name="DaysCalc" />
+                    <outputColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Error Output].Columns[EvaluationDate]"
+                      dataType="dbDate"
+                      lineageId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Error Output].Columns[EvaluationDate]"
+                      name="EvaluationDate" />
+                    <outputColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Error Output].Columns[Date_Ident]"
+                      dataType="i4"
+                      lineageId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Error Output].Columns[Date_Ident]"
+                      name="Date_Ident" />
+                    <outputColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Error Output].Columns[EvaluationMonth]"
+                      dataType="i2"
+                      lineageId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Error Output].Columns[EvaluationMonth]"
+                      name="EvaluationMonth" />
+                    <outputColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Load F_ADH.Paths[OLE DB Source Output]"
+              endId="Package\Load F_ADH\F_ADH.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Load F_ADH\S_F_ADH.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Stage Adherence"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{7B62CD71-4EFB-4B4E-B38D-94026A850890}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Stage Adherence"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server v10; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          version="1">
+          <components>
+            <component
+              refId="Package\Stage Adherence\ADH_StatusData"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="ADH_StatusData"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT c.[EvalRun_ID]
+      ,c.[PMD_Client_ID]
+      ,c.[PlanIdentifier_PClm]
+      ,c.[PMD_Patient_ID]
+      ,c.[MeasureUse]
+      ,c.[QualifyingMonthMedCount]
+      ,c.[PMDStatusDescr]
+      ,c.[MeasureQual_Status_EOY]
+      ,c.[EvaluationMonth]
+      ,c.[MinInsulinMonth]
+      ,c.[AcumenPreviousYear_Status]
+      ,c.[AcumenPreviousYear_PDC_Unadjusted]
+      ,c.[MeasureADH_Status]
+      ,c.[MeasureADH_StatusDescription]
+      ,c.[StockStatus]
+      ,c.[StockStatusDescription]
+      ,c.[SupplyEnd_Julian]
+      ,c.[MeasureQualified]
+      ,c.[MemberInNumerator]
+      ,c.[DistinctMedications]
+      ,c.[PDC_For_Month]
+      ,c.[PDC_Numerator_Month]
+      ,c.[PDC_Denominator_Month]
+      ,c.[DaysNeeded]
+      ,c.[DaysRemaining]
+      ,c.[StockInHand]
+      ,c.[DaysCalc]
+      ,c.[EvaluationDate]
+	  ,CAST(CAST(sr.RunYear AS VARCHAR(4)) + '-'+ CAST(c.EvaluationMonth AS VARCHAR(2)) +'-01' AS DATE)  AS ADHMonth
+  FROM [Stars_Warehouse].[dbo].[ADH_StatusData] c WITH (NOLOCK)
+  INNER JOIN stars.dbo.Stars_RunData sr
+  ON sr.EvalRun_ID=c.EvalRun_ID</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Stage Adherence\ADH_StatusData.Connections[OleDbConnection]"
+                  connectionManagerID="{D09F8B5A-C342-4F5A-9B45-A0558CA45FB4}:invalid"
+                  connectionManagerRefId="{D09F8B5A-C342-4F5A-9B45-A0558CA45FB4}:invalid"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[EvalRun_ID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].ExternalColumns[EvalRun_ID]"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[EvalRun_ID]"
+                      name="EvalRun_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[PMD_Client_ID]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].ExternalColumns[PMD_Client_ID]"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[PMD_Client_ID]"
+                      name="PMD_Client_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[PlanIdentifier_PClm]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].ExternalColumns[PlanIdentifier_PClm]"
+                      length="5"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[PlanIdentifier_PClm]"
+                      name="PlanIdentifier_PClm"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[PMD_Patient_ID]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].ExternalColumns[PMD_Patient_ID]"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[PMD_Patient_ID]"
+                      name="PMD_Patient_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[MeasureUse]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].ExternalColumns[MeasureUse]"
+                      length="50"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[MeasureUse]"
+                      name="MeasureUse"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[QualifyingMonthMedCount]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].ExternalColumns[QualifyingMonthMedCount]"
+                      length="2"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[QualifyingMonthMedCount]"
+                      name="QualifyingMonthMedCount"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[PMDStatusDescr]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].ExternalColumns[PMDStatusDescr]"
+                      length="20"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[PMDStatusDescr]"
+                      name="PMDStatusDescr"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[MeasureQual_Status_EOY]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].ExternalColumns[MeasureQual_Status_EOY]"
+                      length="20"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[MeasureQual_Status_EOY]"
+                      name="MeasureQual_Status_EOY"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[EvaluationMonth]"
+                      dataType="i2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].ExternalColumns[EvaluationMonth]"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[EvaluationMonth]"
+                      name="EvaluationMonth"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[MinInsulinMonth]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].ExternalColumns[MinInsulinMonth]"
+                      length="2"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[MinInsulinMonth]"
+                      name="MinInsulinMonth"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[AcumenPreviousYear_Status]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].ExternalColumns[AcumenPreviousYear_Status]"
+                      length="75"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[AcumenPreviousYear_Status]"
+                      name="AcumenPreviousYear_Status"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[AcumenPreviousYear_PDC_Unadjusted]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].ExternalColumns[AcumenPreviousYear_PDC_Unadjusted]"
+                      length="50"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[AcumenPreviousYear_PDC_Unadjusted]"
+                      name="AcumenPreviousYear_PDC_Unadjusted"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[MeasureADH_Status]"
+                      dataType="i2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].ExternalColumns[MeasureADH_Status]"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[MeasureADH_Status]"
+                      name="MeasureADH_Status"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[MeasureADH_StatusDescription]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].ExternalColumns[MeasureADH_StatusDescription]"
+                      length="50"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[MeasureADH_StatusDescription]"
+                      name="MeasureADH_StatusDescription"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[StockStatus]"
+                      dataType="i2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].ExternalColumns[StockStatus]"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[StockStatus]"
+                      name="StockStatus"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[StockStatusDescription]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].ExternalColumns[StockStatusDescription]"
+                      length="50"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[StockStatusDescription]"
+                      name="StockStatusDescription"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[SupplyEnd_Julian]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].ExternalColumns[SupplyEnd_Julian]"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[SupplyEnd_Julian]"
+                      name="SupplyEnd_Julian"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[MeasureQualified]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].ExternalColumns[MeasureQualified]"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[MeasureQualified]"
+                      name="MeasureQualified"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[MemberInNumerator]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].ExternalColumns[MemberInNumerator]"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[MemberInNumerator]"
+                      name="MemberInNumerator"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[DistinctMedications]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].ExternalColumns[DistinctMedications]"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[DistinctMedications]"
+                      name="DistinctMedications"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[PDC_For_Month]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].ExternalColumns[PDC_For_Month]"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[PDC_For_Month]"
+                      name="PDC_For_Month"
+                      precision="25"
+                      scale="10"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[PDC_Numerator_Month]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].ExternalColumns[PDC_Numerator_Month]"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[PDC_Numerator_Month]"
+                      name="PDC_Numerator_Month"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[PDC_Denominator_Month]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].ExternalColumns[PDC_Denominator_Month]"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[PDC_Denominator_Month]"
+                      name="PDC_Denominator_Month"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[DaysNeeded]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].ExternalColumns[DaysNeeded]"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[DaysNeeded]"
+                      name="DaysNeeded"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[DaysRemaining]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].ExternalColumns[DaysRemaining]"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[DaysRemaining]"
+                      name="DaysRemaining"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[StockInHand]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].ExternalColumns[StockInHand]"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[StockInHand]"
+                      name="StockInHand"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[DaysCalc]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].ExternalColumns[DaysCalc]"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[DaysCalc]"
+                      name="DaysCalc"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[EvaluationDate]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].ExternalColumns[EvaluationDate]"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[EvaluationDate]"
+                      name="EvaluationDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[ADHMonth]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].ExternalColumns[ADHMonth]"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[ADHMonth]"
+                      name="ADHMonth"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].ExternalColumns[EvalRun_ID]"
+                      dataType="i4"
+                      name="EvalRun_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].ExternalColumns[PMD_Client_ID]"
+                      dataType="i4"
+                      name="PMD_Client_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].ExternalColumns[PlanIdentifier_PClm]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      name="PlanIdentifier_PClm" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].ExternalColumns[PMD_Patient_ID]"
+                      dataType="i8"
+                      name="PMD_Patient_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].ExternalColumns[MeasureUse]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="MeasureUse" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].ExternalColumns[QualifyingMonthMedCount]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="QualifyingMonthMedCount" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].ExternalColumns[PMDStatusDescr]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="PMDStatusDescr" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].ExternalColumns[MeasureQual_Status_EOY]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="MeasureQual_Status_EOY" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].ExternalColumns[EvaluationMonth]"
+                      dataType="i2"
+                      name="EvaluationMonth" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].ExternalColumns[MinInsulinMonth]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="MinInsulinMonth" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].ExternalColumns[AcumenPreviousYear_Status]"
+                      codePage="1252"
+                      dataType="str"
+                      length="75"
+                      name="AcumenPreviousYear_Status" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].ExternalColumns[AcumenPreviousYear_PDC_Unadjusted]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="AcumenPreviousYear_PDC_Unadjusted" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].ExternalColumns[MeasureADH_Status]"
+                      dataType="i2"
+                      name="MeasureADH_Status" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].ExternalColumns[MeasureADH_StatusDescription]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="MeasureADH_StatusDescription" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].ExternalColumns[StockStatus]"
+                      dataType="i2"
+                      name="StockStatus" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].ExternalColumns[StockStatusDescription]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="StockStatusDescription" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].ExternalColumns[SupplyEnd_Julian]"
+                      dataType="i4"
+                      name="SupplyEnd_Julian" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].ExternalColumns[MeasureQualified]"
+                      dataType="i4"
+                      name="MeasureQualified" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].ExternalColumns[MemberInNumerator]"
+                      dataType="i4"
+                      name="MemberInNumerator" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].ExternalColumns[DistinctMedications]"
+                      dataType="i4"
+                      name="DistinctMedications" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].ExternalColumns[PDC_For_Month]"
+                      dataType="numeric"
+                      name="PDC_For_Month"
+                      precision="25"
+                      scale="10" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].ExternalColumns[PDC_Numerator_Month]"
+                      dataType="i4"
+                      name="PDC_Numerator_Month" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].ExternalColumns[PDC_Denominator_Month]"
+                      dataType="i4"
+                      name="PDC_Denominator_Month" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].ExternalColumns[DaysNeeded]"
+                      dataType="i4"
+                      name="DaysNeeded" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].ExternalColumns[DaysRemaining]"
+                      dataType="i4"
+                      name="DaysRemaining" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].ExternalColumns[StockInHand]"
+                      dataType="i4"
+                      name="StockInHand" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].ExternalColumns[DaysCalc]"
+                      dataType="i4"
+                      name="DaysCalc" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].ExternalColumns[EvaluationDate]"
+                      dataType="dbDate"
+                      name="EvaluationDate" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].ExternalColumns[ADHMonth]"
+                      dataType="dbDate"
+                      name="ADHMonth" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Error Output].Columns[EvalRun_ID]"
+                      dataType="i4"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Error Output].Columns[EvalRun_ID]"
+                      name="EvalRun_ID" />
+                    <outputColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Error Output].Columns[PMD_Client_ID]"
+                      dataType="i4"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Error Output].Columns[PMD_Client_ID]"
+                      name="PMD_Client_ID" />
+                    <outputColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Error Output].Columns[PlanIdentifier_PClm]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Error Output].Columns[PlanIdentifier_PClm]"
+                      name="PlanIdentifier_PClm" />
+                    <outputColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Error Output].Columns[PMD_Patient_ID]"
+                      dataType="i8"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Error Output].Columns[PMD_Patient_ID]"
+                      name="PMD_Patient_ID" />
+                    <outputColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Error Output].Columns[MeasureUse]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Error Output].Columns[MeasureUse]"
+                      name="MeasureUse" />
+                    <outputColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Error Output].Columns[QualifyingMonthMedCount]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Error Output].Columns[QualifyingMonthMedCount]"
+                      name="QualifyingMonthMedCount" />
+                    <outputColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Error Output].Columns[PMDStatusDescr]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Error Output].Columns[PMDStatusDescr]"
+                      name="PMDStatusDescr" />
+                    <outputColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Error Output].Columns[MeasureQual_Status_EOY]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Error Output].Columns[MeasureQual_Status_EOY]"
+                      name="MeasureQual_Status_EOY" />
+                    <outputColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Error Output].Columns[EvaluationMonth]"
+                      dataType="i2"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Error Output].Columns[EvaluationMonth]"
+                      name="EvaluationMonth" />
+                    <outputColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Error Output].Columns[MinInsulinMonth]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Error Output].Columns[MinInsulinMonth]"
+                      name="MinInsulinMonth" />
+                    <outputColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Error Output].Columns[AcumenPreviousYear_Status]"
+                      codePage="1252"
+                      dataType="str"
+                      length="75"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Error Output].Columns[AcumenPreviousYear_Status]"
+                      name="AcumenPreviousYear_Status" />
+                    <outputColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Error Output].Columns[AcumenPreviousYear_PDC_Unadjusted]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Error Output].Columns[AcumenPreviousYear_PDC_Unadjusted]"
+                      name="AcumenPreviousYear_PDC_Unadjusted" />
+                    <outputColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Error Output].Columns[MeasureADH_Status]"
+                      dataType="i2"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Error Output].Columns[MeasureADH_Status]"
+                      name="MeasureADH_Status" />
+                    <outputColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Error Output].Columns[MeasureADH_StatusDescription]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Error Output].Columns[MeasureADH_StatusDescription]"
+                      name="MeasureADH_StatusDescription" />
+                    <outputColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Error Output].Columns[StockStatus]"
+                      dataType="i2"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Error Output].Columns[StockStatus]"
+                      name="StockStatus" />
+                    <outputColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Error Output].Columns[StockStatusDescription]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Error Output].Columns[StockStatusDescription]"
+                      name="StockStatusDescription" />
+                    <outputColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Error Output].Columns[SupplyEnd_Julian]"
+                      dataType="i4"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Error Output].Columns[SupplyEnd_Julian]"
+                      name="SupplyEnd_Julian" />
+                    <outputColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Error Output].Columns[MeasureQualified]"
+                      dataType="i4"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Error Output].Columns[MeasureQualified]"
+                      name="MeasureQualified" />
+                    <outputColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Error Output].Columns[MemberInNumerator]"
+                      dataType="i4"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Error Output].Columns[MemberInNumerator]"
+                      name="MemberInNumerator" />
+                    <outputColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Error Output].Columns[DistinctMedications]"
+                      dataType="i4"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Error Output].Columns[DistinctMedications]"
+                      name="DistinctMedications" />
+                    <outputColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Error Output].Columns[PDC_For_Month]"
+                      dataType="numeric"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Error Output].Columns[PDC_For_Month]"
+                      name="PDC_For_Month"
+                      precision="25"
+                      scale="10" />
+                    <outputColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Error Output].Columns[PDC_Numerator_Month]"
+                      dataType="i4"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Error Output].Columns[PDC_Numerator_Month]"
+                      name="PDC_Numerator_Month" />
+                    <outputColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Error Output].Columns[PDC_Denominator_Month]"
+                      dataType="i4"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Error Output].Columns[PDC_Denominator_Month]"
+                      name="PDC_Denominator_Month" />
+                    <outputColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Error Output].Columns[DaysNeeded]"
+                      dataType="i4"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Error Output].Columns[DaysNeeded]"
+                      name="DaysNeeded" />
+                    <outputColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Error Output].Columns[DaysRemaining]"
+                      dataType="i4"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Error Output].Columns[DaysRemaining]"
+                      name="DaysRemaining" />
+                    <outputColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Error Output].Columns[StockInHand]"
+                      dataType="i4"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Error Output].Columns[StockInHand]"
+                      name="StockInHand" />
+                    <outputColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Error Output].Columns[DaysCalc]"
+                      dataType="i4"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Error Output].Columns[DaysCalc]"
+                      name="DaysCalc" />
+                    <outputColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Error Output].Columns[EvaluationDate]"
+                      dataType="dbDate"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Error Output].Columns[EvaluationDate]"
+                      name="EvaluationDate" />
+                    <outputColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Error Output].Columns[ADHMonth]"
+                      dataType="dbDate"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Error Output].Columns[ADHMonth]"
+                      name="ADHMonth" />
+                    <outputColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Stage Adherence\S_F_ADH"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="S_F_ADH"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[staging].[S_F_ADH]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Stage Adherence\S_F_ADH.Connections[OleDbConnection]"
+                  connectionManagerID="{F130C9C1-8230-45DD-AA40-3603B0BFBE9E}:invalid"
+                  connectionManagerRefId="{F130C9C1-8230-45DD-AA40-3603B0BFBE9E}:invalid"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].Columns[EvalRun_ID]"
+                      cachedDataType="i4"
+                      cachedName="EvalRun_ID"
+                      externalMetadataColumnId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[EvalRun_ID]"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[EvalRun_ID]" />
+                    <inputColumn
+                      refId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].Columns[PMD_Client_ID]"
+                      cachedDataType="i8"
+                      cachedName="PMD_Client_ID"
+                      externalMetadataColumnId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[PMD_Client_ID]"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[PMD_Client_ID]" />
+                    <inputColumn
+                      refId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].Columns[PlanIdentifier_PClm]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="5"
+                      cachedName="PlanIdentifier_PClm"
+                      externalMetadataColumnId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[PlanIdentifier_PClm]"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[PlanIdentifier_PClm]" />
+                    <inputColumn
+                      refId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].Columns[PMD_Patient_ID]"
+                      cachedDataType="i8"
+                      cachedName="PMD_Patient_ID"
+                      externalMetadataColumnId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[PMD_Patient_ID]"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[PMD_Patient_ID]" />
+                    <inputColumn
+                      refId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].Columns[MeasureUse]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="MeasureUse"
+                      externalMetadataColumnId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[MeasureUse]"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[MeasureUse]" />
+                    <inputColumn
+                      refId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].Columns[QualifyingMonthMedCount]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="QualifyingMonthMedCount"
+                      externalMetadataColumnId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[QualifyingMonthMedCount]"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[QualifyingMonthMedCount]" />
+                    <inputColumn
+                      refId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].Columns[PMDStatusDescr]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="PMDStatusDescr"
+                      externalMetadataColumnId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[PMDStatusDescr]"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[PMDStatusDescr]" />
+                    <inputColumn
+                      refId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].Columns[MeasureQual_Status_EOY]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="MeasureQual_Status_EOY"
+                      externalMetadataColumnId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[MeasureQual_Status_EOY]"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[MeasureQual_Status_EOY]" />
+                    <inputColumn
+                      refId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].Columns[EvaluationMonth]"
+                      cachedDataType="i2"
+                      cachedName="EvaluationMonth"
+                      externalMetadataColumnId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[EvaluationMonth]"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[EvaluationMonth]" />
+                    <inputColumn
+                      refId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].Columns[MinInsulinMonth]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="MinInsulinMonth"
+                      externalMetadataColumnId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[MinInsulinMonth]"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[MinInsulinMonth]" />
+                    <inputColumn
+                      refId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].Columns[AcumenPreviousYear_Status]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="75"
+                      cachedName="AcumenPreviousYear_Status"
+                      externalMetadataColumnId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[AcumenPreviousYear_Status]"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[AcumenPreviousYear_Status]" />
+                    <inputColumn
+                      refId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].Columns[AcumenPreviousYear_PDC_Unadjusted]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="AcumenPreviousYear_PDC_Unadjusted"
+                      externalMetadataColumnId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[AcumenPreviousYear_PDC_Unadjusted]"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[AcumenPreviousYear_PDC_Unadjusted]" />
+                    <inputColumn
+                      refId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].Columns[MeasureADH_Status]"
+                      cachedDataType="i2"
+                      cachedName="MeasureADH_Status"
+                      externalMetadataColumnId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[MeasureADH_Status]"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[MeasureADH_Status]" />
+                    <inputColumn
+                      refId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].Columns[MeasureADH_StatusDescription]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="MeasureADH_StatusDescription"
+                      externalMetadataColumnId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[MeasureADH_StatusDescription]"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[MeasureADH_StatusDescription]" />
+                    <inputColumn
+                      refId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].Columns[StockStatus]"
+                      cachedDataType="i2"
+                      cachedName="StockStatus"
+                      externalMetadataColumnId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[StockStatus]"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[StockStatus]" />
+                    <inputColumn
+                      refId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].Columns[StockStatusDescription]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="StockStatusDescription"
+                      externalMetadataColumnId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[StockStatusDescription]"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[StockStatusDescription]" />
+                    <inputColumn
+                      refId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].Columns[SupplyEnd_Julian]"
+                      cachedDataType="i4"
+                      cachedName="SupplyEnd_Julian"
+                      externalMetadataColumnId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[SupplyEnd_Julian]"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[SupplyEnd_Julian]" />
+                    <inputColumn
+                      refId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].Columns[MeasureQualified]"
+                      cachedDataType="i4"
+                      cachedName="MeasureQualified"
+                      externalMetadataColumnId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[MeasureQualified]"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[MeasureQualified]" />
+                    <inputColumn
+                      refId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].Columns[MemberInNumerator]"
+                      cachedDataType="i4"
+                      cachedName="MemberInNumerator"
+                      externalMetadataColumnId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[MemberInNumerator]"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[MemberInNumerator]" />
+                    <inputColumn
+                      refId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].Columns[DistinctMedications]"
+                      cachedDataType="i4"
+                      cachedName="DistinctMedications"
+                      externalMetadataColumnId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[DistinctMedications]"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[DistinctMedications]" />
+                    <inputColumn
+                      refId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].Columns[PDC_For_Month]"
+                      cachedDataType="numeric"
+                      cachedName="PDC_For_Month"
+                      cachedPrecision="25"
+                      cachedScale="10"
+                      externalMetadataColumnId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[PDC_For_Month]"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[PDC_For_Month]" />
+                    <inputColumn
+                      refId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].Columns[PDC_Numerator_Month]"
+                      cachedDataType="i4"
+                      cachedName="PDC_Numerator_Month"
+                      externalMetadataColumnId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[PDC_Numerator_Month]"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[PDC_Numerator_Month]" />
+                    <inputColumn
+                      refId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].Columns[PDC_Denominator_Month]"
+                      cachedDataType="i4"
+                      cachedName="PDC_Denominator_Month"
+                      externalMetadataColumnId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[PDC_Denominator_Month]"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[PDC_Denominator_Month]" />
+                    <inputColumn
+                      refId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].Columns[DaysNeeded]"
+                      cachedDataType="i4"
+                      cachedName="DaysNeeded"
+                      externalMetadataColumnId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[DaysNeeded]"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[DaysNeeded]" />
+                    <inputColumn
+                      refId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].Columns[DaysRemaining]"
+                      cachedDataType="i4"
+                      cachedName="DaysRemaining"
+                      externalMetadataColumnId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[DaysRemaining]"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[DaysRemaining]" />
+                    <inputColumn
+                      refId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].Columns[StockInHand]"
+                      cachedDataType="i4"
+                      cachedName="StockInHand"
+                      externalMetadataColumnId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[StockInHand]"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[StockInHand]" />
+                    <inputColumn
+                      refId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].Columns[DaysCalc]"
+                      cachedDataType="i4"
+                      cachedName="DaysCalc"
+                      externalMetadataColumnId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[DaysCalc]"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[DaysCalc]" />
+                    <inputColumn
+                      refId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].Columns[EvaluationDate]"
+                      cachedDataType="dbDate"
+                      cachedName="EvaluationDate"
+                      externalMetadataColumnId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[EvaluationDate]"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[EvaluationDate]" />
+                    <inputColumn
+                      refId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].Columns[ADHMonth]"
+                      cachedDataType="dbDate"
+                      cachedName="ADHMonth"
+                      externalMetadataColumnId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[ADHMonth]"
+                      lineageId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output].Columns[ADHMonth]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[EvalRun_ID]"
+                      dataType="i4"
+                      name="EvalRun_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[PMD_Client_ID]"
+                      dataType="i8"
+                      name="PMD_Client_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[PlanIdentifier_PClm]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      name="PlanIdentifier_PClm" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[PMD_Patient_ID]"
+                      dataType="i8"
+                      name="PMD_Patient_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[MeasureUse]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="MeasureUse" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[QualifyingMonthMedCount]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="QualifyingMonthMedCount" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[PMDStatusDescr]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="PMDStatusDescr" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[MeasureQual_Status_EOY]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="MeasureQual_Status_EOY" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[EvaluationMonth]"
+                      dataType="i2"
+                      name="EvaluationMonth" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[MinInsulinMonth]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="MinInsulinMonth" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[AcumenPreviousYear_Status]"
+                      codePage="1252"
+                      dataType="str"
+                      length="75"
+                      name="AcumenPreviousYear_Status" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[AcumenPreviousYear_PDC_Unadjusted]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="AcumenPreviousYear_PDC_Unadjusted" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[MeasureADH_Status]"
+                      dataType="i2"
+                      name="MeasureADH_Status" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[MeasureADH_StatusDescription]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="MeasureADH_StatusDescription" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[StockStatus]"
+                      dataType="i2"
+                      name="StockStatus" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[StockStatusDescription]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="StockStatusDescription" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[SupplyEnd_Julian]"
+                      dataType="i4"
+                      name="SupplyEnd_Julian" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[MeasureQualified]"
+                      dataType="i4"
+                      name="MeasureQualified" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[MemberInNumerator]"
+                      dataType="i4"
+                      name="MemberInNumerator" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[DistinctMedications]"
+                      dataType="i4"
+                      name="DistinctMedications" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[PDC_For_Month]"
+                      dataType="numeric"
+                      name="PDC_For_Month"
+                      precision="25"
+                      scale="10" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[PDC_Numerator_Month]"
+                      dataType="i4"
+                      name="PDC_Numerator_Month" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[PDC_Denominator_Month]"
+                      dataType="i4"
+                      name="PDC_Denominator_Month" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[DaysNeeded]"
+                      dataType="i4"
+                      name="DaysNeeded" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[DaysRemaining]"
+                      dataType="i4"
+                      name="DaysRemaining" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[StockInHand]"
+                      dataType="i4"
+                      name="StockInHand" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[DaysCalc]"
+                      dataType="i4"
+                      name="DaysCalc" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[EvaluationDate]"
+                      dataType="dbDate"
+                      name="EvaluationDate" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input].ExternalColumns[ADHMonth]"
+                      dataType="dbDate"
+                      name="ADHMonth" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Stage Adherence\S_F_ADH.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage Adherence\S_F_ADH.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage Adherence\S_F_ADH.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage Adherence\S_F_ADH.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage Adherence\S_F_ADH.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Stage Adherence.Paths[OLE DB Source Output]"
+              endId="Package\Stage Adherence\S_F_ADH.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Stage Adherence\ADH_StatusData.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate Tables"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{B9F479FC-BAF8-4FA2-86D9-0E65A69E51B4}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate Tables"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{F130C9C1-8230-45DD-AA40-3603B0BFBE9E}"
+          SQLTask:SqlStatementSource="Truncate Table staging.S_F_ADH&#xA;Go&#xA;&#xA;Truncate Table dbo.F_ADH&#xA;Go" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{9EB1598D-02D9-4B08-9967-3D99C49AB3D0}"
+      DTS:From="Package\Truncate Tables"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Stage Adherence" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{E592BA3B-D3AB-4DB4-9B16-45DA76274C3B}"
+      DTS:From="Package\Stage Adherence"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Load F_ADH" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql12">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="136,44"
+          Id="Package\Load F_ADH"
+          TopLeft="20.4433962264151,281.084905660377" />
+        <NodeLayout
+          Size="136,44"
+          Id="Package\Stage Adherence"
+          TopLeft="13.4622641509434,179.235849056604" />
+        <NodeLayout
+          Size="155,42"
+          Id="Package\Truncate Tables"
+          TopLeft="4.5,73.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="81.7311320754717,115.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,63.735849056604"
+              Start="0,0"
+              End="0,56.235849056604">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,56.235849056604" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="81.3490566037736,223.160377358491">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="6.98113207547169,57.9245283018868"
+              Start="0,0"
+              End="6.98113207547169,50.4245283018868">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28.9433962264151" />
+                  <mssgle:LineSegment
+                    End="6.98113207547169,28.9433962264151" />
+                  <mssgle:LineSegment
+                    End="6.98113207547169,50.4245283018868" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Load F_ADH">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="136,44"
+          Id="Package\Load F_ADH\S_F_ADH"
+          TopLeft="5.5,5.5" />
+        <NodeLayout
+          Size="136,44"
+          Id="Package\Load F_ADH\F_ADH"
+          TopLeft="123.311320754717,118.330188679245" />
+        <EdgeLayout
+          Id="Package\Load F_ADH.Paths[OLE DB Source Output]"
+          TopLeft="73.3867924528302,49.4245283018868">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="117.811320754717,68.9056603773585"
+              Start="0,0"
+              End="117.811320754717,61.4056603773585">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,34.4528301886793" />
+                  <mssgle:LineSegment
+                    End="117.811320754717,34.4528301886793" />
+                  <mssgle:LineSegment
+                    End="117.811320754717,61.4056603773585" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load F_ADH\F_ADH">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load F_ADH\S_F_ADH">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Stage Adherence">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="136,44"
+          Id="Package\Stage Adherence\S_F_ADH"
+          TopLeft="13.3679245283019,87.254716981132" />
+        <NodeLayout
+          Size="157,42"
+          Id="Package\Stage Adherence\ADH_StatusData"
+          TopLeft="5.5,5.5" />
+        <EdgeLayout
+          Id="Package\Stage Adherence.Paths[OLE DB Source Output]"
+          TopLeft="82.6839622641509,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,39.754716981132"
+              Start="0,0"
+              End="0,32.254716981132">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,32.254716981132" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Stage Adherence\ADH_StatusData">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Stage Adherence\S_F_ADH">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

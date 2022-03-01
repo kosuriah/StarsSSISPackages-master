@@ -1,0 +1,2213 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="7/9/2014 9:49:17 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="SQLSTARSRPT"
+  DTS:CreatorName="AD\bill.shoap"
+  DTS:DTSID="{86019790-B95D-4CB4-A7C2-52933BC93C28}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.166"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Stars_Billing SUPD_TrueUp"
+  DTS:PackageType="5"
+  DTS:VersionBuild="935"
+  DTS:VersionGUID="{3F6362F4-6C40-4618-83D9-DF9EC02B858C}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{A5485BD0-9E20-48D1-A723-56DDE08BBDC8}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="Billing_Control_Create_Datetime">
+      <DTS:VariableValue
+        DTS:DataType="7">7/9/2014 12:23:00 PM</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{93A89028-A271-4F6B-A8B3-FCA9BCC438A7}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="Billing_Control_ID">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{4BDA4028-0F8E-4992-9E69-EDC1DF0ADE8A}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="PMD_Client_ID">
+      <DTS:VariableValue
+        DTS:DataType="3">62</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{0C0460D0-517B-4CD9-B8A6-A35D87E61BED}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="rsTrueUpClientAndRunYear">
+      <DTS:VariableValue
+        DTS:DataSubType="ManagedSerializable"
+        DTS:DataType="13">
+        <SOAP-ENV:Envelope xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+          <SOAP-ENV:Body>
+            <xsd:anyType
+              id="ref-1"></xsd:anyType>
+          </SOAP-ENV:Body>
+        </SOAP-ENV:Envelope>
+      </DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{1D693DB2-24E7-4FAD-AA15-D24ACD878C57}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RunYear">
+      <DTS:VariableValue
+        DTS:DataType="3">2020</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\ForEach Client And RunYear"
+      DTS:CreationName="STOCK:FOREACHLOOP"
+      DTS:Description="Loops through each client and run year"
+      DTS:DTSID="{7B588788-1B2A-4839-A655-5634C292094C}"
+      DTS:ExecutableType="STOCK:FOREACHLOOP"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ForEach Client And RunYear">
+      <DTS:ForEachEnumerator
+        DTS:CreationName="Microsoft.ForEachADOEnumerator"
+        DTS:DTSID="{0D9A7087-ED39-4599-90C3-BFDA6D18BF0F}"
+        DTS:ObjectName="{0D9A7087-ED39-4599-90C3-BFDA6D18BF0F}">
+        <DTS:ObjectData>
+          <FEEADO
+            EnumType="EnumerateRowsInFirstTable"
+            VarName="User::rsTrueUpClientAndRunYear" />
+        </DTS:ObjectData>
+      </DTS:ForEachEnumerator>
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\ForEach Client And RunYear\Create Billing Control"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Creates the billing control record"
+          DTS:DTSID="{3C6182DB-2CB4-43E4-8817-30456D7B962E}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Create Billing Control"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{4CE44E7F-4048-4669-8B7B-76E808B7ED38}"
+              SQLTask:SqlStatementSource="Exec SUPD.usp_CreateBillingControl ?, ?, ? Output, ? Output" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::PMD_Client_ID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="User::RunYear"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="2"
+                SQLTask:DtsVariableName="User::Billing_Control_ID"
+                SQLTask:ParameterDirection="Output"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="3"
+                SQLTask:DtsVariableName="User::Billing_Control_Create_Datetime"
+                SQLTask:ParameterDirection="Output"
+                SQLTask:DataType="135"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\ForEach Client And RunYear\ExecSQL StarsConnect_staging_SUPDLoad"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{7460CFEA-AC61-4576-AF59-625EC581F8A9}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="ExecSQL StarsConnect_staging_SUPDLoad"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{46A46588-6151-4C4A-B85D-8DF14AF5C933}"
+              SQLTask:SqlStatementSource="EXEC staging.usp_SUPDLoad @RunYear = ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::RunYear"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\ForEach Client And RunYear\ExecSQL StarsConnect_staging_SUPDTruncate"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{2C14E992-099B-46D8-A234-2AEAFC1373AD}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="ExecSQL StarsConnect_staging_SUPDTruncate"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{46A46588-6151-4C4A-B85D-8DF14AF5C933}"
+              SQLTask:SqlStatementSource="EXEC staging.usp_SUPDTruncate;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\ForEach Client And RunYear\ExecSQL Stars_Billing_SUPD_usp_Bill"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{212C609C-19FF-44BA-B662-6E1F5A8BEA5B}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="ExecSQL Stars_Billing_SUPD_usp_Bill"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{4CE44E7F-4048-4669-8B7B-76E808B7ED38}"
+              SQLTask:SqlStatementSource="EXEC Stars_Billing.SUPD.usp_Bill @BillingControlID = ?, @CreateDateTime = ?, @PMD_Client_ID = ?, @RunYear = ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::Billing_Control_ID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="User::Billing_Control_Create_Datetime"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="7"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="2"
+                SQLTask:DtsVariableName="User::PMD_Client_ID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="3"
+                SQLTask:DtsVariableName="User::RunYear"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\ForEach Client And RunYear\ExecSQL Stars_Billing_SUPD_usp_Load"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{A297EF43-A6C4-4167-80A2-7C58F58FDF1B}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="ExecSQL Stars_Billing_SUPD_usp_Load"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{4CE44E7F-4048-4669-8B7B-76E808B7ED38}"
+              SQLTask:SqlStatementSource="EXEC Stars_Billing.SUPD.usp_Load @PMD_Client_ID = ?, @RunYear = ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::PMD_Client_ID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="User::RunYear"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\ForEach Client And RunYear\Execute True Up SUPD"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{81DDE97B-C22A-4259-9D0E-91E5B0FA2CE9}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Execute True Up SUPD"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{4CE44E7F-4048-4669-8B7B-76E808B7ED38}"
+              SQLTask:SqlStatementSource="Declare @CurrentDateTime&#x9;DateTime = GetDate()&#xA;Exec SUPD.usp_TrueUp_SUPD ?, ?, ?, @Create_DateTime = @CurrentDateTime" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="@PMD_Client_ID"
+                SQLTask:DtsVariableName="User::PMD_Client_ID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="@RunYear"
+                SQLTask:DtsVariableName="User::RunYear"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="@Billing_Control_ID"
+                SQLTask:DtsVariableName="User::Billing_Control_ID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\ForEach Client And RunYear\Execute usp_TrueUpGetBillingDataSUPD"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Executes the usp_TrueUpGetBillingDataSUPD sproc"
+          DTS:DTSID="{13069F6D-904E-413C-AABA-7F9E761949C0}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Execute usp_TrueUpGetBillingDataSUPD"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{4CE44E7F-4048-4669-8B7B-76E808B7ED38}"
+              SQLTask:SqlStatementSource="Exec usp_TrueUpGetBillingDataSUPD ?, ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="@PMD_Client_ID"
+                SQLTask:DtsVariableName="User::PMD_Client_ID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="@RunYear"
+                SQLTask:DtsVariableName="User::RunYear"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{D65733A3-F646-4D2C-A535-1FF4DFF973F8}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Load StarsConnect Outreach and Provider"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Billing_SUPD_Outreach"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="OLEDB Stars_Billing_SUPD_Outreach"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[SUPD].[Outreach]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">0</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Billing_SUPD_Outreach.Connections[OleDbConnection]"
+                      connectionManagerID="{4CE44E7F-4048-4669-8B7B-76E808B7ED38}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[Stars_Billing]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Billing_SUPD_Outreach.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Billing_SUPD_Outreach.Outputs[OLE DB Source Output].Columns[ReferenceID]"
+                          dataType="i8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Billing_SUPD_Outreach.Outputs[OLE DB Source Output].ExternalColumns[ReferenceID]"
+                          lineageId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Billing_SUPD_Outreach.Outputs[OLE DB Source Output].Columns[ReferenceID]"
+                          name="ReferenceID"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Billing_SUPD_Outreach.Outputs[OLE DB Source Output].Columns[OutreachType]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Billing_SUPD_Outreach.Outputs[OLE DB Source Output].ExternalColumns[OutreachType]"
+                          length="25"
+                          lineageId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Billing_SUPD_Outreach.Outputs[OLE DB Source Output].Columns[OutreachType]"
+                          name="OutreachType"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Billing_SUPD_Outreach.Outputs[OLE DB Source Output].Columns[PMD_Patient_ID]"
+                          dataType="i8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Billing_SUPD_Outreach.Outputs[OLE DB Source Output].ExternalColumns[PMD_Patient_ID]"
+                          lineageId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Billing_SUPD_Outreach.Outputs[OLE DB Source Output].Columns[PMD_Patient_ID]"
+                          name="PMD_Patient_ID"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Billing_SUPD_Outreach.Outputs[OLE DB Source Output].Columns[NPI]"
+                          dataType="i8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Billing_SUPD_Outreach.Outputs[OLE DB Source Output].ExternalColumns[NPI]"
+                          lineageId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Billing_SUPD_Outreach.Outputs[OLE DB Source Output].Columns[NPI]"
+                          name="NPI"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Billing_SUPD_Outreach.Outputs[OLE DB Source Output].Columns[DateOutreach]"
+                          dataType="dbDate"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Billing_SUPD_Outreach.Outputs[OLE DB Source Output].ExternalColumns[DateOutreach]"
+                          lineageId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Billing_SUPD_Outreach.Outputs[OLE DB Source Output].Columns[DateOutreach]"
+                          name="DateOutreach"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Billing_SUPD_Outreach.Outputs[OLE DB Source Output].ExternalColumns[OutreachID]"
+                          dataType="i4"
+                          name="OutreachID" />
+                        <externalMetadataColumn
+                          refId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Billing_SUPD_Outreach.Outputs[OLE DB Source Output].ExternalColumns[ReferenceID]"
+                          dataType="i8"
+                          name="ReferenceID" />
+                        <externalMetadataColumn
+                          refId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Billing_SUPD_Outreach.Outputs[OLE DB Source Output].ExternalColumns[OutreachType]"
+                          codePage="1252"
+                          dataType="str"
+                          length="25"
+                          name="OutreachType" />
+                        <externalMetadataColumn
+                          refId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Billing_SUPD_Outreach.Outputs[OLE DB Source Output].ExternalColumns[PMD_Patient_ID]"
+                          dataType="i8"
+                          name="PMD_Patient_ID" />
+                        <externalMetadataColumn
+                          refId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Billing_SUPD_Outreach.Outputs[OLE DB Source Output].ExternalColumns[NPI]"
+                          dataType="i8"
+                          name="NPI" />
+                        <externalMetadataColumn
+                          refId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Billing_SUPD_Outreach.Outputs[OLE DB Source Output].ExternalColumns[DateOutreach]"
+                          dataType="dbDate"
+                          name="DateOutreach" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Billing_SUPD_Outreach.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Billing_SUPD_Outreach.Outputs[OLE DB Source Error Output].Columns[ReferenceID]"
+                          dataType="i8"
+                          lineageId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Billing_SUPD_Outreach.Outputs[OLE DB Source Error Output].Columns[ReferenceID]"
+                          name="ReferenceID" />
+                        <outputColumn
+                          refId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Billing_SUPD_Outreach.Outputs[OLE DB Source Error Output].Columns[OutreachType]"
+                          codePage="1252"
+                          dataType="str"
+                          length="25"
+                          lineageId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Billing_SUPD_Outreach.Outputs[OLE DB Source Error Output].Columns[OutreachType]"
+                          name="OutreachType" />
+                        <outputColumn
+                          refId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Billing_SUPD_Outreach.Outputs[OLE DB Source Error Output].Columns[PMD_Patient_ID]"
+                          dataType="i8"
+                          lineageId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Billing_SUPD_Outreach.Outputs[OLE DB Source Error Output].Columns[PMD_Patient_ID]"
+                          name="PMD_Patient_ID" />
+                        <outputColumn
+                          refId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Billing_SUPD_Outreach.Outputs[OLE DB Source Error Output].Columns[NPI]"
+                          dataType="i8"
+                          lineageId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Billing_SUPD_Outreach.Outputs[OLE DB Source Error Output].Columns[NPI]"
+                          name="NPI" />
+                        <outputColumn
+                          refId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Billing_SUPD_Outreach.Outputs[OLE DB Source Error Output].Columns[DateOutreach]"
+                          dataType="dbDate"
+                          lineageId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Billing_SUPD_Outreach.Outputs[OLE DB Source Error Output].Columns[DateOutreach]"
+                          name="DateOutreach" />
+                        <outputColumn
+                          refId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Billing_SUPD_Outreach.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Billing_SUPD_Outreach.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Billing_SUPD_Outreach.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Billing_SUPD_Outreach.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Billing_SUPD_Prescription Query"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="OLEDB Stars_Billing_SUPD_Prescription Query"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset"></property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT DISTINCT
+	NPI
+FROM Stars_Billing.SUPD.Prescription</property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Billing_SUPD_Prescription Query.Connections[OleDbConnection]"
+                      connectionManagerID="{4CE44E7F-4048-4669-8B7B-76E808B7ED38}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[Stars_Billing]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Billing_SUPD_Prescription Query.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Billing_SUPD_Prescription Query.Outputs[OLE DB Source Output].Columns[NPI]"
+                          dataType="i8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Billing_SUPD_Prescription Query.Outputs[OLE DB Source Output].ExternalColumns[NPI]"
+                          lineageId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Billing_SUPD_Prescription Query.Outputs[OLE DB Source Output].Columns[NPI]"
+                          name="NPI"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Billing_SUPD_Prescription Query.Outputs[OLE DB Source Output].ExternalColumns[NPI]"
+                          dataType="i8"
+                          name="NPI" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Billing_SUPD_Prescription Query.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Billing_SUPD_Prescription Query.Outputs[OLE DB Source Error Output].Columns[NPI]"
+                          dataType="i8"
+                          lineageId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Billing_SUPD_Prescription Query.Outputs[OLE DB Source Error Output].Columns[NPI]"
+                          name="NPI" />
+                        <outputColumn
+                          refId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Billing_SUPD_Prescription Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Billing_SUPD_Prescription Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Billing_SUPD_Prescription Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Billing_SUPD_Prescription Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Connect_staging_SUPD_NPI"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="OLEDB Stars_Connect_staging_SUPD_NPI"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[staging].[SUPD_NPI]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Connect_staging_SUPD_NPI.Connections[OleDbConnection]"
+                      connectionManagerID="{46A46588-6151-4C4A-B85D-8DF14AF5C933}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[ODS_StarsConnect]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Connect_staging_SUPD_NPI.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Connect_staging_SUPD_NPI.Inputs[OLE DB Destination Input].Columns[NPI]"
+                          cachedDataType="i8"
+                          cachedName="NPI"
+                          externalMetadataColumnId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Connect_staging_SUPD_NPI.Inputs[OLE DB Destination Input].ExternalColumns[NPI]"
+                          lineageId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Billing_SUPD_Prescription Query.Outputs[OLE DB Source Output].Columns[NPI]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Connect_staging_SUPD_NPI.Inputs[OLE DB Destination Input].ExternalColumns[NPI]"
+                          dataType="i8"
+                          name="NPI" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Connect_staging_SUPD_NPI.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Connect_staging_SUPD_NPI.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Connect_staging_SUPD_NPI.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Connect_staging_SUPD_NPI.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Connect_staging_SUPD_NPI.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Connect_staging_SUPD_NPI.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Connect_staging_SUPD_Outreach"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="OLEDB Stars_Connect_staging_SUPD_Outreach"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[staging].[SUPD_Outreach]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Connect_staging_SUPD_Outreach.Connections[OleDbConnection]"
+                      connectionManagerID="{46A46588-6151-4C4A-B85D-8DF14AF5C933}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[ODS_StarsConnect]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Connect_staging_SUPD_Outreach.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Connect_staging_SUPD_Outreach.Inputs[OLE DB Destination Input].Columns[ReferenceID]"
+                          cachedDataType="i8"
+                          cachedName="ReferenceID"
+                          externalMetadataColumnId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Connect_staging_SUPD_Outreach.Inputs[OLE DB Destination Input].ExternalColumns[ReferenceID]"
+                          lineageId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Billing_SUPD_Outreach.Outputs[OLE DB Source Output].Columns[ReferenceID]" />
+                        <inputColumn
+                          refId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Connect_staging_SUPD_Outreach.Inputs[OLE DB Destination Input].Columns[OutreachType]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="25"
+                          cachedName="OutreachType"
+                          externalMetadataColumnId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Connect_staging_SUPD_Outreach.Inputs[OLE DB Destination Input].ExternalColumns[OutreachType]"
+                          lineageId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Billing_SUPD_Outreach.Outputs[OLE DB Source Output].Columns[OutreachType]" />
+                        <inputColumn
+                          refId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Connect_staging_SUPD_Outreach.Inputs[OLE DB Destination Input].Columns[PMD_Patient_ID]"
+                          cachedDataType="i8"
+                          cachedName="PMD_Patient_ID"
+                          externalMetadataColumnId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Connect_staging_SUPD_Outreach.Inputs[OLE DB Destination Input].ExternalColumns[PMD_Patient_ID]"
+                          lineageId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Billing_SUPD_Outreach.Outputs[OLE DB Source Output].Columns[PMD_Patient_ID]" />
+                        <inputColumn
+                          refId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Connect_staging_SUPD_Outreach.Inputs[OLE DB Destination Input].Columns[NPI]"
+                          cachedDataType="i8"
+                          cachedName="NPI"
+                          externalMetadataColumnId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Connect_staging_SUPD_Outreach.Inputs[OLE DB Destination Input].ExternalColumns[NPI]"
+                          lineageId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Billing_SUPD_Outreach.Outputs[OLE DB Source Output].Columns[NPI]" />
+                        <inputColumn
+                          refId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Connect_staging_SUPD_Outreach.Inputs[OLE DB Destination Input].Columns[DateOutreach]"
+                          cachedDataType="dbDate"
+                          cachedName="DateOutreach"
+                          externalMetadataColumnId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Connect_staging_SUPD_Outreach.Inputs[OLE DB Destination Input].ExternalColumns[DateOutreach]"
+                          lineageId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Billing_SUPD_Outreach.Outputs[OLE DB Source Output].Columns[DateOutreach]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Connect_staging_SUPD_Outreach.Inputs[OLE DB Destination Input].ExternalColumns[OutreachID]"
+                          dataType="i4"
+                          name="OutreachID" />
+                        <externalMetadataColumn
+                          refId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Connect_staging_SUPD_Outreach.Inputs[OLE DB Destination Input].ExternalColumns[ReferenceID]"
+                          dataType="i8"
+                          name="ReferenceID" />
+                        <externalMetadataColumn
+                          refId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Connect_staging_SUPD_Outreach.Inputs[OLE DB Destination Input].ExternalColumns[OutreachType]"
+                          codePage="1252"
+                          dataType="str"
+                          length="25"
+                          name="OutreachType" />
+                        <externalMetadataColumn
+                          refId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Connect_staging_SUPD_Outreach.Inputs[OLE DB Destination Input].ExternalColumns[PMD_Patient_ID]"
+                          dataType="i8"
+                          name="PMD_Patient_ID" />
+                        <externalMetadataColumn
+                          refId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Connect_staging_SUPD_Outreach.Inputs[OLE DB Destination Input].ExternalColumns[NPI]"
+                          dataType="i8"
+                          name="NPI" />
+                        <externalMetadataColumn
+                          refId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Connect_staging_SUPD_Outreach.Inputs[OLE DB Destination Input].ExternalColumns[DateOutreach]"
+                          dataType="dbDate"
+                          name="DateOutreach" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Connect_staging_SUPD_Outreach.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Connect_staging_SUPD_Outreach.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Connect_staging_SUPD_Outreach.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Connect_staging_SUPD_Outreach.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Connect_staging_SUPD_Outreach.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Connect_staging_SUPD_Outreach.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider.Paths[OLE DB Source Output]"
+                  endId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Connect_staging_SUPD_Outreach.Inputs[OLE DB Destination Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Billing_SUPD_Outreach.Outputs[OLE DB Source Output]" />
+                <path
+                  refId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider.Paths[OLE DB Source Output1]"
+                  endId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Connect_staging_SUPD_NPI.Inputs[OLE DB Destination Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Billing_SUPD_Prescription Query.Outputs[OLE DB Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{7302FE17-01B7-4D4A-A06F-718BDE765FE8}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Load Stars_Billing Outreach and Organization"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_Organization"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="OLEDB StarsConnect_staging_Organization"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[staging].[SUPD_Organization]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">0</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_Organization.Connections[OleDbConnection]"
+                      connectionManagerID="{46A46588-6151-4C4A-B85D-8DF14AF5C933}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[ODS_StarsConnect]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_Organization.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_Organization.Outputs[OLE DB Source Output].Columns[ProviderNPI]"
+                          dataType="i8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_Organization.Outputs[OLE DB Source Output].ExternalColumns[ProviderNPI]"
+                          lineageId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_Organization.Outputs[OLE DB Source Output].Columns[ProviderNPI]"
+                          name="ProviderNPI"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_Organization.Outputs[OLE DB Source Output].Columns[OutreachNPI]"
+                          dataType="i8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_Organization.Outputs[OLE DB Source Output].ExternalColumns[OutreachNPI]"
+                          lineageId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_Organization.Outputs[OLE DB Source Output].Columns[OutreachNPI]"
+                          name="OutreachNPI"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_Organization.Outputs[OLE DB Source Output].ExternalColumns[OrganizationID]"
+                          dataType="i4"
+                          name="OrganizationID" />
+                        <externalMetadataColumn
+                          refId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_Organization.Outputs[OLE DB Source Output].ExternalColumns[ProviderNPI]"
+                          dataType="i8"
+                          name="ProviderNPI" />
+                        <externalMetadataColumn
+                          refId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_Organization.Outputs[OLE DB Source Output].ExternalColumns[OutreachNPI]"
+                          dataType="i8"
+                          name="OutreachNPI" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_Organization.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_Organization.Outputs[OLE DB Source Error Output].Columns[ProviderNPI]"
+                          dataType="i8"
+                          lineageId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_Organization.Outputs[OLE DB Source Error Output].Columns[ProviderNPI]"
+                          name="ProviderNPI" />
+                        <outputColumn
+                          refId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_Organization.Outputs[OLE DB Source Error Output].Columns[OutreachNPI]"
+                          dataType="i8"
+                          lineageId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_Organization.Outputs[OLE DB Source Error Output].Columns[OutreachNPI]"
+                          name="OutreachNPI" />
+                        <outputColumn
+                          refId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_Organization.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_Organization.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_Organization.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_Organization.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_SUPDOutreach Query"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="OLEDB StarsConnect_staging_SUPDOutreach Query"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset"></property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT
+	ReferenceID
+	,OutreachType
+	,PMD_Patient_ID
+	,NPI
+	,DateOutreach
+FROM staging.SUPD_Outreach
+WHERE OutreachType &lt;&gt; 'BatchFax'</property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_SUPDOutreach Query.Connections[OleDbConnection]"
+                      connectionManagerID="{46A46588-6151-4C4A-B85D-8DF14AF5C933}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[ODS_StarsConnect]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_SUPDOutreach Query.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_SUPDOutreach Query.Outputs[OLE DB Source Output].Columns[ReferenceID]"
+                          dataType="i8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_SUPDOutreach Query.Outputs[OLE DB Source Output].ExternalColumns[ReferenceID]"
+                          lineageId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_SUPDOutreach Query.Outputs[OLE DB Source Output].Columns[ReferenceID]"
+                          name="ReferenceID"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_SUPDOutreach Query.Outputs[OLE DB Source Output].Columns[OutreachType]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_SUPDOutreach Query.Outputs[OLE DB Source Output].ExternalColumns[OutreachType]"
+                          length="25"
+                          lineageId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_SUPDOutreach Query.Outputs[OLE DB Source Output].Columns[OutreachType]"
+                          name="OutreachType"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_SUPDOutreach Query.Outputs[OLE DB Source Output].Columns[PMD_Patient_ID]"
+                          dataType="i8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_SUPDOutreach Query.Outputs[OLE DB Source Output].ExternalColumns[PMD_Patient_ID]"
+                          lineageId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_SUPDOutreach Query.Outputs[OLE DB Source Output].Columns[PMD_Patient_ID]"
+                          name="PMD_Patient_ID"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_SUPDOutreach Query.Outputs[OLE DB Source Output].Columns[NPI]"
+                          dataType="i8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_SUPDOutreach Query.Outputs[OLE DB Source Output].ExternalColumns[NPI]"
+                          lineageId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_SUPDOutreach Query.Outputs[OLE DB Source Output].Columns[NPI]"
+                          name="NPI"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_SUPDOutreach Query.Outputs[OLE DB Source Output].Columns[DateOutreach]"
+                          dataType="dbDate"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_SUPDOutreach Query.Outputs[OLE DB Source Output].ExternalColumns[DateOutreach]"
+                          lineageId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_SUPDOutreach Query.Outputs[OLE DB Source Output].Columns[DateOutreach]"
+                          name="DateOutreach"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_SUPDOutreach Query.Outputs[OLE DB Source Output].ExternalColumns[ReferenceID]"
+                          dataType="i8"
+                          name="ReferenceID" />
+                        <externalMetadataColumn
+                          refId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_SUPDOutreach Query.Outputs[OLE DB Source Output].ExternalColumns[OutreachType]"
+                          codePage="1252"
+                          dataType="str"
+                          length="25"
+                          name="OutreachType" />
+                        <externalMetadataColumn
+                          refId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_SUPDOutreach Query.Outputs[OLE DB Source Output].ExternalColumns[PMD_Patient_ID]"
+                          dataType="i8"
+                          name="PMD_Patient_ID" />
+                        <externalMetadataColumn
+                          refId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_SUPDOutreach Query.Outputs[OLE DB Source Output].ExternalColumns[NPI]"
+                          dataType="i8"
+                          name="NPI" />
+                        <externalMetadataColumn
+                          refId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_SUPDOutreach Query.Outputs[OLE DB Source Output].ExternalColumns[DateOutreach]"
+                          dataType="dbDate"
+                          name="DateOutreach" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_SUPDOutreach Query.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_SUPDOutreach Query.Outputs[OLE DB Source Error Output].Columns[ReferenceID]"
+                          dataType="i8"
+                          lineageId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_SUPDOutreach Query.Outputs[OLE DB Source Error Output].Columns[ReferenceID]"
+                          name="ReferenceID" />
+                        <outputColumn
+                          refId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_SUPDOutreach Query.Outputs[OLE DB Source Error Output].Columns[OutreachType]"
+                          codePage="1252"
+                          dataType="str"
+                          length="25"
+                          lineageId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_SUPDOutreach Query.Outputs[OLE DB Source Error Output].Columns[OutreachType]"
+                          name="OutreachType" />
+                        <outputColumn
+                          refId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_SUPDOutreach Query.Outputs[OLE DB Source Error Output].Columns[PMD_Patient_ID]"
+                          dataType="i8"
+                          lineageId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_SUPDOutreach Query.Outputs[OLE DB Source Error Output].Columns[PMD_Patient_ID]"
+                          name="PMD_Patient_ID" />
+                        <outputColumn
+                          refId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_SUPDOutreach Query.Outputs[OLE DB Source Error Output].Columns[NPI]"
+                          dataType="i8"
+                          lineageId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_SUPDOutreach Query.Outputs[OLE DB Source Error Output].Columns[NPI]"
+                          name="NPI" />
+                        <outputColumn
+                          refId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_SUPDOutreach Query.Outputs[OLE DB Source Error Output].Columns[DateOutreach]"
+                          dataType="dbDate"
+                          lineageId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_SUPDOutreach Query.Outputs[OLE DB Source Error Output].Columns[DateOutreach]"
+                          name="DateOutreach" />
+                        <outputColumn
+                          refId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_SUPDOutreach Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_SUPDOutreach Query.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_SUPDOutreach Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_SUPDOutreach Query.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB Stars_Billing_SUPD_Organization"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="OLEDB Stars_Billing_SUPD_Organization"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[SUPD].[Organization]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB Stars_Billing_SUPD_Organization.Connections[OleDbConnection]"
+                      connectionManagerID="{4CE44E7F-4048-4669-8B7B-76E808B7ED38}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[Stars_Billing]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB Stars_Billing_SUPD_Organization.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB Stars_Billing_SUPD_Organization.Inputs[OLE DB Destination Input].Columns[ProviderNPI]"
+                          cachedDataType="i8"
+                          cachedName="ProviderNPI"
+                          externalMetadataColumnId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB Stars_Billing_SUPD_Organization.Inputs[OLE DB Destination Input].ExternalColumns[ProviderNPI]"
+                          lineageId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_Organization.Outputs[OLE DB Source Output].Columns[ProviderNPI]" />
+                        <inputColumn
+                          refId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB Stars_Billing_SUPD_Organization.Inputs[OLE DB Destination Input].Columns[OutreachNPI]"
+                          cachedDataType="i8"
+                          cachedName="OutreachNPI"
+                          externalMetadataColumnId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB Stars_Billing_SUPD_Organization.Inputs[OLE DB Destination Input].ExternalColumns[OutreachNPI]"
+                          lineageId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_Organization.Outputs[OLE DB Source Output].Columns[OutreachNPI]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB Stars_Billing_SUPD_Organization.Inputs[OLE DB Destination Input].ExternalColumns[OrganizationID]"
+                          dataType="i4"
+                          name="OrganizationID" />
+                        <externalMetadataColumn
+                          refId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB Stars_Billing_SUPD_Organization.Inputs[OLE DB Destination Input].ExternalColumns[ProviderNPI]"
+                          dataType="i8"
+                          name="ProviderNPI" />
+                        <externalMetadataColumn
+                          refId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB Stars_Billing_SUPD_Organization.Inputs[OLE DB Destination Input].ExternalColumns[OutreachNPI]"
+                          dataType="i8"
+                          name="OutreachNPI" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB Stars_Billing_SUPD_Organization.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB Stars_Billing_SUPD_Organization.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB Stars_Billing_SUPD_Organization.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB Stars_Billing_SUPD_Organization.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB Stars_Billing_SUPD_Organization.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB Stars_Billing_SUPD_Organization.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB Stars_Billing_SUPD_Outreach"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="OLEDB Stars_Billing_SUPD_Outreach"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[SUPD].[Outreach]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB Stars_Billing_SUPD_Outreach.Connections[OleDbConnection]"
+                      connectionManagerID="{4CE44E7F-4048-4669-8B7B-76E808B7ED38}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[Stars_Billing]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB Stars_Billing_SUPD_Outreach.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB Stars_Billing_SUPD_Outreach.Inputs[OLE DB Destination Input].Columns[ReferenceID]"
+                          cachedDataType="i8"
+                          cachedName="ReferenceID"
+                          externalMetadataColumnId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB Stars_Billing_SUPD_Outreach.Inputs[OLE DB Destination Input].ExternalColumns[ReferenceID]"
+                          lineageId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_SUPDOutreach Query.Outputs[OLE DB Source Output].Columns[ReferenceID]" />
+                        <inputColumn
+                          refId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB Stars_Billing_SUPD_Outreach.Inputs[OLE DB Destination Input].Columns[OutreachType]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="25"
+                          cachedName="OutreachType"
+                          externalMetadataColumnId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB Stars_Billing_SUPD_Outreach.Inputs[OLE DB Destination Input].ExternalColumns[OutreachType]"
+                          lineageId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_SUPDOutreach Query.Outputs[OLE DB Source Output].Columns[OutreachType]" />
+                        <inputColumn
+                          refId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB Stars_Billing_SUPD_Outreach.Inputs[OLE DB Destination Input].Columns[PMD_Patient_ID]"
+                          cachedDataType="i8"
+                          cachedName="PMD_Patient_ID"
+                          externalMetadataColumnId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB Stars_Billing_SUPD_Outreach.Inputs[OLE DB Destination Input].ExternalColumns[PMD_Patient_ID]"
+                          lineageId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_SUPDOutreach Query.Outputs[OLE DB Source Output].Columns[PMD_Patient_ID]" />
+                        <inputColumn
+                          refId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB Stars_Billing_SUPD_Outreach.Inputs[OLE DB Destination Input].Columns[NPI]"
+                          cachedDataType="i8"
+                          cachedName="NPI"
+                          externalMetadataColumnId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB Stars_Billing_SUPD_Outreach.Inputs[OLE DB Destination Input].ExternalColumns[NPI]"
+                          lineageId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_SUPDOutreach Query.Outputs[OLE DB Source Output].Columns[NPI]" />
+                        <inputColumn
+                          refId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB Stars_Billing_SUPD_Outreach.Inputs[OLE DB Destination Input].Columns[DateOutreach]"
+                          cachedDataType="dbDate"
+                          cachedName="DateOutreach"
+                          externalMetadataColumnId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB Stars_Billing_SUPD_Outreach.Inputs[OLE DB Destination Input].ExternalColumns[DateOutreach]"
+                          lineageId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_SUPDOutreach Query.Outputs[OLE DB Source Output].Columns[DateOutreach]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB Stars_Billing_SUPD_Outreach.Inputs[OLE DB Destination Input].ExternalColumns[OutreachID]"
+                          dataType="i4"
+                          name="OutreachID" />
+                        <externalMetadataColumn
+                          refId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB Stars_Billing_SUPD_Outreach.Inputs[OLE DB Destination Input].ExternalColumns[ReferenceID]"
+                          dataType="i8"
+                          name="ReferenceID" />
+                        <externalMetadataColumn
+                          refId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB Stars_Billing_SUPD_Outreach.Inputs[OLE DB Destination Input].ExternalColumns[OutreachType]"
+                          codePage="1252"
+                          dataType="str"
+                          length="25"
+                          name="OutreachType" />
+                        <externalMetadataColumn
+                          refId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB Stars_Billing_SUPD_Outreach.Inputs[OLE DB Destination Input].ExternalColumns[PMD_Patient_ID]"
+                          dataType="i8"
+                          name="PMD_Patient_ID" />
+                        <externalMetadataColumn
+                          refId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB Stars_Billing_SUPD_Outreach.Inputs[OLE DB Destination Input].ExternalColumns[NPI]"
+                          dataType="i8"
+                          name="NPI" />
+                        <externalMetadataColumn
+                          refId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB Stars_Billing_SUPD_Outreach.Inputs[OLE DB Destination Input].ExternalColumns[DateOutreach]"
+                          dataType="dbDate"
+                          name="DateOutreach" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB Stars_Billing_SUPD_Outreach.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB Stars_Billing_SUPD_Outreach.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB Stars_Billing_SUPD_Outreach.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB Stars_Billing_SUPD_Outreach.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB Stars_Billing_SUPD_Outreach.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB Stars_Billing_SUPD_Outreach.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization.Paths[OLE DB Source Output]"
+                  endId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB Stars_Billing_SUPD_Outreach.Inputs[OLE DB Destination Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_SUPDOutreach Query.Outputs[OLE DB Source Output]" />
+                <path
+                  refId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization.Paths[OLE DB Source Output1]"
+                  endId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB Stars_Billing_SUPD_Organization.Inputs[OLE DB Destination Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_Organization.Outputs[OLE DB Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\ForEach Client And RunYear\Truncate SUPD Tables"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Truncate SUPD Tables"
+          DTS:DTSID="{02209D19-7F01-4E8A-B706-94A3518B0E00}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Truncate SUPD Tables"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{4CE44E7F-4048-4669-8B7B-76E808B7ED38}"
+              SQLTask:SqlStatementSource="Exec SUPD.usp_TruncateBillingTables" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\ForEach Client And RunYear\Update ProcessedDate for Client and Run Year"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{26f8dedd-730a-4caa-bc3b-f589b3766924}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Update ProcessedDate for Client and Run Year"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{4CE44E7F-4048-4669-8B7B-76E808B7ED38}"
+              SQLTask:SqlStatementSource="EXEC SUPD.usp_UpdateProcessedDateForClientAndRunYear @PMD_Client_ID = ?, @RunYear = ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="@PMD_Client_ID"
+                SQLTask:DtsVariableName="User::PMD_Client_ID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="@RunYear"
+                SQLTask:DtsVariableName="User::RunYear"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\ForEach Client And RunYear.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{7BC89571-A218-4BAE-8C11-4C6D6F643684}"
+          DTS:From="Package\ForEach Client And RunYear\Truncate SUPD Tables"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\ForEach Client And RunYear\Create Billing Control" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\ForEach Client And RunYear.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{3E78122E-B278-47C9-A58A-62E4FC1B4CCC}"
+          DTS:From="Package\ForEach Client And RunYear\Create Billing Control"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\ForEach Client And RunYear\ExecSQL Stars_Billing_SUPD_usp_Load" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\ForEach Client And RunYear.PrecedenceConstraints[Constraint 10]"
+          DTS:CreationName=""
+          DTS:DTSID="{9C1F5504-5E58-4601-9CCC-891AC1065429}"
+          DTS:From="Package\ForEach Client And RunYear\ExecSQL Stars_Billing_SUPD_usp_Bill"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 10"
+          DTS:To="Package\ForEach Client And RunYear\Update ProcessedDate for Client and Run Year" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\ForEach Client And RunYear.PrecedenceConstraints[Constraint 3]"
+          DTS:CreationName=""
+          DTS:DTSID="{F344514E-3271-406D-9222-BBFCD00B553B}"
+          DTS:From="Package\ForEach Client And RunYear\ExecSQL Stars_Billing_SUPD_usp_Load"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 3"
+          DTS:To="Package\ForEach Client And RunYear\ExecSQL StarsConnect_staging_SUPDTruncate" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\ForEach Client And RunYear.PrecedenceConstraints[Constraint 4]"
+          DTS:CreationName=""
+          DTS:DTSID="{AB8AEBC8-43FB-4C39-997B-F13395D55268}"
+          DTS:From="Package\ForEach Client And RunYear\ExecSQL StarsConnect_staging_SUPDTruncate"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 4"
+          DTS:To="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\ForEach Client And RunYear.PrecedenceConstraints[Constraint 5]"
+          DTS:CreationName=""
+          DTS:DTSID="{CB07844E-F6B7-4EB9-8112-40CC878474D8}"
+          DTS:From="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 5"
+          DTS:To="Package\ForEach Client And RunYear\ExecSQL StarsConnect_staging_SUPDLoad" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\ForEach Client And RunYear.PrecedenceConstraints[Constraint 6]"
+          DTS:CreationName=""
+          DTS:DTSID="{919AA47B-5758-4DF4-929A-DA86EEC25475}"
+          DTS:From="Package\ForEach Client And RunYear\ExecSQL StarsConnect_staging_SUPDLoad"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 6"
+          DTS:To="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\ForEach Client And RunYear.PrecedenceConstraints[Constraint 7]"
+          DTS:CreationName=""
+          DTS:DTSID="{3EBB3CC8-5E0E-4BDA-8670-565E9E0BAFFC}"
+          DTS:From="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 7"
+          DTS:To="Package\ForEach Client And RunYear\Execute True Up SUPD" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\ForEach Client And RunYear.PrecedenceConstraints[Constraint 8]"
+          DTS:CreationName=""
+          DTS:DTSID="{7ED589A4-DD99-49AE-B41F-2D5524CE6C9F}"
+          DTS:From="Package\ForEach Client And RunYear\Execute True Up SUPD"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 8"
+          DTS:To="Package\ForEach Client And RunYear\Execute usp_TrueUpGetBillingDataSUPD" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\ForEach Client And RunYear.PrecedenceConstraints[Constraint 9]"
+          DTS:CreationName=""
+          DTS:DTSID="{41C97C11-8BB4-4CE6-A1E1-26F2F55923EA}"
+          DTS:From="Package\ForEach Client And RunYear\Execute usp_TrueUpGetBillingDataSUPD"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 9"
+          DTS:To="Package\ForEach Client And RunYear\ExecSQL Stars_Billing_SUPD_usp_Bill" />
+      </DTS:PrecedenceConstraints>
+      <DTS:ForEachVariableMappings>
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{BC2C09A0-B27E-40DE-89EF-9A0B8179C8C3}"
+          DTS:ObjectName="{BC2C09A0-B27E-40DE-89EF-9A0B8179C8C3}"
+          DTS:ValueIndex="0"
+          DTS:VariableName="User::PMD_Client_ID" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{45D4A33B-171A-4EE0-A33B-0B1226DFC638}"
+          DTS:ObjectName="{45D4A33B-171A-4EE0-A33B-0B1226DFC638}"
+          DTS:ValueIndex="1"
+          DTS:VariableName="User::RunYear" />
+      </DTS:ForEachVariableMappings>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Get True Up Clients"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Truncate SUPD Tables"
+      DTS:DTSID="{90e35a1f-484e-4dfe-accb-14ce0dfb7044}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Get True Up Clients"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{4CE44E7F-4048-4669-8B7B-76E808B7ED38}"
+          SQLTask:SqlStatementSource="Exec SUPD.usp_GetTrueUpClients"
+          SQLTask:ResultType="ResultSetType_Rowset" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::rsTrueUpClientAndRunYear" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 10]"
+      DTS:CreationName=""
+      DTS:DTSID="{EA551721-999E-4E56-9F2E-F4257D6DFFBD}"
+      DTS:From="Package\Get True Up Clients"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 10"
+      DTS:To="Package\ForEach Client And RunYear" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="176.8,41.6"
+          Id="Package\ForEach Client And RunYear\Create Billing Control"
+          TopLeft="121.623526090669,78.5525070147375" />
+        <NodeLayout
+          Size="297.6,41.6"
+          Id="Package\ForEach Client And RunYear\ExecSQL Stars_Billing_SUPD_usp_Bill"
+          TopLeft="48.9317084843368,742.242885521517" />
+        <NodeLayout
+          Size="268.8,41.6"
+          Id="Package\ForEach Client And RunYear\ExecSQL Stars_Billing_SUPD_usp_Load"
+          TopLeft="71.1239130885448,166.654726536923" />
+        <NodeLayout
+          Size="297.6,41.6"
+          Id="Package\ForEach Client And RunYear\ExecSQL StarsConnect_staging_SUPDLoad"
+          TopLeft="57.7124182168155,429.800321733657" />
+        <NodeLayout
+          Size="297.6,41.6"
+          Id="Package\ForEach Client And RunYear\ExecSQL StarsConnect_staging_SUPDTruncate"
+          TopLeft="56.6379829789174,259.945368948896" />
+        <NodeLayout
+          Size="188,41.6"
+          Id="Package\ForEach Client And RunYear\Execute True Up SUPD"
+          TopLeft="107.770351083486,582.33344622841" />
+        <NodeLayout
+          Size="271.2,41.6"
+          Id="Package\ForEach Client And RunYear\Execute usp_TrueUpGetBillingDataSUPD"
+          TopLeft="64.4409879951095,657.684645113771" />
+        <NodeLayout
+          Size="297.6,41.6"
+          Id="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization"
+          TopLeft="57.367300385412,504.133982460937" />
+        <NodeLayout
+          Size="274.4,41.6"
+          Id="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider"
+          TopLeft="65.8876224692192,344.203341459285" />
+        <NodeLayout
+          Size="164.8,41.6"
+          Id="Package\ForEach Client And RunYear\Truncate SUPD Tables"
+          TopLeft="134.751831711369,10.6259271810084" />
+        <NodeLayout
+          Size="297.6,41.6"
+          Id="Package\ForEach Client And RunYear\Update ProcessedDate for Client and Run Year"
+          TopLeft="43.709507473662,820.851964777542" />
+        <EdgeLayout
+          Id="Package\ForEach Client And RunYear.PrecedenceConstraints[Constraint]"
+          TopLeft="213.587678901019,52.2259271810084">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,26.3265798337291"
+              Start="0,0"
+              End="0,18.8265798337291">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.8265798337291" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\ForEach Client And RunYear.PrecedenceConstraints[Constraint 10]"
+          TopLeft="195.120607978999,783.842885521517">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,37.0090792560248"
+              Start="0,0"
+              End="0,29.5090792560248">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.5090792560248" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\ForEach Client And RunYear.PrecedenceConstraints[Constraint 3]"
+          TopLeft="205.480948033731,208.254726536923">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,51.6906424119724"
+              Start="0,0"
+              End="0,44.1906424119724">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,44.1906424119724" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\ForEach Client And RunYear.PrecedenceConstraints[Constraint 4]"
+          TopLeft="204.262802724068,301.545368948896">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,42.6579725103886"
+              Start="0,0"
+              End="0,35.1579725103886">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,35.1579725103886" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\ForEach Client And RunYear.PrecedenceConstraints[Constraint 5]"
+          TopLeft="204.800020343017,385.803341459285">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,43.9969802743723"
+              Start="0,0"
+              End="0,36.4969802743723">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,36.4969802743723" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\ForEach Client And RunYear.PrecedenceConstraints[Constraint 6]"
+          TopLeft="206.339859301114,471.400321733657">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,32.73366072728"
+              Start="0,0"
+              End="0,25.23366072728">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25.23366072728" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\ForEach Client And RunYear.PrecedenceConstraints[Constraint 7]"
+          TopLeft="203.968825734449,545.733982460937">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,36.599463767473"
+              Start="0,0"
+              End="0,29.099463767473">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.099463767473" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\ForEach Client And RunYear.PrecedenceConstraints[Constraint 8]"
+          TopLeft="200.905669539298,623.93344622841">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,33.7511988853609"
+              Start="0,0"
+              End="0,26.2511988853609">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26.2511988853609" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\ForEach Client And RunYear.PrecedenceConstraints[Constraint 9]"
+          TopLeft="198.886348239723,699.284645113771">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,42.9582404077463"
+              Start="0,0"
+              End="0,35.4582404077463">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,35.4582404077463" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\ForEach Client And RunYear.PrecedenceConstraints[Constraint 1]"
+          TopLeft="207.773719589607,120.152507014737">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,46.502219522186"
+              Start="0,0"
+              End="0,39.002219522186">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,39.002219522186" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="455.2,899.2"
+          Size="455.2,942.4"
+          Id="Package\ForEach Client And RunYear"
+          TopLeft="377.499984999498,109.200000867843" />
+        <NodeLayout
+          Size="170.4,41.6"
+          Id="Package\Get True Up Clients"
+          TopLeft="518.003011118163,22.2801325521349" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 10]"
+          TopLeft="604.151498058831,63.8801325521349">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,45.3198683157081"
+              Start="0,0"
+              End="0,37.8198683157081">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,37.8198683157081" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="323.2,41.6"
+          Id="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB Stars_Billing_SUPD_Outreach"
+          TopLeft="97,141" />
+        <NodeLayout
+          Size="323.2,41.6"
+          Id="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB Stars_Billing_SUPD_Organization"
+          TopLeft="453,141" />
+        <NodeLayout
+          Size="323.2,41.6"
+          Id="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_SUPDOutreach Query"
+          TopLeft="97,56" />
+        <NodeLayout
+          Size="323.2,41.6"
+          Id="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_Organization"
+          TopLeft="453,55" />
+        <EdgeLayout
+          Id="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization.Paths[OLE DB Source Output]"
+          TopLeft="258.5,98">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,43"
+              Start="0,0"
+              End="0,35.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,35.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization.Paths[OLE DB Source Output1]"
+          TopLeft="614.5,97">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,44"
+              Start="0,0"
+              End="0,36.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,36.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_SUPDOutreach Query">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\ForEach Client And RunYear\Load Stars_Billing Outreach and Organization\OLEDB StarsConnect_staging_Organization">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="303.2,41.6"
+          Id="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Connect_staging_SUPD_NPI"
+          TopLeft="464,135" />
+        <NodeLayout
+          Size="303.2,41.6"
+          Id="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Billing_SUPD_Prescription Query"
+          TopLeft="464,51" />
+        <NodeLayout
+          Size="303.2,41.6"
+          Id="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Billing_SUPD_Outreach"
+          TopLeft="79.5,51" />
+        <NodeLayout
+          Size="303.2,41.6"
+          Id="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Connect_staging_SUPD_Outreach"
+          TopLeft="78.6666666997803,135" />
+        <EdgeLayout
+          Id="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider.Paths[OLE DB Source Output1]"
+          TopLeft="615.5,93">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,42"
+              Start="0,0"
+              End="0,34.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,34.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider.Paths[OLE DB Source Output]"
+          TopLeft="230.68333334989,92.6">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,42.4"
+              Start="0,0"
+              End="0,34.9">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,34.9" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\ForEach Client And RunYear\Load StarsConnect Outreach and Provider\OLEDB Stars_Connect_staging_SUPD_Outreach">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

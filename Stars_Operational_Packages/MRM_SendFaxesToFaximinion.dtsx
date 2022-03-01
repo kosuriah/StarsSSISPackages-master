@@ -1,0 +1,3385 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="2/5/2015 11:06:06 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="LT-J6QQN12-0112"
+  DTS:CreatorName="PHARMMD\saideswar.thondapu"
+  DTS:DelayValidation="True"
+  DTS:DTSID="{35A10D0F-1F94-467C-B5F9-60D7B6E7558D}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.1100.123"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="mrmSendFaxesToFaximinion"
+  DTS:PackageType="5"
+  DTS:VersionBuild="318"
+  DTS:VersionGUID="{582A2455-3A5C-410D-887B-CB1AF969F519}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Flat File Connection Manager]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{03F5FC99-2BE1-4B02-BB99-47737A148CBB}"
+      DTS:ObjectName="Flat File Connection Manager">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Project::FaxSendPathMRM]+"BatchFax\\NoVerifiedFaxNumber\\NewFaxesNoVerifiedFaxNumber.csv"</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\p10prdsde003.pharmmd.local\Stars\FaxSend\MRM\BatchFax\NoVerifiedFaxNumber\NewFaxesNoVerifiedFaxNumber.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="25"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="providerNPI"
+              DTS:DTSID="{79D9B775-1FE3-4891-9736-01339D3B6E1F}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="133"
+              DTS:TextQualified="True"
+              DTS:ObjectName="campaignCreateDate"
+              DTS:DTSID="{AB6EBCB3-F167-4F2B-B48E-F209F3036C43}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="recipientFaxNumber"
+              DTS:DTSID="{1F901A1B-C3DD-4A18-845D-16919C6B9715}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="senderFaxNumber"
+              DTS:DTSID="{8FA3C2A8-C223-463A-AF59-42A0A795203E}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="250"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="fileName"
+              DTS:DTSID="{6A40C7F8-3D51-42D8-9BE6-DD26BFD825CC}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="faxSentIndicator"
+              DTS:DTSID="{01165ACC-EB4C-4A33-A633-2733130633B6}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="135"
+              DTS:TextQualified="True"
+              DTS:ObjectName="faxStatusUpdateDate"
+              DTS:DTSID="{EAED81B0-F964-4FC4-8566-10F8D5E114EF}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="currentFaxStatus"
+              DTS:DTSID="{8339F5B2-2AD6-4C9E-996D-F3FC1757CD3D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1000"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="faxStatusDetail"
+              DTS:DTSID="{017B2F5A-A346-430D-80CC-599F2AA75942}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="2000"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="errorCode"
+              DTS:DTSID="{44A780AD-9614-4400-A03B-90C6DD62CC91}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1000"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="errorType"
+              DTS:DTSID="{E8676481-40C2-4167-9264-7BFADE72B76C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="mrmBatchFaxPDFID"
+              DTS:DTSID="{555956CE-4D29-4947-AD1C-675209F7FD38}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="pmdClientID"
+              DTS:DTSID="{309BF6F0-BE7D-4312-912E-5BD0D6A9FB76}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:DataType="135"
+              DTS:TextQualified="True"
+              DTS:ObjectName="faxSentToFaximinionDate"
+              DTS:DTSID="{C1A01C8A-8F83-4DA9-8E11-44838EAF71DE}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{F72DB88C-3769-49D3-9C8E-61E5154ABC79}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="BatchFaxDate">
+      <DTS:VariableValue
+        DTS:DataType="8">2017-06-20</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{D1A71F40-B5BB-4F5E-A04E-2C2B6F38D366}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[User::sourceFolder]+&quot;\\error&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="errorFolder">
+      <DTS:VariableValue
+        DTS:DataType="8">\\p10prdsde003.pharmmd.local\Stars\FaxSend\MRM\BatchFax\2017-06-20\error</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{2D73DA85-A4C7-4F9C-87CC-67A239010752}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[$Project::FaximinionAPIKey]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="FaximinionKey">
+      <DTS:VariableValue
+        DTS:DataType="8">b255d73dacdc6155</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{7019FD82-D53D-434D-9547-C8A337A2A997}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[$Project::FaximinionTransmitAddress]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="FaximinionSend">
+      <DTS:VariableValue
+        DTS:DataType="8">https://faximinion.pharmmd.com/faxes/transmit</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{CA49765D-8DFF-435E-8BDE-3BF516A30455}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[User::sourceFolder]+&quot;\\sent&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="sentFolder">
+      <DTS:VariableValue
+        DTS:DataType="8">\\p10prdsde003.pharmmd.local\Stars\FaxSend\MRM\BatchFax\2017-06-20\sent</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{292B5A94-EDF1-417C-BA5F-1029CCDA7B99}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[$Project::FaxSendPathMRM]+&quot;BatchFax\\&quot;+ @[User::BatchFaxDate]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="sourceFolder">
+      <DTS:VariableValue
+        DTS:DataType="8">\\p10prdsde003.pharmmd.local\Stars\FaxSend\MRM\BatchFax\2017-06-20</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{8BE656B4-C2CE-4425-8B9D-09BCF666FDEF}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varFileName">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Create Error Folder"
+      DTS:CreationName="Microsoft.FileSystemTask"
+      DTS:Description="File System Task"
+      DTS:DTSID="{0EB25DE5-D26B-4CA5-BF7D-68EBF36DDC46}"
+      DTS:ExecutableType="Microsoft.FileSystemTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Create Error Folder"
+      DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <FileSystemData
+          TaskOperationType="CreateDirectory"
+          TaskOverwriteDestFile="True"
+          TaskSourcePath="User::errorFolder"
+          TaskIsSourceVariable="True"
+          TaskDestinationPath="User::errorFolder"
+          TaskIsDestinationVariable="True" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Create Sent Folder"
+      DTS:CreationName="Microsoft.FileSystemTask"
+      DTS:Description="File System Task"
+      DTS:DTSID="{581AFBDC-95D8-4D4A-B096-EE7496690FD8}"
+      DTS:ExecutableType="Microsoft.FileSystemTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Create Sent Folder"
+      DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <FileSystemData
+          TaskOperationType="CreateDirectory"
+          TaskOverwriteDestFile="True"
+          TaskSourcePath="User::sentFolder"
+          TaskIsSourceVariable="True" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Get and Send Fax to Faximinion"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:DelayValidation="True"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{3BEB7D36-37E9-4167-94CD-3363BE74AB93}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Get and Send Fax to Faximinion"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          defaultBufferMaxRows="1"
+          defaultBufferSize="1048576"
+          engineThreads="2"
+          runInOptimizedMode="false"
+          version="1">
+          <components>
+            <component
+              refId="Package\Get and Send Fax to Faximinion\Get all Fax file Information"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Get all Fax file Information"
+              usesDispositions="true"
+              validateExternalMetadata="False"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT DISTINCT
+    mrmBatchFaxPDFID
+  , providerNPI
+  , campaignCreateDate
+  , recipientFaxNumber
+  , senderFaxNumber
+  , fileName
+  , faxSentIndicator
+  , faxSentToFaximinionDate
+  , faxStatusUpdateDate
+  , currentFaxStatus
+  , faxStatusDetail
+  , errorCode
+  , errorType
+  , pmdClientID
+FROM
+    SCMRM.dbo.mrmBatchFaxPDFs p
+WHERE  currentFaxStatus IN ( 'New' , 'Retry' , 'SentBefore' ,'failure')
+	AND ISNULL(p.faxSentIndicator,'N')&lt;&gt;'Y'
+	AND campaigncreatedate = (Select max(campaigncreatedate) from SCMRM.dbo.mrmBatchFaxPDFs)</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping">"Parameter0:Input",{F72DB88C-3769-49D3-9C8E-61E5154ABC79};</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Connections[OleDbConnection]"
+                  connectionManagerID="{41920AF9-8DB7-4D45-A69E-694E95087E27}:invalid"
+                  connectionManagerRefId="{41920AF9-8DB7-4D45-A69E-694E95087E27}:invalid"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].Columns[providerNPI]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].ExternalColumns[providerNPI]"
+                      length="25"
+                      lineageId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].Columns[providerNPI]"
+                      name="providerNPI"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].Columns[campaignCreateDate]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].ExternalColumns[campaignCreateDate]"
+                      lineageId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].Columns[campaignCreateDate]"
+                      name="campaignCreateDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].Columns[recipientFaxNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].ExternalColumns[recipientFaxNumber]"
+                      length="20"
+                      lineageId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].Columns[recipientFaxNumber]"
+                      name="recipientFaxNumber"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].Columns[senderFaxNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].ExternalColumns[senderFaxNumber]"
+                      length="20"
+                      lineageId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].Columns[senderFaxNumber]"
+                      name="senderFaxNumber"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].Columns[fileName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].ExternalColumns[fileName]"
+                      length="250"
+                      lineageId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].Columns[fileName]"
+                      name="fileName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].Columns[faxSentIndicator]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].ExternalColumns[faxSentIndicator]"
+                      length="1"
+                      lineageId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].Columns[faxSentIndicator]"
+                      name="faxSentIndicator"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].Columns[faxStatusUpdateDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].ExternalColumns[faxStatusUpdateDate]"
+                      lineageId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].Columns[faxStatusUpdateDate]"
+                      name="faxStatusUpdateDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].Columns[currentFaxStatus]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].ExternalColumns[currentFaxStatus]"
+                      length="50"
+                      lineageId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].Columns[currentFaxStatus]"
+                      name="currentFaxStatus"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].Columns[faxStatusDetail]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].ExternalColumns[faxStatusDetail]"
+                      length="1000"
+                      lineageId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].Columns[faxStatusDetail]"
+                      name="faxStatusDetail"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].Columns[errorCode]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].ExternalColumns[errorCode]"
+                      length="2000"
+                      lineageId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].Columns[errorCode]"
+                      name="errorCode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].Columns[errorType]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].ExternalColumns[errorType]"
+                      length="1000"
+                      lineageId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].Columns[errorType]"
+                      name="errorType"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].Columns[mrmBatchFaxPDFID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].ExternalColumns[mrmBatchFaxPDFID]"
+                      lineageId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].Columns[mrmBatchFaxPDFID]"
+                      name="mrmBatchFaxPDFID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].Columns[pmdClientID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].ExternalColumns[pmdClientID]"
+                      lineageId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].Columns[pmdClientID]"
+                      name="pmdClientID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].Columns[faxSentToFaximinionDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].ExternalColumns[faxSentToFaximinionDate]"
+                      lineageId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].Columns[faxSentToFaximinionDate]"
+                      name="faxSentToFaximinionDate"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].ExternalColumns[providerNPI]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="providerNPI" />
+                    <externalMetadataColumn
+                      refId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].ExternalColumns[campaignCreateDate]"
+                      dataType="dbDate"
+                      name="campaignCreateDate" />
+                    <externalMetadataColumn
+                      refId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].ExternalColumns[recipientFaxNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="recipientFaxNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].ExternalColumns[senderFaxNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="senderFaxNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].ExternalColumns[fileName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="250"
+                      name="fileName" />
+                    <externalMetadataColumn
+                      refId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].ExternalColumns[faxSentIndicator]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="faxSentIndicator" />
+                    <externalMetadataColumn
+                      refId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].ExternalColumns[faxStatusUpdateDate]"
+                      dataType="dbTimeStamp"
+                      name="faxStatusUpdateDate" />
+                    <externalMetadataColumn
+                      refId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].ExternalColumns[currentFaxStatus]"
+                      dataType="wstr"
+                      length="50"
+                      name="currentFaxStatus" />
+                    <externalMetadataColumn
+                      refId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].ExternalColumns[faxStatusDetail]"
+                      dataType="wstr"
+                      length="1000"
+                      name="faxStatusDetail" />
+                    <externalMetadataColumn
+                      refId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].ExternalColumns[errorCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2000"
+                      name="errorCode" />
+                    <externalMetadataColumn
+                      refId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].ExternalColumns[errorType]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="errorType" />
+                    <externalMetadataColumn
+                      refId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].ExternalColumns[mrmBatchFaxPDFID]"
+                      dataType="i4"
+                      name="mrmBatchFaxPDFID" />
+                    <externalMetadataColumn
+                      refId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].ExternalColumns[pmdClientID]"
+                      dataType="i4"
+                      name="pmdClientID" />
+                    <externalMetadataColumn
+                      refId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].ExternalColumns[faxSentToFaximinionDate]"
+                      dataType="dbTimeStamp"
+                      name="faxSentToFaximinionDate" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Error Output].Columns[mrmBatchFaxPDFID]"
+                      dataType="i4"
+                      lineageId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Error Output].Columns[mrmBatchFaxPDFID]"
+                      name="mrmBatchFaxPDFID" />
+                    <outputColumn
+                      refId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Error Output].Columns[providerNPI]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      lineageId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Error Output].Columns[providerNPI]"
+                      name="providerNPI" />
+                    <outputColumn
+                      refId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Error Output].Columns[campaignCreateDate]"
+                      dataType="dbDate"
+                      lineageId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Error Output].Columns[campaignCreateDate]"
+                      name="campaignCreateDate" />
+                    <outputColumn
+                      refId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Error Output].Columns[recipientFaxNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Error Output].Columns[recipientFaxNumber]"
+                      name="recipientFaxNumber" />
+                    <outputColumn
+                      refId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Error Output].Columns[senderFaxNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Error Output].Columns[senderFaxNumber]"
+                      name="senderFaxNumber" />
+                    <outputColumn
+                      refId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Error Output].Columns[fileName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="250"
+                      lineageId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Error Output].Columns[fileName]"
+                      name="fileName" />
+                    <outputColumn
+                      refId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Error Output].Columns[faxSentIndicator]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Error Output].Columns[faxSentIndicator]"
+                      name="faxSentIndicator" />
+                    <outputColumn
+                      refId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Error Output].Columns[faxSentToFaximinionDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Error Output].Columns[faxSentToFaximinionDate]"
+                      name="faxSentToFaximinionDate" />
+                    <outputColumn
+                      refId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Error Output].Columns[faxStatusUpdateDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Error Output].Columns[faxStatusUpdateDate]"
+                      name="faxStatusUpdateDate" />
+                    <outputColumn
+                      refId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Error Output].Columns[currentFaxStatus]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Error Output].Columns[currentFaxStatus]"
+                      name="currentFaxStatus" />
+                    <outputColumn
+                      refId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Error Output].Columns[faxStatusDetail]"
+                      dataType="wstr"
+                      length="1000"
+                      lineageId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Error Output].Columns[faxStatusDetail]"
+                      name="faxStatusDetail" />
+                    <outputColumn
+                      refId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Error Output].Columns[errorCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2000"
+                      lineageId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Error Output].Columns[errorCode]"
+                      name="errorCode" />
+                    <outputColumn
+                      refId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Error Output].Columns[errorType]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      lineageId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Error Output].Columns[errorType]"
+                      name="errorType" />
+                    <outputColumn
+                      refId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Error Output].Columns[pmdClientID]"
+                      dataType="i4"
+                      lineageId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Error Output].Columns[pmdClientID]"
+                      name="pmdClientID" />
+                    <outputColumn
+                      refId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Get and Send Fax to Faximinion\Multicast"
+              componentClassID="Microsoft.Multicast"
+              contactInfo="Multicast;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Distributes every input row to every row in one or more outputs. For example, branch your data flow to make a copy of data so that some values can be masked before sharing with external partners."
+              name="Multicast">
+              <inputs>
+                <input
+                  refId="Package\Get and Send Fax to Faximinion\Multicast.Inputs[Multicast Input 1]"
+                  name="Multicast Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Get and Send Fax to Faximinion\Multicast.Outputs[Multicast Output 7]"
+                  dangling="true"
+                  deleteOutputOnPathDetached="true"
+                  name="Multicast Output 7"
+                  synchronousInputId="Package\Get and Send Fax to Faximinion\Multicast.Inputs[Multicast Input 1]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Get and Send Fax to Faximinion\Multicast.Outputs[Multicast Output 1]"
+                  deleteOutputOnPathDetached="true"
+                  name="Multicast Output 1"
+                  synchronousInputId="Package\Get and Send Fax to Faximinion\Multicast.Inputs[Multicast Input 1]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Get and Send Fax to Faximinion\Multicast.Outputs[Multicast Output 6]"
+                  dangling="true"
+                  deleteOutputOnPathDetached="true"
+                  name="Multicast Output 6"
+                  synchronousInputId="Package\Get and Send Fax to Faximinion\Multicast.Inputs[Multicast Input 1]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Get and Send Fax to Faximinion\Multicast.Outputs[Multicast Output 3]"
+                  deleteOutputOnPathDetached="true"
+                  name="Multicast Output 3"
+                  synchronousInputId="Package\Get and Send Fax to Faximinion\Multicast.Inputs[Multicast Input 1]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Get and Send Fax to Faximinion\Multicast.Outputs[Multicast Output 2]"
+                  dangling="true"
+                  deleteOutputOnPathDetached="true"
+                  name="Multicast Output 2"
+                  synchronousInputId="Package\Get and Send Fax to Faximinion\Multicast.Inputs[Multicast Input 1]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Get and Send Fax to Faximinion\Multicast.Outputs[Multicast Output 5]"
+                  dangling="true"
+                  deleteOutputOnPathDetached="true"
+                  name="Multicast Output 5"
+                  synchronousInputId="Package\Get and Send Fax to Faximinion\Multicast.Inputs[Multicast Input 1]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Get and Send Fax to Faximinion\Multicast.Outputs[Multicast Output 4]"
+                  dangling="true"
+                  deleteOutputOnPathDetached="true"
+                  name="Multicast Output 4"
+                  synchronousInputId="Package\Get and Send Fax to Faximinion\Multicast.Inputs[Multicast Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Get and Send Fax to Faximinion\Send fax file to Faximinion"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Includes and runs custom script code. For example, apply a business rule that limits the range of valid values in an &quot;income&quot; column or add values in two columns and calculate the average of the sum.;Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;9"
+              description="Includes and runs custom script code. For example, apply a business rule that limits the range of valid values in an &quot;income&quot; column or add values in two columns and calculate the average of the sum."
+              name="Send fax file to Faximinion"
+              validateExternalMetadata="False"
+              version="9">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Stores the source code of the component"
+                  isArray="true"
+                  name="SourceCode"
+                  state="cdata">
+                  <arrayElements
+                    arrayElementCount="33">
+                    <arrayElement
+                      dataType="System.String"><![CDATA[main.cs]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[#region Help:  Introduction to the Script Component
+/* The Script Component allows you to perform virtually any operation that can be accomplished in
+ * a .Net application within the context of an Integration Services data flow.
+ *
+ * Expand the other regions which have "Help" prefixes for examples of specific ways to use
+ * Integration Services features within this script component. */
+#endregion
+
+#region Namespaces
+using System;
+using System.Data;
+using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
+using Microsoft.SqlServer.Dts.Runtime.Wrapper;
+using Microsoft.SqlServer.Dts.Runtime;
+using Microsoft.SqlServer.Dts;
+
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Collections.Specialized;
+using System.IO;
+using Phaxio;
+using System.Data.SqlClient;
+using System;
+using System.Data;
+using System.Windows.Forms;
+
+
+#endregion
+
+/// <summary>
+/// This is the class to which to add your code.  Do not change the name, attributes, or parent
+/// of this class.
+/// </summary>
+[Microsoft.SqlServer.Dts.Pipeline.SSISScriptComponentEntryPointAttribute]
+
+public class ScriptMain : UserComponent
+{
+    #region Help:  Using Integration Services variables and parameters
+    /* To use a variable in this script, first ensure that the variable has been added to
+     * either the list contained in the ReadOnlyVariables property or the list contained in
+     * the ReadWriteVariables property of this script component, according to whether or not your
+     * code needs to write into the variable.  To do so, save this script, close this instance of
+     * Visual Studio, and update the ReadOnlyVariables and ReadWriteVariables properties in the
+     * Script Transformation Editor window.
+     * To use a parameter in this script, follow the same steps. Parameters are always read-only.
+     *
+     * Example of reading from a variable or parameter:
+     *  DateTime startTime = Variables.MyStartTime;
+     *
+     * Example of writing to a variable:
+     *  Variables.myStringVariable = "new value";
+     */
+    #endregion
+
+    #region Help:  Using Integration Services Connnection Managers
+    /* Some types of connection managers can be used in this script component.  See the help topic
+     * "Working with Connection Managers Programatically" for details.
+     *
+     * To use a connection manager in this script, first ensure that the connection manager has
+     * been added to either the list of connection managers on the Connection Managers page of the
+     * script component editor.  To add the connection manager, save this script, close this instance of
+     * Visual Studio, and add the Connection Manager to the list.
+     *
+     * If the component needs to hold a connection open while processing rows, override the
+     * AcquireConnections and ReleaseConnections methods.
+     * 
+     * Example of using an ADO.Net connection manager to acquire a SqlConnection:
+     *  object rawConnection = Connections.SalesDB.AcquireConnection(transaction);
+     *  SqlConnection salesDBConn = (SqlConnection)rawConnection;
+     *
+     * Example of using a File connection manager to acquire a file path:
+     *  object rawConnection = Connections.Prices_zip.AcquireConnection(transaction);
+     *  string filePath = (string)rawConnection;
+     *
+     * Example of releasing a connection manager:
+     *  Connections.SalesDB.ReleaseConnection(rawConnection); 
+     */
+    #endregion
+
+    #region Help:  Firing Integration Services Events
+    /* This script component can fire events.
+     *
+     * Example of firing an error event:
+     *  ComponentMetaData.FireError(10, "Process Values", "Bad value", "", 0, out cancel);
+     *
+     * Example of firing an information event:
+     *  ComponentMetaData.FireInformation(10, "Process Values", "Processing has started", "", 0, fireAgain);
+     *
+     * Example of firing a warning event:
+     *  ComponentMetaData.FireWarning(10, "Process Values", "No rows were received", "", 0);
+     */
+    #endregion
+
+    IDTSConnectionManager100 connMgr;
+    SqlConnection sqlConn;
+    SqlCommand sqlCmd;
+    SqlParameter sqlParam;
+     
+
+    public override void AcquireConnections(object Transaction)
+    {
+        connMgr = this.Connections.scmrmADO;
+        sqlConn = (SqlConnection)connMgr.AcquireConnection(null);
+    }
+
+    public override void ReleaseConnections()
+    {
+        connMgr.ReleaseConnection(sqlConn);
+    }
+
+    /// <summary>
+    /// This method is called once, before rows begin to be processed in the data flow.
+    ///
+    /// You can remove this method if you don't need to do anything here.
+    /// </summary>
+    public override void PreExecute()
+    {
+        base.PreExecute();
+        /*
+         * Add your code here
+         */
+      // string  test = this.Variables.errorFolder;
+      // System.Windows.Forms.MessageBox.Show(test); 
+        string updateQuery = "update [dbo].[mrmBatchFaxPDFs] set  [faxSentIndicator] = @FaxSendInd, faxSentToFaximinionDate = getdate(), [currentFaxStatus]= @LastStatus, [faxStatusDetail]= @ResponseMessage, " +
+                             "ErrorCode = @ErrorCode, ErrorType = @ErrorType where mrmBatchFaxPDFID = @mrmBatchFaxPDFID and providerNPI=@providerNPI";
+        sqlCmd = new SqlCommand(updateQuery, sqlConn);
+
+        sqlParam = new SqlParameter("@mrmBatchFaxPDFID", SqlDbType.BigInt);
+        sqlCmd.Parameters.Add(sqlParam);
+        sqlParam = new SqlParameter("@providerNPI", SqlDbType.VarChar, 25);
+        sqlCmd.Parameters.Add(sqlParam);
+        sqlParam = new SqlParameter("@FaxSendInd", SqlDbType.Char, 1);
+        sqlCmd.Parameters.Add(sqlParam);
+        sqlParam = new SqlParameter("@LastStatus", SqlDbType.VarChar, 20);
+        sqlCmd.Parameters.Add(sqlParam);
+        sqlParam = new SqlParameter("@ResponseMessage", SqlDbType.VarChar, 1000);
+        sqlCmd.Parameters.Add(sqlParam);
+        sqlParam = new SqlParameter("@ErrorCode", SqlDbType.VarChar, 2000);
+        sqlCmd.Parameters.Add(sqlParam);
+        sqlParam = new SqlParameter("@ErrorType", SqlDbType.VarChar, 1000);
+        sqlCmd.Parameters.Add(sqlParam);
+       // System.Windows.Forms.MessageBox.Show(updateQuery);
+
+      //  string userName = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+       // System.Windows.Forms.MessageBox.Show(userName);
+    }
+
+
+    /// <summary>
+    /// This method is called after all the rows have passed through this component.
+    ///
+    /// You can delete this method if you don't need to do anything here.
+    /// </summary>
+    public override void PostExecute()
+    {
+        base.PostExecute();
+        /*
+         * Add your code here
+         */
+    }
+
+    /// <summary>
+    /// This method is called once for every row that passes through the component from Input0.
+    ///
+    /// Example of reading a value from a column in the the row:
+    ///  string zipCode = Row.ZipCode
+    ///
+    /// Example of writing a value to a column in the row:
+    ///  Row.ZipCode = zipCode
+    /// </summary>
+    /// <param name="Row">The row that is currently passing through the component</param>
+    public override void Input0_ProcessInputRow(Input0Buffer Row)
+    {
+        
+        string FaximinionAddress = Variables.FaximinionSend;
+        string FaximinionAPIKey = Variables.FaximinionKey;
+
+        //Prod
+        //string SourceFolderPath = @"\\pharmmd.local\sharedfolder\Collaboration\MRM Call List\CallListPDFs\BatchFaxPDFs\";
+        //string ArchiveFolderPath = @"\\pharmmd.local\sharedfolder\Collaboration\MRM Call List\CallListPDFs\Archive\batchFaxSentArchive\"; // this is Z drive path(Z:\)
+        //string ErrorFolderPath = @"\\pharmmd.local\sharedfolder\Collaboration\MRM Call List\CallListPDFs\error\"; // this is Z drive path(Z:\)
+
+        //Prod
+        string SourceFolderPath = Variables.sourceFolder + @"\";
+        string ArchiveFolderPath = Variables.sentFolder + @"\";
+        string ErrorFolderPath = Variables.errorFolder + @"\";
+               
+     
+
+        try
+        {
+            string LastStatus = Row.currentFaxStatus;
+            string Filename = Row.fileName ;
+            string SourceFilePath = SourceFolderPath + Filename;
+            string FileCreateDate = Row.campaignCreateDate.ToString("yyyyMMdd");
+            string DestinationFolderPath = ArchiveFolderPath; //+ @"\" + FileCreateDate;
+            string mrmBatchFaxPDFID =Row.mrmBatchFaxPDFID.ToString();
+            string providerNPI = Row.providerNPI;
+        
+            NameValueCollection FaxParameters = new NameValueCollection()
+                            {
+                                { "fax[from_number]", Row.senderFaxNumber},
+                                { "fax[to_number]", Row.recipientFaxNumber },
+                                { "fax[client_id]", Row.mrmBatchFaxPDFID.ToString() },
+                                { "fax[filename]",  SourceFilePath  },
+                                {"callback_url", "http://test.local/callback"},
+                                { "api_key", FaximinionAPIKey},
+                                { "format", "json" }
+                            };
+        
+            //System.Windows.Forms.MessageBox.Show(mrmBatchFaxPDFID);
+           // System.Windows.Forms.MessageBox.Show(Filename);
+          // System.Windows.Forms.MessageBox.Show(SourceFilePath);
+            //System.Windows.Forms.MessageBox.Show(DestinationFolderPath); 
+            
+            if (LastStatus == "SentBefore")
+
+            {
+                string DestinationFilePath = DestinationFolderPath + @"\" + Filename;
+               
+                if (!Directory.Exists(DestinationFolderPath))
+                    Directory.CreateDirectory(DestinationFolderPath);
+                if (File.Exists(DestinationFilePath))
+                    File.Delete(DestinationFilePath);
+
+                File.Move(SourceFilePath, DestinationFilePath);
+              //  System.Windows.Forms.MessageBox.Show(DestinationFilePath); 
+            }
+            else
+            {
+                PhaxioOperationResult ValidationPhaxioResult = ValidationProcess(FaxParameters);
+               
+                
+                if (!ValidationPhaxioResult.Success)
+             
+                    
+              
+
+                {
+                    DestinationFolderPath = ErrorFolderPath ;
+                   
+                    ValidationAndArchiveFile(ValidationPhaxioResult, SourceFilePath, DestinationFolderPath, Row.mrmBatchFaxPDFID, DestinationFolderPath + @"\" +  Filename,providerNPI);
+                    
+                }
+                else
+                {
+                    
+                    PhaxioAPI objPhaxioAPI = new PhaxioAPI();
+                    PhaxioOperationResult PhaxioResult = objPhaxioAPI.sendFax(FaximinionAddress, FaxParameters);
+                    // string PhaxioResultString = objPhaxioAPI.sendFax(FaximinionAddress, FaxParameters).ToString();
+                 //   System.Windows.Forms.MessageBox.Show(PhaxioResult.Message.ToString()); 
+                    if (PhaxioResult.Success)
+                        UpdateStatusandArchiveFile(PhaxioResult, SourceFilePath, DestinationFolderPath, Row.mrmBatchFaxPDFID, DestinationFolderPath + @"\" + Filename,providerNPI);
+                                 
+                    else
+                        UpdateRetryStatus(PhaxioResult, Row.mrmBatchFaxPDFID,Row.providerNPI);
+             
+                }
+                
+            }
+           
+        }
+        catch (Exception ex)
+        {
+            //SaveandArchiveFile(new PhaxioOperationResult(false, ex.ToString()), SourceFolderPath + FileName, DestinationFolderPath, Row.FaxKey);
+            ex.ToString();
+            //System.Windows.Forms.MessageBox.Show(ex.ToString());
+          
+        }
+
+    }
+
+    public PhaxioOperationResult ValidationProcess(NameValueCollection parameters)
+    {
+      //  System.Windows.Forms.MessageBox.Show(parameters["fax[filename]"]);
+        //System.Windows.Forms.MessageBox.Show(parameters["fax[filename]"].Length.ToString()); 
+        if ((parameters["fax[to_number]"] == null) || (parameters["fax[to_number]"].Length == 0))
+            return new PhaxioOperationResult(false, "You must include a to fax number number.");
+       // System.Windows.Forms.MessageBox.Show(parameters["fax[to_number]"]); 
+        //System.Windows.Forms.MessageBox.Show(return new PhaxioOperationResult(false, "You must include a to fax number number."));
+        Regex regex = new Regex("[^0-9]");
+        string ToFaxNum = regex.Replace(parameters["fax[to_number]"], String.Empty);
+        
+        if (!(ToFaxNum.Length == 10 || ToFaxNum.Length == 11))
+            return new PhaxioOperationResult(false, "To fax number is not valid");
+       // System.Windows.Forms.MessageBox.Show(ToFaxNum.Length.ToString()); 
+        //Accepts only 10 digits, no more no less
+        //Regex pattern = new Regex(@"(?<!\d)\d{10}(?!\d)");
+        //if (!pattern.IsMatch(parameters["fax[to_number]"]))
+        //    return new PhaxioOperationResult(false, "To fax number is not valid");
+
+       // string userName = Environment.UserName;
+       // System.Windows.Forms.MessageBox.Show(File.Exists(parameters["fax[filename]"]).ToString());
+       
+        if (parameters["fax[filename]"] == null && (parameters["fax[filename]"].Length == 0))
+            
+            return new PhaxioOperationResult(false, "You must include a file.");
+            
+        if (parameters["fax[filename]"] != null)
+            if (!File.Exists(parameters["fax[filename]"]))
+     
+            {
+                return new PhaxioOperationResult(false, System.String.Format("The file '{0}' does not exist.", parameters["fax[filename]"]));
+                
+            }
+
+        return new PhaxioOperationResult(true, "Validation is successful");
+    }
+
+    public void ValidationAndArchiveFile(PhaxioOperationResult PhaxioResult, string SourceFilePath, string DestinationFolderPath, long mrmBatchFaxPDFID, string DestinationFilePath,string providerNPI )
+    {
+        string faxStatus = "failure";
+        string faxSendInd = "N";
+
+        sqlCmd.Parameters["@mrmBatchFaxPDFID"].Value = mrmBatchFaxPDFID;
+        sqlCmd.Parameters["@providerNPI"].Value = providerNPI;
+        sqlCmd.Parameters["@FaxSendInd"].Value = faxSendInd;
+        sqlCmd.Parameters["@LastStatus"].Value = faxStatus;
+        sqlCmd.Parameters["@ResponseMessage"].Value = PhaxioResult.Message;
+        sqlCmd.Parameters["@ErrorCode"].Value = PhaxioResult.Message;
+        sqlCmd.Parameters["@ErrorType"].Value = "Validation failed";
+
+        sqlCmd.ExecuteNonQuery();
+        //System.Windows.Forms.MessageBox.Show(PhaxioResult.Message);
+        //System.Windows.Forms.MessageBox.Show(faxSendInd);
+        //System.Windows.Forms.MessageBox.Show(faxStatus);
+        //System.Windows.Forms.MessageBox.Show(mrmBatchFaxPDFID.ToString());
+
+      
+        if (!Directory.Exists(DestinationFolderPath))
+            Directory.CreateDirectory(DestinationFolderPath);
+        if (File.Exists(DestinationFilePath))
+            File.Delete(DestinationFilePath);
+        File.Move(SourceFilePath, DestinationFilePath);
+    }
+
+    public void UpdateStatusandArchiveFile(PhaxioOperationResult PhaxioResult, string SourceFilePath, string DestinationFolderPath, long mrmBatchFaxPDFID, string DestinationFilePath,string providerNPI)
+    {
+
+        sqlCmd.Parameters["@mrmBatchFaxPDFID"].Value = mrmBatchFaxPDFID;
+        sqlCmd.Parameters["@FaxSendInd"].Value = "Y";
+        sqlCmd.Parameters["@LastStatus"].Value = PhaxioResult.Data["status"] == string.Empty ? DBNull.Value : PhaxioResult.Data["status"];
+        sqlCmd.Parameters["@ResponseMessage"].Value = PhaxioResult.Message;
+        sqlCmd.Parameters["@ErrorCode"].Value = PhaxioResult.Data["error_code"] == string.Empty ? DBNull.Value : PhaxioResult.Data["error_code"];
+        sqlCmd.Parameters["@ErrorType"].Value = PhaxioResult.Data["error_type"] == string.Empty ? DBNull.Value : PhaxioResult.Data["error_type"];
+        sqlCmd.Parameters["@providerNPI"].Value = providerNPI;
+        sqlCmd.ExecuteNonQuery();
+       // System.Windows.Forms.MessageBox.Show(PhaxioResult.Data["status"].ToString());
+        //System.Windows.Forms.MessageBox.Show(PhaxioResult.Message.ToString());
+        //System.Windows.Forms.MessageBox.Show(PhaxioResult.Data["error_code"].ToString());
+        //System.Windows.Forms.MessageBox.Show(mrmBatchFaxPDFID.ToString());
+
+
+        if (!Directory.Exists(DestinationFolderPath))
+            Directory.CreateDirectory(DestinationFolderPath);
+        if (File.Exists(DestinationFilePath))
+            File.Delete(DestinationFilePath);
+        File.Move(SourceFilePath, DestinationFilePath);
+      
+
+    }
+
+    public void UpdateRetryStatus(PhaxioOperationResult PhaxioResult, long mrmBatchFaxPDFID,string providerNPI)
+    {
+        string faxStatus = "Retry";
+        string faxSendInd = "N";
+        string PhaxioResultString = PhaxioResult.Message.Substring(1, 2000); 
+
+        sqlCmd.Parameters["@mrmBatchFaxPDFID"].Value = mrmBatchFaxPDFID;
+        sqlCmd.Parameters["@FaxSendInd"].Value = faxSendInd;
+        sqlCmd.Parameters["@LastStatus"].Value = faxStatus;
+        sqlCmd.Parameters["@providerNPI"].Value = providerNPI;
+        sqlCmd.Parameters["@ResponseMessage"].Value = "Error has been occurred while uploading fax document to faximinion API";
+        sqlCmd.Parameters["@ErrorCode"].Value = PhaxioResult.Message.Substring(1, 2000);
+        sqlCmd.Parameters["@ErrorType"].Value = "Error has been occurred while uploading fax document to faximinion API";
+      
+        sqlCmd.ExecuteNonQuery();
+        //System.Windows.Forms.MessageBox.Show(PhaxioResult.Data["status"].ToString());
+        //System.Windows.Forms.MessageBox.Show(PhaxioResult.Message.ToString());
+        //System.Windows.Forms.MessageBox.Show(PhaxioResult.Data["error_code"].ToString());
+      //  System.Windows.Forms.MessageBox.Show(mrmBatchFaxPDFID.ToString());
+
+    }
+
+}
+]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[Properties\Resources.resx]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+</root>]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[PhaxioAPI.cs]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Collections.Specialized;
+using System.IO;
+using System.Net;
+using System.Security.Cryptography;
+using System.Web.Script.Serialization;
+//using System.Dynamic;
+//using System.Collections.ObjectModel;
+using Microsoft.CSharp.RuntimeBinder;
+
+namespace Phaxio
+{
+    public class PhaxioAPI
+    {
+        private bool debug = false;
+        private string api_key;
+        private string api_secret;
+        private string host;
+
+        public PhaxioAPI() { }
+
+        public PhaxioAPI(string apiKey, string apiSecret, string hostURL = "https://api.phaxio.com/v1/")
+        {
+            api_key = apiKey;
+            api_secret = apiSecret;
+            host = hostURL;
+        }
+
+        public PhaxioOperationResult faxStatus(int faxId)
+        {
+            if (faxId == 0)
+                return new PhaxioOperationResult(false, "A valid fax id is required.");
+            NameValueCollection parameters = new NameValueCollection();
+            parameters.Add("id", faxId.ToString());
+            return doRequest(host + "faxStatus", parameters);
+        }
+
+        public PhaxioOperationResult sendFax(string address, NameValueCollection parameters)
+        {
+            //if ((parameters["fax[to_number]"] == null) || (parameters["fax[to_number]"].Length == 0))
+            //    return new PhaxioOperationResult(false, "You must include a 'to fax number' number.");
+
+            //if (parameters["fax[filename]"] == null && (parameters["fax[filename]"].Length == 0))
+            //    return new PhaxioOperationResult(false, "You must include a file.");
+
+            //if (parameters["fax[filename]"] != null)
+            //    if (!File.Exists(parameters["fax[filename]"]))
+            //    {
+            //        return new PhaxioOperationResult(false, System.String.Format("The file '{0}' does not exist.", parameters["fax[filename]"]));
+            //    }
+
+            return doRequest(address, parameters); //Changed
+        }
+
+        //public PhaxioOperationResult sendFax(string[] to, string[] filenames, Dictionary<string, string> options)
+        //{
+        //    if ((to == null) || (to.Length == 0))
+        //        return new PhaxioOperationResult(false, "You must include a 'to' number.");
+
+        //    if (filenames == null && !options.ContainsKey("string_data"))
+        //        return new PhaxioOperationResult(false, "You must include a file.");
+
+        //    NameValueCollection parameters = new NameValueCollection();
+
+        //    for (int i = 0; i < to.Length; i++)
+        //    {
+        //        parameters.Add(System.String.Format("to[{0}]", i), to[i]);
+        //    }
+        //    if (filenames != null)
+        //        for (int i = 0; i < filenames.Length; i++)
+        //        {
+        //            if (!File.Exists(@filenames[i]))
+        //            {
+        //                return new PhaxioOperationResult(false, System.String.Format("The file '{0}' does not exist.", filenames[i]));
+        //            }
+        //            parameters.Add(System.String.Format("filename[{0}]", i), filenames[i]);
+        //        }
+        //    string[] validOptionNames = new string[]{
+        //        "string_data",
+        //        "string_data_type",
+        //        "batch",
+        //        "batch_delay",
+        //        "batch_collision!avoidance",
+        //        "callback_url",
+        //        "cancel_timeout",
+        //        "caller_id"};
+        //    copyValidOptionsToParameters(validOptionNames, options, parameters);
+
+        //    return doRequest(host, parameters); //Changed
+        //}
+
+        //public PhaxioOperationResult fireBatch(int batchId){
+        //    if(batchId==0)
+        //        return new PhaxioOperationResult(false, "You need to include a batch Id.");
+        //    NameValueCollection parameters = new NameValueCollection();
+        //    parameters.Add("id",batchId.ToString());
+        //    return doRequest(host+"fireBatch",parameters);
+        //}
+
+        //public PhaxioOperationResult closeBatch(int batchId){
+        //    if(batchId==0)
+        //        return new PhaxioOperationResult(false, "You need to include a batch Id.");
+        //    NameValueCollection parameters = new NameValueCollection();
+        //    parameters.Add("id",batchId.ToString());
+        //    return doRequest(host+"closeBatch",parameters);
+        //}
+
+        //public string getApiKey()
+        //{
+        //    return api_key;
+        //}
+
+        //public string getApiSecret()
+        //{
+        //    return api_secret;
+        //}
+
+        //public PhaxioOperationResult provisionNumber(int areaCode, string callbackURL = "")
+        //{
+        //    if (areaCode == 0)
+        //        return new PhaxioOperationResult(false, "Area Code is required.");
+        //    NameValueCollection parameters = new NameValueCollection();
+        //    parameters.Add("area_code", areaCode.ToString());
+        //    if (callbackURL != "")
+        //    {
+        //        parameters.Add("callback_url", callbackURL);
+        //    }
+        //    return doRequest(host + "provisionNumber", parameters);
+        //}
+
+        //public PhaxioOperationResult releaseNumber(string number)
+        //{
+        //    if (number == "")
+        //    {
+        //        return new PhaxioOperationResult(false, "A fax number is required.");
+        //    }
+        //    NameValueCollection parameters = new NameValueCollection();
+        //    parameters.Add("number", number);
+        //    return doRequest(host + "releaseNumber", parameters);
+        //}
+
+        //public PhaxioOperationResult numberList(Dictionary<string, string> options = null)
+        //{
+        //    NameValueCollection parameters = new NameValueCollection();
+        //    if (options != null)
+        //    {
+        //        copyValidOptionsToParameters(new string[] { "area_code", "number" }, options, parameters);
+        //    }
+        //    return doRequest(host + "numberList", parameters);
+        //}
+
+        //public PhaxioOperationResult accountStatus()
+        //{
+        //    NameValueCollection parameters = new NameValueCollection();
+        //    return doRequest(host + "accountStatus", parameters);
+        //}
+
+        //public PhaxioOperationResult testReceive(string filename, Dictionary<string, string> options = null)
+        //{
+        //    if (filename == null || filename == "" || !File.Exists(@filename) || Path.GetExtension(filename) != ".pdf")
+        //    {
+        //        return new PhaxioOperationResult(false, "You must specify a valid pdf file.");
+        //    }
+        //    NameValueCollection parameters = new NameValueCollection();
+        //    parameters.Add("filename", filename);
+        //    if (options != null)
+        //    {
+        //        copyValidOptionsToParameters(new string[] { "from_number", "to_number" }, options, parameters);
+        //    }
+        //    return doRequest(host + "testReceive", parameters);
+        //}
+
+        //public PhaxioOperationResult attachPhaxCode(float x, float y, string filename, Dictionary<string, string> options = null)
+        //{
+        //    if (filename == null || filename == "" || !File.Exists(@filename) || Path.GetExtension(filename) != ".pdf")
+        //    {
+        //        return new PhaxioOperationResult(false, "You must specify a valid pdf file.");
+        //    }
+        //    NameValueCollection parameters = new NameValueCollection();
+        //    parameters.Add("filename", filename);
+        //    parameters.Add("x", x.ToString());
+        //    parameters.Add("y", y.ToString());
+        //    if (options != null)
+        //    {
+        //        copyValidOptionsToParameters(new string[] { "metadata", "page_number" }, options, parameters);
+        //    }
+        //    return doRequest(host + "attachPhaxCodeToPdf", parameters);
+        //}
+
+        //public PhaxioOperationResult createPhaxCode(Dictionary<string, string> options = null)
+        //{
+        //    NameValueCollection parameters = new NameValueCollection();
+        //    if (options != null)
+        //    {
+        //        copyValidOptionsToParameters(new string[] { "metadata", "redirect" }, options, parameters);
+        //    }
+        //    return doRequest(host + "createPhaxCode", parameters);
+        //}
+
+        //public PhaxioOperationResult getHostedDocument(string name, string metadata = null)
+        //{
+        //    if (name == null || name == "")
+        //    {
+        //        return new PhaxioOperationResult(false, "You must include a document name.");
+        //    }
+        //    NameValueCollection parameters = new NameValueCollection();
+        //    if (metadata != null || metadata != "")
+        //    {
+        //        parameters.Add("metadata", metadata);
+        //    }
+        //    return doRequest(host + "getHostedDocument", parameters);
+        //}
+
+        //public PhaxioOperationResult faxFile(int id, string type = "p")
+        //{
+        //    if (id == 0)
+        //    {
+        //        return new PhaxioOperationResult(false, "A fax id is required.");
+        //    }
+        //    NameValueCollection parameters = new NameValueCollection();
+        //    parameters.Add("id", id.ToString());
+        //    parameters.Add("type", type);
+        //    return doRequest(host + "faxFile", parameters);
+        //}
+
+        //public PhaxioOperationResult faxList(string start, string end, Dictionary<string, string> options = null)
+        //{
+        //    if (start == null || start == "" || end == "" || end == null)
+        //        return new PhaxioOperationResult(false, "Start and end timestamps are required.");
+        //    NameValueCollection parameters = new NameValueCollection();
+        //    parameters.Add("start", start);
+        //    parameters.Add("end", end);
+        //    if (options != null)
+        //    {
+        //        copyValidOptionsToParameters(new string[] { "page", "max_per_page" }, options, parameters);
+        //    }
+        //    return doRequest(host + "faxList", parameters);
+        //}
+
+        private PhaxioOperationResult doRequest(string address, NameValueCollection parameters)
+        {
+            //parameters.Add("api_key", api_key);
+            //parameters.Add("api_secret", api_secret);
+            //if (debug)
+            //    Console.WriteLine("Request address: \n\n {0}?{1}", address, ToString(parameters));
+
+            var response = createAndSendRequest(address, parameters);
+            if (!response.Success)
+            {
+                //if (debug)
+                //    Console.WriteLine("Failed in createAndSendRequest: \n\n{0}\n\n", response.Message);
+
+                return response;
+            }
+
+            //if (debug)
+            //    Console.WriteLine("Response message: \n\n{0}\n\n", response.Message);
+
+            JavaScriptSerializer responsed = new JavaScriptSerializer();
+            dynamic res;
+            try
+            {
+                res = responsed.Deserialize<dynamic>(response.Message);
+            }
+            catch
+            {
+                return new PhaxioOperationResult(false, "No data received from service.");
+            }
+
+            string sresMessage = "";
+            string sStatus = "";
+            string sErrorCode = "";
+            string sErrorType = "";
+
+            if (res.ContainsKey("message"))
+                sresMessage = CheckNullString(res["message"]);
+
+            if (res.ContainsKey("status"))
+                sStatus = CheckNullString(res["status"]);
+
+            if (res.ContainsKey("error_code"))
+                sErrorCode = CheckNullString(res["error_code"]);
+
+            if (res.ContainsKey("error_type"))
+                sErrorType = CheckNullString(res["error_type"]);
+
+            //object[] objRecipients = null;
+            //dynamic dynRecipients = null;
+
+            //if (res.ContainsKey("recipients"))
+            //{
+            //    objRecipients = res["recipients"];
+            //    dynRecipients = objRecipients[0];
+
+            //    if (dynRecipients.ContainsKey("error_code"))
+            //        sErrorCode = sErrorCode + CheckNullString(dynRecipients["error_code"]);
+
+            //    if (dynRecipients.ContainsKey("error_type"))
+            //        sErrorType = sErrorType + CheckNullString(dynRecipients["error_type"]);
+            //}
+
+            Dictionary<string, object> resdata = new Dictionary<string, object>();
+            resdata.Add("status", sStatus.Trim());
+            resdata.Add("error_code", sErrorCode.Trim());
+            resdata.Add("error_type", sErrorType.Trim());
+
+            return new PhaxioOperationResult(true, sresMessage, resdata);
+        }
+
+        private string CheckNullString(object Value)
+        {
+            string strValue = "";
+            if (Value != null)
+                strValue = Value.ToString();
+
+            return strValue;
+        }        
+
+        private string ToString(NameValueCollection source)
+        {
+            var str = new StringBuilder();
+            foreach (KeyValuePair<string, string> kv in source)
+                str.Append(string.Format("{0}{1}{2}{3}", kv.Key, '=', kv.Value, '&'));
+            var retval = str.ToString();
+            return retval.Substring(0, retval.Length - 1);
+        }
+
+        //private void copyValidOptionsToParameters(string[] validParameterNames, Dictionary<string, string> options, NameValueCollection parameters)
+        //{
+        //    foreach (string name in validParameterNames)
+        //    {
+        //        if (options.ContainsKey(name))
+        //        {
+        //            parameters.Add(name, options[name]);
+        //        }
+        //    }
+        //}
+
+        private PhaxioOperationResult createAndSendRequest(string url, NameValueCollection parameters)
+        {
+            string boundary = "---------------------------" + getSHA(DateTime.Now.Ticks.ToString("x"));
+            byte[] boundarybytes = System.Text.Encoding.ASCII.GetBytes("\r\n--" + boundary + "\r\n");
+
+            HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(url);
+            webRequest.ContentType = "multipart/form-data; boundary=" + boundary;
+            webRequest.Method = "POST";
+            webRequest.KeepAlive = true;
+            webRequest.Credentials = System.Net.CredentialCache.DefaultCredentials;
+
+            Stream requestStream = webRequest.GetRequestStream();
+
+            string formdataTemplate = "Content-Disposition: form-data; name=\"{0}\"\r\n\r\n{1}";
+            string headerTemplate = "Content-Disposition: form-data; name=\"{0}\"; filename=\"{1}\"\r\nContent-Type: application/octet-stream\r\n\r\n";
+            foreach (string key in parameters.Keys)
+            {
+                requestStream.Write(boundarybytes, 0, boundarybytes.Length);
+                if (key.Contains("filename")) //Changed
+                {
+                    string header = string.Format(headerTemplate, key, parameters[key]);
+                    byte[] headerbytes = System.Text.Encoding.UTF8.GetBytes(header);
+                    requestStream.Write(headerbytes, 0, headerbytes.Length);
+                    FileStream fileStream = new FileStream(parameters[key], FileMode.Open, FileAccess.Read);
+                    byte[] buffer = new byte[4096];
+                    int bytesRead = 0;
+                    while ((bytesRead = fileStream.Read(buffer, 0, buffer.Length)) != 0)
+                    {
+                        requestStream.Write(buffer, 0, bytesRead);
+                    }
+                    fileStream.Close();
+                }
+                else
+                {
+
+                    string formitem = string.Format(formdataTemplate, key, parameters[key]);
+                    byte[] formitembytes = System.Text.Encoding.UTF8.GetBytes(formitem);
+                    requestStream.Write(formitembytes, 0, formitembytes.Length);
+                }
+            }
+            byte[] trailer = System.Text.Encoding.ASCII.GetBytes("\r\n--" + boundary + "--\r\n");
+            requestStream.Write(trailer, 0, trailer.Length);
+            requestStream.Close();
+
+            WebResponse webResponse = null;
+            try
+            {
+                webResponse = webRequest.GetResponse();
+                Stream stream2 = webResponse.GetResponseStream();
+                StreamReader reader2 = new StreamReader(stream2);
+                string message = reader2.ReadToEnd();
+                webResponse.Close();
+                webResponse = null;
+                webRequest = null;
+                return new PhaxioOperationResult(true, message);
+            }
+            catch (Exception ex)
+            {
+                if (webResponse != null)
+                {
+                    webResponse.Close();
+                    webResponse = null;
+                }
+                webRequest = null;
+                return new PhaxioOperationResult(false, ex.ToString());
+            }
+        }
+
+        private string getSHA(string data)
+        {
+            SHA1 temp = new SHA1CryptoServiceProvider();
+            UnicodeEncoding UE = new UnicodeEncoding();
+            byte[] hash = temp.ComputeHash(UE.GetBytes(data));
+            string result = "";
+            foreach (var b in hash)
+                result += b.ToString("X2");
+            return result;
+        }
+
+    }
+
+    public class PhaxioOperationResult
+    {
+        public PhaxioOperationResult(bool success, string message, Dictionary<string, object> data = null)
+        {
+            Success = success;
+            Message = message;
+            Data = data;
+        }
+
+        public bool Success { get; set; }
+
+        public string Message { get; set; }
+
+        public Dictionary<string, object> Data { get; set; }
+    }
+
+}
+]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[SC_9a5698b569d546cb8e212af1c399891a.csproj]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[<?xml version="1.0" encoding="utf-8"?><Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003"><PropertyGroup><ProjectTypeGuids>{30D016F9-3734-4E33-A861-5E7D899E18F3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids><Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration><Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform><ProductVersion>8.0.30703</ProductVersion><SchemaVersion>2.0</SchemaVersion><ProjectGuid>{305B8FB3-AF96-4437-9C10-B71D1A50EC0E}</ProjectGuid><OutputType>Library</OutputType><AppDesignerFolder>Properties</AppDesignerFolder><RootNamespace>SC_9a5698b569d546cb8e212af1c399891a</RootNamespace><AssemblyName>SC_67A651BD930F4907956F095301B5C52F</AssemblyName><TargetFrameworkVersion>v4.0</TargetFrameworkVersion><FileAlignment>512</FileAlignment><ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>true</ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch></PropertyGroup><PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'"><DebugSymbols>true</DebugSymbols><OutputPath>bin\Debug\</OutputPath><DefineConstants>DEBUG;TRACE</DefineConstants><DebugType>full</DebugType><PlatformTarget>AnyCPU</PlatformTarget><ErrorReport>prompt</ErrorReport></PropertyGroup><PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'"><OutputPath>bin\Release\</OutputPath><DefineConstants>TRACE</DefineConstants><Optimize>true</Optimize><PlatformTarget>AnyCPU</PlatformTarget><ErrorReport>prompt</ErrorReport></PropertyGroup><PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'"><DebugSymbols>true</DebugSymbols><OutputPath>bin\x86\Debug\</OutputPath><DefineConstants>DEBUG;TRACE</DefineConstants><DebugType>full</DebugType><PlatformTarget>x86</PlatformTarget><ErrorReport>prompt</ErrorReport></PropertyGroup><PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'"><OutputPath>bin\x86\Release\</OutputPath><DefineConstants>TRACE</DefineConstants><Optimize>true</Optimize><PlatformTarget>x86</PlatformTarget><ErrorReport>prompt</ErrorReport></PropertyGroup><ItemGroup><Reference Include="Microsoft.CSharp" /><Reference Include="Microsoft.SqlServer.Dts.Design, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" /><Reference Include="Microsoft.SqlServer.DTSPipelineWrap, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL"><SpecificVersion>False</SpecificVersion></Reference><Reference Include="Microsoft.SqlServer.DTSRuntimeWrap, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=x86"><SpecificVersion>False</SpecificVersion></Reference><Reference Include="Microsoft.SQLServer.ManagedDTS, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" /><Reference Include="Microsoft.SqlServer.ScriptTask, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" /><Reference Include="System" /><Reference Include="System.Data" /><Reference Include="System.Web" /><Reference Include="System.Web.Extensions" /><Reference Include="System.Windows.Forms" /><Reference Include="System.Xml" /><Reference Include="Microsoft.SqlServer.TxScript, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" /><Reference Include="Microsoft.SqlServer.PipelineHost, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" /><Compile Include="main.cs" /><Compile Include="BufferWrapper.cs" /><Compile Include="ComponentWrapper.cs" /></ItemGroup><ItemGroup><AppDesigner Include="Properties\" /><Compile Include="PhaxioAPI.cs" /><Compile Include="Properties\AssemblyInfo.cs"><SubType>Code</SubType></Compile><EmbeddedResource Include="Properties\Resources.resx"><Generator>ResXFileCodeGenerator</Generator><LastGenOutput>Resources.Designer.cs</LastGenOutput></EmbeddedResource><Compile Include="Properties\Resources.Designer.cs"><AutoGen>True</AutoGen><DependentUpon>Resources.resx</DependentUpon></Compile><None Include="Properties\Settings.settings"><Generator>SettingsSingleFileGenerator</Generator><LastGenOutput>Settings.Designer.cs</LastGenOutput></None><Compile Include="Properties\Settings.Designer.cs"><AutoGen>True</AutoGen><DependentUpon>Settings.settings</DependentUpon></Compile></ItemGroup><ItemGroup><WCFMetadata Include="Service References\" /></ItemGroup><!-- Include the build rules for a C# project.--><Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" /><!-- This section defines VSTA properties that describe the host-changable project properties. --><ProjectExtensions><VisualStudio><FlavorProperties GUID="{30D016F9-3734-4E33-A861-5E7D899E18F3}"><ProjectProperties HostName="VSTAHostName" HostPackage="{B3A685AA-7EAF-4BC6-9940-57959FA5AC07}" ApplicationType="usd" Language="cs" TemplatesPath="" /><Host Name="ScriptComponent" IconIndex="0" /><ProjectClient><HostIdentifier>SSIS_SC120</HostIdentifier></ProjectClient></FlavorProperties></VisualStudio></ProjectExtensions></Project>]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[Properties\Settings.Designer.cs]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="SC_9a5698b569d546cb8e212af1c399891a.Properties.Settings.get_Default():SC_9a5698b569d546cb8e212af1c399891a.Properties.Sett" +
+    "ings")]
+
+namespace SC_9a5698b569d546cb8e212af1c399891a.Properties {
+    
+    
+    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+        
+        [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+        private static Settings defaultInstance = new Settings();
+        
+        public static Settings Default {
+            get {
+                return defaultInstance;
+            }
+        }
+    }
+}
+]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[ComponentWrapper.cs]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[/* THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT!
+*  Microsoft SQL Server Integration Services component wrapper
+*  This module defines the base class for your component
+*  THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT! */
+
+using System;
+using System.Data;
+using Microsoft.SqlServer.Dts.Pipeline;
+using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
+using Microsoft.SqlServer.Dts.Runtime.Wrapper;
+
+public class UserComponent: ScriptComponent
+{
+    public Connections Connections;
+    public Variables Variables;
+    public UserComponent()
+    {
+        Connections = new Connections(this);
+        Variables = new Variables(this);
+    }
+
+    public override void ProcessInput(int InputID, string InputName, PipelineBuffer Buffer, OutputNameMap OutputMap)
+    {
+
+        if (InputName.Equals(@"Input 0", StringComparison.Ordinal))
+        {
+            Input0_ProcessInput(new Input0Buffer(Buffer, GetColumnIndexes(InputID), OutputMap));
+        }
+
+    }
+
+    public virtual void Input0_ProcessInput(Input0Buffer Buffer)
+    {
+        while (Buffer.NextRow())
+        {
+            Input0_ProcessInputRow(Buffer);
+        }
+    }
+
+    public virtual void Input0_ProcessInputRow(Input0Buffer Row)
+    {
+    }
+
+}
+
+public class Connections
+{
+    ScriptComponent ParentComponent;
+
+    public Connections(ScriptComponent Component)
+    {
+        ParentComponent = Component;
+    }
+
+    public IDTSConnectionManager100 scmrmADO
+    {
+        get
+        {
+            return ParentComponent.ComponentMetaData.RuntimeConnectionCollection.GetRuntimeConnectionByName(@"scmrmADO").ConnectionManager;
+        }
+    }
+
+}
+
+public class Variables
+{
+    ScriptComponent ParentComponent;
+
+    public Variables(ScriptComponent Component)
+    {
+        ParentComponent = Component;
+    }
+
+    public String errorFolder
+    {
+        get
+        {
+            return (String)(ParentComponent.ReadOnlyVariables["errorFolder"].GetValueWithContext(ScriptComponent.EvaluatorContext));
+        }
+    }
+
+    public String FaximinionKey
+    {
+        get
+        {
+            return (String)(ParentComponent.ReadOnlyVariables["FaximinionKey"].GetValueWithContext(ScriptComponent.EvaluatorContext));
+        }
+    }
+
+    public String FaximinionSend
+    {
+        get
+        {
+            return (String)(ParentComponent.ReadOnlyVariables["FaximinionSend"].GetValueWithContext(ScriptComponent.EvaluatorContext));
+        }
+    }
+
+    public String sentFolder
+    {
+        get
+        {
+            return (String)(ParentComponent.ReadOnlyVariables["sentFolder"].GetValueWithContext(ScriptComponent.EvaluatorContext));
+        }
+    }
+
+    public String sourceFolder
+    {
+        get
+        {
+            return (String)(ParentComponent.ReadOnlyVariables["sourceFolder"].GetValueWithContext(ScriptComponent.EvaluatorContext));
+        }
+    }
+
+}
+]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[BufferWrapper.cs]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[/* THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT!
+*  Microsoft SQL Server Integration Services buffer wrappers
+*  This module defines classes for accessing data flow buffers
+*  THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT! */
+
+
+
+using System;
+using System.Data;
+using Microsoft.SqlServer.Dts.Pipeline;
+using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
+
+public class Input0Buffer: ScriptBuffer
+
+{
+    public Input0Buffer(PipelineBuffer Buffer, int[] BufferColumnIndexes, OutputNameMap OutputMap)
+        : base(Buffer, BufferColumnIndexes, OutputMap)
+    {
+    }
+
+    public String fileName
+    {
+        get
+        {
+            return Buffer.GetString(BufferColumnIndexes[0]);
+        }
+    }
+    public bool fileName_IsNull
+    {
+        get
+        {
+            return IsNull(0);
+        }
+    }
+
+    public String providerNPI
+    {
+        get
+        {
+            return Buffer.GetString(BufferColumnIndexes[1]);
+        }
+    }
+    public bool providerNPI_IsNull
+    {
+        get
+        {
+            return IsNull(1);
+        }
+    }
+
+    public DateTime campaignCreateDate
+    {
+        get
+        {
+            return Buffer.GetDate(BufferColumnIndexes[2]);
+        }
+    }
+    public bool campaignCreateDate_IsNull
+    {
+        get
+        {
+            return IsNull(2);
+        }
+    }
+
+    public String recipientFaxNumber
+    {
+        get
+        {
+            return Buffer.GetString(BufferColumnIndexes[3]);
+        }
+    }
+    public bool recipientFaxNumber_IsNull
+    {
+        get
+        {
+            return IsNull(3);
+        }
+    }
+
+    public String senderFaxNumber
+    {
+        get
+        {
+            return Buffer.GetString(BufferColumnIndexes[4]);
+        }
+    }
+    public bool senderFaxNumber_IsNull
+    {
+        get
+        {
+            return IsNull(4);
+        }
+    }
+
+    public String faxSentIndicator
+    {
+        get
+        {
+            return Buffer.GetString(BufferColumnIndexes[5]);
+        }
+    }
+    public bool faxSentIndicator_IsNull
+    {
+        get
+        {
+            return IsNull(5);
+        }
+    }
+
+    public DateTime faxStatusUpdateDate
+    {
+        get
+        {
+            return Buffer.GetDateTime(BufferColumnIndexes[6]);
+        }
+    }
+    public bool faxStatusUpdateDate_IsNull
+    {
+        get
+        {
+            return IsNull(6);
+        }
+    }
+
+    public String currentFaxStatus
+    {
+        get
+        {
+            return Buffer.GetString(BufferColumnIndexes[7]);
+        }
+    }
+    public bool currentFaxStatus_IsNull
+    {
+        get
+        {
+            return IsNull(7);
+        }
+    }
+
+    public String faxStatusDetail
+    {
+        get
+        {
+            return Buffer.GetString(BufferColumnIndexes[8]);
+        }
+    }
+    public bool faxStatusDetail_IsNull
+    {
+        get
+        {
+            return IsNull(8);
+        }
+    }
+
+    public String errorCode
+    {
+        get
+        {
+            return Buffer.GetString(BufferColumnIndexes[9]);
+        }
+    }
+    public bool errorCode_IsNull
+    {
+        get
+        {
+            return IsNull(9);
+        }
+    }
+
+    public String errorType
+    {
+        get
+        {
+            return Buffer.GetString(BufferColumnIndexes[10]);
+        }
+    }
+    public bool errorType_IsNull
+    {
+        get
+        {
+            return IsNull(10);
+        }
+    }
+
+    public Int32 mrmBatchFaxPDFID
+    {
+        get
+        {
+            return Buffer.GetInt32(BufferColumnIndexes[11]);
+        }
+    }
+    public bool mrmBatchFaxPDFID_IsNull
+    {
+        get
+        {
+            return IsNull(11);
+        }
+    }
+
+    public Int32 pmdClientID
+    {
+        get
+        {
+            return Buffer.GetInt32(BufferColumnIndexes[12]);
+        }
+    }
+    public bool pmdClientID_IsNull
+    {
+        get
+        {
+            return IsNull(12);
+        }
+    }
+
+    public DateTime faxSentToFaximinionDate
+    {
+        get
+        {
+            return Buffer.GetDateTime(BufferColumnIndexes[13]);
+        }
+    }
+    public bool faxSentToFaximinionDate_IsNull
+    {
+        get
+        {
+            return IsNull(13);
+        }
+    }
+
+    new public bool NextRow()
+    {
+        return base.NextRow();
+    }
+
+    new public bool EndOfRowset()
+    {
+        return base.EndOfRowset();
+    }
+
+}
+]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[Project]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF16LE]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[<?xml version="1.0" encoding="UTF-16" standalone="yes"?>
+<c:Project xmlns:c="http://schemas.microsoft.com/codeprojectml/2010/08/main" xmlns:msb="http://schemas.microsoft.com/developer/msbuild/2003" runtimeVersion="3.0" schemaVersion="1.0">
+	<msb:PropertyGroup>
+		<msb:Language>msBuild</msb:Language>
+		<msb:CodeName>SC_9a5698b569d546cb8e212af1c399891a</msb:CodeName>
+		<msb:DisplayName>SC_9a5698b569d546cb8e212af1c399891a</msb:DisplayName>
+		<msb:ProjectId>{F3E9947A-1F93-43A8-981C-BCF02B22C81C}</msb:ProjectId>
+	</msb:PropertyGroup>
+	<msb:ItemGroup>
+		<msb:Project Include="SC_9a5698b569d546cb8e212af1c399891a.csproj"/>
+		<msb:Folder Include="Service References\"/>
+		<msb:File Include="Properties\Settings.settings"/>
+		<msb:File Include="Properties\AssemblyInfo.cs"/>
+		<msb:File Include="Properties\Resources.resx"/>
+		<msb:File Include="PhaxioAPI.cs"/>
+		<msb:File Include="Properties\Resources.Designer.cs"/>
+		<msb:File Include="main.cs"/>
+		<msb:File Include="BufferWrapper.cs"/>
+		<msb:File Include="Properties\Settings.Designer.cs"/>
+		<msb:File Include="ComponentWrapper.cs"/>
+	</msb:ItemGroup>
+</c:Project>]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[Properties\AssemblyInfo.cs]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[using System.Reflection;
+using System.Runtime.CompilerServices;
+
+//
+// General Information about an assembly is controlled through the following 
+// set of attributes. Change these attribute values to modify the information
+// associated with an assembly.
+//
+[assembly: AssemblyTitle("SC_9a5698b569d546cb8e212af1c399891a")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("SC_9a5698b569d546cb8e212af1c399891a")]
+[assembly: AssemblyCopyright("Copyright @  2015")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+//
+// Version information for an assembly consists of the following four values:
+//
+//      Major Version
+//      Minor Version 
+//      Build Number
+//      Revision
+//
+// You can specify all the values or you can default the Revision and Build Numbers 
+// by using the '*' as shown below:
+
+[assembly: AssemblyVersion("1.0.*")]
+]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[Properties\Settings.settings]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
+</SettingsFile>]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[Properties\Resources.Designer.cs]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="SC_9a5698b569d546cb8e212af1c399891a.Properties.Resources.get_ResourceManager():System.Resources.Resou" +
+    "rceManager")]
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="SC_9a5698b569d546cb8e212af1c399891a.Properties.Resources.get_Culture():System.Globalization.CultureIn" +
+    "fo")]
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="SC_9a5698b569d546cb8e212af1c399891a.Properties.Resources.set_Culture(System.Globalization.CultureInfo" +
+    "):Void")]
+
+namespace SC_9a5698b569d546cb8e212af1c399891a.Properties {
+    
+    
+    /// <summary>
+    ///   A strongly-typed resource class, for looking up localized strings, etc.
+    /// </summary>
+    // This class was auto-generated by the StronglyTypedResourceBuilder
+    // class via a tool like ResGen or Visual Studio.
+    // To add or remove a member, edit your .ResX file then rerun ResGen
+    // with the /str option, or rebuild your VS project.
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    internal class Resources {
+        
+        private static global::System.Resources.ResourceManager resourceMan;
+        
+        private static global::System.Globalization.CultureInfo resourceCulture;
+        
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        internal Resources() {
+        }
+        
+        /// <summary>
+        ///   Returns the cached ResourceManager instance used by this class.
+        /// </summary>
+        [global::System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Resources.ResourceManager ResourceManager {
+            get {
+                if ((resourceMan == null)) {
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SC_9a5698b569d546cb8e212af1c399891a.Properties.Resources", typeof(Resources).Assembly);
+                    resourceMan = temp;
+                }
+                return resourceMan;
+            }
+        }
+        
+        /// <summary>
+        ///   Overrides the current thread's CurrentUICulture property for all
+        ///   resource lookups using this strongly typed resource class.
+        /// </summary>
+        [global::System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Globalization.CultureInfo Culture {
+            get {
+                return resourceCulture;
+            }
+            set {
+                resourceCulture = value;
+            }
+        }
+    }
+}
+]]></arrayElement>
+                  </arrayElements>
+                </property>
+                <property
+                  dataType="System.String"
+                  description="Stores the binary representation of the component"
+                  isArray="true"
+                  name="BinaryCode"
+                  state="cdata">
+                  <arrayElements
+                    arrayElementCount="2">
+                    <arrayElement
+                      dataType="System.String"><![CDATA[SC_67A651BD930F4907956F095301B5C52F.dll]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[TVqQAAMAAAAEAAAA//8AALgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAgAAAAA4fug4AtAnNIbgBTM0hVGhpcyBwcm9ncmFtIGNhbm5vdCBiZSBydW4gaW4gRE9TIG1v
+ZGUuDQ0KJAAAAAAAAABQRQAATAEDAHL56FkAAAAAAAAAAOAAAiELAQsAAFQAAAAIAAAAAAAADnIA
+AAAgAAAAgAAAAAAAEAAgAAAAAgAABAAAAAAAAAAEAAAAAAAAAADAAAAAAgAAAAAAAAMAQIUAABAA
+ABAAAAAAEAAAEAAAAAAAABAAAAAAAAAAAAAAALhxAABTAAAAAIAAAAgEAAAAAAAAAAAAAAAAAAAA
+AAAAAKAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAIAAACAAAAAAAAAAAAAAACCAAAEgAAAAAAAAAAAAAAC50ZXh0AAAAFFIAAAAgAAAAVAAAAAIA
+AAAAAAAAAAAAAAAAACAAAGAucnNyYwAAAAgEAAAAgAAAAAYAAABWAAAAAAAAAAAAAAAAAABAAABA
+LnJlbG9jAAAMAAAAAKAAAAACAAAAXAAAAAAAAAAAAAAAAAAAQAAAQgAAAAAAAAAAAAAAAAAAAADw
+cQAAAAAAAEgAAAACAAUA+DgAAMA4AAABAAAAAAAAAEA4AAC4AAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAH4CKA0AAAoCAnMuAAAGfQEAAAQCAnMwAAAGfQIAAAQqkgRy
+AQAAcBpvDgAACiwVAgUCAygPAAAKDgRzDwAABm8DAAAGKkorBwIDbwQAAAYDbywAAAYt8SoGKqYC
+AnsBAAAEby8AAAZ9AwAABAICewMAAAQUbxEAAAp0CAAAAX0EAAAEKkoCewMAAAQCewQAAARvEgAA
+CioAEzAEAFABAAABAAARAigTAAAKchEAAHAKAgYCewQAAARzFAAACn0FAAAEAnJiAgBwFnMVAAAK
+fQYAAAQCewUAAARvFgAACgJ7BgAABG8XAAAKJgJyhgIAcB8WHxlzGAAACn0GAAAEAnsFAAAEbxYA
+AAoCewYAAARvFwAACiYCcqACAHAZF3MYAAAKfQYAAAQCewUAAARvFgAACgJ7BgAABG8XAAAKJgJy
+uAIAcB8WHxRzGAAACn0GAAAEAnsFAAAEbxYAAAoCewYAAARvFwAACiYCctACAHAfFiDoAwAAcxgA
+AAp9BgAABAJ7BQAABG8WAAAKAnsGAAAEbxcAAAomAnLyAgBwHxYg0AcAAHMYAAAKfQYAAAQCewUA
+AARvFgAACgJ7BgAABG8XAAAKJgJyCAMAcB8WIOgDAABzGAAACn0GAAAEAnsFAAAEbxYAAAoCewYA
+AARvFwAACiYqHgIoGQAACiobMAgAGgIAAAIAABECewIAAARvMwAABgoCewIAAARvMgAABgsCewIA
+AARvNQAABnIeAwBwKBoAAAoMAnsCAAAEbzQAAAZyHgMAcCgaAAAKDQJ7AgAABG8xAAAGch4DAHAo
+GgAAChMEA28eAAAGEwUDbxAAAAYTBggRBigaAAAKEwcDbxQAAAYTERIRciIDAHAoGwAACiYJEwgD
+byYAAAYTEhISKBwAAAomA28SAAAGEwlzHQAAChMPEQ9yNAMAcANvGAAABm8eAAAKEQ9yVgMAcANv
+FgAABm8eAAAKEQ9ydAMAcANvJgAABhMTEhMoHAAACm8eAAAKEQ9ykgMAcBEHbx4AAAoRD3KuAwBw
+csgDAHBvHgAAChEPcv4DAHAHbx4AAAoRD3IOBABwchwEAHBvHgAAChEPEwoRBXImBABwKB8AAAos
+PxEIch4DAHARBiggAAAKEwsRCCghAAAKLQgRCCgiAAAKJhELKCMAAAosBxELKCQAAAoRBxELKCUA
+AAo4kgAAAAIRCigKAAAGEwwRDG9AAAAGLSkRBBMIAhEMEQcRCANvJgAABmoRCHIeAwBwEQYoIAAA
+ChEJKAsAAAYrVnM2AAAGEw0RDQYRCm85AAAGEw4RDm9AAAAGLCUCEQ4RBxEIA28mAAAGahEIch4D
+AHARBiggAAAKEQkoDAAABisVAhEOA28mAAAGagNvEgAABigNAAAG3gwTEBEQbyYAAAom3gAqAABB
+HAAAAAAAAFsAAACyAQAADQIAAAwAAAAlAAABEzAEAOQAAAADAAARA3JWAwBwbycAAAosEgNyVgMA
+cG8nAAAKbygAAAotDRZyPAQAcBRzPwAABipyjgQAcHMpAAAKCgYDclYDAHBvJwAACn4qAAAKbysA
+AAoLB28oAAAKHwouFwdvKAAACh8LLg0WcpwEAHAUcz8AAAYqA3KSAwBwbycAAAotHwNykgMAcG8n
+AAAKbygAAAotDRZy0gQAcBRzPwAABioDcpIDAHBvJwAACiwvA3KSAwBwbycAAAooIwAACi0dFnIE
+BQBwA3KSAwBwbycAAAooLAAAChRzPwAABioXckIFAHAUcz8AAAYqEzACABIBAAAEAAARcnQFAHAK
+coQFAHALAnsFAAAEbxYAAApyYgIAcG8tAAAKDgSMJwAAAW8uAAAKAnsFAAAEbxYAAApyhgIAcG8t
+AAAKDgZvLgAACgJ7BQAABG8WAAAKcqACAHBvLQAACgdvLgAACgJ7BQAABG8WAAAKcrgCAHBvLQAA
+CgZvLgAACgJ7BQAABG8WAAAKctACAHBvLQAACgNvQgAABm8uAAAKAnsFAAAEbxYAAApy8gIAcG8t
+AAAKA29CAAAGby4AAAoCewUAAARvFgAACnIIAwBwby0AAApyiAUAcG8uAAAKAnsFAAAEby8AAAom
+BSghAAAKLQcFKCIAAAomDgUoIwAACiwHDgUoJAAACgQOBSglAAAKKgAAAzADAIgBAAAAAAAAAnsF
+AAAEbxYAAApyYgIAcG8tAAAKDgSMJwAAAW8uAAAKAnsFAAAEbxYAAApyoAIAcG8tAAAKcqwFAHBv
+LgAACgJ7BQAABG8WAAAKcrgCAHBvLQAACgNvRAAABnKwBQBwbzAAAAp+KgAACi4SA29EAAAGcrAF
+AHBvMAAACisFfjEAAApvLgAACgJ7BQAABG8WAAAKctACAHBvLQAACgNvQgAABm8uAAAKAnsFAAAE
+bxYAAApy8gIAcG8tAAAKA29EAAAGcr4FAHBvMAAACn4qAAAKLhIDb0QAAAZyvgUAcG8wAAAKKwV+
+MQAACm8uAAAKAnsFAAAEbxYAAApyCAMAcG8tAAAKA29EAAAGctQFAHBvMAAACn4qAAAKLhIDb0QA
+AAZy1AUAcG8wAAAKKwV+MQAACm8uAAAKAnsFAAAEbxYAAApyhgIAcG8tAAAKDgZvLgAACgJ7BQAA
+BG8vAAAKJgUoIQAACi0HBSgiAAAKJg4FKCMAAAosBw4FKCQAAAoEDgUoJQAACioTMAQABQEAAAQA
+ABFy6gUAcApyhAUAcAsDb0IAAAYXINAHAABvMgAACiYCewUAAARvFgAACnJiAgBwby0AAAoEjCcA
+AAFvLgAACgJ7BQAABG8WAAAKcqACAHBvLQAACgdvLgAACgJ7BQAABG8WAAAKcrgCAHBvLQAACgZv
+LgAACgJ7BQAABG8WAAAKcoYCAHBvLQAACgVvLgAACgJ7BQAABG8WAAAKctACAHBvLQAACnL2BQBw
+by4AAAoCewUAAARvFgAACnLyAgBwby0AAAoDb0IAAAYXINAHAABvMgAACm8uAAAKAnsFAAAEbxYA
+AApyCAMAcG8tAAAKcvYFAHBvLgAACgJ7BQAABG8vAAAKJioeAigBAAAGKioCAwQFKDMAAAoqUgJ7
+NAAACgJ7NQAAChaUbzYAAAoqIgIWKDcAAAoqUgJ7NAAACgJ7NQAACheUbzYAAAoqIgIXKDcAAAoq
+UgJ7NAAACgJ7NQAAChiUbzgAAAoqIgIYKDcAAAoqUgJ7NAAACgJ7NQAAChmUbzYAAAoqIgIZKDcA
+AAoqUgJ7NAAACgJ7NQAAChqUbzYAAAoqIgIaKDcAAAoqUgJ7NAAACgJ7NQAAChuUbzYAAAoqIgIb
+KDcAAAoqUgJ7NAAACgJ7NQAAChyUbzkAAAoqIgIcKDcAAAoqUgJ7NAAACgJ7NQAACh2UbzYAAAoq
+IgIdKDcAAAoqUgJ7NAAACgJ7NQAACh6UbzYAAAoqIgIeKDcAAAoqVgJ7NAAACgJ7NQAACh8JlG82
+AAAKKiYCHwkoNwAACipWAns0AAAKAns1AAAKHwqUbzYAAAoqJgIfCig3AAAKKlYCezQAAAoCezUA
+AAofC5RvOgAACiomAh8LKDcAAAoqVgJ7NAAACgJ7NQAACh8MlG86AAAKKiYCHwwoNwAACipWAns0
+AAAKAns1AAAKHw2UbzkAAAoqJgIfDSg3AAAKKh4CKDsAAAoqHgIoPAAACio6Aig9AAAKAgN9BwAA
+BCqCAnsHAAAEbz4AAApvPwAACnKFBgBwb0AAAApvQQAACio6Aig9AAAKAgN9CAAABCqWAnsIAAAE
+b0IAAApylwYAcG9DAAAKKEQAAApvRQAACnQcAAABKpYCewgAAARvQgAACnKvBgBwb0MAAAooRAAA
+Cm9FAAAKdBwAAAEqlgJ7CAAABG9CAAAKcssGAHBvQwAACihEAAAKb0UAAAp0HAAAASqWAnsIAAAE
+b0IAAApy6QYAcG9DAAAKKEQAAApvRQAACnQcAAABKpYCewgAAARvQgAACnL/BgBwb0MAAAooRAAA
+Cm9FAAAKdBwAAAEqHgIoPQAACipyAig9AAAKAgN9CgAABAIEfQsAAAQCBX0MAAAEKhMwAwBAAAAA
+BQAAEQMtDRZyGQcAcBRzPwAABipzHQAACgoGclEHAHAPASgcAAAKbx4AAAoCAnsMAAAEclcHAHAo
+GgAACgYoOgAABiomAgMEKDoAAAYqAAAbMAsASwcAAAYAABECAwQoPQAABgoGb0AAAAYtAgYqc0YA
+AAoLBwZvQgAABm8BAAArDN4UJhZyawcAcBRzPwAABhMI3QwHAAByqQcAcA1yqQcAcBMEcqkHAHAT
+BXKpBwBwEwZ+EwAABC0xFh9T0AcAAAIoSAAACheNOQAAARMJEQkWFhQoSQAACqIRCShKAAAKKEsA
+AAqAEwAABH4TAAAEe0wAAAp+EwAABH4UAAAELUAWcqsHAHAU0AcAAAIoSAAAChiNOQAAARMKEQoW
+FhQoSQAACqIRChcZFChJAAAKohEKKE0AAAooTgAACoAUAAAEfhQAAAR7TwAACn4UAAAECHLDBwBw
+b1AAAApvUQAACjn3AAAAfhUAAAQtJBbQHAAAAShIAAAK0AcAAAIoSAAACihSAAAKKFMAAAqAFQAA
+BH4VAAAEe1QAAAp+FQAABH4WAAAELUAYctMHAHAU0AcAAAIoSAAAChiNOQAAARMLEQsWFxQoSQAA
+CqIRCxcWFChJAAAKohELKE0AAAooVQAACoAWAAAEfhYAAAR7VgAACn4WAAAEAn4XAAAELToW0AcA
+AAIoSAAAChiNOQAAARMMEQwWFhQoSQAACqIRDBcZFChJAAAKohEMKFcAAAooTgAACoAXAAAEfhcA
+AAR7TwAACn4XAAAECHLDBwBwb1AAAApvWAAACm9ZAAAKDX4YAAAELTEWH1PQBwAAAihIAAAKF405
+AAABEw0RDRYWFChJAAAKohENKEoAAAooSwAACoAYAAAEfhgAAAR7TAAACn4YAAAEfhkAAAQtQBZy
+qwcAcBTQBwAAAihIAAAKGI05AAABEw4RDhYWFChJAAAKohEOFxkUKEkAAAqiEQ4oTQAACihOAAAK
+gBkAAAR+GQAABHtPAAAKfhkAAAQIcrAFAHBvUAAACm9RAAAKOfgAAAB+GgAABC0kFtAcAAABKEgA
+AArQBwAAAihIAAAKKFIAAAooUwAACoAaAAAEfhoAAAR7VAAACn4aAAAEfhsAAAQtQBhy0wcAcBTQ
+BwAAAihIAAAKGI05AAABEw8RDxYXFChJAAAKohEPFxYUKEkAAAqiEQ8oTQAACihVAAAKgBsAAAR+
+GwAABHtWAAAKfhsAAAQCfhwAAAQtOhbQBwAAAihIAAAKGI05AAABExAREBYWFChJAAAKohEQFxkU
+KEkAAAqiERAoVwAACihOAAAKgBwAAAR+HAAABHtPAAAKfhwAAAQIcrAFAHBvUAAACm9YAAAKb1kA
+AAoTBH4dAAAELTEWH1PQBwAAAihIAAAKF405AAABExERERYWFChJAAAKohERKEoAAAooSwAACoAd
+AAAEfh0AAAR7TAAACn4dAAAEfh4AAAQtQBZyqwcAcBTQBwAAAihIAAAKGI05AAABExIREhYWFChJ
+AAAKohESFxkUKEkAAAqiERIoTQAACihOAAAKgB4AAAR+HgAABHtPAAAKfh4AAAQIcr4FAHBvUAAA
+Cm9RAAAKOfgAAAB+HwAABC0kFtAcAAABKEgAAArQBwAAAihIAAAKKFIAAAooUwAACoAfAAAEfh8A
+AAR7VAAACn4fAAAEfiAAAAQtQBhy0wcAcBTQBwAAAihIAAAKGI05AAABExMRExYXFChJAAAKohET
+FxYUKEkAAAqiERMoTQAACihVAAAKgCAAAAR+IAAABHtWAAAKfiAAAAQCfiEAAAQtOhbQBwAAAihI
+AAAKGI05AAABExQRFBYWFChJAAAKohEUFxkUKEkAAAqiERQoVwAACihOAAAKgCEAAAR+IQAABHtP
+AAAKfiEAAAQIcr4FAHBvUAAACm9YAAAKb1kAAAoTBX4iAAAELTEWH1PQBwAAAihIAAAKF405AAAB
+ExURFRYWFChJAAAKohEVKEoAAAooSwAACoAiAAAEfiIAAAR7TAAACn4iAAAEfiMAAAQtQBZyqwcA
+cBTQBwAAAihIAAAKGI05AAABExYRFhYWFChJAAAKohEWFxkUKEkAAAqiERYoTQAACihOAAAKgCMA
+AAR+IwAABHtPAAAKfiMAAAQIctQFAHBvUAAACm9RAAAKOfgAAAB+JAAABC0kFtAcAAABKEgAAArQ
+BwAAAihIAAAKKFIAAAooUwAACoAkAAAEfiQAAAR7VAAACn4kAAAEfiUAAAQtQBhy0wcAcBTQBwAA
+AihIAAAKGI05AAABExcRFxYXFChJAAAKohEXFxYUKEkAAAqiERcoTQAACihVAAAKgCUAAAR+JQAA
+BHtWAAAKfiUAAAQCfiYAAAQtOhbQBwAAAihIAAAKGI05AAABExgRGBYWFChJAAAKohEYFxkUKEkA
+AAqiERgoVwAACihOAAAKgCYAAAR+JgAABHtPAAAKfiYAAAQIctQFAHBvUAAACm9YAAAKb1kAAAoT
+BnNaAAAKEwcRB3KwBQBwEQRvWwAACm9cAAAKEQdyvgUAcBEFb1sAAApvXAAAChEHctQFAHARBm9b
+AAAKb1wAAAoXCREHcz8AAAYqEQgqAAEQAAAAABkADygAFAMAAAETMAEAEgAAAAEAABFyqQcAcAoD
+LAcDbyYAAAoKBioAABswBQCXAAAABwAAEXNdAAAKCgNvXgAACg0rUwlvXwAACqUKAAAbCwZy8wcA
+cBqNAwAAARMEEQQWEgEoYAAACqIRBBcfPYxEAAABohEEGBIBKGEAAAqiEQQZHyaMRAAAAaIRBChi
+AAAKb2MAAAomCW9kAAAKLaXeFAl1RQAAARMFEQUsBxEFb2UAAArcBm8mAAAKDAgWCG8oAAAKF1lv
+MgAACioAARAAAAIADQBfbAAUAAAAABswBAAtAgAACAAAEXINCABwAihmAAAKExUSFShnAAAKExYS
+FnJFCABwKGgAAAooPgAABigaAAAKCihpAAAKckkIAHAGclMIAHAoIAAACm9qAAAKCwMoawAACnRI
+AAABDAhyWQgAcAYoGgAACm9sAAAKCHKXCABwb20AAAoIF29uAAAKCChvAAAKb3AAAAoIb3EAAAoN
+cqEIAHATBHIFCQBwEwUEb3IAAApvcwAAChMXOMwAAAARF29fAAAKdBwAAAETBgkHFgeOaW90AAAK
+EQZy1AkAcG91AAAKLHcRBREGBBEGbycAAAoodgAAChMHKHcAAAoRB29qAAAKEwgJEQgWEQiOaW90
+AAAKBBEGbycAAAoZF3N4AAAKEwkgABAAAI1QAAABEwoWEwsrCwkRChYRC290AAAKEQkRChYRCo5p
+b3kAAAolEwst4hEJb3oAAAorLhEEEQYEEQZvJwAACih2AAAKEwwodwAAChEMb2oAAAoTDQkRDRYR
+DY5pb3QAAAoRF29kAAAKOij////eFREXdUUAAAETGBEYLAcRGG9lAAAK3ChpAAAKckkIAHAGcuYJ
+AHAoIAAACm9qAAAKEw4JEQ4WEQ6OaW90AAAKCW96AAAKFBMPCG97AAAKEw8RD298AAAKExAREHN9
+AAAKExEREW9+AAAKExIRD29/AAAKFBMPFAwXERIUcz8AAAYTFN4kExMRDywKEQ9vfwAAChQTDxQM
+FhETbyYAAAoUcz8AAAYTFN4AERQqAAAAARwAAAIApADfgwEVAAAAAAAAygE8BgIkJQAAARMwAwBS
+AAAACQAAEXOAAAAKCnOBAAAKCwYHA29qAAAKb4IAAAoMcqkHAHANCBMFFhMGKyARBREGkRMECRIE
+cvAJAHAogwAACigaAAAKDREGF1gTBhEGEQWOaTLYCSpyAig9AAAKAgMoQQAABgIEKEMAAAYCBShF
+AAAGKh4Cew0AAAQqIgIDfQ0AAAQqHgJ7DgAABCoiAgN9DgAABCoeAnsPAAAEKiICA30PAAAEKh4C
+KD0AAAoqAAATMAIALQAAAAoAABF+EAAABC0gcvYJAHDQCQAAAihIAAAKb4YAAApzhwAACgoGgBAA
+AAR+EAAABCoafhEAAAQqHgKAEQAABCoafhIAAAQqLnNLAAAGgBIAAAQqHgIoiQAACioAtAAAAM7K
+774BAAAAkQAAAGxTeXN0ZW0uUmVzb3VyY2VzLlJlc291cmNlUmVhZGVyLCBtc2NvcmxpYiwgVmVy
+c2lvbj00LjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkz
+NGUwODkjU3lzdGVtLlJlc291cmNlcy5SdW50aW1lUmVzb3VyY2VTZXQCAAAAAAAAAAAAAABQQURQ
+QURQtAAAAEJTSkIBAAEAAAAAAAwAAAB2NC4wLjMwMzE5AAAAAAUAbAAAAGgQAAAjfgAA1BAAAFgX
+AAAjU3RyaW5ncwAAAAAsKAAAaAoAACNVUwCUMgAAEAAAACNHVUlEAAAApDIAABwGAAAjQmxvYgAA
+AAAAAAACAAABVx2iCQkLAAAA+iUzABYAAAEAAABcAAAACwAAACYAAABMAAAAMQAAAIkAAAACAAAA
+GQAAAAoAAAAGAAAAKAAAACwAAAAKAAAAAQAAAAoAAAABAAAAAQAAAAEAAAAAAAoAAQAAAAAABgAV
+AfQABgAlAfQACgBCATsBDgBeAUkBEgCdAfQABgCsAfQAFgA9AhUCGgCAAmoCGgCWAmoCGgCoAmoC
+DgAaA/sCCgDOAzsBCgCFCWoJCgBCCjEKCgBzCl4KCgD2C9wLCgAhDA8MCgA4DA8MCgBVDA8MCgB0
+DA8MCgCNDA8MCgCmDA8MCgDBDA8MCgDcDA8MCgD1DA8MCgAuDQ4NCgBODQ4NCgCQDTsBCgCXDTsB
+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
+AAABAOcKAAACAO8KAAADAPkKAAAEAAALAAABAPkKAAABAAoLAAABAA4LAAABAAoLAAABABoLAAAB
+ACULAAACADILAAADAEELAAAEAMAHAAAFAFcLAAAGAEIGAAABACULAAACADILAAADAEELAAAEAMAH
+AAAFAFcLAAAGAEIGAAABACULAAACAMAHAAADAEIGAAABAPkKAAACAGsLAAADAAALAAABAH8LAAAB
+AH8LAAABAIkLAAACAJALEBADAJoLAAABAKILAAABAKgLAAACABoLAAABAKgLAAACABoLAAABALAL
+AAABALYLAAABAL0LAAACABoLAAABAMELAAABAMYLAAACAM4LEBADAMELAAABANYLAAABANYLAAAB
+ANYLAAABANYLgQB2AdoAiQB2AdoAkQB2AdoAmQB2AdoAoQB2AdoAqQB2AdoAsQB2AdoAuQB2AdoA
+wQB2AdoAyQB2AdoA0QB2AW0B2QB2ARsACQB2ARsA4QCoDXIBCQCvDXkB8QB2ARsAOQDnDYQBOQD5
+DT8ACQDkAhsASQB2AYkBUQB2AZABSQAsDpcBAQE7Dp0BUQB2AaQBCQDvAhsA4QA/DrABYQBFCcQA
+CQFFCWgAWQB2ARsAWQA7DrYB4QBMDrwB4QA/DsIBEQFsDskBEQGBDs4BIQFsDskBIQGWDtUBIQGd
+DtoBGQBFCWgAWQCsDsQA4QC1DnUAMQF2AdoA4QDlDqEAMQHrDv8B4QDzDgUCAQGsDhICQQEfDz8A
+SQEzD3UADACsDiQCUQGwCysC4QBKDzACEQB2AV4AEQD5CjYCEQBrCzoCKQBUDz4CEQBeD0MCKQBl
+D0gCKQBtD0gCKQB5D04CEQAVBmwAEQAdBmwAGQB2ARsACQDoD1MCWQEhEFkCYQFaEF8CaQF1EJQA
+CQCcEGYCcQGsDmwCCQDdEHMCeQEKEXkCsQF2ARsAsQGVEtUCuQG4EuACyQElE/IC2QGJE/wCFAAl
+EyMDFACYEzAD2QGfEzQDHAAlEyMDHACYEzADJACsE24DLACsE4QD2QGzE40DNAAlEyMDNACYEzAD
+PAAlEyMDPACYEzAD2QG7E74DRACsE24DTACsE4QDDAB2ARsA4QDEE2gADAA7DuoDAQJ2ARsACQIb
+FEcEEQIpFE0EVABEFFkEVABRFF4E4QDzDmMEAQJbFGoEEQJiFGwAKQJ3FBsAYQB/FIcEYQCHFIwE
+OQFFCcQAMQKaFJAEMQKkFJYEOQIlE5wEOQLSFNoAOQLiFNoAQQLtFNUASQIYFaMEOQIvFakEOQJG
+FbAECQJmFbYEYQIbFEcEWQJvFbwE4QB1FcQE4QDzDskEMQJ+FZAEaQJ2AdAEWQKrFdsEWQKwFRsA
+OQLCFeMEiQLOFbAEkQJ2AekEmQL4FWgAiQKwFRsAoQJ2ARsAqQJ2ARsAsQJXFiUFgQJFCcQAwQJ2
+ARsAyQJ2ARsAuQG8FjwFcQB2AUIF2QJ2AU8FIQB2ARsADgCBADMBEgC1AGgBLgBjAPoFLgALAGMF
+LgATAKsFLgBbAPEFLgAjANQFLgA7ANoFLgAbANQFLgBDANQFLgArANQFLgAzAKsFYwCDAH8BIwEr
+BH8BYwEjBH8BoQEjBH8BwQEjBH8B4QEjBH8BQQIjBH8ByQRDBFYF6QRDBFYFAAgjBH8BIAgjBH8B
+QAgjBH8BYAgjBH8BgAgjBH8BoAgjBH8BrAHgAQsCGAKAAvIDcQTwBCwFSgUEAAEABQAdAAYAHgAI
+ACMACQAmAAoAKAAAACkGeQAAADIGfQAAAEIGeQAAAE4GfQAAAGEGgQAAAHQGfQAAAI4GeQAAAKEG
+fQAAALsGeQAAAMsGfQAAAOIGeQAAAPMGfQAAAAsHgQAAAB8HfQAAADoHeQAAAEsHfQAAAGMHeQAA
+AHMHfQAAAIoHeQAAAJQHfQAAAKUHeQAAAK8HfQAAAMAHhgAAANEHfQAAAOkHhgAAAPUHfQAAAAgI
+gQAAACAIfQAAAFwImQAAALoIeQAAAMYIeQAAANQIeQAAAOMIeQAAAO4IeQAAABwKfQAAACQKeQAA
+ACwK+gAAAEIKGwEAALsKIAEAAN8KLgECABAAAwACABEABQACABIABwACABMACQACABQACwACABUA
+DQACABYADwACABcAEQACABgAEwACABkAFQACABoAFwACABsAGQACABwAGwACAB0AHQACAB4AHwAC
+AB8AIQACACAAIwACACEAJQACACIAJwACACMAKQACACQAKwACACUALQACACYALwACACcAMQACACgA
+MwACACkANQACACoANwACACsAOQACAC8AOwACADEAPQACADIAPwACADMAQQACADQAQwACADUARQAB
+AEEARwACAEAARwACAEIASQABAEMASQACAEQASwABAEUASwACAEcATQACAEgATwABAEkATwACAEoA
+UQAdAhMDUQNiA3kDnAOsA9ID3wNRBASAAAABAAAAZRkJXQAAAAAAAGwNAAAMAAAAAAAAAAAAAAAB
+ANcAAAAAAAQAAAAAAAAAAAAAAAoAMgEAAAAABAAAAAAAAAAAAAAACgA7AQAAAAAMAAAAAAAAAAAA
+AAABAHwBAAAAAAwAAAAAAAAAAAAAAAEA8gEAAAAABAAAAAAAAAAAAAAACgBeAgAAAAAMAAAAAAAA
+AAAAAAABAIIPAAAAAAQAAAAAAAAAAAAAAAoAOxEAAAAABAAAAAAAAAAAAAAAzAJKEgAAAAAEAAAA
+AAAAAAAAAADpAsoSAAAAAAAAAAABAAAAFBcAAAsABwCPANwCAAAAAAA8TW9kdWxlPgBTQ182N0E2
+NTFCRDkzMEY0OTA3OTU2RjA5NTMwMUI1QzUyRi5kbGwAVXNlckNvbXBvbmVudABTY3JpcHRNYWlu
+AElucHV0MEJ1ZmZlcgBDb25uZWN0aW9ucwBWYXJpYWJsZXMAUGhheGlvQVBJAFBoYXhpbwBQaGF4
+aW9PcGVyYXRpb25SZXN1bHQAUmVzb3VyY2VzAFNDXzlhNTY5OGI1NjlkNTQ2Y2I4ZTIxMmFmMWMz
+OTk4OTFhLlByb3BlcnRpZXMAU2V0dGluZ3MATWljcm9zb2Z0LlNxbFNlcnZlci5UeFNjcmlwdABN
+aWNyb3NvZnQuU3FsU2VydmVyLkR0cy5QaXBlbGluZQBTY3JpcHRDb21wb25lbnQAU2NyaXB0QnVm
+ZmVyAG1zY29ybGliAFN5c3RlbQBPYmplY3QAU3lzdGVtLkNvbmZpZ3VyYXRpb24AQXBwbGljYXRp
+b25TZXR0aW5nc0Jhc2UALmN0b3IATWljcm9zb2Z0LlNxbFNlcnZlci5QaXBlbGluZUhvc3QAUGlw
+ZWxpbmVCdWZmZXIAT3V0cHV0TmFtZU1hcABQcm9jZXNzSW5wdXQASW5wdXQwX1Byb2Nlc3NJbnB1
+dABJbnB1dDBfUHJvY2Vzc0lucHV0Um93AE1pY3Jvc29mdC5TcWxTZXJ2ZXIuRFRTUnVudGltZVdy
+YXAATWljcm9zb2Z0LlNxbFNlcnZlci5EdHMuUnVudGltZS5XcmFwcGVyAElEVFNDb25uZWN0aW9u
+TWFuYWdlcjEwMABjb25uTWdyAFN5c3RlbS5EYXRhAFN5c3RlbS5EYXRhLlNxbENsaWVudABTcWxD
+b25uZWN0aW9uAHNxbENvbm4AU3FsQ29tbWFuZABzcWxDbWQAU3FsUGFyYW1ldGVyAHNxbFBhcmFt
+AEFjcXVpcmVDb25uZWN0aW9ucwBSZWxlYXNlQ29ubmVjdGlvbnMAUHJlRXhlY3V0ZQBQb3N0RXhl
+Y3V0ZQBTeXN0ZW0uQ29sbGVjdGlvbnMuU3BlY2lhbGl6ZWQATmFtZVZhbHVlQ29sbGVjdGlvbgBW
+YWxpZGF0aW9uUHJvY2VzcwBWYWxpZGF0aW9uQW5kQXJjaGl2ZUZpbGUAVXBkYXRlU3RhdHVzYW5k
+QXJjaGl2ZUZpbGUAVXBkYXRlUmV0cnlTdGF0dXMAZ2V0X2ZpbGVOYW1lAGdldF9maWxlTmFtZV9J
+c051bGwAZ2V0X3Byb3ZpZGVyTlBJAGdldF9wcm92aWRlck5QSV9Jc051bGwARGF0ZVRpbWUAZ2V0
+X2NhbXBhaWduQ3JlYXRlRGF0ZQBnZXRfY2FtcGFpZ25DcmVhdGVEYXRlX0lzTnVsbABnZXRfcmVj
+aXBpZW50RmF4TnVtYmVyAGdldF9yZWNpcGllbnRGYXhOdW1iZXJfSXNOdWxsAGdldF9zZW5kZXJG
+YXhOdW1iZXIAZ2V0X3NlbmRlckZheE51bWJlcl9Jc051bGwAZ2V0X2ZheFNlbnRJbmRpY2F0b3IA
+Z2V0X2ZheFNlbnRJbmRpY2F0b3JfSXNOdWxsAGdldF9mYXhTdGF0dXNVcGRhdGVEYXRlAGdldF9m
+YXhTdGF0dXNVcGRhdGVEYXRlX0lzTnVsbABnZXRfY3VycmVudEZheFN0YXR1cwBnZXRfY3VycmVu
+dEZheFN0YXR1c19Jc051bGwAZ2V0X2ZheFN0YXR1c0RldGFpbABnZXRfZmF4U3RhdHVzRGV0YWls
+X0lzTnVsbABnZXRfZXJyb3JDb2RlAGdldF9lcnJvckNvZGVfSXNOdWxsAGdldF9lcnJvclR5cGUA
+Z2V0X2Vycm9yVHlwZV9Jc051bGwAZ2V0X21ybUJhdGNoRmF4UERGSUQAZ2V0X21ybUJhdGNoRmF4
+UERGSURfSXNOdWxsAGdldF9wbWRDbGllbnRJRABnZXRfcG1kQ2xpZW50SURfSXNOdWxsAGdldF9m
+YXhTZW50VG9GYXhpbWluaW9uRGF0ZQBnZXRfZmF4U2VudFRvRmF4aW1pbmlvbkRhdGVfSXNOdWxs
+AE5leHRSb3cARW5kT2ZSb3dzZXQAZmlsZU5hbWUAZmlsZU5hbWVfSXNOdWxsAHByb3ZpZGVyTlBJ
+AHByb3ZpZGVyTlBJX0lzTnVsbABjYW1wYWlnbkNyZWF0ZURhdGUAY2FtcGFpZ25DcmVhdGVEYXRl
+X0lzTnVsbAByZWNpcGllbnRGYXhOdW1iZXIAcmVjaXBpZW50RmF4TnVtYmVyX0lzTnVsbABzZW5k
+ZXJGYXhOdW1iZXIAc2VuZGVyRmF4TnVtYmVyX0lzTnVsbABmYXhTZW50SW5kaWNhdG9yAGZheFNl
+bnRJbmRpY2F0b3JfSXNOdWxsAGZheFN0YXR1c1VwZGF0ZURhdGUAZmF4U3RhdHVzVXBkYXRlRGF0
+ZV9Jc051bGwAY3VycmVudEZheFN0YXR1cwBjdXJyZW50RmF4U3RhdHVzX0lzTnVsbABmYXhTdGF0
+dXNEZXRhaWwAZmF4U3RhdHVzRGV0YWlsX0lzTnVsbABlcnJvckNvZGUAZXJyb3JDb2RlX0lzTnVs
+bABlcnJvclR5cGUAZXJyb3JUeXBlX0lzTnVsbABtcm1CYXRjaEZheFBERklEAG1ybUJhdGNoRmF4
+UERGSURfSXNOdWxsAHBtZENsaWVudElEAHBtZENsaWVudElEX0lzTnVsbABmYXhTZW50VG9GYXhp
+bWluaW9uRGF0ZQBmYXhTZW50VG9GYXhpbWluaW9uRGF0ZV9Jc051bGwAUGFyZW50Q29tcG9uZW50
+AGdldF9zY21ybUFETwBzY21ybUFETwBnZXRfZXJyb3JGb2xkZXIAZ2V0X0ZheGltaW5pb25LZXkA
+Z2V0X0ZheGltaW5pb25TZW5kAGdldF9zZW50Rm9sZGVyAGdldF9zb3VyY2VGb2xkZXIAZXJyb3JG
+b2xkZXIARmF4aW1pbmlvbktleQBGYXhpbWluaW9uU2VuZABzZW50Rm9sZGVyAHNvdXJjZUZvbGRl
+cgBkZWJ1ZwBhcGlfa2V5AGFwaV9zZWNyZXQAaG9zdABmYXhTdGF0dXMAc2VuZEZheABkb1JlcXVl
+c3QAQ2hlY2tOdWxsU3RyaW5nAFRvU3RyaW5nAGNyZWF0ZUFuZFNlbmRSZXF1ZXN0AGdldFNIQQBT
+eXN0ZW0uQ29sbGVjdGlvbnMuR2VuZXJpYwBEaWN0aW9uYXJ5YDIAZ2V0X1N1Y2Nlc3MAc2V0X1N1
+Y2Nlc3MAZ2V0X01lc3NhZ2UAc2V0X01lc3NhZ2UAZ2V0X0RhdGEAc2V0X0RhdGEAPFN1Y2Nlc3M+
+a19fQmFja2luZ0ZpZWxkADxNZXNzYWdlPmtfX0JhY2tpbmdGaWVsZAA8RGF0YT5rX19CYWNraW5n
+RmllbGQAU3VjY2VzcwBNZXNzYWdlAERhdGEAU3lzdGVtLlJlc291cmNlcwBSZXNvdXJjZU1hbmFn
+ZXIAcmVzb3VyY2VNYW4AU3lzdGVtLkdsb2JhbGl6YXRpb24AQ3VsdHVyZUluZm8AcmVzb3VyY2VD
+dWx0dXJlAGdldF9SZXNvdXJjZU1hbmFnZXIAZ2V0X0N1bHR1cmUAc2V0X0N1bHR1cmUAQ3VsdHVy
+ZQBkZWZhdWx0SW5zdGFuY2UAZ2V0X0RlZmF1bHQARGVmYXVsdABJbnB1dElEAElucHV0TmFtZQBC
+dWZmZXIAT3V0cHV0TWFwAFJvdwBUcmFuc2FjdGlvbgBwYXJhbWV0ZXJzAFBoYXhpb1Jlc3VsdABT
+b3VyY2VGaWxlUGF0aABEZXN0aW5hdGlvbkZvbGRlclBhdGgARGVzdGluYXRpb25GaWxlUGF0aABC
+dWZmZXJDb2x1bW5JbmRleGVzAENvbXBvbmVudABhcGlLZXkAYXBpU2VjcmV0AGhvc3RVUkwAZmF4
+SWQAYWRkcmVzcwBWYWx1ZQBzb3VyY2UAdXJsAGRhdGEAc3VjY2VzcwBtZXNzYWdlAHZhbHVlAFN5
+c3RlbS5SdW50aW1lLlZlcnNpb25pbmcAVGFyZ2V0RnJhbWV3b3JrQXR0cmlidXRlAFN5c3RlbS5S
+ZWZsZWN0aW9uAEFzc2VtYmx5VGl0bGVBdHRyaWJ1dGUAQXNzZW1ibHlEZXNjcmlwdGlvbkF0dHJp
+YnV0ZQBBc3NlbWJseUNvbmZpZ3VyYXRpb25BdHRyaWJ1dGUAQXNzZW1ibHlDb21wYW55QXR0cmli
+dXRlAEFzc2VtYmx5UHJvZHVjdEF0dHJpYnV0ZQBBc3NlbWJseUNvcHlyaWdodEF0dHJpYnV0ZQBB
+c3NlbWJseVRyYWRlbWFya0F0dHJpYnV0ZQBBc3NlbWJseUN1bHR1cmVBdHRyaWJ1dGUAQXNzZW1i
+bHlWZXJzaW9uQXR0cmlidXRlAFN5c3RlbS5SdW50aW1lLkNvbXBpbGVyU2VydmljZXMAQ29tcGls
+YXRpb25SZWxheGF0aW9uc0F0dHJpYnV0ZQBSdW50aW1lQ29tcGF0aWJpbGl0eUF0dHJpYnV0ZQBT
+Q182N0E2NTFCRDkzMEY0OTA3OTU2RjA5NTMwMUI1QzUyRgBTdHJpbmcAU3RyaW5nQ29tcGFyaXNv
+bgBFcXVhbHMAR2V0Q29sdW1uSW5kZXhlcwBTU0lTU2NyaXB0Q29tcG9uZW50RW50cnlQb2ludEF0
+dHJpYnV0ZQBBY3F1aXJlQ29ubmVjdGlvbgBSZWxlYXNlQ29ubmVjdGlvbgBTcWxEYlR5cGUAU3Fs
+UGFyYW1ldGVyQ29sbGVjdGlvbgBnZXRfUGFyYW1ldGVycwBBZGQAQ29uY2F0AEludDMyAG9wX0Vx
+dWFsaXR5AFN5c3RlbS5JTwBEaXJlY3RvcnkARXhpc3RzAERpcmVjdG9yeUluZm8AQ3JlYXRlRGly
+ZWN0b3J5AEZpbGUARGVsZXRlAE1vdmUARXhjZXB0aW9uAGdldF9JdGVtAGdldF9MZW5ndGgAU3lz
+dGVtLlRleHQuUmVndWxhckV4cHJlc3Npb25zAFJlZ2V4AEVtcHR5AFJlcGxhY2UARm9ybWF0AElu
+dDY0AFN5c3RlbS5EYXRhLkNvbW1vbgBEYlBhcmFtZXRlcgBzZXRfVmFsdWUARGJDb21tYW5kAEV4
+ZWN1dGVOb25RdWVyeQBEQk51bGwAU3Vic3RyaW5nAEdldFN0cmluZwBJc051bGwAR2V0RGF0ZQBH
+ZXREYXRlVGltZQBHZXRJbnQzMgBNaWNyb3NvZnQuU3FsU2VydmVyLkRUU1BpcGVsaW5lV3JhcABN
+aWNyb3NvZnQuU3FsU2VydmVyLkR0cy5QaXBlbGluZS5XcmFwcGVyAElEVFNDb21wb25lbnRNZXRh
+RGF0YTEwMABnZXRfQ29tcG9uZW50TWV0YURhdGEASURUU1J1bnRpbWVDb25uZWN0aW9uQ29sbGVj
+dGlvbjEwMABnZXRfUnVudGltZUNvbm5lY3Rpb25Db2xsZWN0aW9uAElEVFNSdW50aW1lQ29ubmVj
+dGlvbjEwMABHZXRSdW50aW1lQ29ubmVjdGlvbkJ5TmFtZQBnZXRfQ29ubmVjdGlvbk1hbmFnZXIA
+SURUU1ZhcmlhYmxlczEwMABnZXRfUmVhZE9ubHlWYXJpYWJsZXMASURUU1ZhcmlhYmxlMTAwAFNj
+cmlwdENvbXBvbmVudEV2YWxDb250ZXh0AGdldF9FdmFsdWF0b3JDb250ZXh0AElEVFNFdmFsdWF0
+b3JDb250ZXh0MTAwAEdldFZhbHVlV2l0aENvbnRleHQAPGRvUmVxdWVzdD5vX19TaXRlQ29udGFp
+bmVyMABTeXN0ZW0uQ29yZQBDYWxsU2l0ZWAxAEZ1bmNgMwBDYWxsU2l0ZQA8PnBfX1NpdGUxAEZ1
+bmNgNAA8PnBfX1NpdGUyADw+cF9fU2l0ZTMAPD5wX19TaXRlNAA8PnBfX1NpdGU1ADw+cF9fU2l0
+ZTYAPD5wX19TaXRlNwA8PnBfX1NpdGU4ADw+cF9fU2l0ZTkAPD5wX19TaXRlYQA8PnBfX1NpdGVi
+ADw+cF9fU2l0ZWMAPD5wX19TaXRlZAA8PnBfX1NpdGVlADw+cF9fU2l0ZWYAPD5wX19TaXRlMTAA
+PD5wX19TaXRlMTEAPD5wX19TaXRlMTIAPD5wX19TaXRlMTMAPD5wX19TaXRlMTQAU3lzdGVtLldl
+Yi5FeHRlbnNpb25zAFN5c3RlbS5XZWIuU2NyaXB0LlNlcmlhbGl6YXRpb24ASmF2YVNjcmlwdFNl
+cmlhbGl6ZXIARGVzZXJpYWxpemUAVHlwZQBSdW50aW1lVHlwZUhhbmRsZQBHZXRUeXBlRnJvbUhh
+bmRsZQBNaWNyb3NvZnQuQ1NoYXJwAE1pY3Jvc29mdC5DU2hhcnAuUnVudGltZUJpbmRlcgBDU2hh
+cnBBcmd1bWVudEluZm8AQ1NoYXJwQXJndW1lbnRJbmZvRmxhZ3MAQ3JlYXRlAEJpbmRlcgBDYWxs
+U2l0ZUJpbmRlcgBDU2hhcnBCaW5kZXJGbGFncwBTeXN0ZW0uTGlucS5FeHByZXNzaW9ucwBFeHBy
+ZXNzaW9uVHlwZQBJRW51bWVyYWJsZWAxAFVuYXJ5T3BlcmF0aW9uAFRhcmdldABJbnZva2VNZW1i
+ZXIASW52b2tlAENvbnZlcnQAR2V0SW5kZXgAVHJpbQBTeXN0ZW0uVGV4dABTdHJpbmdCdWlsZGVy
+AE5hbWVPYmplY3RDb2xsZWN0aW9uQmFzZQBTeXN0ZW0uQ29sbGVjdGlvbnMASUVudW1lcmF0b3IA
+R2V0RW51bWVyYXRvcgBnZXRfQ3VycmVudABLZXlWYWx1ZVBhaXJgMgBnZXRfS2V5AENoYXIAZ2V0
+X1ZhbHVlAEFwcGVuZABNb3ZlTmV4dABJRGlzcG9zYWJsZQBEaXNwb3NlAGdldF9Ob3cAZ2V0X1Rp
+Y2tzAEVuY29kaW5nAGdldF9BU0NJSQBHZXRCeXRlcwBTeXN0ZW0uTmV0AFdlYlJlcXVlc3QASHR0
+cFdlYlJlcXVlc3QAc2V0X0NvbnRlbnRUeXBlAHNldF9NZXRob2QAc2V0X0tlZXBBbGl2ZQBDcmVk
+ZW50aWFsQ2FjaGUASUNyZWRlbnRpYWxzAGdldF9EZWZhdWx0Q3JlZGVudGlhbHMAc2V0X0NyZWRl
+bnRpYWxzAFN0cmVhbQBHZXRSZXF1ZXN0U3RyZWFtAEtleXNDb2xsZWN0aW9uAGdldF9LZXlzAFdy
+aXRlAENvbnRhaW5zAGdldF9VVEY4AEZpbGVTdHJlYW0ARmlsZU1vZGUARmlsZUFjY2VzcwBCeXRl
+AFJlYWQAQ2xvc2UAV2ViUmVzcG9uc2UAR2V0UmVzcG9uc2UAR2V0UmVzcG9uc2VTdHJlYW0AU3Ry
+ZWFtUmVhZGVyAFRleHRSZWFkZXIAUmVhZFRvRW5kAFN5c3RlbS5TZWN1cml0eS5DcnlwdG9ncmFw
+aHkAU0hBMUNyeXB0b1NlcnZpY2VQcm92aWRlcgBVbmljb2RlRW5jb2RpbmcASGFzaEFsZ29yaXRo
+bQBDb21wdXRlSGFzaABTSEExAENvbXBpbGVyR2VuZXJhdGVkQXR0cmlidXRlAFN5c3RlbS5EaWFn
+bm9zdGljcwBEZWJ1Z2dlck5vblVzZXJDb2RlQXR0cmlidXRlAEFzc2VtYmx5AGdldF9Bc3NlbWJs
+eQBTeXN0ZW0uQ29tcG9uZW50TW9kZWwARWRpdG9yQnJvd3NhYmxlQXR0cmlidXRlAEVkaXRvckJy
+b3dzYWJsZVN0YXRlAC5jY3RvcgBTQ185YTU2OThiNTY5ZDU0NmNiOGUyMTJhZjFjMzk5ODkxYS5Q
+cm9wZXJ0aWVzLlJlc291cmNlcy5yZXNvdXJjZXMAAAAPSQBuAHAAdQB0ACAAMAAAgk91AHAAZABh
+AHQAZQAgAFsAZABiAG8AXQAuAFsAbQByAG0AQgBhAHQAYwBoAEYAYQB4AFAARABGAHMAXQAgAHMA
+ZQB0ACAAIABbAGYAYQB4AFMAZQBuAHQASQBuAGQAaQBjAGEAdABvAHIAXQAgAD0AIABAAEYAYQB4
+AFMAZQBuAGQASQBuAGQALAAgAGYAYQB4AFMAZQBuAHQAVABvAEYAYQB4AGkAbQBpAG4AaQBvAG4A
+RABhAHQAZQAgAD0AIABnAGUAdABkAGEAdABlACgAKQAsACAAWwBjAHUAcgByAGUAbgB0AEYAYQB4
+AFMAdABhAHQAdQBzAF0APQAgAEAATABhAHMAdABTAHQAYQB0AHUAcwAsACAAWwBmAGEAeABTAHQA
+YQB0AHUAcwBEAGUAdABhAGkAbABdAD0AIABAAFIAZQBzAHAAbwBuAHMAZQBNAGUAcwBzAGEAZwBl
+ACwAIABFAHIAcgBvAHIAQwBvAGQAZQAgAD0AIABAAEUAcgByAG8AcgBDAG8AZABlACwAIABFAHIA
+cgBvAHIAVAB5AHAAZQAgAD0AIABAAEUAcgByAG8AcgBUAHkAcABlACAAdwBoAGUAcgBlACAAbQBy
+AG0AQgBhAHQAYwBoAEYAYQB4AFAARABGAEkARAAgAD0AIABAAG0AcgBtAEIAYQB0AGMAaABGAGEA
+eABQAEQARgBJAEQAIABhAG4AZAAgAHAAcgBvAHYAaQBkAGUAcgBOAFAASQA9AEAAcAByAG8AdgBp
+AGQAZQByAE4AUABJAAAjQABtAHIAbQBCAGEAdABjAGgARgBhAHgAUABEAEYASQBEAAAZQABwAHIA
+bwB2AGkAZABlAHIATgBQAEkAABdAAEYAYQB4AFMAZQBuAGQASQBuAGQAABdAAEwAYQBzAHQAUwB0
+AGEAdAB1AHMAACFAAFIAZQBzAHAAbwBuAHMAZQBNAGUAcwBzAGEAZwBlAAAVQABFAHIAcgBvAHIA
+QwBvAGQAZQAAFUAARQByAHIAbwByAFQAeQBwAGUAAANcAAAReQB5AHkAeQBNAE0AZABkAAAhZgBh
+AHgAWwBmAHIAbwBtAF8AbgB1AG0AYgBlAHIAXQAAHWYAYQB4AFsAdABvAF8AbgB1AG0AYgBlAHIA
+XQAAHWYAYQB4AFsAYwBsAGkAZQBuAHQAXwBpAGQAXQAAG2YAYQB4AFsAZgBpAGwAZQBuAGEAbQBl
+AF0AABljAGEAbABsAGIAYQBjAGsAXwB1AHIAbAAANWgAdAB0AHAAOgAvAC8AdABlAHMAdAAuAGwA
+bwBjAGEAbAAvAGMAYQBsAGwAYgBhAGMAawAAD2EAcABpAF8AawBlAHkAAA1mAG8AcgBtAGEAdAAA
+CWoAcwBvAG4AABVTAGUAbgB0AEIAZQBmAG8AcgBlAABRWQBvAHUAIABtAHUAcwB0ACAAaQBuAGMA
+bAB1AGQAZQAgAGEAIAB0AG8AIABmAGEAeAAgAG4AdQBtAGIAZQByACAAbgB1AG0AYgBlAHIALgAA
+DVsAXgAwAC0AOQBdAAE1VABvACAAZgBhAHgAIABuAHUAbQBiAGUAcgAgAGkAcwAgAG4AbwB0ACAA
+dgBhAGwAaQBkAAAxWQBvAHUAIABtAHUAcwB0ACAAaQBuAGMAbAB1AGQAZQAgAGEAIABmAGkAbABl
+AC4AAD1UAGgAZQAgAGYAaQBsAGUAIAAnAHsAMAB9ACcAIABkAG8AZQBzACAAbgBvAHQAIABlAHgA
+aQBzAHQALgABMVYAYQBsAGkAZABhAHQAaQBvAG4AIABpAHMAIABzAHUAYwBjAGUAcwBzAGYAdQBs
+AAAPZgBhAGkAbAB1AHIAZQAAA04AACNWAGEAbABpAGQAYQB0AGkAbwBuACAAZgBhAGkAbABlAGQA
+AANZAAANcwB0AGEAdAB1AHMAABVlAHIAcgBvAHIAXwBjAG8AZABlAAAVZQByAHIAbwByAF8AdAB5
+AHAAZQAAC1IAZQB0AHIAeQAAgI1FAHIAcgBvAHIAIABoAGEAcwAgAGIAZQBlAG4AIABvAGMAYwB1
+AHIAcgBlAGQAIAB3AGgAaQBsAGUAIAB1AHAAbABvAGEAZABpAG4AZwAgAGYAYQB4ACAAZABvAGMA
+dQBtAGUAbgB0ACAAdABvACAAZgBhAHgAaQBtAGkAbgBpAG8AbgAgAEEAUABJAAARcwBjAG0AcgBt
+AEEARABPAAAXZQByAHIAbwByAEYAbwBsAGQAZQByAAAbRgBhAHgAaQBtAGkAbgBpAG8AbgBLAGUA
+eQAAHUYAYQB4AGkAbQBpAG4AaQBvAG4AUwBlAG4AZAAAFXMAZQBuAHQARgBvAGwAZABlAHIAABlz
+AG8AdQByAGMAZQBGAG8AbABkAGUAcgAAN0EAIAB2AGEAbABpAGQAIABmAGEAeAAgAGkAZAAgAGkA
+cwAgAHIAZQBxAHUAaQByAGUAZAAuAAAFaQBkAAATZgBhAHgAUwB0AGEAdAB1AHMAAD1OAG8AIABk
+AGEAdABhACAAcgBlAGMAZQBpAHYAZQBkACAAZgByAG8AbQAgAHMAZQByAHYAaQBjAGUALgAAAQAX
+QwBvAG4AdABhAGkAbgBzAEsAZQB5AAAPbQBlAHMAcwBhAGcAZQAAH0MAaABlAGMAawBOAHUAbABs
+AFMAdAByAGkAbgBnAAAZewAwAH0AewAxAH0AewAyAH0AewAzAH0AADctAC0ALQAtAC0ALQAtAC0A
+LQAtAC0ALQAtAC0ALQAtAC0ALQAtAC0ALQAtAC0ALQAtAC0ALQABA3gAAAkNAAoALQAtAAEFDQAK
+AAA9bQB1AGwAdABpAHAAYQByAHQALwBmAG8AcgBtAC0AZABhAHQAYQA7ACAAYgBvAHUAbgBkAGEA
+cgB5AD0AAQlQAE8AUwBUAABjQwBvAG4AdABlAG4AdAAtAEQAaQBzAHAAbwBzAGkAdABpAG8AbgA6
+ACAAZgBvAHIAbQAtAGQAYQB0AGEAOwAgAG4AYQBtAGUAPQAiAHsAMAB9ACIADQAKAA0ACgB7ADEA
+fQABgM1DAG8AbgB0AGUAbgB0AC0ARABpAHMAcABvAHMAaQB0AGkAbwBuADoAIABmAG8AcgBtAC0A
+ZABhAHQAYQA7ACAAbgBhAG0AZQA9ACIAewAwAH0AIgA7ACAAZgBpAGwAZQBuAGEAbQBlAD0AIgB7
+ADEAfQAiAA0ACgBDAG8AbgB0AGUAbgB0AC0AVAB5AHAAZQA6ACAAYQBwAHAAbABpAGMAYQB0AGkA
+bwBuAC8AbwBjAHQAZQB0AC0AcwB0AHIAZQBhAG0ADQAKAA0ACgABEWYAaQBsAGUAbgBhAG0AZQAA
+CS0ALQANAAoAAQVYADIAAHFTAEMAXwA5AGEANQA2ADkAOABiADUANgA5AGQANQA0ADYAYwBiADgA
+ZQAyADEAMgBhAGYAMQBjADMAOQA5ADgAOQAxAGEALgBQAHIAbwBwAGUAcgB0AGkAZQBzAC4AUgBl
+AHMAbwB1AHIAYwBlAHMAAMbJy3Uk/FdBmbXsslA7/f8ACImEXc2AgMyRCLd6XFYZNOCJAwYSFAMG
+EhgDIAABCSAEAQgOEhUSGQUgAQESEAMGEh0DBhIhAwYSJQMGEikEIAEBHAYgARIgEi0KIAYBEiAO
+DgoODgcgAwESIAoOCSADARIVHQgSGQMgAA4DIAACBCAAETEDIAAIAygADgMoAAIEKAARMQMoAAgD
+BhIFBSABARIFBCAAEh0EKAASHQIGAgIGDgYgAwEODg4FIAESIAgHIAISIA4SLQQgAQ4cBSABDhIt
+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
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAEAAAABgAAIAAAAAAAAAAAAAAAAAAAAEAAQAA
+ADAAAIAAAAAAAAAAAAAAAAAAAAEAAAAAAEgAAABYgAAAsAMAAAAAAAAAAAAAsAM0AAAAVgBTAF8A
+VgBFAFIAUwBJAE8ATgBfAEkATgBGAE8AAAAAAL0E7/4AAAEAAAABAAldZRkAAAEACV1lGT8AAAAA
+AAAABAAAAAIAAAAAAAAAAAAAAAAAAABEAAAAAQBWAGEAcgBGAGkAbABlAEkAbgBmAG8AAAAAACQA
+BAAAAFQAcgBhAG4AcwBsAGEAdABpAG8AbgAAAAAAAACwBBADAAABAFMAdAByAGkAbgBnAEYAaQBs
+AGUASQBuAGYAbwAAAOwCAAABADAAMAAwADAAMAA0AGIAMAAAAHAAJAABAEYAaQBsAGUARABlAHMA
+YwByAGkAcAB0AGkAbwBuAAAAAABTAEMAXwA5AGEANQA2ADkAOABiADUANgA5AGQANQA0ADYAYwBi
+ADgAZQAyADEAMgBhAGYAMQBjADMAOQA5ADgAOQAxAGEAAABAAA8AAQBGAGkAbABlAFYAZQByAHMA
+aQBvAG4AAAAAADEALgAwAC4ANgA1ADAAMQAuADIAMwA4ADEANwAAAAAAcAAoAAEASQBuAHQAZQBy
+AG4AYQBsAE4AYQBtAGUAAABTAEMAXwA2ADcAQQA2ADUAMQBCAEQAOQAzADAARgA0ADkAMAA3ADkA
+NQA2AEYAMAA5ADUAMwAwADEAQgA1AEMANQAyAEYALgBkAGwAbAAAAEgAEgABAEwAZQBnAGEAbABD
+AG8AcAB5AHIAaQBnAGgAdAAAAEMAbwBwAHkAcgBpAGcAaAB0ACAAQAAgACAAMgAwADEANQAAAHgA
+KAABAE8AcgBpAGcAaQBuAGEAbABGAGkAbABlAG4AYQBtAGUAAABTAEMAXwA2ADcAQQA2ADUAMQBC
+AEQAOQAzADAARgA0ADkAMAA3ADkANQA2AEYAMAA5ADUAMwAwADEAQgA1AEMANQAyAEYALgBkAGwA
+bAAAAGgAJAABAFAAcgBvAGQAdQBjAHQATgBhAG0AZQAAAAAAUwBDAF8AOQBhADUANgA5ADgAYgA1
+ADYAOQBkADUANAA2AGMAYgA4AGUAMgAxADIAYQBmADEAYwAzADkAOQA4ADkAMQBhAAAARAAPAAEA
+UAByAG8AZAB1AGMAdABWAGUAcgBzAGkAbwBuAAAAMQAuADAALgA2ADUAMAAxAC4AMgAzADgAMQA3
+AAAAAABIAA8AAQBBAHMAcwBlAG0AYgBsAHkAIABWAGUAcgBzAGkAbwBuAAAAMQAuADAALgA2ADUA
+MAAxAC4AMgAzADgAMQA3AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAcAAADAAAABAyAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAA==]]></arrayElement>
+                  </arrayElements>
+                </property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the Microsoft Visual Studio Tools for Applications project. Project names must be unique within a package."
+                  name="VSTAProjectName"
+                  typeConverter="NOTBROWSABLE">SC_67a651bd930f4907956f095301b5c52f</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the programming language used by the script."
+                  name="ScriptLanguage"
+                  typeConverter="Microsoft.SqlServer.VSTAHosting.ScriptingLanguages">CSharp</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a comma-separated list of read-only variables."
+                  name="ReadOnlyVariables"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ScriptUIVariablePickerDlg">User::errorFolder,User::FaximinionKey,User::FaximinionSend,User::sentFolder,User::sourceFolder</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a comma-separated list of read/write variables."
+                  name="ReadWriteVariables"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ScriptUIWriteableVariablePickerDlg"></property>
+                <property
+                  dataType="System.String"
+                  description="List of breakpoints present on the script."
+                  isArray="true"
+                  name="BreakpointCollection"
+                  typeConverter="NOTBROWSABLE">
+                  <arrayElements
+                    arrayElementCount="0" />
+                </property>
+                <property
+                  dataType="System.String"
+                  description="Checksum to match component metedata against compiled codes."
+                  name="MetadataChecksum"
+                  typeConverter="NOTBROWSABLE">648742638b4cb9e768fdbb64eb9c033c</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.ScriptComponentHost</property>
+                <property
+                  dataType="System.String"
+                  description="Checksum to match component metedata against compiled codes."
+                  name="MetadataShaChecksum"
+                  typeConverter="NOTBROWSABLE">749bd25d43b4e80c3b158279d0e66e70a51772a0</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Get and Send Fax to Faximinion\Send fax file to Faximinion.Connections[scmrmADO]"
+                  connectionManagerID="{669D81A8-C5A7-4844-AFB7-BC4B7D3B2BB7}:invalid"
+                  connectionManagerRefId="{669D81A8-C5A7-4844-AFB7-BC4B7D3B2BB7}:invalid"
+                  name="scmrmADO" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Get and Send Fax to Faximinion\Send fax file to Faximinion.Inputs[Input 0]"
+                  hasSideEffects="true"
+                  name="Input 0">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Get and Send Fax to Faximinion\Send fax file to Faximinion.Inputs[Input 0].Columns[fileName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="250"
+                      cachedName="fileName"
+                      lineageId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].Columns[fileName]" />
+                    <inputColumn
+                      refId="Package\Get and Send Fax to Faximinion\Send fax file to Faximinion.Inputs[Input 0].Columns[providerNPI]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="providerNPI"
+                      lineageId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].Columns[providerNPI]" />
+                    <inputColumn
+                      refId="Package\Get and Send Fax to Faximinion\Send fax file to Faximinion.Inputs[Input 0].Columns[campaignCreateDate]"
+                      cachedDataType="dbDate"
+                      cachedName="campaignCreateDate"
+                      lineageId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].Columns[campaignCreateDate]" />
+                    <inputColumn
+                      refId="Package\Get and Send Fax to Faximinion\Send fax file to Faximinion.Inputs[Input 0].Columns[recipientFaxNumber]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="recipientFaxNumber"
+                      lineageId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].Columns[recipientFaxNumber]" />
+                    <inputColumn
+                      refId="Package\Get and Send Fax to Faximinion\Send fax file to Faximinion.Inputs[Input 0].Columns[senderFaxNumber]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="senderFaxNumber"
+                      lineageId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].Columns[senderFaxNumber]" />
+                    <inputColumn
+                      refId="Package\Get and Send Fax to Faximinion\Send fax file to Faximinion.Inputs[Input 0].Columns[faxSentIndicator]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="faxSentIndicator"
+                      lineageId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].Columns[faxSentIndicator]" />
+                    <inputColumn
+                      refId="Package\Get and Send Fax to Faximinion\Send fax file to Faximinion.Inputs[Input 0].Columns[faxStatusUpdateDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="faxStatusUpdateDate"
+                      lineageId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].Columns[faxStatusUpdateDate]" />
+                    <inputColumn
+                      refId="Package\Get and Send Fax to Faximinion\Send fax file to Faximinion.Inputs[Input 0].Columns[currentFaxStatus]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="currentFaxStatus"
+                      lineageId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].Columns[currentFaxStatus]" />
+                    <inputColumn
+                      refId="Package\Get and Send Fax to Faximinion\Send fax file to Faximinion.Inputs[Input 0].Columns[faxStatusDetail]"
+                      cachedDataType="wstr"
+                      cachedLength="1000"
+                      cachedName="faxStatusDetail"
+                      lineageId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].Columns[faxStatusDetail]" />
+                    <inputColumn
+                      refId="Package\Get and Send Fax to Faximinion\Send fax file to Faximinion.Inputs[Input 0].Columns[errorCode]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="2000"
+                      cachedName="errorCode"
+                      lineageId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].Columns[errorCode]" />
+                    <inputColumn
+                      refId="Package\Get and Send Fax to Faximinion\Send fax file to Faximinion.Inputs[Input 0].Columns[errorType]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1000"
+                      cachedName="errorType"
+                      lineageId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].Columns[errorType]" />
+                    <inputColumn
+                      refId="Package\Get and Send Fax to Faximinion\Send fax file to Faximinion.Inputs[Input 0].Columns[mrmBatchFaxPDFID]"
+                      cachedDataType="i4"
+                      cachedName="mrmBatchFaxPDFID"
+                      lineageId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].Columns[mrmBatchFaxPDFID]" />
+                    <inputColumn
+                      refId="Package\Get and Send Fax to Faximinion\Send fax file to Faximinion.Inputs[Input 0].Columns[pmdClientID]"
+                      cachedDataType="i4"
+                      cachedName="pmdClientID"
+                      lineageId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].Columns[pmdClientID]" />
+                    <inputColumn
+                      refId="Package\Get and Send Fax to Faximinion\Send fax file to Faximinion.Inputs[Input 0].Columns[faxSentToFaximinionDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="faxSentToFaximinionDate"
+                      lineageId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].Columns[faxSentToFaximinionDate]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+            </component>
+            <component
+              refId="Package\Get and Send Fax to Faximinion\update recipientFaxNumber in SCMRM"
+              componentClassID="Microsoft.OLEDBCommand"
+              contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Runs an SQL statement for each row in a data flow. For example, call a 'new employee setup' stored procedure for each row in the 'new employees' table. Note: running an SQL statement for each row of a large data flow may take a long time."
+              name="update recipientFaxNumber in SCMRM"
+              usesDispositions="true"
+              validateExternalMetadata="False"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">exec scmrm.dbo.updateMRMPDFsRecipientFaxFromStarsConnect ?,?,?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Get and Send Fax to Faximinion\update recipientFaxNumber in SCMRM.Connections[OleDbConnection]"
+                  connectionManagerID="{41920AF9-8DB7-4D45-A69E-694E95087E27}:invalid"
+                  connectionManagerRefId="{41920AF9-8DB7-4D45-A69E-694E95087E27}:invalid"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Get and Send Fax to Faximinion\update recipientFaxNumber in SCMRM.Inputs[OLE DB Command Input]"
+                  errorOrTruncationOperation="Command Execution"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Command Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Get and Send Fax to Faximinion\update recipientFaxNumber in SCMRM.Inputs[OLE DB Command Input].Columns[providerNPI]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="providerNPI"
+                      externalMetadataColumnId="Package\Get and Send Fax to Faximinion\update recipientFaxNumber in SCMRM.Inputs[OLE DB Command Input].ExternalColumns[@providerNPI]"
+                      lineageId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].Columns[providerNPI]" />
+                    <inputColumn
+                      refId="Package\Get and Send Fax to Faximinion\update recipientFaxNumber in SCMRM.Inputs[OLE DB Command Input].Columns[recipientFaxNumber]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="recipientFaxNumber"
+                      externalMetadataColumnId="Package\Get and Send Fax to Faximinion\update recipientFaxNumber in SCMRM.Inputs[OLE DB Command Input].ExternalColumns[@recipientFaxnumber]"
+                      lineageId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].Columns[recipientFaxNumber]" />
+                    <inputColumn
+                      refId="Package\Get and Send Fax to Faximinion\update recipientFaxNumber in SCMRM.Inputs[OLE DB Command Input].Columns[mrmBatchFaxPDFID]"
+                      cachedDataType="i4"
+                      cachedName="mrmBatchFaxPDFID"
+                      externalMetadataColumnId="Package\Get and Send Fax to Faximinion\update recipientFaxNumber in SCMRM.Inputs[OLE DB Command Input].ExternalColumns[@mrmBatchFaxPDFID]"
+                      lineageId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output].Columns[mrmBatchFaxPDFID]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Get and Send Fax to Faximinion\update recipientFaxNumber in SCMRM.Inputs[OLE DB Command Input].ExternalColumns[@providerNPI]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="@providerNPI">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Get and Send Fax to Faximinion\update recipientFaxNumber in SCMRM.Inputs[OLE DB Command Input].ExternalColumns[@recipientFaxnumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="@recipientFaxnumber">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Get and Send Fax to Faximinion\update recipientFaxNumber in SCMRM.Inputs[OLE DB Command Input].ExternalColumns[@mrmBatchFaxPDFID]"
+                      dataType="i4"
+                      name="@mrmBatchFaxPDFID">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Get and Send Fax to Faximinion\update recipientFaxNumber in SCMRM.Outputs[OLE DB Command Output]"
+                  exclusionGroup="1"
+                  name="OLE DB Command Output"
+                  synchronousInputId="Package\Get and Send Fax to Faximinion\update recipientFaxNumber in SCMRM.Inputs[OLE DB Command Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Get and Send Fax to Faximinion\update recipientFaxNumber in SCMRM.Outputs[OLE DB Command Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Command Error Output"
+                  synchronousInputId="Package\Get and Send Fax to Faximinion\update recipientFaxNumber in SCMRM.Inputs[OLE DB Command Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Get and Send Fax to Faximinion\update recipientFaxNumber in SCMRM.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Get and Send Fax to Faximinion\update recipientFaxNumber in SCMRM.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Get and Send Fax to Faximinion\update recipientFaxNumber in SCMRM.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Get and Send Fax to Faximinion\update recipientFaxNumber in SCMRM.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Get and Send Fax to Faximinion.Paths[Multicast Output 1]"
+              endId="Package\Get and Send Fax to Faximinion\update recipientFaxNumber in SCMRM.Inputs[OLE DB Command Input]"
+              name="Multicast Output 1"
+              startId="Package\Get and Send Fax to Faximinion\Multicast.Outputs[Multicast Output 1]" />
+            <path
+              refId="Package\Get and Send Fax to Faximinion.Paths[Multicast Output 3]"
+              endId="Package\Get and Send Fax to Faximinion\Send fax file to Faximinion.Inputs[Input 0]"
+              name="Multicast Output 3"
+              startId="Package\Get and Send Fax to Faximinion\Multicast.Outputs[Multicast Output 3]" />
+            <path
+              refId="Package\Get and Send Fax to Faximinion.Paths[OLE DB Source Output]"
+              endId="Package\Get and Send Fax to Faximinion\Multicast.Inputs[Multicast Input 1]"
+              name="OLE DB Source Output"
+              startId="Package\Get and Send Fax to Faximinion\Get all Fax file Information.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Get BatchFaxDate"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{CE8ABEB8-44FC-46C0-AC90-B8BDF0234B5C}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Get BatchFaxDate"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{41920AF9-8DB7-4D45-A69E-694E95087E27}"
+          SQLTask:SqlStatementSource="Select max(campaigncreatedate) from SCMRM.dbo.mrmBatchFaxPDFs"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::BatchFaxDate" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Send Faxing summary notification"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:Disabled="True"
+      DTS:DTSID="{AB4DFEB5-FFC5-453A-9D33-A2D014047451}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Send Faxing summary notification"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{41920AF9-8DB7-4D45-A69E-694E95087E27}"
+          SQLTask:SqlStatementSource="Declare @CallListEmailDatabaseProfile varchar(20) = ?&#xA;Declare @CallListEmailRecipients varchar(50) = 'p10prdsde003OPS'&#xA;&#xA;&#xA;if (SELECT count(*) FROM SCMRM.dbo.mrmBatchFaxPDFs  where campaignCreateDate = cast(getdate()-1 as date)) &gt; 1&#xA;begin&#xA; Declare @Subject nvarchar(1000)&#xA; Declare @body nvarchar(2000)&#xA; DECLARE @successfullfaxcount INT&#xA; DECLARE @failedFaxCount INT&#xA;  DECLARE @pendingFaxCount INT&#xA;    DECLARE @previouslysentcount INT&#xA; &#xA; Set @Subject= 'MRM Batch Fax Campaign for  ' + Convert(varchar(12),getdate(), 100)&#xA;&#xA; Set @body = &#xA; 'All,&#xA; &#xA;MRM Batch Fax Process is Complete'+ &#xA; &#xA; CAST(@successfullfaxcount AS VARCHAR(100))+' faxes were successfully sent.&#xA;&#xA; ' +CAST(@pendingFaxCount  AS VARCHAR(100))+ ' faxes are pending.&#xA;&#xA; ' +CAST( @failedFaxCount  AS VARCHAR(100)) + ' faxes failed.&#xA;&#xA; Please contact datateam@pharmmd.com with any questions.'&#xA;&#xA;&#xA; exec msdb.dbo.sp_send_dbmail&#xA;  @profile_name = @CallListEmailDatabaseProfile, -- replace with your SQL Database Mail Profile &#xA; @body = @body,&#xA; @body_format ='text',&#xA; @recipients = @CallListEmailRecipients,-- replace with your email address&#xA; @subject = @Subject&#xA; --,@query = @EmailQuery, @attach_query_result_as_file = 0, @query_attachment_filename = 'CallList.txt'&#xA;&#xA;&#xA;&#xA;&#xA; --@profile_name = 'SQLOPS Peak10', -- replace with your SQL Database Mail Profile &#xA; --@body = @body,&#xA; --@body_format ='text',&#xA; --@recipients = 'corey.collins@pharmmd.com',-- replace with your email address&#xA; --@subject = @Subject&#xA; ----,@query = @EmailQuery, @attach_query_result_as_file = 0, @query_attachment_filename = 'CallList.txt'&#xA;end" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="$Project::CallListEmailDatabaseProfile"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{12119A0F-B1E9-4F48-9928-8033B72241FF}"
+      DTS:From="Package\Get and Send Fax to Faximinion"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Send Faxing summary notification" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{A1A2D50D-9619-475F-9F21-A35C65167E7F}"
+      DTS:From="Package\Get BatchFaxDate"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Create Sent Folder" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{2ACAD142-6C4F-4E99-A8BE-CE849CE4FD98}"
+      DTS:From="Package\Create Sent Folder"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Create Error Folder" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{AA33EA23-289E-45AB-99B4-71207A4F3031}"
+      DTS:From="Package\Create Error Folder"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Get and Send Fax to Faximinion" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql12">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="260,42"
+          Id="Package\Create Error Folder"
+          TopLeft="158.499993145466,190.999994686672" />
+        <NodeLayout
+          Size="260,42"
+          Id="Package\Create Sent Folder"
+          TopLeft="158.499993145466,109.999997343336" />
+        <NodeLayout
+          Size="260,42"
+          Id="Package\Get and Send Fax to Faximinion"
+          TopLeft="158.499993145466,271.999992030008" />
+        <NodeLayout
+          Size="260,42"
+          Id="Package\Get BatchFaxDate"
+          TopLeft="158.499993145466,30" />
+        <NodeLayout
+          Size="260,42"
+          Id="Package\Send Faxing summary notification"
+          TopLeft="153.499993145466,355.999989373344" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="285.999993145466,313.999992030008">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,41.999997343336"
+              Start="0,0"
+              End="0,34.499997343336">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,34.499997343336" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="288.499993145466,72">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,37.999997343336"
+              Start="0,0"
+              End="0,30.499997343336">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.499997343336" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="288.499993145466,151.999997343336">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,38.999997343336"
+              Start="0,0"
+              End="0,31.499997343336">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.499997343336" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="288.499993145466,232.999994686672">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,38.999997343336"
+              Start="0,0"
+              End="0,31.499997343336">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.499997343336" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="This package sends PDF files to Faximinion"
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="254,40"
+          Id="f9430dc7-845e-41bf-8186-f98e2d404453"
+          TopLeft="439,92" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Get and Send Fax to Faximinion">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="204,42"
+          Id="Package\Get and Send Fax to Faximinion\Send fax file to Faximinion"
+          TopLeft="683,339" />
+        <NodeLayout
+          Size="259,42"
+          Id="Package\Get and Send Fax to Faximinion\update recipientFaxNumber in SCMRM"
+          TopLeft="124.000008742015,331.428568392384" />
+        <NodeLayout
+          Size="126,42"
+          Id="Package\Get and Send Fax to Faximinion\Multicast"
+          TopLeft="387.500005265077,173.214290505769" />
+        <NodeLayout
+          Size="219,42"
+          Id="Package\Get and Send Fax to Faximinion\Get all Fax file Information"
+          TopLeft="342.333333399561,64.714285524524" />
+        <EdgeLayout
+          Id="Package\Get and Send Fax to Faximinion.Paths[OLE DB Source Output]"
+          TopLeft="451.166669332319,106.714285524524">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,66.500004981245"
+              Start="0,0"
+              End="0,59.000004981245">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,59.000004981245" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Get and Send Fax to Faximinion.Paths[Multicast Output 3]"
+          TopLeft="470.166671931744,215.214290505769">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="314.833328068256,123.785709494231"
+              Start="0,0"
+              End="314.833328068256,116.285709494231">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,46.4455869412227" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,46.4455869412227"
+                    Point2="0,50.4455869412227"
+                    Point3="4,50.4455869412227" />
+                  <mssgle:LineSegment
+                    End="310.833328068256,50.4455869412227" />
+                  <mssgle:CubicBezierSegment
+                    Point1="310.833328068256,50.4455869412227"
+                    Point2="314.833328068256,50.4455869412227"
+                    Point3="314.833328068256,54.4455869412227" />
+                  <mssgle:LineSegment
+                    End="314.833328068256,116.285709494231" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Get and Send Fax to Faximinion.Paths[Multicast Output 1]"
+          TopLeft="430.83333859841,215.214290505769">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-177.333329856395,116.214277886615"
+              Start="0,0"
+              End="-177.333329856395,108.714277886615">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,43.3600505494042" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,43.3600505494042"
+                    Point2="0,47.3600505494042"
+                    Point3="-4,47.3600505494042" />
+                  <mssgle:LineSegment
+                    End="-173.333329856395,47.3600505494042" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-173.333329856395,47.3600505494042"
+                    Point2="-177.333329856395,47.3600505494042"
+                    Point3="-177.333329856395,51.3600505494042" />
+                  <mssgle:LineSegment
+                    End="-177.333329856395,108.714277886615" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Get and Send Fax to Faximinion\Get all Fax file Information">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

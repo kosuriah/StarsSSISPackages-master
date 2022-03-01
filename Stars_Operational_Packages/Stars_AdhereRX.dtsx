@@ -1,0 +1,1752 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="7/16/2019 12:33:44 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="LT-53LLQN2-0685"
+  DTS:CreatorName="PHARMMD\Paul.Hancock"
+  DTS:DTSID="{D22B6E69-72C6-4E32-A9FA-F6629D254357}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.1100.123"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Stars_AdhereRX"
+  DTS:PackageType="5"
+  DTS:VersionBuild="21"
+  DTS:VersionGUID="{9E8A42C6-77CC-4EF0-A7D7-FE3EDCC5F56F}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[FFM AdhereRXCallList]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{190C4A32-C582-497A-865F-B6198CE35B39}"
+      DTS:ObjectName="FFM AdhereRXCallList">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">"\\\\"+ @[$Project::ServerOperation] +"\\Stars\\ClientFiles\\AdhereRX\\AdhereRXCallList"+REPLACE(LEFT((DT_STR,31,1252)GETDATE(),10),"-","")+".csv"</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x0022_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\P10DEVSDE003\Stars\ClientFiles\AdhereRX\AdhereRXCallList20190716.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="2"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PMD_Client_ID"
+              DTS:DTSID="{2616E4FE-4C80-4B4F-B2C1-7034B621F7BF}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="20"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PMD_Patient_ID"
+              DTS:DTSID="{B06D796E-D8DF-4D0F-B1F5-8DA79DAD9EB1}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="133"
+              DTS:TextQualified="True"
+              DTS:ObjectName="DateFilled"
+              DTS:DTSID="{AA95B75C-45EE-4E5F-B2C5-C4546F8BE15C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="255"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Drug"
+              DTS:DTSID="{47501D85-C8CE-4709-9A89-F1547336BF33}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Pharmacy"
+              DTS:DTSID="{7D6E6B09-D8CA-4188-8E0B-8925986AE84A}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="10"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PharmacyPhoneNumber"
+              DTS:DTSID="{EAF1EDFB-CF89-457B-9A7F-7D59926EE3FA}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[SMTP Connection Manager]"
+      DTS:CreationName="SMTP"
+      DTS:DTSID="{032B9F2D-4E7D-4120-B472-82CE0748CC6E}"
+      DTS:ObjectName="SMTP Connection Manager">
+      <DTS:ObjectData>
+        <SmtpConnectionManager
+          ConnectionString="SmtpServer=mxgw-vip.pharmmd.net;UseWindowsAuthentication=False;EnableSsl=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Create Call List CSV file"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{70DEA36F-B942-4E36-B1D7-72817AA7A704}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Create Call List CSV file"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Create Call List CSV file\FFD AdhereRXCallListYYYYMMDD"
+              componentClassID="Microsoft.FlatFileDestination"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Flat File Destination"
+              localeId="1033"
+              name="FFD AdhereRXCallListYYYYMMDD">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+                <property
+                  dataType="System.Boolean"
+                  description="When text qualifier is enabled, specifies whether the text qualifier in the data written to the destination file will be escaped or not."
+                  name="EscapeQualifier">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Create Call List CSV file\FFD AdhereRXCallListYYYYMMDD.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[FFM AdhereRXCallList]"
+                  connectionManagerRefId="Package.ConnectionManagers[FFM AdhereRXCallList]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Create Call List CSV file\FFD AdhereRXCallListYYYYMMDD.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Create Call List CSV file\FFD AdhereRXCallListYYYYMMDD.Inputs[Flat File Destination Input].Columns[PMD_Client_ID]"
+                      cachedDataType="i2"
+                      cachedName="PMD_Client_ID"
+                      externalMetadataColumnId="Package\Create Call List CSV file\FFD AdhereRXCallListYYYYMMDD.Inputs[Flat File Destination Input].ExternalColumns[PMD_Client_ID]"
+                      lineageId="Package\Create Call List CSV file\OLEDB Stars_rdsm dbo vw_AdhereRXCallList.Outputs[OLE DB Source Output].Columns[PMD_Client_ID]" />
+                    <inputColumn
+                      refId="Package\Create Call List CSV file\FFD AdhereRXCallListYYYYMMDD.Inputs[Flat File Destination Input].Columns[PMD_Patient_ID]"
+                      cachedDataType="i8"
+                      cachedName="PMD_Patient_ID"
+                      externalMetadataColumnId="Package\Create Call List CSV file\FFD AdhereRXCallListYYYYMMDD.Inputs[Flat File Destination Input].ExternalColumns[PMD_Patient_ID]"
+                      lineageId="Package\Create Call List CSV file\OLEDB Stars_rdsm dbo vw_AdhereRXCallList.Outputs[OLE DB Source Output].Columns[PMD_Patient_ID]" />
+                    <inputColumn
+                      refId="Package\Create Call List CSV file\FFD AdhereRXCallListYYYYMMDD.Inputs[Flat File Destination Input].Columns[DateFilled]"
+                      cachedDataType="dbDate"
+                      cachedName="DateFilled"
+                      externalMetadataColumnId="Package\Create Call List CSV file\FFD AdhereRXCallListYYYYMMDD.Inputs[Flat File Destination Input].ExternalColumns[DateFilled]"
+                      lineageId="Package\Create Call List CSV file\OLEDB Stars_rdsm dbo vw_AdhereRXCallList.Outputs[OLE DB Source Output].Columns[DateFilled]" />
+                    <inputColumn
+                      refId="Package\Create Call List CSV file\FFD AdhereRXCallListYYYYMMDD.Inputs[Flat File Destination Input].Columns[Drug]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="Drug"
+                      externalMetadataColumnId="Package\Create Call List CSV file\FFD AdhereRXCallListYYYYMMDD.Inputs[Flat File Destination Input].ExternalColumns[Drug]"
+                      lineageId="Package\Create Call List CSV file\OLEDB Stars_rdsm dbo vw_AdhereRXCallList.Outputs[OLE DB Source Output].Columns[Drug]" />
+                    <inputColumn
+                      refId="Package\Create Call List CSV file\FFD AdhereRXCallListYYYYMMDD.Inputs[Flat File Destination Input].Columns[Pharmacy]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="Pharmacy"
+                      externalMetadataColumnId="Package\Create Call List CSV file\FFD AdhereRXCallListYYYYMMDD.Inputs[Flat File Destination Input].ExternalColumns[Pharmacy]"
+                      lineageId="Package\Create Call List CSV file\OLEDB Stars_rdsm dbo vw_AdhereRXCallList.Outputs[OLE DB Source Output].Columns[Pharmacy]" />
+                    <inputColumn
+                      refId="Package\Create Call List CSV file\FFD AdhereRXCallListYYYYMMDD.Inputs[Flat File Destination Input].Columns[PharmacyPhoneNumber]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="PharmacyPhoneNumber"
+                      externalMetadataColumnId="Package\Create Call List CSV file\FFD AdhereRXCallListYYYYMMDD.Inputs[Flat File Destination Input].ExternalColumns[PharmacyPhoneNumber]"
+                      lineageId="Package\Create Call List CSV file\OLEDB Stars_rdsm dbo vw_AdhereRXCallList.Outputs[OLE DB Source Output].Columns[PharmacyPhoneNumber]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Create Call List CSV file\FFD AdhereRXCallListYYYYMMDD.Inputs[Flat File Destination Input].ExternalColumns[PMD_Client_ID]"
+                      dataType="i2"
+                      name="PMD_Client_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Create Call List CSV file\FFD AdhereRXCallListYYYYMMDD.Inputs[Flat File Destination Input].ExternalColumns[PMD_Patient_ID]"
+                      dataType="i8"
+                      name="PMD_Patient_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Create Call List CSV file\FFD AdhereRXCallListYYYYMMDD.Inputs[Flat File Destination Input].ExternalColumns[DateFilled]"
+                      dataType="dbDate"
+                      name="DateFilled" />
+                    <externalMetadataColumn
+                      refId="Package\Create Call List CSV file\FFD AdhereRXCallListYYYYMMDD.Inputs[Flat File Destination Input].ExternalColumns[Drug]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="Drug" />
+                    <externalMetadataColumn
+                      refId="Package\Create Call List CSV file\FFD AdhereRXCallListYYYYMMDD.Inputs[Flat File Destination Input].ExternalColumns[Pharmacy]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="Pharmacy" />
+                    <externalMetadataColumn
+                      refId="Package\Create Call List CSV file\FFD AdhereRXCallListYYYYMMDD.Inputs[Flat File Destination Input].ExternalColumns[PharmacyPhoneNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="PharmacyPhoneNumber" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+            <component
+              refId="Package\Create Call List CSV file\OLEDB Stars_rdsm dbo vw_AdhereRXCallList"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLEDB Stars_rdsm dbo vw_AdhereRXCallList"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[vw_AdhereRXCallList]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Create Call List CSV file\OLEDB Stars_rdsm dbo vw_AdhereRXCallList.Connections[OleDbConnection]"
+                  connectionManagerID="{833D12C4-85D0-48E0-89ED-50C49F533C60}:invalid"
+                  connectionManagerRefId="{833D12C4-85D0-48E0-89ED-50C49F533C60}:invalid"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Create Call List CSV file\OLEDB Stars_rdsm dbo vw_AdhereRXCallList.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Create Call List CSV file\OLEDB Stars_rdsm dbo vw_AdhereRXCallList.Outputs[OLE DB Source Output].Columns[PMD_Client_ID]"
+                      dataType="i2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Create Call List CSV file\OLEDB Stars_rdsm dbo vw_AdhereRXCallList.Outputs[OLE DB Source Output].ExternalColumns[PMD_Client_ID]"
+                      lineageId="Package\Create Call List CSV file\OLEDB Stars_rdsm dbo vw_AdhereRXCallList.Outputs[OLE DB Source Output].Columns[PMD_Client_ID]"
+                      name="PMD_Client_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Create Call List CSV file\OLEDB Stars_rdsm dbo vw_AdhereRXCallList.Outputs[OLE DB Source Output].Columns[PMD_Patient_ID]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Create Call List CSV file\OLEDB Stars_rdsm dbo vw_AdhereRXCallList.Outputs[OLE DB Source Output].ExternalColumns[PMD_Patient_ID]"
+                      lineageId="Package\Create Call List CSV file\OLEDB Stars_rdsm dbo vw_AdhereRXCallList.Outputs[OLE DB Source Output].Columns[PMD_Patient_ID]"
+                      name="PMD_Patient_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Create Call List CSV file\OLEDB Stars_rdsm dbo vw_AdhereRXCallList.Outputs[OLE DB Source Output].Columns[DateFilled]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Create Call List CSV file\OLEDB Stars_rdsm dbo vw_AdhereRXCallList.Outputs[OLE DB Source Output].ExternalColumns[DateFilled]"
+                      lineageId="Package\Create Call List CSV file\OLEDB Stars_rdsm dbo vw_AdhereRXCallList.Outputs[OLE DB Source Output].Columns[DateFilled]"
+                      name="DateFilled"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Create Call List CSV file\OLEDB Stars_rdsm dbo vw_AdhereRXCallList.Outputs[OLE DB Source Output].Columns[Drug]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Create Call List CSV file\OLEDB Stars_rdsm dbo vw_AdhereRXCallList.Outputs[OLE DB Source Output].ExternalColumns[Drug]"
+                      length="255"
+                      lineageId="Package\Create Call List CSV file\OLEDB Stars_rdsm dbo vw_AdhereRXCallList.Outputs[OLE DB Source Output].Columns[Drug]"
+                      name="Drug"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Create Call List CSV file\OLEDB Stars_rdsm dbo vw_AdhereRXCallList.Outputs[OLE DB Source Output].Columns[Pharmacy]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Create Call List CSV file\OLEDB Stars_rdsm dbo vw_AdhereRXCallList.Outputs[OLE DB Source Output].ExternalColumns[Pharmacy]"
+                      length="100"
+                      lineageId="Package\Create Call List CSV file\OLEDB Stars_rdsm dbo vw_AdhereRXCallList.Outputs[OLE DB Source Output].Columns[Pharmacy]"
+                      name="Pharmacy"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Create Call List CSV file\OLEDB Stars_rdsm dbo vw_AdhereRXCallList.Outputs[OLE DB Source Output].Columns[PharmacyPhoneNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Create Call List CSV file\OLEDB Stars_rdsm dbo vw_AdhereRXCallList.Outputs[OLE DB Source Output].ExternalColumns[PharmacyPhoneNumber]"
+                      length="10"
+                      lineageId="Package\Create Call List CSV file\OLEDB Stars_rdsm dbo vw_AdhereRXCallList.Outputs[OLE DB Source Output].Columns[PharmacyPhoneNumber]"
+                      name="PharmacyPhoneNumber"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Create Call List CSV file\OLEDB Stars_rdsm dbo vw_AdhereRXCallList.Outputs[OLE DB Source Output].ExternalColumns[PMD_Client_ID]"
+                      dataType="i2"
+                      name="PMD_Client_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Create Call List CSV file\OLEDB Stars_rdsm dbo vw_AdhereRXCallList.Outputs[OLE DB Source Output].ExternalColumns[PMD_Patient_ID]"
+                      dataType="i8"
+                      name="PMD_Patient_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Create Call List CSV file\OLEDB Stars_rdsm dbo vw_AdhereRXCallList.Outputs[OLE DB Source Output].ExternalColumns[DateFilled]"
+                      dataType="dbDate"
+                      name="DateFilled" />
+                    <externalMetadataColumn
+                      refId="Package\Create Call List CSV file\OLEDB Stars_rdsm dbo vw_AdhereRXCallList.Outputs[OLE DB Source Output].ExternalColumns[Drug]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="Drug" />
+                    <externalMetadataColumn
+                      refId="Package\Create Call List CSV file\OLEDB Stars_rdsm dbo vw_AdhereRXCallList.Outputs[OLE DB Source Output].ExternalColumns[Pharmacy]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="Pharmacy" />
+                    <externalMetadataColumn
+                      refId="Package\Create Call List CSV file\OLEDB Stars_rdsm dbo vw_AdhereRXCallList.Outputs[OLE DB Source Output].ExternalColumns[PharmacyPhoneNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="PharmacyPhoneNumber" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Create Call List CSV file\OLEDB Stars_rdsm dbo vw_AdhereRXCallList.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Create Call List CSV file\OLEDB Stars_rdsm dbo vw_AdhereRXCallList.Outputs[OLE DB Source Error Output].Columns[PMD_Client_ID]"
+                      dataType="i2"
+                      lineageId="Package\Create Call List CSV file\OLEDB Stars_rdsm dbo vw_AdhereRXCallList.Outputs[OLE DB Source Error Output].Columns[PMD_Client_ID]"
+                      name="PMD_Client_ID" />
+                    <outputColumn
+                      refId="Package\Create Call List CSV file\OLEDB Stars_rdsm dbo vw_AdhereRXCallList.Outputs[OLE DB Source Error Output].Columns[PMD_Patient_ID]"
+                      dataType="i8"
+                      lineageId="Package\Create Call List CSV file\OLEDB Stars_rdsm dbo vw_AdhereRXCallList.Outputs[OLE DB Source Error Output].Columns[PMD_Patient_ID]"
+                      name="PMD_Patient_ID" />
+                    <outputColumn
+                      refId="Package\Create Call List CSV file\OLEDB Stars_rdsm dbo vw_AdhereRXCallList.Outputs[OLE DB Source Error Output].Columns[DateFilled]"
+                      dataType="dbDate"
+                      lineageId="Package\Create Call List CSV file\OLEDB Stars_rdsm dbo vw_AdhereRXCallList.Outputs[OLE DB Source Error Output].Columns[DateFilled]"
+                      name="DateFilled" />
+                    <outputColumn
+                      refId="Package\Create Call List CSV file\OLEDB Stars_rdsm dbo vw_AdhereRXCallList.Outputs[OLE DB Source Error Output].Columns[Drug]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      lineageId="Package\Create Call List CSV file\OLEDB Stars_rdsm dbo vw_AdhereRXCallList.Outputs[OLE DB Source Error Output].Columns[Drug]"
+                      name="Drug" />
+                    <outputColumn
+                      refId="Package\Create Call List CSV file\OLEDB Stars_rdsm dbo vw_AdhereRXCallList.Outputs[OLE DB Source Error Output].Columns[Pharmacy]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\Create Call List CSV file\OLEDB Stars_rdsm dbo vw_AdhereRXCallList.Outputs[OLE DB Source Error Output].Columns[Pharmacy]"
+                      name="Pharmacy" />
+                    <outputColumn
+                      refId="Package\Create Call List CSV file\OLEDB Stars_rdsm dbo vw_AdhereRXCallList.Outputs[OLE DB Source Error Output].Columns[PharmacyPhoneNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\Create Call List CSV file\OLEDB Stars_rdsm dbo vw_AdhereRXCallList.Outputs[OLE DB Source Error Output].Columns[PharmacyPhoneNumber]"
+                      name="PharmacyPhoneNumber" />
+                    <outputColumn
+                      refId="Package\Create Call List CSV file\OLEDB Stars_rdsm dbo vw_AdhereRXCallList.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Create Call List CSV file\OLEDB Stars_rdsm dbo vw_AdhereRXCallList.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Create Call List CSV file\OLEDB Stars_rdsm dbo vw_AdhereRXCallList.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Create Call List CSV file\OLEDB Stars_rdsm dbo vw_AdhereRXCallList.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Create Call List CSV file.Paths[OLE DB Source Output]"
+              endId="Package\Create Call List CSV file\FFD AdhereRXCallListYYYYMMDD.Inputs[Flat File Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Create Call List CSV file\OLEDB Stars_rdsm dbo vw_AdhereRXCallList.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\ExecSQL StarsConnect dbo usp_AdhereRX"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{13547A0E-5D8D-4FE9-8024-C54337E08738}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ExecSQL StarsConnect dbo usp_AdhereRX"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{C4D05BF8-D95C-4500-92C3-AB5C733EC574}"
+          SQLTask:SqlStatementSource="EXEC usp_LoadPatient;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\ExecSQL Stars_rdsm dbo usp_AdhereRx"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{9646D0BD-3554-4CD7-B4FB-A3DEEB7D161A}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ExecSQL Stars_rdsm dbo usp_AdhereRx"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{833D12C4-85D0-48E0-89ED-50C49F533C60}"
+          SQLTask:SqlStatementSource="EXEC usp_AdhereRX;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\ExecSQL Truncate StarsConnect staging Patient"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{ECC2951F-E985-4259-AF39-2854ADE15276}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ExecSQL Truncate StarsConnect staging Patient"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{C4D05BF8-D95C-4500-92C3-AB5C733EC574}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE staging.Patient;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Load StarsConnect staging Patient"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{9746DEA8-7BDE-4613-A91F-F913A57E074D}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load StarsConnect staging Patient"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLEDB StarsConnect staging Patient"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[staging].[Patient]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient.Connections[OleDbConnection]"
+                  connectionManagerID="{C4D05BF8-D95C-4500-92C3-AB5C733EC574}:invalid"
+                  connectionManagerRefId="{C4D05BF8-D95C-4500-92C3-AB5C733EC574}:invalid"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient.Inputs[OLE DB Destination Input].Columns[pmd_client_id]"
+                      cachedDataType="i4"
+                      cachedName="pmd_client_id"
+                      externalMetadataColumnId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient.Inputs[OLE DB Destination Input].ExternalColumns[pmd_client_id]"
+                      lineageId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].Columns[pmd_client_id]" />
+                    <inputColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient.Inputs[OLE DB Destination Input].Columns[pmd_patient_id]"
+                      cachedDataType="i8"
+                      cachedName="pmd_patient_id"
+                      externalMetadataColumnId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient.Inputs[OLE DB Destination Input].ExternalColumns[pmd_patient_id]"
+                      lineageId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].Columns[pmd_patient_id]" />
+                    <inputColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient.Inputs[OLE DB Destination Input].Columns[first_name]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="first_name"
+                      externalMetadataColumnId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient.Inputs[OLE DB Destination Input].ExternalColumns[first_name]"
+                      lineageId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].Columns[first_name]" />
+                    <inputColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient.Inputs[OLE DB Destination Input].Columns[last_name]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="last_name"
+                      externalMetadataColumnId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient.Inputs[OLE DB Destination Input].ExternalColumns[last_name]"
+                      lineageId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].Columns[last_name]" />
+                    <inputColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient.Inputs[OLE DB Destination Input].Columns[gender]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="gender"
+                      externalMetadataColumnId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient.Inputs[OLE DB Destination Input].ExternalColumns[gender]"
+                      lineageId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].Columns[gender]" />
+                    <inputColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient.Inputs[OLE DB Destination Input].Columns[dob]"
+                      cachedDataType="dbDate"
+                      cachedName="dob"
+                      externalMetadataColumnId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient.Inputs[OLE DB Destination Input].ExternalColumns[dob]"
+                      lineageId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].Columns[dob]" />
+                    <inputColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient.Inputs[OLE DB Destination Input].Columns[member_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="member_id"
+                      externalMetadataColumnId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient.Inputs[OLE DB Destination Input].ExternalColumns[member_id]"
+                      lineageId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].Columns[member_id]" />
+                    <inputColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient.Inputs[OLE DB Destination Input].Columns[plan_name]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="plan_name"
+                      externalMetadataColumnId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient.Inputs[OLE DB Destination Input].ExternalColumns[plan_name]"
+                      lineageId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].Columns[plan_name]" />
+                    <inputColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient.Inputs[OLE DB Destination Input].Columns[plan_group]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="plan_group"
+                      externalMetadataColumnId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient.Inputs[OLE DB Destination Input].ExternalColumns[plan_group]"
+                      lineageId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].Columns[plan_group]" />
+                    <inputColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient.Inputs[OLE DB Destination Input].Columns[plan_sponsor]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="plan_sponsor"
+                      externalMetadataColumnId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient.Inputs[OLE DB Destination Input].ExternalColumns[plan_sponsor]"
+                      lineageId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].Columns[plan_sponsor]" />
+                    <inputColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient.Inputs[OLE DB Destination Input].Columns[plan_cs_number]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="15"
+                      cachedName="plan_cs_number"
+                      externalMetadataColumnId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient.Inputs[OLE DB Destination Input].ExternalColumns[plan_cs_number]"
+                      lineageId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].Columns[plan_cs_number]" />
+                    <inputColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient.Inputs[OLE DB Destination Input].Columns[mtm_eligible]"
+                      cachedDataType="bool"
+                      cachedName="mtm_eligible"
+                      externalMetadataColumnId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient.Inputs[OLE DB Destination Input].ExternalColumns[mtm_eligible]"
+                      lineageId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].Columns[mtm_eligible]" />
+                    <inputColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient.Inputs[OLE DB Destination Input].Columns[low_income_subsidy]"
+                      cachedDataType="bool"
+                      cachedName="low_income_subsidy"
+                      externalMetadataColumnId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient.Inputs[OLE DB Destination Input].ExternalColumns[low_income_subsidy]"
+                      lineageId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].Columns[low_income_subsidy]" />
+                    <inputColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient.Inputs[OLE DB Destination Input].Columns[low_income_subsidy_discount]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="250"
+                      cachedName="low_income_subsidy_discount"
+                      externalMetadataColumnId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient.Inputs[OLE DB Destination Input].ExternalColumns[low_income_subsidy_discount]"
+                      lineageId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].Columns[low_income_subsidy_discount]" />
+                    <inputColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient.Inputs[OLE DB Destination Input].Columns[address_1]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="250"
+                      cachedName="address_1"
+                      externalMetadataColumnId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient.Inputs[OLE DB Destination Input].ExternalColumns[address_1]"
+                      lineageId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].Columns[address_1]" />
+                    <inputColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient.Inputs[OLE DB Destination Input].Columns[city]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="city"
+                      externalMetadataColumnId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient.Inputs[OLE DB Destination Input].ExternalColumns[city]"
+                      lineageId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].Columns[city]" />
+                    <inputColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient.Inputs[OLE DB Destination Input].Columns[state]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="state"
+                      externalMetadataColumnId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient.Inputs[OLE DB Destination Input].ExternalColumns[state]"
+                      lineageId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].Columns[state]" />
+                    <inputColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient.Inputs[OLE DB Destination Input].Columns[zip_code]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="zip_code"
+                      externalMetadataColumnId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient.Inputs[OLE DB Destination Input].ExternalColumns[zip_code]"
+                      lineageId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].Columns[zip_code]" />
+                    <inputColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient.Inputs[OLE DB Destination Input].Columns[number]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="15"
+                      cachedName="number"
+                      externalMetadataColumnId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient.Inputs[OLE DB Destination Input].ExternalColumns[number]"
+                      lineageId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].Columns[number]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient.Inputs[OLE DB Destination Input].ExternalColumns[PatientID]"
+                      dataType="i4"
+                      name="PatientID" />
+                    <externalMetadataColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient.Inputs[OLE DB Destination Input].ExternalColumns[pmd_client_id]"
+                      dataType="i4"
+                      name="pmd_client_id" />
+                    <externalMetadataColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient.Inputs[OLE DB Destination Input].ExternalColumns[pmd_patient_id]"
+                      dataType="i8"
+                      name="pmd_patient_id" />
+                    <externalMetadataColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient.Inputs[OLE DB Destination Input].ExternalColumns[first_name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="first_name" />
+                    <externalMetadataColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient.Inputs[OLE DB Destination Input].ExternalColumns[last_name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="last_name" />
+                    <externalMetadataColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient.Inputs[OLE DB Destination Input].ExternalColumns[gender]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="gender" />
+                    <externalMetadataColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient.Inputs[OLE DB Destination Input].ExternalColumns[dob]"
+                      dataType="dbDate"
+                      name="dob" />
+                    <externalMetadataColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient.Inputs[OLE DB Destination Input].ExternalColumns[member_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="member_id" />
+                    <externalMetadataColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient.Inputs[OLE DB Destination Input].ExternalColumns[plan_name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="plan_name" />
+                    <externalMetadataColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient.Inputs[OLE DB Destination Input].ExternalColumns[plan_group]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="plan_group" />
+                    <externalMetadataColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient.Inputs[OLE DB Destination Input].ExternalColumns[plan_sponsor]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="plan_sponsor" />
+                    <externalMetadataColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient.Inputs[OLE DB Destination Input].ExternalColumns[plan_cs_number]"
+                      codePage="1252"
+                      dataType="str"
+                      length="15"
+                      name="plan_cs_number" />
+                    <externalMetadataColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient.Inputs[OLE DB Destination Input].ExternalColumns[mtm_eligible]"
+                      dataType="bool"
+                      name="mtm_eligible" />
+                    <externalMetadataColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient.Inputs[OLE DB Destination Input].ExternalColumns[low_income_subsidy]"
+                      dataType="bool"
+                      name="low_income_subsidy" />
+                    <externalMetadataColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient.Inputs[OLE DB Destination Input].ExternalColumns[low_income_subsidy_discount]"
+                      codePage="1252"
+                      dataType="str"
+                      length="250"
+                      name="low_income_subsidy_discount" />
+                    <externalMetadataColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient.Inputs[OLE DB Destination Input].ExternalColumns[address_1]"
+                      codePage="1252"
+                      dataType="str"
+                      length="250"
+                      name="address_1" />
+                    <externalMetadataColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient.Inputs[OLE DB Destination Input].ExternalColumns[city]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="city" />
+                    <externalMetadataColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient.Inputs[OLE DB Destination Input].ExternalColumns[state]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="state" />
+                    <externalMetadataColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient.Inputs[OLE DB Destination Input].ExternalColumns[zip_code]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="zip_code" />
+                    <externalMetadataColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient.Inputs[OLE DB Destination Input].ExternalColumns[number]"
+                      codePage="1252"
+                      dataType="str"
+                      length="15"
+                      name="number" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLEDB Stars_rdsm staging Patient"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[staging].[Patient]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Connections[OleDbConnection]"
+                  connectionManagerID="{833D12C4-85D0-48E0-89ED-50C49F533C60}:invalid"
+                  connectionManagerRefId="{833D12C4-85D0-48E0-89ED-50C49F533C60}:invalid"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].Columns[PatientID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].ExternalColumns[PatientID]"
+                      lineageId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].Columns[PatientID]"
+                      name="PatientID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].Columns[pmd_client_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].ExternalColumns[pmd_client_id]"
+                      lineageId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].Columns[pmd_client_id]"
+                      name="pmd_client_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].Columns[pmd_patient_id]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].ExternalColumns[pmd_patient_id]"
+                      lineageId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].Columns[pmd_patient_id]"
+                      name="pmd_patient_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].Columns[first_name]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].ExternalColumns[first_name]"
+                      length="100"
+                      lineageId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].Columns[first_name]"
+                      name="first_name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].Columns[last_name]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].ExternalColumns[last_name]"
+                      length="100"
+                      lineageId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].Columns[last_name]"
+                      name="last_name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].Columns[gender]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].ExternalColumns[gender]"
+                      length="1"
+                      lineageId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].Columns[gender]"
+                      name="gender"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].Columns[dob]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].ExternalColumns[dob]"
+                      lineageId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].Columns[dob]"
+                      name="dob"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].Columns[member_id]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].ExternalColumns[member_id]"
+                      length="50"
+                      lineageId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].Columns[member_id]"
+                      name="member_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].Columns[plan_name]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].ExternalColumns[plan_name]"
+                      length="100"
+                      lineageId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].Columns[plan_name]"
+                      name="plan_name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].Columns[plan_group]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].ExternalColumns[plan_group]"
+                      length="100"
+                      lineageId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].Columns[plan_group]"
+                      name="plan_group"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].Columns[plan_sponsor]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].ExternalColumns[plan_sponsor]"
+                      length="100"
+                      lineageId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].Columns[plan_sponsor]"
+                      name="plan_sponsor"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].Columns[plan_cs_number]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].ExternalColumns[plan_cs_number]"
+                      length="15"
+                      lineageId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].Columns[plan_cs_number]"
+                      name="plan_cs_number"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].Columns[mtm_eligible]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].ExternalColumns[mtm_eligible]"
+                      lineageId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].Columns[mtm_eligible]"
+                      name="mtm_eligible"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].Columns[low_income_subsidy]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].ExternalColumns[low_income_subsidy]"
+                      lineageId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].Columns[low_income_subsidy]"
+                      name="low_income_subsidy"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].Columns[low_income_subsidy_discount]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].ExternalColumns[low_income_subsidy_discount]"
+                      length="250"
+                      lineageId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].Columns[low_income_subsidy_discount]"
+                      name="low_income_subsidy_discount"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].Columns[address_1]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].ExternalColumns[address_1]"
+                      length="250"
+                      lineageId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].Columns[address_1]"
+                      name="address_1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].Columns[city]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].ExternalColumns[city]"
+                      length="100"
+                      lineageId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].Columns[city]"
+                      name="city"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].Columns[state]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].ExternalColumns[state]"
+                      length="50"
+                      lineageId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].Columns[state]"
+                      name="state"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].Columns[zip_code]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].ExternalColumns[zip_code]"
+                      length="50"
+                      lineageId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].Columns[zip_code]"
+                      name="zip_code"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].Columns[number]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].ExternalColumns[number]"
+                      length="15"
+                      lineageId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].Columns[number]"
+                      name="number"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].ExternalColumns[PatientID]"
+                      dataType="i4"
+                      name="PatientID" />
+                    <externalMetadataColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].ExternalColumns[pmd_client_id]"
+                      dataType="i4"
+                      name="pmd_client_id" />
+                    <externalMetadataColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].ExternalColumns[pmd_patient_id]"
+                      dataType="i8"
+                      name="pmd_patient_id" />
+                    <externalMetadataColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].ExternalColumns[first_name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="first_name" />
+                    <externalMetadataColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].ExternalColumns[last_name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="last_name" />
+                    <externalMetadataColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].ExternalColumns[gender]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="gender" />
+                    <externalMetadataColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].ExternalColumns[dob]"
+                      dataType="dbDate"
+                      name="dob" />
+                    <externalMetadataColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].ExternalColumns[member_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="member_id" />
+                    <externalMetadataColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].ExternalColumns[plan_name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="plan_name" />
+                    <externalMetadataColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].ExternalColumns[plan_group]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="plan_group" />
+                    <externalMetadataColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].ExternalColumns[plan_sponsor]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="plan_sponsor" />
+                    <externalMetadataColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].ExternalColumns[plan_cs_number]"
+                      codePage="1252"
+                      dataType="str"
+                      length="15"
+                      name="plan_cs_number" />
+                    <externalMetadataColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].ExternalColumns[mtm_eligible]"
+                      dataType="bool"
+                      name="mtm_eligible" />
+                    <externalMetadataColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].ExternalColumns[low_income_subsidy]"
+                      dataType="bool"
+                      name="low_income_subsidy" />
+                    <externalMetadataColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].ExternalColumns[low_income_subsidy_discount]"
+                      codePage="1252"
+                      dataType="str"
+                      length="250"
+                      name="low_income_subsidy_discount" />
+                    <externalMetadataColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].ExternalColumns[address_1]"
+                      codePage="1252"
+                      dataType="str"
+                      length="250"
+                      name="address_1" />
+                    <externalMetadataColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].ExternalColumns[city]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="city" />
+                    <externalMetadataColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].ExternalColumns[state]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="state" />
+                    <externalMetadataColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].ExternalColumns[zip_code]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="zip_code" />
+                    <externalMetadataColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output].ExternalColumns[number]"
+                      codePage="1252"
+                      dataType="str"
+                      length="15"
+                      name="number" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Error Output].Columns[PatientID]"
+                      dataType="i4"
+                      lineageId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Error Output].Columns[PatientID]"
+                      name="PatientID" />
+                    <outputColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Error Output].Columns[pmd_client_id]"
+                      dataType="i4"
+                      lineageId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Error Output].Columns[pmd_client_id]"
+                      name="pmd_client_id" />
+                    <outputColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Error Output].Columns[pmd_patient_id]"
+                      dataType="i8"
+                      lineageId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Error Output].Columns[pmd_patient_id]"
+                      name="pmd_patient_id" />
+                    <outputColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Error Output].Columns[first_name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Error Output].Columns[first_name]"
+                      name="first_name" />
+                    <outputColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Error Output].Columns[last_name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Error Output].Columns[last_name]"
+                      name="last_name" />
+                    <outputColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Error Output].Columns[gender]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Error Output].Columns[gender]"
+                      name="gender" />
+                    <outputColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Error Output].Columns[dob]"
+                      dataType="dbDate"
+                      lineageId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Error Output].Columns[dob]"
+                      name="dob" />
+                    <outputColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Error Output].Columns[member_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Error Output].Columns[member_id]"
+                      name="member_id" />
+                    <outputColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Error Output].Columns[plan_name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Error Output].Columns[plan_name]"
+                      name="plan_name" />
+                    <outputColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Error Output].Columns[plan_group]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Error Output].Columns[plan_group]"
+                      name="plan_group" />
+                    <outputColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Error Output].Columns[plan_sponsor]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Error Output].Columns[plan_sponsor]"
+                      name="plan_sponsor" />
+                    <outputColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Error Output].Columns[plan_cs_number]"
+                      codePage="1252"
+                      dataType="str"
+                      length="15"
+                      lineageId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Error Output].Columns[plan_cs_number]"
+                      name="plan_cs_number" />
+                    <outputColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Error Output].Columns[mtm_eligible]"
+                      dataType="bool"
+                      lineageId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Error Output].Columns[mtm_eligible]"
+                      name="mtm_eligible" />
+                    <outputColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Error Output].Columns[low_income_subsidy]"
+                      dataType="bool"
+                      lineageId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Error Output].Columns[low_income_subsidy]"
+                      name="low_income_subsidy" />
+                    <outputColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Error Output].Columns[low_income_subsidy_discount]"
+                      codePage="1252"
+                      dataType="str"
+                      length="250"
+                      lineageId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Error Output].Columns[low_income_subsidy_discount]"
+                      name="low_income_subsidy_discount" />
+                    <outputColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Error Output].Columns[address_1]"
+                      codePage="1252"
+                      dataType="str"
+                      length="250"
+                      lineageId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Error Output].Columns[address_1]"
+                      name="address_1" />
+                    <outputColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Error Output].Columns[city]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Error Output].Columns[city]"
+                      name="city" />
+                    <outputColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Error Output].Columns[state]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Error Output].Columns[state]"
+                      name="state" />
+                    <outputColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Error Output].Columns[zip_code]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Error Output].Columns[zip_code]"
+                      name="zip_code" />
+                    <outputColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Error Output].Columns[number]"
+                      codePage="1252"
+                      dataType="str"
+                      length="15"
+                      lineageId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Error Output].Columns[number]"
+                      name="number" />
+                    <outputColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Load StarsConnect staging Patient.Paths[OLE DB Source Output]"
+              endId="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Send Mail Task"
+      DTS:CreationName="Microsoft.SendMailTask"
+      DTS:DelayValidation="True"
+      DTS:Description="Send Mail Task"
+      DTS:DTSID="{9C4E605A-C016-4C69-B0A2-5C0332934609}"
+      DTS:ExecutableType="Microsoft.SendMailTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Send Mail Task"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:PropertyExpression
+        DTS:Name="FileAttachments">"\\\\"+ @[$Project::ServerOperation] +"\\Stars\\ClientFiles\\AdhereRX\\AdhereRXCallList"+REPLACE(LEFT((DT_STR,31,1252)GETDATE(),10),"-","")+".csv"</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <SendMailTask:SendMailTaskData
+          SendMailTask:SMTPServer="{032B9F2D-4E7D-4120-B472-82CE0748CC6E}"
+          SendMailTask:From="stars_developers@adherehealth.com"
+          SendMailTask:To="kelly.mooneyham@adherehealth.com"
+          SendMailTask:CC="paul.hancock@adherehealth.com"
+          SendMailTask:Subject="AdhereRX Call List"
+          SendMailTask:MessageSource="See Attached" xmlns:SendMailTask="www.microsoft.com/sqlserver/dts/tasks/sendmailtask">
+          <SendMailTask:Attachments
+            SendMailTask:FileName="\\P10DEVSDE003\Stars\ClientFiles\AdhereRX\AdhereRXCallList20190716.csv" />
+        </SendMailTask:SendMailTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{59F06F34-0966-46D8-A2B6-6EDDE4BD83F9}"
+      DTS:From="Package\ExecSQL Stars_rdsm dbo usp_AdhereRx"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\ExecSQL Truncate StarsConnect staging Patient" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{487BDFFA-D1BE-4D7F-8AF5-9621588903E3}"
+      DTS:From="Package\ExecSQL Truncate StarsConnect staging Patient"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Load StarsConnect staging Patient" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{D7CAB91D-2E00-48CE-AD6C-A71919178551}"
+      DTS:From="Package\Load StarsConnect staging Patient"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\ExecSQL StarsConnect dbo usp_AdhereRX" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{3E75CEF4-82B2-4109-9BFD-BD713ADDE99E}"
+      DTS:From="Package\ExecSQL StarsConnect dbo usp_AdhereRX"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Create Call List CSV file" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{4A00070A-02AC-4B9D-8F98-C61B186F469C}"
+      DTS:From="Package\Create Call List CSV file"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\Send Mail Task" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql12">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="303,42"
+          Id="Package\Create Call List CSV file"
+          TopLeft="156.833333333333,383" />
+        <NodeLayout
+          Size="303,42"
+          Id="Package\ExecSQL Stars_rdsm dbo usp_AdhereRx"
+          TopLeft="156.833333333333,43" />
+        <NodeLayout
+          Size="303,42"
+          Id="Package\ExecSQL StarsConnect dbo usp_AdhereRX"
+          TopLeft="156.833333333333,298" />
+        <NodeLayout
+          Size="303,42"
+          Id="Package\ExecSQL Truncate StarsConnect staging Patient"
+          TopLeft="156.833333333333,128" />
+        <NodeLayout
+          Size="303,42"
+          Id="Package\Load StarsConnect staging Patient"
+          TopLeft="156.833333333333,213" />
+        <NodeLayout
+          Size="303,42"
+          Id="Package\Send Mail Task"
+          TopLeft="156.833333333333,468" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="308.333333333333,85">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,43"
+              Start="0,0"
+              End="0,35.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,35.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="308.333333333333,170">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,43"
+              Start="0,0"
+              End="0,35.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,35.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="308.333333333333,255">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,43"
+              Start="0,0"
+              End="0,35.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,35.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="308.333333333333,340">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,43"
+              Start="0,0"
+              End="0,35.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,35.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="308.333333333333,425">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,43"
+              Start="0,0"
+              End="0,35.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,35.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Create Call List CSV file">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="290,42"
+          Id="Package\Create Call List CSV file\OLEDB Stars_rdsm dbo vw_AdhereRXCallList"
+          TopLeft="79,41" />
+        <NodeLayout
+          Size="290,42"
+          Id="Package\Create Call List CSV file\FFD AdhereRXCallListYYYYMMDD"
+          TopLeft="79,135" />
+        <EdgeLayout
+          Id="Package\Create Call List CSV file.Paths[OLE DB Source Output]"
+          TopLeft="224,83">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,52"
+              Start="0,0"
+              End="0,44.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,44.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Create Call List CSV file\OLEDB Stars_rdsm dbo vw_AdhereRXCallList">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">View</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Load StarsConnect staging Patient">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="241,42"
+          Id="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient"
+          TopLeft="134,48" />
+        <NodeLayout
+          Size="250,42"
+          Id="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient"
+          TopLeft="132,142" />
+        <EdgeLayout
+          Id="Package\Load StarsConnect staging Patient.Paths[OLE DB Source Output]"
+          TopLeft="255.75,90">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,52"
+              Start="0,0"
+              End="0,44.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,44.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load StarsConnect staging Patient\OLEDB StarsConnect staging Patient">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load StarsConnect staging Patient\OLEDB Stars_rdsm staging Patient">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

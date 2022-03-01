@@ -1,0 +1,980 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="7/7/2016 9:35:43 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="LT-3CP0N12-0096"
+  DTS:CreatorName="PHARMMD\Paul.Osborne"
+  DTS:DTSID="{97E7E62A-8E43-492A-A7A4-0D56352B0274}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.1301.433"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Centene_Asthma_Drugs"
+  DTS:PackageType="5"
+  DTS:VersionBuild="29"
+  DTS:VersionGUID="{3E2B7006-863C-4863-BFDD-27CD0778DF4F}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Excel MMA-A]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{21375E7B-DA73-485D-86B6-F5C27B012EA2}"
+      DTS:ObjectName="Excel MMA-A">
+      <DTS:PropertyExpression
+        DTS:Name="ExcelFilePath">@[$Project::MediSpan_Centene_NDC_Path]+"\\MMA-A.xlsx"</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=\\p10devsde003\Stars\MediSpan\Centene NDCs\MMA-A.xlsx;Extended Properties=&quot;EXCEL 12.0 XML;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Excel MMA-B]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{76C1B9BD-5901-4ABF-B649-297C7C6C78D2}"
+      DTS:ObjectName="Excel MMA-B">
+      <DTS:PropertyExpression
+        DTS:Name="ExcelFilePath">@[$Project::MediSpan_Centene_NDC_Path]+"\\MMA-B.xlsx"</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=\\p10devsde003\Stars\MediSpan\Centene NDCs\MMA-B.xlsx;Extended Properties=&quot;EXCEL 12.0 XML;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{0E64F872-F918-4F60-85ED-1E9D245F389E}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="ListAsOf">
+      <DTS:VariableValue
+        DTS:DataType="7">7/7/2016 9:49:19 AM</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Centene_MMA-A"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:DelayValidation="True"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{CA6DF0E8-ADD3-4F38-B10C-8D1CB8C4C189}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Centene_MMA-A"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Centene_MMA-A\Add ListAsOf date"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Add ListAsOf date"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Centene_MMA-A\Add ListAsOf date.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Centene_MMA-A\Add ListAsOf date.Inputs[Derived Column Input].Columns[NDC Code]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="NDC Code"
+                      lineageId="Package\Centene_MMA-A\Excel MMA-A.Outputs[Excel Source Output].Columns[NDC Code]" />
+                    <inputColumn
+                      refId="Package\Centene_MMA-A\Add ListAsOf date.Inputs[Derived Column Input].Columns[Brand Name]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Brand Name"
+                      lineageId="Package\Centene_MMA-A\Excel MMA-A.Outputs[Excel Source Output].Columns[Brand Name]" />
+                    <inputColumn
+                      refId="Package\Centene_MMA-A\Add ListAsOf date.Inputs[Derived Column Input].Columns[Generic Product Name]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Generic Product Name"
+                      lineageId="Package\Centene_MMA-A\Excel MMA-A.Outputs[Excel Source Output].Columns[Generic Product Name]" />
+                    <inputColumn
+                      refId="Package\Centene_MMA-A\Add ListAsOf date.Inputs[Derived Column Input].Columns[Route]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Route"
+                      lineageId="Package\Centene_MMA-A\Excel MMA-A.Outputs[Excel Source Output].Columns[Route]" />
+                    <inputColumn
+                      refId="Package\Centene_MMA-A\Add ListAsOf date.Inputs[Derived Column Input].Columns[Description]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Description"
+                      lineageId="Package\Centene_MMA-A\Excel MMA-A.Outputs[Excel Source Output].Columns[Description]" />
+                    <inputColumn
+                      refId="Package\Centene_MMA-A\Add ListAsOf date.Inputs[Derived Column Input].Columns[Drug ID]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Drug ID"
+                      lineageId="Package\Centene_MMA-A\Excel MMA-A.Outputs[Excel Source Output].Columns[Drug ID]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Centene_MMA-A\Add ListAsOf date.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Centene_MMA-A\Add ListAsOf date.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Centene_MMA-A\Add ListAsOf date.Outputs[Derived Column Output].Columns[ListAsOf]"
+                      dataType="date"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Centene_MMA-A\Add ListAsOf date.Outputs[Derived Column Output].Columns[ListAsOf]"
+                      name="ListAsOf"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">@[User::ListAsOf]</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">@[User::ListAsOf]</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Centene_MMA-A\Add ListAsOf date.Outputs[Derived Column Output].Columns[NDC]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="50"
+                      lineageId="Package\Centene_MMA-A\Add ListAsOf date.Outputs[Derived Column Output].Columns[NDC]"
+                      name="NDC"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_STR,50,1252)#{Package\Centene_MMA-A\Excel MMA-A.Outputs[Excel Source Output].Columns[NDC Code]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_STR,50,1252)[NDC Code]</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Centene_MMA-A\Add ListAsOf date.Outputs[Derived Column Output].Columns[Brand_Drug_Name]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="500"
+                      lineageId="Package\Centene_MMA-A\Add ListAsOf date.Outputs[Derived Column Output].Columns[Brand_Drug_Name]"
+                      name="Brand_Drug_Name"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_STR,500,1252)#{Package\Centene_MMA-A\Excel MMA-A.Outputs[Excel Source Output].Columns[Brand Name]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_STR,500,1252)[Brand Name]</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Centene_MMA-A\Add ListAsOf date.Outputs[Derived Column Output].Columns[Generic_Drug_Name]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="500"
+                      lineageId="Package\Centene_MMA-A\Add ListAsOf date.Outputs[Derived Column Output].Columns[Generic_Drug_Name]"
+                      name="Generic_Drug_Name"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_STR,500,1252)#{Package\Centene_MMA-A\Excel MMA-A.Outputs[Excel Source Output].Columns[Generic Product Name]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_STR,500,1252)[Generic Product Name]</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Centene_MMA-A\Add ListAsOf date.Outputs[Derived Column Output].Columns[Route_Of_Admin]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="50"
+                      lineageId="Package\Centene_MMA-A\Add ListAsOf date.Outputs[Derived Column Output].Columns[Route_Of_Admin]"
+                      name="Route_Of_Admin"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_STR,50,1252)#{Package\Centene_MMA-A\Excel MMA-A.Outputs[Excel Source Output].Columns[Route]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_STR,50,1252)Route</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Centene_MMA-A\Add ListAsOf date.Outputs[Derived Column Output].Columns[Drug_Description]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="500"
+                      lineageId="Package\Centene_MMA-A\Add ListAsOf date.Outputs[Derived Column Output].Columns[Drug_Description]"
+                      name="Drug_Description"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_STR,500,1252)#{Package\Centene_MMA-A\Excel MMA-A.Outputs[Excel Source Output].Columns[Description]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_STR,500,1252)Description</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Centene_MMA-A\Add ListAsOf date.Outputs[Derived Column Output].Columns[Drug_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="50"
+                      lineageId="Package\Centene_MMA-A\Add ListAsOf date.Outputs[Derived Column Output].Columns[Drug_ID]"
+                      name="Drug_ID"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_STR,50,1252)#{Package\Centene_MMA-A\Excel MMA-A.Outputs[Excel Source Output].Columns[Drug ID]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_STR,50,1252)[Drug ID]</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Centene_MMA-A\Add ListAsOf date.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Centene_MMA-A\Add ListAsOf date.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Centene_MMA-A\Add ListAsOf date.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Centene_MMA-A\Add ListAsOf date.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Centene_MMA-A\Add ListAsOf date.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Centene_MMA-A\Add ListAsOf date.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Centene_MMA-A\DrugList_Asthma"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="DrugList_Asthma"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[DrugList_Asthma]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">ROWS_PER_BATCH = 1000</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Centene_MMA-A\DrugList_Asthma.Connections[OleDbConnection]"
+                  connectionManagerID="{5F6FF095-0DB4-4B41-AD38-AF2BAAD0229E}:invalid"
+                  connectionManagerRefId="{5F6FF095-0DB4-4B41-AD38-AF2BAAD0229E}:invalid"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Centene_MMA-A\DrugList_Asthma.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Centene_MMA-A\DrugList_Asthma.Inputs[OLE DB Destination Input].Columns[ListAsOf]"
+                      cachedDataType="date"
+                      cachedName="ListAsOf"
+                      externalMetadataColumnId="Package\Centene_MMA-A\DrugList_Asthma.Inputs[OLE DB Destination Input].ExternalColumns[ListAsOf]"
+                      lineageId="Package\Centene_MMA-A\Add ListAsOf date.Outputs[Derived Column Output].Columns[ListAsOf]" />
+                    <inputColumn
+                      refId="Package\Centene_MMA-A\DrugList_Asthma.Inputs[OLE DB Destination Input].Columns[NDC]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="NDC"
+                      externalMetadataColumnId="Package\Centene_MMA-A\DrugList_Asthma.Inputs[OLE DB Destination Input].ExternalColumns[NDC]"
+                      lineageId="Package\Centene_MMA-A\Add ListAsOf date.Outputs[Derived Column Output].Columns[NDC]" />
+                    <inputColumn
+                      refId="Package\Centene_MMA-A\DrugList_Asthma.Inputs[OLE DB Destination Input].Columns[Route_Of_Admin]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Route_Of_Admin"
+                      externalMetadataColumnId="Package\Centene_MMA-A\DrugList_Asthma.Inputs[OLE DB Destination Input].ExternalColumns[Route]"
+                      lineageId="Package\Centene_MMA-A\Add ListAsOf date.Outputs[Derived Column Output].Columns[Route_Of_Admin]" />
+                    <inputColumn
+                      refId="Package\Centene_MMA-A\DrugList_Asthma.Inputs[OLE DB Destination Input].Columns[Brand_Drug_Name]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="Brand_Drug_Name"
+                      externalMetadataColumnId="Package\Centene_MMA-A\DrugList_Asthma.Inputs[OLE DB Destination Input].ExternalColumns[Brand_Drug_Name]"
+                      lineageId="Package\Centene_MMA-A\Add ListAsOf date.Outputs[Derived Column Output].Columns[Brand_Drug_Name]" />
+                    <inputColumn
+                      refId="Package\Centene_MMA-A\DrugList_Asthma.Inputs[OLE DB Destination Input].Columns[Drug_Description]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="Drug_Description"
+                      externalMetadataColumnId="Package\Centene_MMA-A\DrugList_Asthma.Inputs[OLE DB Destination Input].ExternalColumns[Drug_Description]"
+                      lineageId="Package\Centene_MMA-A\Add ListAsOf date.Outputs[Derived Column Output].Columns[Drug_Description]" />
+                    <inputColumn
+                      refId="Package\Centene_MMA-A\DrugList_Asthma.Inputs[OLE DB Destination Input].Columns[Generic_Drug_Name]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="Generic_Drug_Name"
+                      externalMetadataColumnId="Package\Centene_MMA-A\DrugList_Asthma.Inputs[OLE DB Destination Input].ExternalColumns[Generic_Drug_Name]"
+                      lineageId="Package\Centene_MMA-A\Add ListAsOf date.Outputs[Derived Column Output].Columns[Generic_Drug_Name]" />
+                    <inputColumn
+                      refId="Package\Centene_MMA-A\DrugList_Asthma.Inputs[OLE DB Destination Input].Columns[Drug_ID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Drug_ID"
+                      externalMetadataColumnId="Package\Centene_MMA-A\DrugList_Asthma.Inputs[OLE DB Destination Input].ExternalColumns[Drug_ID]"
+                      lineageId="Package\Centene_MMA-A\Add ListAsOf date.Outputs[Derived Column Output].Columns[Drug_ID]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Centene_MMA-A\DrugList_Asthma.Inputs[OLE DB Destination Input].ExternalColumns[Route]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Route" />
+                    <externalMetadataColumn
+                      refId="Package\Centene_MMA-A\DrugList_Asthma.Inputs[OLE DB Destination Input].ExternalColumns[ListAsOf]"
+                      dataType="dbDate"
+                      name="ListAsOf" />
+                    <externalMetadataColumn
+                      refId="Package\Centene_MMA-A\DrugList_Asthma.Inputs[OLE DB Destination Input].ExternalColumns[NDC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="NDC" />
+                    <externalMetadataColumn
+                      refId="Package\Centene_MMA-A\DrugList_Asthma.Inputs[OLE DB Destination Input].ExternalColumns[Brand_Drug_Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="Brand_Drug_Name" />
+                    <externalMetadataColumn
+                      refId="Package\Centene_MMA-A\DrugList_Asthma.Inputs[OLE DB Destination Input].ExternalColumns[Generic_Drug_Name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="Generic_Drug_Name" />
+                    <externalMetadataColumn
+                      refId="Package\Centene_MMA-A\DrugList_Asthma.Inputs[OLE DB Destination Input].ExternalColumns[Drug_Description]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="Drug_Description" />
+                    <externalMetadataColumn
+                      refId="Package\Centene_MMA-A\DrugList_Asthma.Inputs[OLE DB Destination Input].ExternalColumns[Drug_Controller]"
+                      dataType="bool"
+                      name="Drug_Controller" />
+                    <externalMetadataColumn
+                      refId="Package\Centene_MMA-A\DrugList_Asthma.Inputs[OLE DB Destination Input].ExternalColumns[Drug_ID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Drug_ID" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Centene_MMA-A\DrugList_Asthma.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Centene_MMA-A\DrugList_Asthma.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Centene_MMA-A\DrugList_Asthma.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Centene_MMA-A\DrugList_Asthma.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Centene_MMA-A\DrugList_Asthma.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Centene_MMA-A\DrugList_Asthma.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Centene_MMA-A\Excel MMA-A"
+              componentClassID="Microsoft.ExcelSource"
+              contactInfo="Excel Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Excel Source"
+              name="Excel MMA-A"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">'MMA-A_2016$'</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mapping from parameters in the SQL command to variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Centene_MMA-A\Excel MMA-A.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Excel MMA-A]"
+                  connectionManagerRefId="Package.ConnectionManagers[Excel MMA-A]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Centene_MMA-A\Excel MMA-A.Outputs[Excel Source Output]"
+                  name="Excel Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Centene_MMA-A\Excel MMA-A.Outputs[Excel Source Output].Columns[NDC Code]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Centene_MMA-A\Excel MMA-A.Outputs[Excel Source Output].ExternalColumns[NDC Code]"
+                      length="255"
+                      lineageId="Package\Centene_MMA-A\Excel MMA-A.Outputs[Excel Source Output].Columns[NDC Code]"
+                      name="NDC Code"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Centene_MMA-A\Excel MMA-A.Outputs[Excel Source Output].Columns[Brand Name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Centene_MMA-A\Excel MMA-A.Outputs[Excel Source Output].ExternalColumns[Brand Name]"
+                      length="255"
+                      lineageId="Package\Centene_MMA-A\Excel MMA-A.Outputs[Excel Source Output].Columns[Brand Name]"
+                      name="Brand Name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Centene_MMA-A\Excel MMA-A.Outputs[Excel Source Output].Columns[Generic Product Name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Centene_MMA-A\Excel MMA-A.Outputs[Excel Source Output].ExternalColumns[Generic Product Name]"
+                      length="255"
+                      lineageId="Package\Centene_MMA-A\Excel MMA-A.Outputs[Excel Source Output].Columns[Generic Product Name]"
+                      name="Generic Product Name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Centene_MMA-A\Excel MMA-A.Outputs[Excel Source Output].Columns[Route]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Centene_MMA-A\Excel MMA-A.Outputs[Excel Source Output].ExternalColumns[Route]"
+                      length="255"
+                      lineageId="Package\Centene_MMA-A\Excel MMA-A.Outputs[Excel Source Output].Columns[Route]"
+                      name="Route"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Centene_MMA-A\Excel MMA-A.Outputs[Excel Source Output].Columns[Description]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Centene_MMA-A\Excel MMA-A.Outputs[Excel Source Output].ExternalColumns[Description]"
+                      length="255"
+                      lineageId="Package\Centene_MMA-A\Excel MMA-A.Outputs[Excel Source Output].Columns[Description]"
+                      name="Description"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Centene_MMA-A\Excel MMA-A.Outputs[Excel Source Output].Columns[Drug ID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Centene_MMA-A\Excel MMA-A.Outputs[Excel Source Output].ExternalColumns[Drug ID]"
+                      length="255"
+                      lineageId="Package\Centene_MMA-A\Excel MMA-A.Outputs[Excel Source Output].Columns[Drug ID]"
+                      name="Drug ID"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Centene_MMA-A\Excel MMA-A.Outputs[Excel Source Output].ExternalColumns[NDC Code]"
+                      dataType="wstr"
+                      length="255"
+                      name="NDC Code" />
+                    <externalMetadataColumn
+                      refId="Package\Centene_MMA-A\Excel MMA-A.Outputs[Excel Source Output].ExternalColumns[Brand Name]"
+                      dataType="wstr"
+                      length="255"
+                      name="Brand Name" />
+                    <externalMetadataColumn
+                      refId="Package\Centene_MMA-A\Excel MMA-A.Outputs[Excel Source Output].ExternalColumns[Generic Product Name]"
+                      dataType="wstr"
+                      length="255"
+                      name="Generic Product Name" />
+                    <externalMetadataColumn
+                      refId="Package\Centene_MMA-A\Excel MMA-A.Outputs[Excel Source Output].ExternalColumns[Route]"
+                      dataType="wstr"
+                      length="255"
+                      name="Route" />
+                    <externalMetadataColumn
+                      refId="Package\Centene_MMA-A\Excel MMA-A.Outputs[Excel Source Output].ExternalColumns[Description]"
+                      dataType="wstr"
+                      length="255"
+                      name="Description" />
+                    <externalMetadataColumn
+                      refId="Package\Centene_MMA-A\Excel MMA-A.Outputs[Excel Source Output].ExternalColumns[Drug ID]"
+                      dataType="wstr"
+                      length="255"
+                      name="Drug ID" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Centene_MMA-A\Excel MMA-A.Outputs[Excel Source Error Output]"
+                  isErrorOut="true"
+                  name="Excel Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Centene_MMA-A\Excel MMA-A.Outputs[Excel Source Error Output].Columns[NDC Code]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Centene_MMA-A\Excel MMA-A.Outputs[Excel Source Error Output].Columns[NDC Code]"
+                      name="NDC Code" />
+                    <outputColumn
+                      refId="Package\Centene_MMA-A\Excel MMA-A.Outputs[Excel Source Error Output].Columns[Brand Name]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Centene_MMA-A\Excel MMA-A.Outputs[Excel Source Error Output].Columns[Brand Name]"
+                      name="Brand Name" />
+                    <outputColumn
+                      refId="Package\Centene_MMA-A\Excel MMA-A.Outputs[Excel Source Error Output].Columns[Generic Product Name]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Centene_MMA-A\Excel MMA-A.Outputs[Excel Source Error Output].Columns[Generic Product Name]"
+                      name="Generic Product Name" />
+                    <outputColumn
+                      refId="Package\Centene_MMA-A\Excel MMA-A.Outputs[Excel Source Error Output].Columns[Route]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Centene_MMA-A\Excel MMA-A.Outputs[Excel Source Error Output].Columns[Route]"
+                      name="Route" />
+                    <outputColumn
+                      refId="Package\Centene_MMA-A\Excel MMA-A.Outputs[Excel Source Error Output].Columns[Description]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Centene_MMA-A\Excel MMA-A.Outputs[Excel Source Error Output].Columns[Description]"
+                      name="Description" />
+                    <outputColumn
+                      refId="Package\Centene_MMA-A\Excel MMA-A.Outputs[Excel Source Error Output].Columns[Drug ID]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Centene_MMA-A\Excel MMA-A.Outputs[Excel Source Error Output].Columns[Drug ID]"
+                      name="Drug ID" />
+                    <outputColumn
+                      refId="Package\Centene_MMA-A\Excel MMA-A.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Centene_MMA-A\Excel MMA-A.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Centene_MMA-A\Excel MMA-A.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Centene_MMA-A\Excel MMA-A.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Centene_MMA-A.Paths[Derived Column Output]"
+              endId="Package\Centene_MMA-A\DrugList_Asthma.Inputs[OLE DB Destination Input]"
+              name="Derived Column Output"
+              startId="Package\Centene_MMA-A\Add ListAsOf date.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Centene_MMA-A.Paths[Excel Source Output]"
+              endId="Package\Centene_MMA-A\Add ListAsOf date.Inputs[Derived Column Input]"
+              name="Excel Source Output"
+              startId="Package\Centene_MMA-A\Excel MMA-A.Outputs[Excel Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Check the new file  they should add Drug_Controller column in the updated file  Update Set Drug_Controller"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:Disabled="True"
+      DTS:DTSID="{38D2121B-BD4A-4E0A-A8DA-588D5BE3BCB5}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Check the new file  they should add Drug_Controller column in the updated file  Update Set Drug_Controller"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\GetDate"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{829cd2e6-d900-4bde-9f89-f3987f55eef8}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="GetDate"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{5F6FF095-0DB4-4B41-AD38-AF2BAAD0229E}"
+          SQLTask:SqlStatementSource="Select getdate() as ListAsOf"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="ListAsOf"
+            SQLTask:DtsVariableName="User::ListAsOf" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{8D1CEF10-F6F3-48F2-90E6-267B2B2355B6}"
+      DTS:From="Package\GetDate"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Centene_MMA-A" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{DB61C64F-5C36-4AB8-8C71-AAB1DA7ED089}"
+      DTS:From="Package\Centene_MMA-A"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Check the new file  they should add Drug_Controller column in the updated file  Update Set Drug_Controller" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql12">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="185,42"
+          Id="Package\Centene_MMA-A"
+          TopLeft="218,186.5" />
+        <NodeLayout
+          Size="588,42"
+          Id="Package\Check the new file  they should add Drug_Controller column in the updated file  Update Set Drug_Controller"
+          TopLeft="223,305" />
+        <NodeLayout
+          Size="185,42"
+          Id="Package\GetDate"
+          TopLeft="218,78" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="310.5,120">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,66.5"
+              Start="0,0"
+              End="0,59">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,59" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="310.5,228.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="206.5,76.5"
+              Start="0,0"
+              End="206.5,69">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,34.25" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,34.25"
+                    Point2="0,38.25"
+                    Point3="4,38.25" />
+                  <mssgle:LineSegment
+                    End="202.5,38.25" />
+                  <mssgle:CubicBezierSegment
+                    Point1="202.5,38.25"
+                    Point2="206.5,38.25"
+                    Point3="206.5,42.25" />
+                  <mssgle:LineSegment
+                    End="206.5,69" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Centene_MMA-A">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="163,42"
+          Id="Package\Centene_MMA-A\Excel MMA-A"
+          TopLeft="294,85" />
+        <NodeLayout
+          Size="163,42"
+          Id="Package\Centene_MMA-A\Add ListAsOf date"
+          TopLeft="294,193.5" />
+        <NodeLayout
+          Size="159,42"
+          Id="Package\Centene_MMA-A\DrugList_Asthma"
+          TopLeft="294,302" />
+        <EdgeLayout
+          Id="Package\Centene_MMA-A.Paths[Excel Source Output]"
+          TopLeft="375.5,127">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,66.5"
+              Start="0,0"
+              End="0,59">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,59" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Centene_MMA-A.Paths[Derived Column Output]"
+          TopLeft="374.5,235.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,66.5"
+              Start="0,0"
+              End="0,59">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,59" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Centene_MMA-A\Excel MMA-A">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Centene_MMA-A\DrugList_Asthma">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

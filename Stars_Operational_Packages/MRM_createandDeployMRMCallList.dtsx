@@ -1,0 +1,1084 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="10/13/2014 11:21:23 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="SQLRDP"
+  DTS:CreatorName="AD\corey.collins"
+  DTS:DelayValidation="True"
+  DTS:DTSID="{61DF75B7-05C2-459B-B501-A9CEF162FB27}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.1100.123"
+  DTS:LocaleID="1033"
+  DTS:MaxErrorCount="0"
+  DTS:ObjectName="MRM_CreateandDeployMRMCallList"
+  DTS:PackageType="5"
+  DTS:VersionBuild="282"
+  DTS:VersionGUID="{EE146350-757F-4F34-B2BE-25BE0D7C249A}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Configurations>
+    <DTS:Configuration
+      DTS:ConfigurationString="\\sqlrdp\general$\artifacts\dev\com.pharmmd.DeploySDNCallListByClientId\com.pharmmd.DeploySDNCallListByClientId\DeploySDNCallListHighMarkConfig.dtsConfig"
+      DTS:ConfigurationType="1"
+      DTS:CreationName=""
+      DTS:DTSID="{A329BF28-6CBB-416C-9B30-4C6D813B463B}"
+      DTS:ObjectName="DeploySDNCallListHighMarkConfig" />
+    <DTS:Configuration
+      DTS:ConfigurationString="\\sqlrdp\general$\artifacts\dev\com.pharmmd.DeploySDNCallListByClientId\com.pharmmd.DeploySDNCallListByClientId\DeploySDNCallListHSConfig.dtsConfig"
+      DTS:ConfigurationType="1"
+      DTS:CreationName=""
+      DTS:DTSID="{A3466708-B9F7-4697-8A8C-BE666EB5F665}"
+      DTS:ObjectName="DeploySDNCallListHSConfig" />
+    <DTS:Configuration
+      DTS:ConfigurationString="\\sqlrdp\general$\artifacts\dev\com.pharmmd.DeploySDNCallListByClientId\com.pharmmd.DeploySDNCallListByClientId\DeploySDNCallListMeridianConfig.dtsConfig"
+      DTS:ConfigurationType="1"
+      DTS:CreationName=""
+      DTS:DTSID="{3F0CA6CB-2FFA-4F11-85A3-2B9ED6C365E5}"
+      DTS:ObjectName="DeploySDNCallListMeridianConfig" />
+    <DTS:Configuration
+      DTS:ConfigurationString="\\sqlrdp\general$\artifacts\dev\com.pharmmd.DeploySDNCallListByClientId\com.pharmmd.DeploySDNCallListByClientId\DeploySDNCallListScanConfig.dtsConfig"
+      DTS:ConfigurationType="1"
+      DTS:CreationName=""
+      DTS:DTSID="{9FA99F5C-815F-4855-8383-C0867A341012}"
+      DTS:ObjectName="DeploySDNCallListScanConfig" />
+    <DTS:Configuration
+      DTS:ConfigurationString="\\sqlrdp\general$\artifacts\dev\com.pharmmd.DeploySDNCallListByClientId\com.pharmmd.DeploySDNCallListByClientId\DeploySDNCallListOptum.dtsConfig"
+      DTS:ConfigurationType="1"
+      DTS:CreationName=""
+      DTS:DTSID="{629B5C7A-9B64-4A56-804F-299E11CAF7EB}"
+      DTS:ObjectName="DeploySDNCallListOptum" />
+    <DTS:Configuration
+      DTS:ConfigurationString="\\sqlrdp\general$\artifacts\dev\com.pharmmd.DeploySDNCallListByClientId\com.pharmmd.DeploySDNCallListByClientId\DeploySDNCallListScanNonEnglishConfig.dtsConfig"
+      DTS:ConfigurationType="1"
+      DTS:CreationName=""
+      DTS:DTSID="{475C8B5D-511E-421F-8E2B-2CCCBFFAFD6C}"
+      DTS:ObjectName="DeploySDNCallListScanNonEnglishConfig" />
+  </DTS:Configurations>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{F43B1D09-4A17-4A2A-BE43-01B1D86BE59E}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="archiveFolder">
+      <DTS:VariableValue
+        DTS:DataType="8">\\pharmmd.local\sharedfolder\Collaboration\MRM Call List\CallListPDFs\archive\</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{B3CE1801-7A2B-4D9F-90AA-CE20F2F3DF19}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[User::archiveFolder]+&quot;callListSessionId_&quot;+(DT_WSTR,8)@[User::callListSessionId]+&quot;_&quot;+@[User::createDate]+&quot;.zip&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="archiveName">
+      <DTS:VariableValue
+        DTS:DataType="8">\\pharmmd.local\sharedfolder\Collaboration\MRM Call List\CallListPDFs\archive\callListSessionId__.zip</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{33AB30B3-ABB4-40C7-945F-E61824B60EA9}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="callCampaignType">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{3972EA0A-C6B5-4A29-88A4-24965D924E63}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="callListCampaignName">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{448FAF72-E609-4C2A-A837-3C176E002F5C}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="callListSessionId">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{4F1C8D15-582D-4660-8B60-CD5D56F7CB83}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="campaignNames">
+      <DTS:VariableValue
+        DTS:DataSubType="ManagedSerializable"
+        DTS:DataType="13">
+        <SOAP-ENV:Envelope xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+          <SOAP-ENV:Body>
+            <xsd:anyType
+              id="ref-1"></xsd:anyType>
+          </SOAP-ENV:Body>
+        </SOAP-ENV:Envelope>
+      </DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{33F78E62-939C-4D7C-AD9D-933A46D36C06}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="createDate">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{91F74DE6-AD6F-4E56-8D73-7CCF1355DC2C}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;EXEC CallCampaigns.dbo.createMRMCallList @campaignName =&quot;+ @[User::callListCampaignName]+&quot;,    @campaignType =&quot;+ @[User::callCampaignType]+&quot; ,@pmdClientID =&quot;+ (DT_STR, 2, 1252 )@[User::pmdClientID]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="DELETEMECallCampaignSQL">
+      <DTS:VariableValue
+        DTS:DataType="8">EXEC CallCampaigns.dbo.createMRMCallList @campaignName =,    @campaignType = ,@pmdClientID =0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{6004645A-0A0F-49DA-AF2B-8E107A4C3BC8}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;EXECUTE  [CallCampaigns].[dbo].[deployMRMCallList] &#xA;   @CampaignName=&quot;+@[User::callListCampaignName]+&quot;&#xA;  ,@pmdenvid=100&#xA;  ,@clientid=&quot;+(DT_STR,2,1252)@[User::pmdClientID]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="DELETEMEDeployCallListSQL">
+      <DTS:VariableValue
+        DTS:DataType="8">EXECUTE  [CallCampaigns].[dbo].[deployMRMCallList] 
+   @CampaignName=
+  ,@pmdenvid=100
+  ,@clientid=0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{B4F3D515-A860-44E9-9F69-36DC1EF512A6}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;EXECUTE [SDN_DialerStore].[dbo].[sp_ArchiveAndPruneMRMCallList] &#xA;   @callListName=&quot;+@[User::sdnTableName]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="DELETEMEsdnSQL">
+      <DTS:VariableValue
+        DTS:DataType="8">EXECUTE [SDN_DialerStore].[dbo].[sp_ArchiveAndPruneMRMCallList] 
+   @callListName=</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{59463485-9A35-43EC-A26A-D93DAC85F154}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="folderToArchive">
+      <DTS:VariableValue
+        DTS:DataType="8">\\pharmmd.local\sharedfolder\Collaboration\MRM Call List\CallListPDFs\CurrentCallListPDFs\</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{2134ACA0-103B-4EC4-A51B-04B54FEEC81A}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="pmdCampaignID">
+      <DTS:VariableValue
+        DTS:DataSubType="ManagedSerializable"
+        DTS:DataType="13">
+        <SOAP-ENV:Envelope xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+          <SOAP-ENV:Body>
+            <xsd:anyType
+              id="ref-1"></xsd:anyType>
+          </SOAP-ENV:Body>
+        </SOAP-ENV:Envelope>
+      </DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{2ED83955-4534-436C-BCFB-DC6FFCE532BC}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="pmdClientID">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{DD0EAB2D-5A0A-41A6-A6BE-FB6E92179D61}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="sdnTableName">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{3E0286AD-32CF-437D-AECC-7F5419A33333}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[User::archiveFolder]+&quot;sentArchive\\&quot;+&quot;callListSessionId_&quot;+(DT_WSTR,8)@[User::callListSessionId]+&quot;SentPDFs&quot;+&quot;_&quot;+@[User::createDate]+&quot;.zip&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="sentArchiveName">
+      <DTS:VariableValue
+        DTS:DataType="8">\\pharmmd.local\sharedfolder\Collaboration\MRM Call List\CallListPDFs\archive\sentArchive\callListSessionId_SentPDFs_.zip</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{29D677F4-1726-4D97-9CB1-022D700EA274}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="sentfolderToArchive">
+      <DTS:VariableValue
+        DTS:DataType="8">\\pharmmd.local\sharedfolder\Collaboration\MRM Call List\CallListPDFs\Sent\</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{CD5A657F-F612-4E7E-96DF-85BF9F741E29}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[User::folderToArchive]+&quot;StageTxtFiles\\&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="tempDirectory">
+      <DTS:VariableValue
+        DTS:DataType="8">\\pharmmd.local\sharedfolder\Collaboration\MRM Call List\CallListPDFs\CurrentCallListPDFs\StageTxtFiles\</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Create MRM Call List"
+      DTS:CreationName="STOCK:FOREACHLOOP"
+      DTS:Description="Foreach Loop Container"
+      DTS:DTSID="{677A3720-7C2E-441B-B67C-427CA67D68ED}"
+      DTS:ExecutableType="STOCK:FOREACHLOOP"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Create MRM Call List">
+      <DTS:ForEachEnumerator
+        DTS:CreationName="Microsoft.ForEachADOEnumerator"
+        DTS:DTSID="{FF4F78F7-30D7-41D0-8C2D-D12F78811459}"
+        DTS:ObjectName="{FF4F78F7-30D7-41D0-8C2D-D12F78811459}">
+        <DTS:ObjectData>
+          <FEEADO
+            EnumType="EnumerateRowsInFirstTable"
+            VarName="User::campaignNames" />
+        </DTS:ObjectData>
+      </DTS:ForEachEnumerator>
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Create MRM Call List\Archive Call List"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:DelayValidation="True"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{8035C700-326D-4678-8F3C-3D95DEC7A8AC}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Archive Call List"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{E882F2C6-5A27-4607-9934-7BEF3FBB60D6}"
+              SQLTask:SqlStatementSource="EXECUTE [SDN_DialerStore].[dbo].[sp_ArchiveAndPruneMRMCallList] ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::sdnTableName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Create MRM Call List\Deploy Call List"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:DelayValidation="True"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{ABB672DF-03A1-4AEC-A6D9-B49D6859532B}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Deploy Call List"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{60F0DFFC-3DF1-454E-8920-37F264BDA45E}"
+              SQLTask:SqlStatementSource="Declare @CampaignName varchar(50) = ?&#xA;,@PMD_ENV_ID int = 100&#xA;,@PMD_Client_ID varchar(2) = cast(? as varchar(2))&#xA;&#xA;EXECUTE  [CallCampaigns].[dbo].[deployMRMCallList] @CampaignName, @PMD_ENV_ID, @PMD_Client_ID" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::callListCampaignName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="User::pmdClientID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Create MRM Call List\Generate CallList"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:DelayValidation="True"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{D2B74608-6759-4D23-901D-81F6019CECB1}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Generate CallList"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{60F0DFFC-3DF1-454E-8920-37F264BDA45E}"
+              SQLTask:SqlStatementSource="Declare @CampaignName varchar(50) = ?&#xA;,@CampaignType varchar(50) = ?&#xA;,@PMD_Client_ID varchar(2) = cast(? as varchar(2))&#xA;&#xA;EXEC CallCampaigns.dbo.createMRMCallList @CampaignName,@CampaignType, @PMD_Client_ID " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::callListCampaignName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="User::callCampaignType"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="2"
+                SQLTask:DtsVariableName="User::pmdClientID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Create MRM Call List\Get SDN Table Name"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{5D235E58-EC79-47F7-AC16-FF05165C6679}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Get SDN Table Name"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{60F0DFFC-3DF1-454E-8920-37F264BDA45E}"
+              SQLTask:SqlStatementSource=" SELECT C.sdnTableName&#xA;    FROm&#xA;                    CallCampaigns.DBO.callListControls C &#xA;                    WHERE c.campaignName=?"
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="sdnTableName"
+                SQLTask:DtsVariableName="User::sdnTableName" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::callListCampaignName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Create MRM Call List.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{D0680224-62BE-4D7A-8A79-D9FA40910DCA}"
+          DTS:From="Package\Create MRM Call List\Archive Call List"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Create MRM Call List\Deploy Call List" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Create MRM Call List.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{3636A654-7B55-4FED-95C1-44E5B0561FF3}"
+          DTS:From="Package\Create MRM Call List\Generate CallList"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Create MRM Call List\Get SDN Table Name" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Create MRM Call List.PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{37DEF91D-D993-4720-9393-A229A32659B7}"
+          DTS:From="Package\Create MRM Call List\Get SDN Table Name"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\Create MRM Call List\Archive Call List" />
+      </DTS:PrecedenceConstraints>
+      <DTS:ForEachVariableMappings>
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{AACFA3E9-335C-4DF2-B0D1-021C2405B03B}"
+          DTS:ObjectName="{AACFA3E9-335C-4DF2-B0D1-021C2405B03B}"
+          DTS:ValueIndex="0"
+          DTS:VariableName="User::callListCampaignName" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{B9A43E9E-CBF1-409C-8F0D-DC8815D24A89}"
+          DTS:ObjectName="{B9A43E9E-CBF1-409C-8F0D-DC8815D24A89}"
+          DTS:ValueIndex="1"
+          DTS:VariableName="User::callCampaignType" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{18D8980F-977E-4BB4-8CD7-6FD3D7FE6EDE}"
+          DTS:ObjectName="{18D8980F-977E-4BB4-8CD7-6FD3D7FE6EDE}"
+          DTS:ValueIndex="2"
+          DTS:VariableName="User::pmdClientID" />
+      </DTS:ForEachVariableMappings>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Create MRM Fax Campaigns"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{C94063FD-C2FC-49B8-814D-FD6225B5CA01}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Create MRM Fax Campaigns"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{60F0DFFC-3DF1-454E-8920-37F264BDA45E}"
+          SQLTask:SqlStatementSource="EXEC CallCampaigns.dbo.createMRMFaxes" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Exec ReportingPopulateMRMCallListData"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{6DE4903B-23B3-4A20-92AD-9AAF0B9927C8}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Exec ReportingPopulateMRMCallListData"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{60F0DFFC-3DF1-454E-8920-37F264BDA45E}"
+          SQLTask:SqlStatementSource="EXEC callcampaigns.Reporting.populateMRMCallListData" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Get Campaign Namess"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{D6C51BA5-D384-4262-B4CC-C0023AF23089}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Get Campaign Namess"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{60F0DFFC-3DF1-454E-8920-37F264BDA45E}"
+          SQLTask:SqlStatementSource="SELECT DISTINCT campaignName,campaignType,pmdClientID FROM CallCampaigns.dbo.callListControls c WHERE c.productLine='MRM' AND c.ACTIVE=1&#xA;"
+          SQLTask:ResultType="ResultSetType_Rowset" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::campaignNames" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\GetCallListSessionID of Previous List to Populate Archive Folder"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{699D0E22-9EBB-4643-8BF7-C9608D6EB8ED}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="GetCallListSessionID of Previous List to Populate Archive Folder"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:EventHandlers>
+        <DTS:EventHandler
+          DTS:refId="Package\GetCallListSessionID of Previous List to Populate Archive Folder.EventHandlers[OnError]"
+          DTS:CreationName="OnError"
+          DTS:DTSID="{0AEEA238-49C8-4F73-AED5-32301C81D5CA}"
+          DTS:EventID="352772104"
+          DTS:EventName="OnError"
+          DTS:LocaleID="-1">
+          <DTS:Variables>
+            <DTS:Variable
+              DTS:CreationName=""
+              DTS:Description="The propagate property of the event"
+              DTS:DTSID="{00C34AAE-E102-4F7E-AF1B-6D3BA5065965}"
+              DTS:IncludeInDebugDump="6789"
+              DTS:Namespace="System"
+              DTS:ObjectName="Propagate">
+              <DTS:VariableValue
+                DTS:DataType="11">-1</DTS:VariableValue>
+            </DTS:Variable>
+          </DTS:Variables>
+          <DTS:Executables />
+        </DTS:EventHandler>
+      </DTS:EventHandlers>
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{60F0DFFC-3DF1-454E-8920-37F264BDA45E}"
+          SQLTask:SqlStatementSource="select distinct cast (callListSessionID as varchar(25) ) callListSessionID from callcampaigns.dbo.calllistcontrols where campaignname='mrmAllClients'"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::callListSessionId" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::callListCampaignName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\GetPrevCallListDateForArchiveFolder"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{B32FD94B-3663-4E5E-8D2C-9857C24CF1C4}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="GetPrevCallListDateForArchiveFolder"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{60F0DFFC-3DF1-454E-8920-37F264BDA45E}"
+          SQLTask:SqlStatementSource="SELECT DISTINCT convert(VARCHAR(8),CAST (createDate AS DATE) ,112) createDate FROM dbo.MRMCallListManifest WHERE mrmCallListManifestID=?"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="createDate"
+            SQLTask:DtsVariableName="User::createDate" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::callListSessionId"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Lock Campaigns"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{DD110938-5666-4655-992F-0E10DAED864E}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Lock Campaigns"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{7FE0E78F-A950-4828-AA28-29286515F1EF}"
+          SQLTask:SqlStatementSource="UPDATE c SET c.locked=1&#xA;from DocumentCampaigns.dbo.Campaign c &#xA;INNER JOIN DocumentCampaigns.dbo.campaignFilter d &#xA;ON c.pmdCampaignId=d.pmdCampaignId &#xA;&#xA;INNER JOIN populations.dbo.[population] p&#xA;ON p.populationId = c.populationID&#xA;&#xA;WHERE c.Locked=0 and p.populationtypeid in (8,12)&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Process Campaign Package"
+      DTS:CreationName="Microsoft.ExecutePackageTask"
+      DTS:Description="Execute Package Task"
+      DTS:DTSID="{45e7421e-b420-41c2-9e8b-725a81f99b53}"
+      DTS:ExecutableType="Microsoft.ExecutePackageTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Process Campaign Package"
+      DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server v10; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ExecutePackageTask>
+          <UseProjectReference>True</UseProjectReference>
+          <PackageName>MRM_ProcessCampaignId.dtsx</PackageName>
+        </ExecutePackageTask>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{BACFB27D-4CB2-4882-B83D-BE2EB4C717DF}"
+      DTS:From="Package\GetPrevCallListDateForArchiveFolder"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Get Campaign Namess" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{B0061165-8764-43B0-AA50-E8B4A7E24485}"
+      DTS:From="Package\Create MRM Call List"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Exec ReportingPopulateMRMCallListData" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{3D236CF3-5059-444A-9514-96C6EC34A9F9}"
+      DTS:From="Package\Process Campaign Package"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Lock Campaigns" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{E49DA24F-B348-4403-A753-FED1D0CF67FE}"
+      DTS:From="Package\Exec ReportingPopulateMRMCallListData"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Create MRM Fax Campaigns" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{23809F86-1025-4497-87C4-02FB0FFD83E6}"
+      DTS:From="Package\GetCallListSessionID of Previous List to Populate Archive Folder"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\GetPrevCallListDateForArchiveFolder" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{227906DE-9A33-46AF-9835-80558888F4D3}"
+      DTS:From="Package\Get Campaign Namess"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\Create MRM Call List" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 6]"
+      DTS:CreationName=""
+      DTS:DTSID="{90991224-F0F6-4911-8D76-6366DD3EC8CD}"
+      DTS:From="Package\Create MRM Fax Campaigns"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 6"
+      DTS:To="Package\Process Campaign Package" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql12">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="136,44"
+          Id="Package\Create MRM Call List\Archive Call List"
+          TopLeft="53,151.729559748428" />
+        <NodeLayout
+          Size="136,44"
+          Id="Package\Create MRM Call List\Deploy Call List"
+          TopLeft="53,217.792452830189" />
+        <NodeLayout
+          Size="136,44"
+          Id="Package\Create MRM Call List\Generate CallList"
+          TopLeft="53,19.6037735849057" />
+        <NodeLayout
+          Size="136,44"
+          Id="Package\Create MRM Call List\Get SDN Table Name"
+          TopLeft="53,85.666666666667" />
+        <EdgeLayout
+          Id="Package\Create MRM Call List.PrecedenceConstraints[Constraint]"
+          TopLeft="53,179.729559748428">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,60.0628930817611"
+              Start="0,0"
+              End="-7.5,60.0628930817611">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-18.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-18.5,0"
+                    Point2="-22.5,0"
+                    Point3="-22.5,4" />
+                  <mssgle:LineSegment
+                    End="-22.5,56.0628930817611" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-22.5,56.0628930817611"
+                    Point2="-22.5,60.0628930817611"
+                    Point3="-18.5,60.0628930817611" />
+                  <mssgle:LineSegment
+                    End="-7.5,60.0628930817611" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Create MRM Call List.PrecedenceConstraints[Constraint 1]"
+          TopLeft="53,41.6037735849057">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,60.0628930817611"
+              Start="0,0"
+              End="-7.5,60.0628930817611">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-18.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-18.5,0"
+                    Point2="-22.5,0"
+                    Point3="-22.5,4" />
+                  <mssgle:LineSegment
+                    End="-22.5,56.0628930817611" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-22.5,56.0628930817611"
+                    Point2="-22.5,60.0628930817611"
+                    Point3="-18.5,60.0628930817611" />
+                  <mssgle:LineSegment
+                    End="-7.5,60.0628930817611" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Create MRM Call List.PrecedenceConstraints[Constraint 2]"
+          TopLeft="53,113.666666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,54.0628930817611"
+              Start="0,0"
+              End="-7.5,54.0628930817611">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-18.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-18.5,0"
+                    Point2="-22.5,0"
+                    Point3="-22.5,4" />
+                  <mssgle:LineSegment
+                    End="-22.5,50.0628930817611" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-22.5,50.0628930817611"
+                    Point2="-22.5,54.0628930817611"
+                    Point3="-18.5,54.0628930817611" />
+                  <mssgle:LineSegment
+                    End="-7.5,54.0628930817611" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43.924528301886795"
+          IsExpanded="True"
+          PanelSize="232,317"
+          Size="232,361"
+          Id="Package\Create MRM Call List"
+          TopLeft="37.566037735849,253.215483677748" />
+        <NodeLayout
+          Size="268,42"
+          Id="Package\Create MRM Fax Campaigns"
+          TopLeft="351,513" />
+        <NodeLayout
+          Size="268,42"
+          Id="Package\Exec ReportingPopulateMRMCallListData"
+          TopLeft="355,571" />
+        <NodeLayout
+          Size="238,44"
+          Id="Package\Get Campaign Namess"
+          TopLeft="33,191.007936507937" />
+        <NodeLayout
+          Size="238,44"
+          Id="Package\GetCallListSessionID of Previous List to Populate Archive Folder"
+          TopLeft="31,69.0079365079366" />
+        <NodeLayout
+          Size="238,44"
+          Id="Package\GetPrevCallListDateForArchiveFolder"
+          TopLeft="31,129.007936507937" />
+        <NodeLayout
+          Size="268,42"
+          Id="Package\Lock Campaigns"
+          TopLeft="353,399" />
+        <NodeLayout
+          Size="268,42"
+          Id="Package\Process Campaign Package"
+          TopLeft="353,454.471698113207" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="31,157.007936507937">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="2,56"
+              Start="0,0"
+              End="-5.5,56">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-18.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-18.5,0"
+                    Point2="-22.5,0"
+                    Point3="-22.5,4" />
+                  <mssgle:LineSegment
+                    End="-22.5,52" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-22.5,52"
+                    Point2="-22.5,56"
+                    Point3="-18.5,56" />
+                  <mssgle:LineSegment
+                    End="-5.5,56" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="269.566037735849,433.715483677748">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="85.433962264151,158.284516322252"
+              Start="0,0"
+              End="77.933962264151,158.284516322252">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="38.7169811320755,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="38.7169811320755,0"
+                    Point2="42.7169811320755,0"
+                    Point3="42.7169811320755,4" />
+                  <mssgle:LineSegment
+                    End="42.7169811320755,154.284516322252" />
+                  <mssgle:CubicBezierSegment
+                    Point1="42.7169811320755,154.284516322252"
+                    Point2="42.7169811320755,158.284516322252"
+                    Point3="46.7169811320755,158.284516322252" />
+                  <mssgle:LineSegment
+                    End="77.933962264151,158.284516322252" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="353,475.471698113207">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,-55.471698113207"
+              Start="0,0"
+              End="-7.5,-55.471698113207">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-18.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-18.5,0"
+                    Point2="-22.5,0"
+                    Point3="-22.5,-4" />
+                  <mssgle:LineSegment
+                    End="-22.5,-51.471698113207" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-22.5,-51.471698113207"
+                    Point2="-22.5,-55.471698113207"
+                    Point3="-18.5,-55.471698113207" />
+                  <mssgle:LineSegment
+                    End="-7.5,-55.471698113207" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="623,592">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="-4,-58"
+              Start="0,0"
+              End="3.5,-58">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="18.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="18.5,0"
+                    Point2="22.5,0"
+                    Point3="22.5,-4" />
+                  <mssgle:LineSegment
+                    End="22.5,-54" />
+                  <mssgle:CubicBezierSegment
+                    Point1="22.5,-54"
+                    Point2="22.5,-58"
+                    Point3="18.5,-58" />
+                  <mssgle:LineSegment
+                    End="3.5,-58" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="31,91.0079365079366">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,60.0000000000004"
+              Start="0,0"
+              End="-7.5,60.0000000000004">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-18.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-18.5,0"
+                    Point2="-22.5,0"
+                    Point3="-22.5,4" />
+                  <mssgle:LineSegment
+                    End="-22.5,56.0000000000004" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-22.5,56.0000000000004"
+                    Point2="-22.5,60.0000000000004"
+                    Point3="-18.5,60.0000000000004" />
+                  <mssgle:LineSegment
+                    End="-7.5,60.0000000000004" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="33,219.007936507937">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="4.56603773584902,214.707547169811"
+              Start="0,0"
+              End="-2.93396226415098,214.707547169811">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-18.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-18.5,0"
+                    Point2="-22.5,0"
+                    Point3="-22.5,4" />
+                  <mssgle:LineSegment
+                    End="-22.5,210.707547169811" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-22.5,210.707547169811"
+                    Point2="-22.5,214.707547169811"
+                    Point3="-18.5,214.707547169811" />
+                  <mssgle:LineSegment
+                    End="-2.93396226415098,214.707547169811" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 6]"
+          TopLeft="351,534">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="2,-52.8616352201263"
+              Start="0,0"
+              End="-5.5,-52.8616352201263">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-18.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-18.5,0"
+                    Point2="-22.5,0"
+                    Point3="-22.5,-4" />
+                  <mssgle:LineSegment
+                    End="-22.5,-48.8616352201263" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-22.5,-48.8616352201263"
+                    Point2="-22.5,-52.8616352201263"
+                    Point3="-18.5,-52.8616352201263" />
+                  <mssgle:LineSegment
+                    End="-5.5,-52.8616352201263" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="This is a legacy step that was used by the old process to create PDFs&#xA;We still need this due to how the Campaign logic works.  However, &#xA;there is no longer a dependency on the locked field for PDFS.  &#xA;The PDF creation process uses the latest MRM campaignIDs."
+          ParentId="Package"
+          FontInfo="{x:Null}"
+          Size="389,88"
+          Id="9847696a-334f-49f5-a8d5-177cade87140"
+          TopLeft="539,193" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

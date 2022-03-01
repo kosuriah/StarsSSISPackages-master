@@ -1,0 +1,2272 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/8/2016 2:23:44 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="LT-J6QQN12-0112"
+  DTS:CreatorName="PHARMMD\Saideswar.Thondapu"
+  DTS:DTSID="{5C2BA003-9C63-4A9A-BDAC-276045C7FC0A}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.93"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Stars_Texting_Send_Update"
+  DTS:PackageType="5"
+  DTS:VersionBuild="46"
+  DTS:VersionGUID="{0EDA1882-EB6D-40CF-9F49-7ACDD7E8BD3A}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Send and update Texting to and from Faximinion"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{b9f203ea-764f-4abd-ba79-0bcda0b94379}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Send and update Texting to and from Faximinion"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Send and update Texting to and from Faximinion\Get all texting Info"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Get all texting Info"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT [DTP_Texting_List_ID]
+    ,[PMD_Client_ID]
+    ,[PlanIdentifier_PClm]
+    ,[Campaign_Date]
+    ,[PMD_Patient_ID]
+    ,[Text_Number]
+    ,[Text_Message]
+    ,[Text_Send_Ind]
+    ,[Text_Send_Date]
+    ,[Last_Status]
+    ,[Error_Code]
+    ,[Error_Message]
+    ,[Faximinion_Text_ID]
+FROM [Stars_Call_Lists].[dbo].[DTP_Texting_List]
+Where [Campaign_Date] = (Select max([Campaign_Date]) From [dbo].[DTP_Texting_List])
+--and [Last_Status] in ('New','pending')</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Connections[OleDbConnection]"
+                  connectionManagerID="{6311C9A2-D389-4B9C-B757-1A615A452B59}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[Stars_Call_Lists]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Output].Columns[Campaign_Date]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Output].ExternalColumns[Campaign_Date]"
+                      lineageId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Output].Columns[Campaign_Date]"
+                      name="Campaign_Date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Output].Columns[DTP_Texting_List_ID]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Output].ExternalColumns[DTP_Texting_List_ID]"
+                      lineageId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Output].Columns[DTP_Texting_List_ID]"
+                      name="DTP_Texting_List_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Output].Columns[PMD_Client_ID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Output].ExternalColumns[PMD_Client_ID]"
+                      lineageId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Output].Columns[PMD_Client_ID]"
+                      name="PMD_Client_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Output].Columns[PlanIdentifier_PClm]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Output].ExternalColumns[PlanIdentifier_PClm]"
+                      length="20"
+                      lineageId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Output].Columns[PlanIdentifier_PClm]"
+                      name="PlanIdentifier_PClm"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Output].Columns[PMD_Patient_ID]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Output].ExternalColumns[PMD_Patient_ID]"
+                      lineageId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Output].Columns[PMD_Patient_ID]"
+                      name="PMD_Patient_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Output].Columns[Text_Message]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Output].ExternalColumns[Text_Message]"
+                      length="1000"
+                      lineageId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Output].Columns[Text_Message]"
+                      name="Text_Message"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Output].Columns[Last_Status]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Output].ExternalColumns[Last_Status]"
+                      length="50"
+                      lineageId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Output].Columns[Last_Status]"
+                      name="Last_Status"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Output].Columns[Error_Code]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Output].ExternalColumns[Error_Code]"
+                      length="1000"
+                      lineageId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Output].Columns[Error_Code]"
+                      name="Error_Code"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Output].Columns[Faximinion_Text_ID]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Output].ExternalColumns[Faximinion_Text_ID]"
+                      lineageId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Output].Columns[Faximinion_Text_ID]"
+                      name="Faximinion_Text_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Output].Columns[Text_Send_Ind]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Output].ExternalColumns[Text_Send_Ind]"
+                      length="1"
+                      lineageId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Output].Columns[Text_Send_Ind]"
+                      name="Text_Send_Ind"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Output].Columns[Text_Send_Date]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Output].ExternalColumns[Text_Send_Date]"
+                      lineageId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Output].Columns[Text_Send_Date]"
+                      name="Text_Send_Date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Output].Columns[Error_Message]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Output].ExternalColumns[Error_Message]"
+                      length="1000"
+                      lineageId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Output].Columns[Error_Message]"
+                      name="Error_Message"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Output].Columns[Text_Number]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Output].ExternalColumns[Text_Number]"
+                      length="50"
+                      lineageId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Output].Columns[Text_Number]"
+                      name="Text_Number"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Output].ExternalColumns[Campaign_Date]"
+                      dataType="dbDate"
+                      name="Campaign_Date" />
+                    <externalMetadataColumn
+                      refId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Output].ExternalColumns[DTP_Texting_List_ID]"
+                      dataType="i8"
+                      name="DTP_Texting_List_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Output].ExternalColumns[PMD_Client_ID]"
+                      dataType="i4"
+                      name="PMD_Client_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Output].ExternalColumns[PlanIdentifier_PClm]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="PlanIdentifier_PClm" />
+                    <externalMetadataColumn
+                      refId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Output].ExternalColumns[PMD_Patient_ID]"
+                      dataType="i8"
+                      name="PMD_Patient_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Output].ExternalColumns[Text_Message]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="Text_Message" />
+                    <externalMetadataColumn
+                      refId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Output].ExternalColumns[Last_Status]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Last_Status" />
+                    <externalMetadataColumn
+                      refId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Output].ExternalColumns[Error_Code]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="Error_Code" />
+                    <externalMetadataColumn
+                      refId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Output].ExternalColumns[Faximinion_Text_ID]"
+                      dataType="i8"
+                      name="Faximinion_Text_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Output].ExternalColumns[Text_Send_Ind]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="Text_Send_Ind" />
+                    <externalMetadataColumn
+                      refId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Output].ExternalColumns[Text_Send_Date]"
+                      dataType="dbTimeStamp"
+                      name="Text_Send_Date" />
+                    <externalMetadataColumn
+                      refId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Output].ExternalColumns[Error_Message]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="Error_Message" />
+                    <externalMetadataColumn
+                      refId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Output].ExternalColumns[Text_Number]"
+                      dataType="wstr"
+                      length="50"
+                      name="Text_Number" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Error Output].Columns[DTP_Texting_List_ID]"
+                      dataType="i8"
+                      lineageId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Error Output].Columns[DTP_Texting_List_ID]"
+                      name="DTP_Texting_List_ID" />
+                    <outputColumn
+                      refId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Error Output].Columns[PMD_Client_ID]"
+                      dataType="i4"
+                      lineageId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Error Output].Columns[PMD_Client_ID]"
+                      name="PMD_Client_ID" />
+                    <outputColumn
+                      refId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Error Output].Columns[PlanIdentifier_PClm]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Error Output].Columns[PlanIdentifier_PClm]"
+                      name="PlanIdentifier_PClm" />
+                    <outputColumn
+                      refId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Error Output].Columns[Campaign_Date]"
+                      dataType="dbDate"
+                      lineageId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Error Output].Columns[Campaign_Date]"
+                      name="Campaign_Date" />
+                    <outputColumn
+                      refId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Error Output].Columns[PMD_Patient_ID]"
+                      dataType="i8"
+                      lineageId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Error Output].Columns[PMD_Patient_ID]"
+                      name="PMD_Patient_ID" />
+                    <outputColumn
+                      refId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Error Output].Columns[Text_Number]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Error Output].Columns[Text_Number]"
+                      name="Text_Number" />
+                    <outputColumn
+                      refId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Error Output].Columns[Text_Message]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      lineageId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Error Output].Columns[Text_Message]"
+                      name="Text_Message" />
+                    <outputColumn
+                      refId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Error Output].Columns[Text_Send_Ind]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Error Output].Columns[Text_Send_Ind]"
+                      name="Text_Send_Ind" />
+                    <outputColumn
+                      refId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Error Output].Columns[Text_Send_Date]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Error Output].Columns[Text_Send_Date]"
+                      name="Text_Send_Date" />
+                    <outputColumn
+                      refId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Error Output].Columns[Last_Status]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Error Output].Columns[Last_Status]"
+                      name="Last_Status" />
+                    <outputColumn
+                      refId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Error Output].Columns[Error_Code]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      lineageId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Error Output].Columns[Error_Code]"
+                      name="Error_Code" />
+                    <outputColumn
+                      refId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Error Output].Columns[Error_Message]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      lineageId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Error Output].Columns[Error_Message]"
+                      name="Error_Message" />
+                    <outputColumn
+                      refId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Error Output].Columns[Faximinion_Text_ID]"
+                      dataType="i8"
+                      lineageId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Error Output].Columns[Faximinion_Text_ID]"
+                      name="Faximinion_Text_ID" />
+                    <outputColumn
+                      refId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Send and update Texting to and from Faximinion\Send fax file to Faximinion"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Includes and runs custom script code. For example, apply a business rule that limits the range of valid values in an &quot;income&quot; column or add values in two columns and calculate the average of the sum.;Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;9"
+              description="Includes and runs custom script code. For example, apply a business rule that limits the range of valid values in an &quot;income&quot; column or add values in two columns and calculate the average of the sum."
+              name="Send fax file to Faximinion"
+              validateExternalMetadata="False"
+              version="11">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Stores the source code of the component"
+                  isArray="true"
+                  name="SourceCode"
+                  state="cdata">
+                  <arrayElements
+                    arrayElementCount="33">
+                    <arrayElement
+                      dataType="System.String"><![CDATA[Properties\Resources.resx]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+</root>]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[main.cs]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[#region Help:  Introduction to the Script Component
+/* The Script Component allows you to perform virtually any operation that can be accomplished in
+ * a .Net application within the context of an Integration Services data flow.
+ *
+ * Expand the other regions which have "Help" prefixes for examples of specific ways to use
+ * Integration Services features within this script component. */
+#endregion
+
+#region Namespaces
+using System;
+using System.Data;
+using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
+using Microsoft.SqlServer.Dts.Runtime.Wrapper;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Collections.Specialized;
+using System.IO;
+using FaxminionText;
+using System.Data.SqlClient;
+
+#endregion
+
+/// <summary>
+/// This is the class to which to add your code.  Do not change the name, attributes, or parent
+/// of this class.
+/// </summary>
+[Microsoft.SqlServer.Dts.Pipeline.SSISScriptComponentEntryPointAttribute]
+public class ScriptMain : UserComponent
+{
+    #region Help:  Using Integration Services variables and parameters
+    /* To use a variable in this script, first ensure that the variable has been added to
+     * either the list contained in the ReadOnlyVariables property or the list contained in
+     * the ReadWriteVariables property of this script component, according to whether or not your
+     * code needs to write into the variable.  To do so, save this script, close this instance of
+     * Visual Studio, and update the ReadOnlyVariables and ReadWriteVariables properties in the
+     * Script Transformation Editor window.
+     * To use a parameter in this script, follow the same steps. Parameters are always read-only.
+     *
+     * Example of reading from a variable or parameter:
+     *  DateTime startTime = Variables.MyStartTime;
+     *
+     * Example of writing to a variable:
+     *  Variables.myStringVariable = "new value";
+     */
+    #endregion
+
+    #region Help:  Using Integration Services Connnection Managers
+    /* Some types of connection managers can be used in this script component.  See the help topic
+     * "Working with Connection Managers Programatically" for details.
+     *
+     * To use a connection manager in this script, first ensure that the connection manager has
+     * been added to either the list of connection managers on the Connection Managers page of the
+     * script component editor.  To add the connection manager, save this script, close this instance of
+     * Visual Studio, and add the Connection Manager to the list.
+     *
+     * If the component needs to hold a connection open while processing rows, override the
+     * AcquireConnections and ReleaseConnections methods.
+     * 
+     * Example of using an ADO.Net connection manager to acquire a SqlConnection:
+     *  object rawConnection = Connections.SalesDB.AcquireConnection(transaction);
+     *  SqlConnection salesDBConn = (SqlConnection)rawConnection;
+     *
+     * Example of using a File connection manager to acquire a file path:
+     *  object rawConnection = Connections.Prices_zip.AcquireConnection(transaction);
+     *  string filePath = (string)rawConnection;
+     *
+     * Example of releasing a connection manager:
+     *  Connections.SalesDB.ReleaseConnection(rawConnection); 
+     */
+    #endregion
+
+    #region Help:  Firing Integration Services Events
+    /* This script component can fire events.
+     *
+     * Example of firing an error event:
+     *  ComponentMetaData.FireError(10, "Process Values", "Bad value", "", 0, out cancel);
+     *
+     * Example of firing an information event:
+     *  ComponentMetaData.FireInformation(10, "Process Values", "Processing has started", "", 0, fireAgain);
+     *
+     * Example of firing a warning event:
+     *  ComponentMetaData.FireWarning(10, "Process Values", "No rows were received", "", 0);
+     */
+    #endregion
+
+
+    IDTSConnectionManager100 connMgr;
+    SqlConnection sqlConn;
+    SqlCommand sqlCmd;
+    SqlParameter sqlParam;
+    
+    public override void AcquireConnections(object Transaction)
+    {
+        connMgr = this.Connections.StarsCallListado;
+        sqlConn = (SqlConnection)connMgr.AcquireConnection(null);
+    }
+
+    public override void ReleaseConnections()
+    {
+        connMgr.ReleaseConnection(sqlConn);
+    }
+
+    /// <summary>
+    /// This method is called once, before rows begin to be processed in the data flow.
+    ///
+    /// You can remove this method if you don't need to do anything here.
+    /// </summary>
+    public override void PreExecute()
+    {
+        base.PreExecute();
+        /*
+         * Add your code here
+         */
+        string updateQuery = "update [dbo].[DTP_Texting_List] set [Text_Send_Ind] = @TextSendInd, [Text_Send_Date] = getdate(), [Last_Status]= @LastStatus, " +
+                              "[Error_Code] = @ErrorCode, [Error_Message] = @ErrorMessage, [Faximinion_Text_ID] = @FaximinionTextID where [DTP_Texting_List_ID] = @DTP_Texting_List_ID";
+
+        sqlCmd = new SqlCommand(updateQuery, sqlConn);
+
+        sqlParam = new SqlParameter("@DTP_Texting_List_ID", SqlDbType.BigInt);
+        sqlCmd.Parameters.Add(sqlParam);
+        sqlParam = new SqlParameter("@TextSendInd", SqlDbType.Char, 1);
+        sqlCmd.Parameters.Add(sqlParam);
+        sqlParam = new SqlParameter("@LastStatus", SqlDbType.VarChar, 20);
+        sqlCmd.Parameters.Add(sqlParam);
+        sqlParam = new SqlParameter("@ErrorCode", SqlDbType.VarChar, 1000);
+        sqlCmd.Parameters.Add(sqlParam);
+        sqlParam = new SqlParameter("@ErrorMessage", SqlDbType.VarChar, 1000);
+        sqlCmd.Parameters.Add(sqlParam);
+        sqlParam = new SqlParameter("@FaximinionTextID", SqlDbType.BigInt);
+        sqlCmd.Parameters.Add(sqlParam);
+    }
+
+    /// <summary>
+    /// This method is called after all the rows have passed through this component.
+    ///
+    /// You can delete this method if you don't need to do anything here.
+    /// </summary>
+    public override void PostExecute()
+    {
+        base.PostExecute();
+        /*
+         * Add your code here
+         */
+    }
+
+    /// <summary>
+    /// This method is called once for every row that passes through the component from Input0.
+    ///
+    /// Example of reading a value from a column in the the row:
+    ///  string zipCode = Row.ZipCode
+    ///
+    /// Example of writing a value to a column in the row:
+    ///  Row.ZipCode = zipCode
+    /// </summary>
+    /// <param name="Row">The row that is currently passing through the component</param>
+    public override void Input0_ProcessInputRow(Input0Buffer Row)
+    {
+
+        //Faxminion Texting APIs
+        string TextFaximinionSendAPI = ReadOnlyVariables["$Project::TextFaximinionSendAPI"].Value.ToString(); //"https://faximiniondev.pharmmd.com/api/texts.json";
+        string TextFaximinionGetAPI = ReadOnlyVariables["$Project::TextFaximinionGetAPI"].Value.ToString(); //"https://faximiniondev.pharmmd.com/api/texts/";
+        string TextAuthorizationToken = "Token token=" + ReadOnlyVariables["$Project::TextAuthorizationToken"].Value.ToString(); //"Token token=WJsS1JNllfocssOuHrZ_qxG4qCwyiZ8c6mPuClCf";
+        string TextFaximinionEnvKey = ReadOnlyVariables["$Project::TextFaximinionEnvKey"].Value.ToString();
+
+        try
+        {
+            if (Row.LastStatus == "New")
+            {
+                NameValueCollection TextParameters = new NameValueCollection()
+                            {
+                                { "authorization", TextAuthorizationToken},
+                                { "env_key", TextFaximinionEnvKey},
+                                { "format", "json"},
+                                { "text[pmd_client_id]", Row.PMDClientID.ToString()},
+                                { "text[to_number]", Row.TextNumber.ToString()},
+                                { "text[body]", Row.TextMessage.ToString()},
+                                { "text[properties][product_line]", "stars"},
+                                { "text[properties][pmd_patient_id]", Row.PMDPatientID.ToString()}
+                            };
+
+                TextResult ValidationTextResult = ValidationProcess(TextParameters);
+
+                if (ValidationTextResult.Success)
+                {
+                    TextAPI objTextAPI = new TextAPI();
+                    TextResult TextFinalResult = objTextAPI.Sendtext(TextFaximinionSendAPI, TextAuthorizationToken, TextParameters);
+
+                    if (TextFinalResult.Success)
+                        SuccessTexts(TextFinalResult, Row);
+                    else
+                        FailureTexts(TextFinalResult, Row);
+                }
+                else
+                {
+                    FailureTexts(ValidationTextResult, Row);
+                }
+            }
+            else
+            {
+                TextAPI objTextAPI = new TextAPI();
+                TextResult TextFinalResult = objTextAPI.GetTextStatus(TextFaximinionGetAPI, TextAuthorizationToken, Row.FaximinionTextID.ToString());
+
+                if (TextFinalResult.Success)
+                    SuccessTexts(TextFinalResult, Row);
+                else
+                    FailureTexts(TextFinalResult, Row);
+            }
+
+        }
+        catch (Exception ex)
+        {
+            //SaveandArchiveFile(new PhaxioOperationResult(false, ex.ToString()), SourceFolderPath + FileName, DestinationFolderPath, Row.FaxKey);
+            ex.ToString();
+        }
+
+    }
+
+    public TextResult ValidationProcess(NameValueCollection parameters)
+    {
+        if ((parameters["text[to_number]"] == null) || (parameters["text[to_number]"].Length == 0))
+            return new TextResult(false, "You must include a to text number.");
+
+        Regex regex = new Regex("[^0-9]");
+        string ToTextNum = regex.Replace(parameters["text[to_number]"], String.Empty);
+        if (!(ToTextNum.Length == 10 || ToTextNum.Length == 11))
+            return new TextResult(false, "To text number is not valid");
+
+        if (parameters["text[body]"] == null && (parameters["text[body]"].Length == 0))
+            return new TextResult(false, "You must include text message");
+
+        return new TextResult(true, "Validation is successful");
+    }
+
+    public void FailureTexts(TextResult TextFinalResult, Input0Buffer Row)
+    {
+        sqlCmd.Parameters["@DTP_Texting_List_ID"].Value = Row.DTPTextingListID;
+        sqlCmd.Parameters["@TextSendInd"].Value = "N";
+        sqlCmd.Parameters["@LastStatus"].Value = "Error";
+        sqlCmd.Parameters["@ErrorCode"].Value = "Validation failed";
+        sqlCmd.Parameters["@ErrorMessage"].Value = TextFinalResult.Message;
+        //sqlCmd.Parameters["@FaximinionTextID"].Value = Row.FaximinionTextID;
+        sqlCmd.Parameters["@FaximinionTextID"].Value = TextFinalResult.Data["Faximinion_Text_ID"] == string.Empty ? DBNull.Value : TextFinalResult.Data["Faximinion_Text_ID"];
+
+        sqlCmd.ExecuteNonQuery();
+    }
+
+    public void SuccessTexts(TextResult TextFinalResult, Input0Buffer Row)
+    {
+
+        sqlCmd.Parameters["@DTP_Texting_List_ID"].Value = Row.DTPTextingListID;
+        sqlCmd.Parameters["@TextSendInd"].Value = "Y";
+        sqlCmd.Parameters["@LastStatus"].Value = TextFinalResult.Data["status"] == string.Empty ? DBNull.Value : TextFinalResult.Data["status"];
+        sqlCmd.Parameters["@ErrorCode"].Value = TextFinalResult.Data["error_code"] == string.Empty ? DBNull.Value : TextFinalResult.Data["error_code"];
+        sqlCmd.Parameters["@ErrorMessage"].Value = TextFinalResult.Data["error_message"] == string.Empty ? DBNull.Value : TextFinalResult.Data["error_message"];
+        sqlCmd.Parameters["@FaximinionTextID"].Value = TextFinalResult.Data["Faximinion_Text_ID"] == string.Empty ? DBNull.Value : TextFinalResult.Data["Faximinion_Text_ID"];
+
+        sqlCmd.ExecuteNonQuery();
+    }
+
+}
+]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[SC_9a5698b569d546cb8e212af1c399891a.csproj]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectTypeGuids>{30D016F9-3734-4E33-A861-5E7D899E18F3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{305B8FB3-AF96-4437-9C10-B71D1A50EC0E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SC_9a5698b569d546cb8e212af1c399891a</RootNamespace>
+    <AssemblyName>SC_9a5698b569d546cb8e212af1c399891a</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>true</ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>
+    <TargetFrameworkProfile></TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>.\bin\Debug\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <OutputPath>.\bin\Release\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.SqlServer.TxScript, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.SqlServer.DTSRuntimeWrap, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.SqlServer.DTSPipelineWrap, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.SqlServer.PipelineHost, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Compile Include="main.cs" />
+    <Compile Include="BufferWrapper.cs" />
+    <Compile Include="ComponentWrapper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppDesigner Include="Properties\" />
+    <Compile Include="TextAPI.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <!-- Include the build rules for a C# project.-->
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- This section defines VSTA properties that describe the host-changable project properties. -->
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{30D016F9-3734-4E33-A861-5E7D899E18F3}">
+        <ProjectProperties HostName="VSTAHostName" HostPackage="{B3A685AA-7EAF-4BC6-9940-57959FA5AC07}" ApplicationType="usd" Language="cs" TemplatesPath="" />
+        <Host Name="ScriptComponent" IconIndex="0" />
+        <ProjectClient>
+          <HostIdentifier>SSIS_SC140</HostIdentifier>
+        </ProjectClient>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[ComponentWrapper.cs]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[/* THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT!
+*  Microsoft SQL Server Integration Services component wrapper
+*  This module defines the base class for your component
+*  THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT! */
+
+using System;
+using System.Data;
+using Microsoft.SqlServer.Dts.Pipeline;
+using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
+using Microsoft.SqlServer.Dts.Runtime.Wrapper;
+
+public class UserComponent: ScriptComponent
+{
+    public Connections Connections;
+    public Variables Variables;
+    public UserComponent()
+    {
+        Connections = new Connections(this);
+        Variables = new Variables(this);
+    }
+
+    public override void ProcessInput(int InputID, string InputName, PipelineBuffer Buffer, OutputNameMap OutputMap)
+    {
+
+        if (InputName.Equals(@"Input 0", StringComparison.Ordinal))
+        {
+            Input0_ProcessInput(new Input0Buffer(Buffer, GetColumnIndexes(InputID), OutputMap));
+        }
+
+    }
+
+    public virtual void Input0_ProcessInput(Input0Buffer Buffer)
+    {
+        while (Buffer.NextRow())
+        {
+            Input0_ProcessInputRow(Buffer);
+        }
+    }
+
+    public virtual void Input0_ProcessInputRow(Input0Buffer Row)
+    {
+    }
+
+}
+
+public class Connections
+{
+    ScriptComponent ParentComponent;
+
+    public Connections(ScriptComponent Component)
+    {
+        ParentComponent = Component;
+    }
+
+    public IDTSConnectionManager100 StarsCallListado
+    {
+        get
+        {
+            return ParentComponent.ComponentMetaData.RuntimeConnectionCollection.GetRuntimeConnectionByName(@"Stars_Call_List_ado").ConnectionManager;
+        }
+    }
+
+}
+
+public class Variables
+{
+    ScriptComponent ParentComponent;
+
+    public Variables(ScriptComponent Component)
+    {
+        ParentComponent = Component;
+    }
+
+    public String TextAuthorizationToken
+    {
+        get
+        {
+            return (String)(ParentComponent.ReadOnlyVariables["TextAuthorizationToken"].GetValueWithContext(ScriptComponent.EvaluatorContext));
+        }
+    }
+
+    public String TextFaximinionEnvKey
+    {
+        get
+        {
+            return (String)(ParentComponent.ReadOnlyVariables["TextFaximinionEnvKey"].GetValueWithContext(ScriptComponent.EvaluatorContext));
+        }
+    }
+
+    public String TextFaximinionGetAPI
+    {
+        get
+        {
+            return (String)(ParentComponent.ReadOnlyVariables["TextFaximinionGetAPI"].GetValueWithContext(ScriptComponent.EvaluatorContext));
+        }
+    }
+
+    public String TextFaximinionSendAPI
+    {
+        get
+        {
+            return (String)(ParentComponent.ReadOnlyVariables["TextFaximinionSendAPI"].GetValueWithContext(ScriptComponent.EvaluatorContext));
+        }
+    }
+
+}
+]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[Properties\Settings.Designer.cs]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="SC_9a5698b569d546cb8e212af1c399891a.Properties.Settings.get_Default():SC_9a5698b569d546cb8e212af1c399891a.Properties.Sett" +
+    "ings")]
+
+namespace SC_9a5698b569d546cb8e212af1c399891a.Properties {
+    
+    
+    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+        
+        [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+        private static Settings defaultInstance = new Settings();
+        
+        public static Settings Default {
+            get {
+                return defaultInstance;
+            }
+        }
+    }
+}
+]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[BufferWrapper.cs]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[/* THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT!
+*  Microsoft SQL Server Integration Services buffer wrappers
+*  This module defines classes for accessing data flow buffers
+*  THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT! */
+
+
+
+using System;
+using System.Data;
+using Microsoft.SqlServer.Dts.Pipeline;
+using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
+
+public class Input0Buffer: ScriptBuffer
+
+{
+    public Input0Buffer(PipelineBuffer Buffer, int[] BufferColumnIndexes, OutputNameMap OutputMap)
+        : base(Buffer, BufferColumnIndexes, OutputMap)
+    {
+    }
+
+    public DateTime CampaignDate
+    {
+        get
+        {
+            return Buffer.GetDate(BufferColumnIndexes[0]);
+        }
+    }
+    public bool CampaignDate_IsNull
+    {
+        get
+        {
+            return IsNull(0);
+        }
+    }
+
+    public Int64 DTPTextingListID
+    {
+        get
+        {
+            return Buffer.GetInt64(BufferColumnIndexes[1]);
+        }
+    }
+    public bool DTPTextingListID_IsNull
+    {
+        get
+        {
+            return IsNull(1);
+        }
+    }
+
+    public Int32 PMDClientID
+    {
+        get
+        {
+            return Buffer.GetInt32(BufferColumnIndexes[2]);
+        }
+    }
+    public bool PMDClientID_IsNull
+    {
+        get
+        {
+            return IsNull(2);
+        }
+    }
+
+    public String PlanIdentifierPClm
+    {
+        get
+        {
+            return Buffer.GetString(BufferColumnIndexes[3]);
+        }
+    }
+    public bool PlanIdentifierPClm_IsNull
+    {
+        get
+        {
+            return IsNull(3);
+        }
+    }
+
+    public Int64 PMDPatientID
+    {
+        get
+        {
+            return Buffer.GetInt64(BufferColumnIndexes[4]);
+        }
+    }
+    public bool PMDPatientID_IsNull
+    {
+        get
+        {
+            return IsNull(4);
+        }
+    }
+
+    public String TextMessage
+    {
+        get
+        {
+            return Buffer.GetString(BufferColumnIndexes[5]);
+        }
+    }
+    public bool TextMessage_IsNull
+    {
+        get
+        {
+            return IsNull(5);
+        }
+    }
+
+    public String LastStatus
+    {
+        get
+        {
+            return Buffer.GetString(BufferColumnIndexes[6]);
+        }
+    }
+    public bool LastStatus_IsNull
+    {
+        get
+        {
+            return IsNull(6);
+        }
+    }
+
+    public String ErrorCode
+    {
+        get
+        {
+            return Buffer.GetString(BufferColumnIndexes[7]);
+        }
+    }
+    public bool ErrorCode_IsNull
+    {
+        get
+        {
+            return IsNull(7);
+        }
+    }
+
+    public Int64 FaximinionTextID
+    {
+        get
+        {
+            return Buffer.GetInt64(BufferColumnIndexes[8]);
+        }
+    }
+    public bool FaximinionTextID_IsNull
+    {
+        get
+        {
+            return IsNull(8);
+        }
+    }
+
+    public String TextSendInd
+    {
+        get
+        {
+            return Buffer.GetString(BufferColumnIndexes[9]);
+        }
+    }
+    public bool TextSendInd_IsNull
+    {
+        get
+        {
+            return IsNull(9);
+        }
+    }
+
+    public DateTime TextSendDate
+    {
+        get
+        {
+            return Buffer.GetDateTime(BufferColumnIndexes[10]);
+        }
+    }
+    public bool TextSendDate_IsNull
+    {
+        get
+        {
+            return IsNull(10);
+        }
+    }
+
+    public String ErrorMessage
+    {
+        get
+        {
+            return Buffer.GetString(BufferColumnIndexes[11]);
+        }
+    }
+    public bool ErrorMessage_IsNull
+    {
+        get
+        {
+            return IsNull(11);
+        }
+    }
+
+    public String TextNumber
+    {
+        get
+        {
+            return Buffer.GetString(BufferColumnIndexes[12]);
+        }
+    }
+    public bool TextNumber_IsNull
+    {
+        get
+        {
+            return IsNull(12);
+        }
+    }
+
+    new public bool NextRow()
+    {
+        return base.NextRow();
+    }
+
+    new public bool EndOfRowset()
+    {
+        return base.EndOfRowset();
+    }
+
+}
+]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[Project]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF16LE]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[<?xml version="1.0" encoding="UTF-16" standalone="yes"?>
+<c:Project xmlns:c="http://schemas.microsoft.com/codeprojectml/2010/08/main" xmlns:msb="http://schemas.microsoft.com/developer/msbuild/2003" runtimeVersion="4.0" schemaVersion="1.0">
+  <msb:PropertyGroup>
+    <msb:CodeName>SC_9a5698b569d546cb8e212af1c399891a</msb:CodeName>
+    <msb:Language>msBuild</msb:Language>
+    <msb:DisplayName>SC_9a5698b569d546cb8e212af1c399891a</msb:DisplayName>
+    <msb:ProjectId>{3B2E3C3F-547E-4F02-831C-C4E9E6F30BAF}</msb:ProjectId>
+  </msb:PropertyGroup>
+  <msb:ItemGroup>
+    <msb:Project Include="SC_9a5698b569d546cb8e212af1c399891a.csproj" />
+    <msb:File Include="ComponentWrapper.cs" />
+    <msb:File Include="main.cs" />
+    <msb:File Include="BufferWrapper.cs" />
+    <msb:File Include="Properties\Settings.settings" />
+    <msb:File Include="TextAPI.cs" />
+    <msb:File Include="Properties\AssemblyInfo.cs" />
+    <msb:File Include="Properties\Resources.resx" />
+    <msb:File Include="Properties\Resources.Designer.cs" />
+    <msb:File Include="Properties\Settings.Designer.cs" />
+  </msb:ItemGroup>
+</c:Project>]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[Properties\AssemblyInfo.cs]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[using System.Reflection;
+using System.Runtime.CompilerServices;
+
+//
+// General Information about an assembly is controlled through the following 
+// set of attributes. Change these attribute values to modify the information
+// associated with an assembly.
+//
+[assembly: AssemblyTitle("SC_9a5698b569d546cb8e212af1c399891a")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("SC_9a5698b569d546cb8e212af1c399891a")]
+[assembly: AssemblyCopyright("Copyright @  2015")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+//
+// Version information for an assembly consists of the following four values:
+//
+//      Major Version
+//      Minor Version 
+//      Build Number
+//      Revision
+//
+// You can specify all the values or you can default the Revision and Build Numbers 
+// by using the '*' as shown below:
+
+[assembly: AssemblyVersion("1.0.0.0")]
+]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[TextAPI.cs]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Collections.Specialized;
+using System.IO;
+using System.Net;
+using System.Security.Cryptography;
+using System.Web.Script.Serialization;
+//using System.Dynamic;
+//using System.Collections.ObjectModel;
+using Microsoft.CSharp.RuntimeBinder;
+using System.Web;
+
+namespace FaxminionText
+{
+    public class TextAPI
+    {
+        private bool debug = false;
+        private string api_key;
+        private string api_secret;
+        private string host;
+
+        public TextAPI() { }
+
+        public TextAPI(string apiKey, string apiSecret, string hostURL = "https://api.phaxio.com/v1/")
+        {
+            api_key = apiKey;
+            api_secret = apiSecret;
+            host = hostURL;
+        }
+
+        public TextResult GetTextStatus(string address, string TextAuthorization, string Faximinion_Text_ID)
+        {
+            if (Faximinion_Text_ID == "0")
+                return new TextResult(false, "A valid faxminion text id is required.");
+
+            return doRequest(address + Faximinion_Text_ID +".json", TextAuthorization, null, "Get");
+        }
+
+        public TextResult Sendtext(string address, string TextAuthorization, NameValueCollection parameters)
+        {
+            return doRequest(address, TextAuthorization, parameters, "Send");
+        }
+
+        private TextResult doRequest(string address, string TextAuthorization, NameValueCollection parameters, string sGetSend)
+        {
+            TextResult response;
+
+            if (sGetSend == "Send")
+                response = createAndSendRequest(address, TextAuthorization, parameters);
+            else
+                response = GetTextStatusRequest(address, TextAuthorization);
+
+            if (!response.Success)
+            {
+                return response;
+            }
+
+            JavaScriptSerializer responsed = new JavaScriptSerializer();
+            dynamic res;
+            try
+            {
+                res = responsed.Deserialize<dynamic>(response.Message);
+            }
+            catch
+            {
+                return new TextResult(false, "No data received from service.");
+            }
+
+            string sFaximinion_Text_ID = "";
+            string sStatus = "";
+            string sErrorCode = "";
+            string sErrorMessage = "";
+
+            if (res.ContainsKey("id"))
+                sFaximinion_Text_ID = CheckNullString(res["id"]);
+
+            if (res.ContainsKey("status"))
+                sStatus = CheckNullString(res["status"]);
+
+            if (res.ContainsKey("error_code"))
+                sErrorCode = CheckNullString(res["error_code"]);
+
+            if (res.ContainsKey("error_message"))
+                sErrorMessage = CheckNullString(res["error_message"]);
+
+            Dictionary<string, object> resdata = new Dictionary<string, object>();
+            resdata.Add("Faximinion_Text_ID", sFaximinion_Text_ID.Trim());
+            resdata.Add("status", sStatus.Trim());
+            resdata.Add("error_code", sErrorCode.Trim());
+            resdata.Add("error_message", sErrorMessage.Trim());
+
+            return new TextResult(true, sStatus, resdata);
+        }
+
+        private string CheckNullString(object Value)
+        {
+            string strValue = "";
+            if (Value != null)
+                strValue = Value.ToString();
+
+            return strValue;
+        }
+
+        private string ToString(NameValueCollection source)
+        {
+            var str = new StringBuilder();
+            foreach (KeyValuePair<string, string> kv in source)
+                str.Append(string.Format("{0}{1}{2}{3}", kv.Key, '=', kv.Value, '&'));
+            var retval = str.ToString();
+            return retval.Substring(0, retval.Length - 1);
+        }
+
+        private TextResult createAndSendRequest(string url, string TextAuthorization, NameValueCollection parameters)
+        {
+
+            string postParamsData = "";
+
+            foreach (string key in parameters.Keys)
+            {
+                postParamsData += HttpUtility.UrlEncode(key) + "=" + HttpUtility.UrlEncode(parameters[key]) + "&";
+            }
+            
+            byte[] paramsdata = Encoding.ASCII.GetBytes(postParamsData);
+
+            HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(url);
+            webRequest.Method = "POST";
+            webRequest.ContentType = "application/x-www-form-urlencoded"; //"multipart/form-data; boundary=" + boundary;
+            webRequest.Credentials = System.Net.CredentialCache.DefaultCredentials;
+            webRequest.ContentLength = paramsdata.Length;
+            webRequest.Headers.Add("authorization", TextAuthorization);
+
+            System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            System.Net.ServicePointManager.Expect100Continue = false;
+            webRequest.KeepAlive = false;
+            webRequest.ContinueTimeout = 20000;
+            Stream requestStream = webRequest.GetRequestStream();
+            requestStream.Write(paramsdata, 0, paramsdata.Length);
+            requestStream.Close();
+           
+
+            WebResponse webResponse = null;
+
+            try
+            {
+                webResponse = webRequest.GetResponse();
+                Stream stream2 = webResponse.GetResponseStream();
+                StreamReader reader2 = new StreamReader(stream2);
+                string message = reader2.ReadToEnd();
+                webResponse.Close();
+                webResponse = null;
+                webRequest = null;
+                return new TextResult(true, message);
+            }
+            catch (Exception ex)
+            {
+                if (webResponse != null)
+                {
+                    webResponse.Close();
+                    webResponse = null;
+                }
+                webRequest = null;
+                return new TextResult(false, ex.ToString());
+            }
+        }
+
+        private TextResult GetTextStatusRequest(string url, string TextAuthorization)
+        {
+
+            HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(url);
+            webRequest.Method = "Get";
+            //webRequest.ContentType = "application/x-www-form-urlencoded"; //"multipart/form-data; boundary=" + boundary;
+            webRequest.Credentials = System.Net.CredentialCache.DefaultCredentials;
+            webRequest.Headers.Add("authorization", TextAuthorization);
+            System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            System.Net.ServicePointManager.Expect100Continue = false;
+            webRequest.KeepAlive = false;
+            webRequest.ContinueTimeout = 20000;
+
+            WebResponse webResponse = null;
+            try
+            {
+                webResponse = webRequest.GetResponse();
+                Stream stream2 = webResponse.GetResponseStream();
+                StreamReader reader2 = new StreamReader(stream2);
+                string message = reader2.ReadToEnd();
+                webResponse.Close();
+                webResponse = null;
+                webRequest = null;
+                return new TextResult(true, message);
+            }
+            catch (Exception ex)
+            {
+                if (webResponse != null)
+                {
+                    webResponse.Close();
+                    webResponse = null;
+                }
+                webRequest = null;
+                return new TextResult(false, ex.ToString());
+            }
+        }
+    }
+
+    public class TextResult
+    {
+        public TextResult(bool success, string message, Dictionary<string, object> data = null)
+        {
+            Success = success;
+            Message = message;
+            Data = data;
+        }
+
+        public bool Success { get; set; }
+
+        public string Message { get; set; }
+
+        public Dictionary<string, object> Data { get; set; }
+    }
+
+}
+]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[Properties\Settings.settings]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
+</SettingsFile>]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[Properties\Resources.Designer.cs]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="SC_9a5698b569d546cb8e212af1c399891a.Properties.Resources.get_ResourceManager():System.Resources.Resou" +
+    "rceManager")]
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="SC_9a5698b569d546cb8e212af1c399891a.Properties.Resources.get_Culture():System.Globalization.CultureIn" +
+    "fo")]
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="SC_9a5698b569d546cb8e212af1c399891a.Properties.Resources.set_Culture(System.Globalization.CultureInfo" +
+    "):Void")]
+
+namespace SC_9a5698b569d546cb8e212af1c399891a.Properties {
+    
+    
+    /// <summary>
+    ///   A strongly-typed resource class, for looking up localized strings, etc.
+    /// </summary>
+    // This class was auto-generated by the StronglyTypedResourceBuilder
+    // class via a tool like ResGen or Visual Studio.
+    // To add or remove a member, edit your .ResX file then rerun ResGen
+    // with the /str option, or rebuild your VS project.
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    internal class Resources {
+        
+        private static global::System.Resources.ResourceManager resourceMan;
+        
+        private static global::System.Globalization.CultureInfo resourceCulture;
+        
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        internal Resources() {
+        }
+        
+        /// <summary>
+        ///   Returns the cached ResourceManager instance used by this class.
+        /// </summary>
+        [global::System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Resources.ResourceManager ResourceManager {
+            get {
+                if ((resourceMan == null)) {
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SC_9a5698b569d546cb8e212af1c399891a.Properties.Resources", typeof(Resources).Assembly);
+                    resourceMan = temp;
+                }
+                return resourceMan;
+            }
+        }
+        
+        /// <summary>
+        ///   Overrides the current thread's CurrentUICulture property for all
+        ///   resource lookups using this strongly typed resource class.
+        /// </summary>
+        [global::System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Globalization.CultureInfo Culture {
+            get {
+                return resourceCulture;
+            }
+            set {
+                resourceCulture = value;
+            }
+        }
+    }
+}
+]]></arrayElement>
+                  </arrayElements>
+                </property>
+                <property
+                  dataType="System.String"
+                  description="Stores the binary representation of the component"
+                  isArray="true"
+                  name="BinaryCode"
+                  state="cdata">
+                  <arrayElements
+                    arrayElementCount="2">
+                    <arrayElement
+                      dataType="System.String"><![CDATA[SC_9a5698b569d546cb8e212af1c399891a.dll]]></arrayElement>
+                    <arrayElement
+                      dataType="System.String"><![CDATA[TVqQAAMAAAAEAAAA//8AALgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAgAAAAA4fug4AtAnNIbgBTM0hVGhpcyBwcm9ncmFtIGNhbm5vdCBiZSBydW4gaW4gRE9TIG1v
+ZGUuDQ0KJAAAAAAAAABQRQAATAEDAIj6s18AAAAAAAAAAOAAIiALATAAAEoAAAAIAAAAAAAAbmgA
+AAAgAAAAgAAAAAAAEAAgAAAAAgAABAAAAAAAAAAGAAAAAAAAAADAAAAAAgAAAAAAAAMAYIUAABAA
+ABAAAAAAEAAAEAAAAAAAABAAAAAAAAAAAAAAABxoAABPAAAAAIAAAEgEAAAAAAAAAAAAAAAAAAAA
+AAAAAKAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAIAAACAAAAAAAAAAAAAAACCAAAEgAAAAAAAAAAAAAAC50ZXh0AAAAdEgAAAAgAAAASgAAAAIA
+AAAAAAAAAAAAAAAAACAAAGAucnNyYwAAAEgEAAAAgAAAAAYAAABMAAAAAAAAAAAAAAAAAABAAABA
+LnJlbG9jAAAMAAAAAKAAAAACAAAAUgAAAAAAAAAAAAAAAAAAQAAAQgAAAAAAAAAAAAAAAAAAAABQ
+aAAAAAAAAEgAAAACAAUAIDUAAEQyAAABAAAAAAAAAGRnAAC4AAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAKYCAnsFAAAEbywAAAZ9AQAABAICewEAAAQUbxAAAAp0DwAA
+AX0CAAAEKkoCewEAAAQCewIAAARvEQAACioAAAATMAQAHwEAAAEAABECKBIAAApyAQAAcAoCBgJ7
+AgAABHMTAAAKfQMAAAQCci4CAHAWcxQAAAp9BAAABAJ7AwAABG8VAAAKAnsEAAAEbxYAAAomAnJY
+AgBwGRdzFwAACn0EAAAEAnsDAAAEbxUAAAoCewQAAARvFgAACiYCcnICAHAfFh8UcxcAAAp9BAAA
+BAJ7AwAABG8VAAAKAnsEAAAEbxYAAAomAnKKAgBwHxYg6AMAAHMXAAAKfQQAAAQCewMAAARvFQAA
+CgJ7BAAABG8WAAAKJgJyoAIAcB8WIOgDAABzFwAACn0EAAAEAnsDAAAEbxUAAAoCewQAAARvFgAA
+CiYCcrwCAHAWcxQAAAp9BAAABAJ7AwAABG8VAAAKAnsEAAAEbxYAAAomKh4CKBgAAAoqABswBAC8
+AQAAAgAAEQIoGQAACnLgAgBwbxoAAApvGwAACm8cAAAKCgIoGQAACnIgAwBwbxoAAApvGwAACm8c
+AAAKC3JeAwBwAigZAAAKcngDAHBvGgAACm8bAAAKbxwAAAooHQAACgwCKBkAAApyugMAcG8aAAAK
+bxsAAApvHAAACg0DbxcAAAZy+AMAcCgeAAAKOewAAABzHwAACiVyAAQAcAhvIAAACiVyHAQAcAlv
+IAAACiVyLAQAcHI6BABwbyAAAAolckQEAHADbw8AAAYTBhIGKCEAAApvIAAACiVybAQAcANvIwAA
+Bm8cAAAKbyAAAAolcowEAHADbxUAAAZvHAAACm8gAAAKJXKiBABwcuAEAHBvIAAACiVy7AQAcANv
+EwAABhMHEgcoIgAACm8gAAAKEwQCEQQoBgAABhMFEQVvQwAABiwvczkAAAYGCBEEbzwAAAYTCBEI
+b0MAAAYsCwIRCAMoCAAABitQAhEIAygHAAAGK0UCEQUDKAcAAAYrOnM5AAAGBwgDbxsAAAYTBxIH
+KCIAAApvOwAABhMJEQlvQwAABiwLAhEJAygIAAAGKwkCEQkDKAcAAAbeCG8cAAAKJt4AKkEcAAAA
+AAAAdgAAAD0BAACzAQAACAAAABQAAAETMAMApgAAAAEAABEDcmwEAHBvIwAACiwSA3JsBABwbyMA
+AApvJAAACi0NFnIuBQBwFHNCAAAGKnJ0BQBwcyUAAAoDcmwEAHBvIwAACn4mAAAKbycAAAoKBm8k
+AAAKHwouFwZvJAAACh8LLg0WcoIFAHAUc0IAAAYqA3KMBABwbyMAAAotHwNyjAQAcG8jAAAKbyQA
+AAotDRZyugUAcBRzQgAABioXcvYFAHAUc0IAAAYqAAATMAMA9wAAAAAAAAACewMAAARvFQAACnIu
+AgBwbygAAAoEbw0AAAaMMwAAAW8pAAAKAnsDAAAEbxUAAApyWAIAcG8oAAAKcigGAHBvKQAACgJ7
+AwAABG8VAAAKcnICAHBvKAAACnIsBgBwbykAAAoCewMAAARvFQAACnKKAgBwbygAAApyOAYAcG8p
+AAAKAnsDAAAEbxUAAApyoAIAcG8oAAAKA29FAAAGbykAAAoCewMAAARvFQAACnK8AgBwbygAAAoD
+b0cAAAZyXAYAcG8qAAAKfiYAAAouEgNvRwAABnJcBgBwbyoAAAorBX4rAAAKbykAAAoCewMAAARv
+LAAACiYqABMwAwBxAQAAAAAAAAJ7AwAABG8VAAAKci4CAHBvKAAACgRvDQAABowzAAABbykAAAoC
+ewMAAARvFQAACnJYAgBwbygAAApyggYAcG8pAAAKAnsDAAAEbxUAAApycgIAcG8oAAAKA29HAAAG
+coYGAHBvKgAACn4mAAAKLhIDb0cAAAZyhgYAcG8qAAAKKwV+KwAACm8pAAAKAnsDAAAEbxUAAApy
+igIAcG8oAAAKA29HAAAGcpQGAHBvKgAACn4mAAAKLhIDb0cAAAZylAYAcG8qAAAKKwV+KwAACm8p
+AAAKAnsDAAAEbxUAAApyoAIAcG8oAAAKA29HAAAGcqoGAHBvKgAACn4mAAAKLhIDb0cAAAZyqgYA
+cG8qAAAKKwV+KwAACm8pAAAKAnsDAAAEbxUAAApyvAIAcG8oAAAKA29HAAAGclwGAHBvKgAACn4m
+AAAKLhIDb0cAAAZyXAYAcG8qAAAKKwV+KwAACm8pAAAKAnsDAAAEbywAAAomKh4CKCcAAAYqKgID
+BAUoLQAACipSAnsuAAAKAnsvAAAKFpRvMAAACioiAhYoMQAACipSAnsuAAAKAnsvAAAKF5RvMgAA
+CioiAhcoMQAACipSAnsuAAAKAnsvAAAKGJRvMwAACioiAhgoMQAACipSAnsuAAAKAnsvAAAKGZRv
+NAAACioiAhkoMQAACipSAnsuAAAKAnsvAAAKGpRvMgAACioiAhooMQAACipSAnsuAAAKAnsvAAAK
+G5RvNAAACioiAhsoMQAACipSAnsuAAAKAnsvAAAKHJRvNAAACioiAhwoMQAACipSAnsuAAAKAnsv
+AAAKHZRvNAAACioiAh0oMQAACipSAnsuAAAKAnsvAAAKHpRvMgAACioiAh4oMQAACipWAnsuAAAK
+AnsvAAAKHwmUbzQAAAoqJgIfCSgxAAAKKlYCey4AAAoCey8AAAofCpRvNQAACiomAh8KKDEAAAoq
+VgJ7LgAACgJ7LwAACh8LlG80AAAKKiYCHwsoMQAACipWAnsuAAAKAnsvAAAKHwyUbzQAAAoqJgIf
+DCgxAAAKKh4CKDYAAAoqHgIoNwAACip+Aig4AAAKAgJzKwAABn0FAAAEAgJzLQAABn0GAAAEKpIE
+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
+AQBPEAAAAgDOCgAAAwASEAAABACNAwAAAQCaBwAAAQDAAwAAAQDfCQAAAgDOCgAAAwASEAAAAQDf
+CQAAAgDOCgAAAQA1EAAAAgAYBBAQAwC4AgAAAQCgBwAAAQCgBwAAAQCgBwkA7Q0BABEA7Q0GABkA
+7Q0KACkA7Q0QADEA7Q0QADkA7Q0QAEEA7Q0QAEkA7Q0QAFEA7Q0QAFkA7Q0QAGEA7Q0QAGkA7Q0G
+ANEA7Q0GAPEA7Q0VAAEB7Q0GAHEAbAsbAHEAfgsgAMkAdQcGAIEA7Q0pAIkA7Q0wAIEAAxA4AHEB
+7AI+AIkA7Q1FAMkAgAcGAMkAvw5fAHkBDwplAIEBjAdsAJEACQhwAIkBlxB0AIkB9xJ6AJkA7Q0G
+AJkA7AKAAJEBCQhwAJkBCQhwAJkADwqGAIkBLAiLAKEB7Q0QAIkBDxOPAKEBqAOSAHEBDwqYAKkB
+lgcgAAwADwqmALEBmgetALkB5xKLAKkA7Q2yAKkABw28AKkA3g7AALEApAXEAKkAwwnKALEAMQHP
+ALEA5wDUALEAEgjZALEAjATEAKkAkxLeAKkA0xDeAMkA7Q0GAIkBag/iAMkA8g7qAJEA7Q0GAMkA
+ogLwAMkBEgv2ANEBcQT8ANkBIg0DAckAZxIIAYEBOBIOAfEBVQQVAfEB2hIeAdkA7Q0kAfkA7Q0G
+AIkBlxAsAQkB7Q0GAAkBygdJAQkCrAVUARkCdQpeARQArAWFARQAtxCSARkCdQyWARwArAWFARwA
+txCSASQAMATQASwAMATmARkCcxHvATQArAWFATQAtxCSATwArAWFATwAtxCSARkCmxIgAkQAMATQ
+AUwAMATmAQwA7Q0GAIkBHwpwAAwA7AJMAhkB7Q0GAEEC3w1oAiEBShFsAFQAqhJ2AlQAjAd7AokB
+nhCAAhkBlgOHAiEBDBLeADEBegUGAIkBHAiOAkECjhCsAlEC3w1oAlkC1QOyAokBlxC3AmECCQK9
+AmEC1Q7DAmkCrAXJAmkCnQMQAGkC5wQQAHECUw/QAmkCQw/WAmkCNwjdAmkC9w/iAokCygnoAokC
+pgfvAjkBvAf0AjkB5BEBAGkC9Qn5ApkC0QX/ApkCdAUGAGkCaAUHA0EB4wn5AqEC7Q0NA6kCXgNw
+AEEBdAUGAA4AWQBGAxIAqQB7Ay4ACwDLBC4AEwDUBC4AGwDzBC4AIwD8BC4AKwAlBS4AMwAlBS4A
+OwAlBS4AQwD8BC4ASwArBS4AUwAlBS4AWwBCBUMAYwCMBeMAawCMBWEBewCMBWMBewCMBQECewCM
+BSECewCMBUECewCMBQkEcwDzBCkEcwDzBGAIewCMBYAIewCMBaAIewCMBcAIewCMBeAIewCMBQAJ
+ewCMBSUATgAzAVQClAIUAwMAAQAFABsABgAcAAcAIAAIACIACgAjAAAAlwWYBAAAbAmdBAAA2wGh
+BAAAwQidBAAAugGlBAAAkgidBAAAKAqpBAAAhAmdBAAAygGhBAAAqQidBAAADASpBAAAPQmdBAAA
+dRCpBAAAuAmdBAAAywOpBAAAEAmdBAAA+AGhBAAA3QidBAAAbAOpBAAA+QidBAAAhgWYBAAAVAmd
+BAAA+wOpBAAAJQmdBAAAhgypBAAAogmdBAAA0AutBAAASwqpBAAAvRKpBAAAMQKpBAAAFwKpBAAA
+Eg2yBAAAIwW3BAAA4xC8BAAALRCdBAAAEASpBAAAswLBBAIACwADAAIADAAFAAIADQAHAAIADgAJ
+AAIADwALAAIAEAANAAIAEQAPAAIAEgARAAIAEwATAAIAFAAVAAIAFQAXAAIAFgAZAAIAFwAbAAIA
+GAAdAAIAGQAfAAIAGgAhAAIAGwAjAAIAHAAlAAIAHQAnAAIAHgApAAIAHwArAAIAIAAtAAIAIQAv
+AAIAIgAxAAIAIwAzAAIAJAA1AAIALAA3AAIALgA5AAIALwA7AAIAMAA9AAIAMQA/AAIAMwBBAAIA
+NABDAAEANQBDAAIANgBFAAIAQwBHAAEARABHAAIARQBJAAEARgBJAAIARwBLAAEASABLAJ4AdQGz
+AcQB2wH+AQ4CNAJBAm4CBIAAAAEAAAAAAAAAAAAAAAAAYAIAAAQAAAAAAAAAAAAAACIDyAIAAAAA
+DgAAAAAAAAAAAAAAKwNWEQAAAAAOAAAAAAAAAAAAAAArAxgMAAAAAAQAAAAAAAAAAAAAACIDhAIA
+AAAABAAAAAAAAAAAAAAAIgMYCgAAAAAOAAAAAAAAAAAAAAArA74RAAAAAAQAAAAAAAAAAAAAADQD
+cQ8AAAAABAAAAAAAAAAAAAAAIgP3BAAAAAAOAAAAAAAAAAAAAAArAzsMAAAAAAQAAAAAAAAAAAAA
+AD0DXwwAAAAABAAAAAAAAAAAAAAAPQO9AgAAAAAAAAAAAQAAAD4OAAALAAkAkQBQAQAAAAAASURU
+U0NvbXBvbmVudE1ldGFEYXRhMTAwAElEVFNWYXJpYWJsZTEwMABJRFRTUnVudGltZUNvbm5lY3Rp
+b25Db2xsZWN0aW9uMTAwAElEVFNSdW50aW1lQ29ubmVjdGlvbjEwMABJRFRTQ29ubmVjdGlvbk1h
+bmFnZXIxMDAASURUU1ZhcmlhYmxlczEwMABJRFRTRXZhbHVhdG9yQ29udGV4dDEwMAA8PnBfXzEw
+ADw+cF9fMAA8PnBfXzExADw+cF9fMQBJRW51bWVyYWJsZWAxAENhbGxTaXRlYDEAPD5wX18xMgBH
+ZXRJbnQzMgA8PnBfXzIAS2V5VmFsdWVQYWlyYDIARGljdGlvbmFyeWAyADw+cF9fMTMAPD5wX18z
+AEZ1bmNgMwA8PnBfXzE0AEdldEludDY0ADw+cF9fNABGdW5jYDQAPD5wX18xNQA8PnBfXzUAPD5w
+X18xNgA8PnBfXzYAPD5wX18xNwA8PnBfXzcAPD5wX18xOAA8Pm9fXzgAPD5wX184ADw+cF9fMTkA
+PD5wX185ADxNb2R1bGU+AEZheGltaW5pb25fVGV4dF9JRABnZXRfUE1EQ2xpZW50SUQAZ2V0X1BN
+RFBhdGllbnRJRABnZXRfRFRQVGV4dGluZ0xpc3RJRABJbnB1dElEAGdldF9GYXhpbWluaW9uVGV4
+dElEAGdldF9BU0NJSQBnZXRfVGV4dEZheGltaW5pb25TZW5kQVBJAGdldF9UZXh0RmF4aW1pbmlv
+bkdldEFQSQBUZXh0QVBJAGhvc3RVUkwAU3lzdGVtLklPAFNDXzlhNTY5OGI1NjlkNTQ2Y2I4ZTIx
+MmFmMWMzOTk4OTFhAFN5c3RlbS5EYXRhAGdldF9EYXRhAHNldF9EYXRhAGdldF9Db21wb25lbnRN
+ZXRhRGF0YQBkYXRhAFN5c3RlbS5XZWIAbXNjb3JsaWIAU3lzdGVtLkNvbGxlY3Rpb25zLkdlbmVy
+aWMAQWRkAFN5c3RlbS5Db2xsZWN0aW9ucy5TcGVjaWFsaXplZAA8RGF0YT5rX19CYWNraW5nRmll
+bGQAPE1lc3NhZ2U+a19fQmFja2luZ0ZpZWxkADxTdWNjZXNzPmtfX0JhY2tpbmdGaWVsZABzcWxD
+bWQAUmVhZFRvRW5kAGdldF9UZXh0U2VuZEluZABEYkNvbW1hbmQAU3FsQ29tbWFuZABzR2V0U2Vu
+ZABBcHBlbmQAc2V0X01ldGhvZABSZXBsYWNlAGRlZmF1bHRJbnN0YW5jZQBzb3VyY2UAZ2V0X0Vy
+cm9yQ29kZQBVcmxFbmNvZGUAZ2V0X01lc3NhZ2UAc2V0X01lc3NhZ2UAZ2V0X0Vycm9yTWVzc2Fn
+ZQBnZXRfVGV4dE1lc3NhZ2UAbWVzc2FnZQBDcmVkZW50aWFsQ2FjaGUASW52b2tlAElEaXNwb3Nh
+YmxlAFJ1bnRpbWVUeXBlSGFuZGxlAEdldFR5cGVGcm9tSGFuZGxlAElucHV0TmFtZQBHZXRSdW50
+aW1lQ29ubmVjdGlvbkJ5TmFtZQBHZXREYXRlVGltZQBNaWNyb3NvZnQuU3FsU2VydmVyLkR0cy5Q
+aXBlbGluZQBTcWxEYlR5cGUAU2VjdXJpdHlQcm90b2NvbFR5cGUARXhwcmVzc2lvblR5cGUAc2V0
+X0NvbnRlbnRUeXBlAFN5c3RlbS5Db3JlAGdldF9DdWx0dXJlAHNldF9DdWx0dXJlAHJlc291cmNl
+Q3VsdHVyZQBOYW1lT2JqZWN0Q29sbGVjdGlvbkJhc2UAQXBwbGljYXRpb25TZXR0aW5nc0Jhc2UA
+V2ViUmVzcG9uc2UAR2V0UmVzcG9uc2UAQ2xvc2UARGlzcG9zZQBnZXRfVGV4dFNlbmREYXRlAGdl
+dF9DYW1wYWlnbkRhdGUAR2V0RGF0ZQBDcmVhdGUARWRpdG9yQnJvd3NhYmxlU3RhdGUAQ2FsbFNp
+dGUAV3JpdGUAQ29tcGlsZXJHZW5lcmF0ZWRBdHRyaWJ1dGUARGVidWdnZXJOb25Vc2VyQ29kZUF0
+dHJpYnV0ZQBEZWJ1Z2dhYmxlQXR0cmlidXRlAEVkaXRvckJyb3dzYWJsZUF0dHJpYnV0ZQBBc3Nl
+bWJseVRpdGxlQXR0cmlidXRlAEFzc2VtYmx5VHJhZGVtYXJrQXR0cmlidXRlAFRhcmdldEZyYW1l
+d29ya0F0dHJpYnV0ZQBBc3NlbWJseUNvbmZpZ3VyYXRpb25BdHRyaWJ1dGUAQXNzZW1ibHlEZXNj
+cmlwdGlvbkF0dHJpYnV0ZQBDb21waWxhdGlvblJlbGF4YXRpb25zQXR0cmlidXRlAEFzc2VtYmx5
+UHJvZHVjdEF0dHJpYnV0ZQBBc3NlbWJseUNvcHlyaWdodEF0dHJpYnV0ZQBTU0lTU2NyaXB0Q29t
+cG9uZW50RW50cnlQb2ludEF0dHJpYnV0ZQBBc3NlbWJseUNvbXBhbnlBdHRyaWJ1dGUAUnVudGlt
+ZUNvbXBhdGliaWxpdHlBdHRyaWJ1dGUAUHJlRXhlY3V0ZQBQb3N0RXhlY3V0ZQBnZXRfVmFsdWUA
+c2V0X1ZhbHVlAHZhbHVlAHNldF9FeHBlY3QxMDBDb250aW51ZQBzZXRfS2VlcEFsaXZlAERlc2Vy
+aWFsaXplAEVuY29kaW5nAFN5c3RlbS5SdW50aW1lLlZlcnNpb25pbmcAQ2hlY2tOdWxsU3RyaW5n
+AFRvU3RyaW5nAEdldFN0cmluZwBTdWJzdHJpbmcAZGVidWcAZ2V0X0xlbmd0aABzZXRfQ29udGVu
+dExlbmd0aABTeXN0ZW0uQ29tcG9uZW50TW9kZWwAU0NfOWE1Njk4YjU2OWQ1NDZjYjhlMjEyYWYx
+YzM5OTg5MWEuZGxsAERCTnVsbABnZXRfUE1EQ2xpZW50SURfSXNOdWxsAGdldF9QTURQYXRpZW50
+SURfSXNOdWxsAGdldF9EVFBUZXh0aW5nTGlzdElEX0lzTnVsbABnZXRfRmF4aW1pbmlvblRleHRJ
+RF9Jc051bGwAZ2V0X1RleHRTZW5kSW5kX0lzTnVsbABnZXRfRXJyb3JDb2RlX0lzTnVsbABnZXRf
+RXJyb3JNZXNzYWdlX0lzTnVsbABnZXRfVGV4dE1lc3NhZ2VfSXNOdWxsAGdldF9UZXh0U2VuZERh
+dGVfSXNOdWxsAGdldF9DYW1wYWlnbkRhdGVfSXNOdWxsAGdldF9QbGFuSWRlbnRpZmllclBDbG1f
+SXNOdWxsAGdldF9UZXh0TnVtYmVyX0lzTnVsbABnZXRfTGFzdFN0YXR1c19Jc051bGwAc2V0X1Nl
+Y3VyaXR5UHJvdG9jb2wAdXJsAEdldFJlc3BvbnNlU3RyZWFtAEdldFJlcXVlc3RTdHJlYW0Ac3Fs
+UGFyYW0AZ2V0X0l0ZW0AU3lzdGVtAFRyaW0AZ2V0X1BsYW5JZGVudGlmaWVyUENsbQByZXNvdXJj
+ZU1hbgBnZXRfVGV4dEF1dGhvcml6YXRpb25Ub2tlbgBTY3JpcHRNYWluAHNxbENvbm4AVW5hcnlP
+cGVyYXRpb24AU3lzdGVtLkNvbmZpZ3VyYXRpb24AU3lzdGVtLkdsb2JhbGl6YXRpb24AU3lzdGVt
+LldlYi5TY3JpcHQuU2VyaWFsaXphdGlvbgBUZXh0QXV0aG9yaXphdGlvbgBUcmFuc2FjdGlvbgBT
+eXN0ZW0uUmVmbGVjdGlvbgBOYW1lVmFsdWVDb2xsZWN0aW9uAGdldF9SdW50aW1lQ29ubmVjdGlv
+bkNvbGxlY3Rpb24AV2ViSGVhZGVyQ29sbGVjdGlvbgBTcWxQYXJhbWV0ZXJDb2xsZWN0aW9uAEtl
+eXNDb2xsZWN0aW9uAEFjcXVpcmVDb25uZWN0aW9uAFJlbGVhc2VDb25uZWN0aW9uAFNxbENvbm5l
+Y3Rpb24ARXhjZXB0aW9uAFN5c3RlbS5EYXRhLkNvbW1vbgBTdHJpbmdDb21wYXJpc29uAGdldF9T
+dGFyc0NhbGxMaXN0YWRvAEN1bHR1cmVJbmZvAENTaGFycEFyZ3VtZW50SW5mbwBPdXRwdXROYW1l
+TWFwAE91dHB1dE1hcABNaWNyb3NvZnQuU3FsU2VydmVyLkRUU1J1bnRpbWVXcmFwAE1pY3Jvc29m
+dC5TcWxTZXJ2ZXIuRFRTUGlwZWxpbmVXcmFwAE1pY3Jvc29mdC5DU2hhcnAAQ2hhcgBJbnZva2VN
+ZW1iZXIAZ2V0X1RleHROdW1iZXIAU3RyZWFtUmVhZGVyAFRleHRSZWFkZXIAU3RyaW5nQnVpbGRl
+cgBNaWNyb3NvZnQuQ1NoYXJwLlJ1bnRpbWVCaW5kZXIAQ2FsbFNpdGVCaW5kZXIASW5wdXQwQnVm
+ZmVyAFBpcGVsaW5lQnVmZmVyAFNjcmlwdEJ1ZmZlcgBnZXRfUmVzb3VyY2VNYW5hZ2VyAGdldF9D
+b25uZWN0aW9uTWFuYWdlcgBTZXJ2aWNlUG9pbnRNYW5hZ2VyAE1pY3Jvc29mdC5TcWxTZXJ2ZXIu
+RHRzLlJ1bnRpbWUuV3JhcHBlcgBNaWNyb3NvZnQuU3FsU2VydmVyLkR0cy5QaXBlbGluZS5XcmFw
+cGVyAERiUGFyYW1ldGVyAFNxbFBhcmFtZXRlcgBKYXZhU2NyaXB0U2VyaWFsaXplcgBjb25uTWdy
+AElFbnVtZXJhdG9yAEdldEVudW1lcmF0b3IALmN0b3IALmNjdG9yAFN5c3RlbS5EaWFnbm9zdGlj
+cwBTeXN0ZW0uUnVudGltZS5Db21waWxlclNlcnZpY2VzAFN5c3RlbS5SZXNvdXJjZXMAU0NfOWE1
+Njk4YjU2OWQ1NDZjYjhlMjEyYWYxYzM5OTg5MWEuUHJvcGVydGllcy5SZXNvdXJjZXMucmVzb3Vy
+Y2VzAERlYnVnZ2luZ01vZGVzAFNDXzlhNTY5OGI1NjlkNTQ2Y2I4ZTIxMmFmMWMzOTk4OTFhLlBy
+b3BlcnRpZXMAZ2V0X1JlYWRPbmx5VmFyaWFibGVzAEdldEJ5dGVzAEJ1ZmZlckNvbHVtbkluZGV4
+ZXMAR2V0Q29sdW1uSW5kZXhlcwBDU2hhcnBBcmd1bWVudEluZm9GbGFncwBDU2hhcnBCaW5kZXJG
+bGFncwBTZXR0aW5ncwBJQ3JlZGVudGlhbHMAc2V0X0NyZWRlbnRpYWxzAGdldF9EZWZhdWx0Q3Jl
+ZGVudGlhbHMARXF1YWxzAFN5c3RlbS5XZWIuRXh0ZW5zaW9ucwBTeXN0ZW0uTGlucS5FeHByZXNz
+aW9ucwBTeXN0ZW0uVGV4dC5SZWd1bGFyRXhwcmVzc2lvbnMAU3lzdGVtLkNvbGxlY3Rpb25zAEFj
+cXVpcmVDb25uZWN0aW9ucwBSZWxlYXNlQ29ubmVjdGlvbnMAZ2V0X0hlYWRlcnMAZ2V0X1BhcmFt
+ZXRlcnMAcGFyYW1ldGVycwBnZXRfU3VjY2VzcwBzZXRfU3VjY2VzcwBzdWNjZXNzAFZhbGlkYXRp
+b25Qcm9jZXNzAGFkZHJlc3MARmFpbHVyZVRleHRzAFN1Y2Nlc3NUZXh0cwBnZXRfTGFzdFN0YXR1
+cwBHZXRUZXh0U3RhdHVzAGdldF9LZXlzAENvbmNhdABGb3JtYXQAT2JqZWN0AFN5c3RlbS5OZXQA
+VGFyZ2V0AGFwaVNlY3JldABhcGlfc2VjcmV0AEVuZE9mUm93c2V0AGdldF9EZWZhdWx0AFRleHRG
+aW5hbFJlc3VsdABUZXh0UmVzdWx0AFN5c3RlbS5EYXRhLlNxbENsaWVudABVc2VyQ29tcG9uZW50
+AFBhcmVudENvbXBvbmVudABTY3JpcHRDb21wb25lbnQAZ2V0X0N1cnJlbnQATWljcm9zb2Z0LlNx
+bFNlcnZlci5UeFNjcmlwdABDb252ZXJ0AEh0dHBXZWJSZXF1ZXN0AGNyZWF0ZUFuZFNlbmRSZXF1
+ZXN0AGRvUmVxdWVzdABHZXRUZXh0U3RhdHVzUmVxdWVzdABNaWNyb3NvZnQuU3FsU2VydmVyLlBp
+cGVsaW5lSG9zdABob3N0AHNldF9Db250aW51ZVRpbWVvdXQASW5wdXQwX1Byb2Nlc3NJbnB1dABN
+b3ZlTmV4dABTeXN0ZW0uVGV4dABGYXhtaW5pb25UZXh0AFNlbmR0ZXh0AEdldFZhbHVlV2l0aENv
+bnRleHQAU2NyaXB0Q29tcG9uZW50RXZhbENvbnRleHQAZ2V0X0V2YWx1YXRvckNvbnRleHQASW5w
+dXQwX1Byb2Nlc3NJbnB1dFJvdwBOZXh0Um93AEdldEluZGV4AFJlZ2V4AGdldF9LZXkAYXBpS2V5
+AGdldF9UZXh0RmF4aW1pbmlvbkVudktleQBhcGlfa2V5AGdldF9Bc3NlbWJseQBFeGVjdXRlTm9u
+UXVlcnkAb3BfRXF1YWxpdHkASHR0cFV0aWxpdHkARW1wdHkAAAAAAIIrdQBwAGQAYQB0AGUAIABb
+AGQAYgBvAF0ALgBbAEQAVABQAF8AVABlAHgAdABpAG4AZwBfAEwAaQBzAHQAXQAgAHMAZQB0ACAA
+WwBUAGUAeAB0AF8AUwBlAG4AZABfAEkAbgBkAF0AIAA9ACAAQABUAGUAeAB0AFMAZQBuAGQASQBu
+AGQALAAgAFsAVABlAHgAdABfAFMAZQBuAGQAXwBEAGEAdABlAF0AIAA9ACAAZwBlAHQAZABhAHQA
+ZQAoACkALAAgAFsATABhAHMAdABfAFMAdABhAHQAdQBzAF0APQAgAEAATABhAHMAdABTAHQAYQB0
+AHUAcwAsACAAWwBFAHIAcgBvAHIAXwBDAG8AZABlAF0AIAA9ACAAQABFAHIAcgBvAHIAQwBvAGQA
+ZQAsACAAWwBFAHIAcgBvAHIAXwBNAGUAcwBzAGEAZwBlAF0AIAA9ACAAQABFAHIAcgBvAHIATQBl
+AHMAcwBhAGcAZQAsACAAWwBGAGEAeABpAG0AaQBuAGkAbwBuAF8AVABlAHgAdABfAEkARABdACAA
+PQAgAEAARgBhAHgAaQBtAGkAbgBpAG8AbgBUAGUAeAB0AEkARAAgAHcAaABlAHIAZQAgAFsARABU
+AFAAXwBUAGUAeAB0AGkAbgBnAF8ATABpAHMAdABfAEkARABdACAAPQAgAEAARABUAFAAXwBUAGUA
+eAB0AGkAbgBnAF8ATABpAHMAdABfAEkARAAAKUAARABUAFAAXwBUAGUAeAB0AGkAbgBnAF8ATABp
+AHMAdABfAEkARAAAGUAAVABlAHgAdABTAGUAbgBkAEkAbgBkAAAXQABMAGEAcwB0AFMAdABhAHQA
+dQBzAAAVQABFAHIAcgBvAHIAQwBvAGQAZQAAG0AARQByAHIAbwByAE0AZQBzAHMAYQBnAGUAACNA
+AEYAYQB4AGkAbQBpAG4AaQBvAG4AVABlAHgAdABJAEQAAD8kAFAAcgBvAGoAZQBjAHQAOgA6AFQA
+ZQB4AHQARgBhAHgAaQBtAGkAbgBpAG8AbgBTAGUAbgBkAEEAUABJAAA9JABQAHIAbwBqAGUAYwB0
+ADoAOgBUAGUAeAB0AEYAYQB4AGkAbQBpAG4AaQBvAG4ARwBlAHQAQQBQAEkAABlUAG8AawBlAG4A
+IAB0AG8AawBlAG4APQAAQSQAUAByAG8AagBlAGMAdAA6ADoAVABlAHgAdABBAHUAdABoAG8AcgBp
+AHoAYQB0AGkAbwBuAFQAbwBrAGUAbgAAPSQAUAByAG8AagBlAGMAdAA6ADoAVABlAHgAdABGAGEA
+eABpAG0AaQBuAGkAbwBuAEUAbgB2AEsAZQB5AAAHTgBlAHcAABthAHUAdABoAG8AcgBpAHoAYQB0
+AGkAbwBuAAAPZQBuAHYAXwBrAGUAeQAADWYAbwByAG0AYQB0AAAJagBzAG8AbgAAJ3QAZQB4AHQA
+WwBwAG0AZABfAGMAbABpAGUAbgB0AF8AaQBkAF0AAB90AGUAeAB0AFsAdABvAF8AbgB1AG0AYgBl
+AHIAXQAAFXQAZQB4AHQAWwBiAG8AZAB5AF0AAD10AGUAeAB0AFsAcAByAG8AcABlAHIAdABpAGUA
+cwBdAFsAcAByAG8AZAB1AGMAdABfAGwAaQBuAGUAXQAAC3MAdABhAHIAcwAAQXQAZQB4AHQAWwBw
+AHIAbwBwAGUAcgB0AGkAZQBzAF0AWwBwAG0AZABfAHAAYQB0AGkAZQBuAHQAXwBpAGQAXQAARVkA
+bwB1ACAAbQB1AHMAdAAgAGkAbgBjAGwAdQBkAGUAIABhACAAdABvACAAdABlAHgAdAAgAG4AdQBt
+AGIAZQByAC4AAA1bAF4AMAAtADkAXQABN1QAbwAgAHQAZQB4AHQAIABuAHUAbQBiAGUAcgAgAGkA
+cwAgAG4AbwB0ACAAdgBhAGwAaQBkAAA7WQBvAHUAIABtAHUAcwB0ACAAaQBuAGMAbAB1AGQAZQAg
+AHQAZQB4AHQAIABtAGUAcwBzAGEAZwBlAAAxVgBhAGwAaQBkAGEAdABpAG8AbgAgAGkAcwAgAHMA
+dQBjAGMAZQBzAHMAZgB1AGwAAANOAAALRQByAHIAbwByAAAjVgBhAGwAaQBkAGEAdABpAG8AbgAg
+AGYAYQBpAGwAZQBkAAAlRgBhAHgAaQBtAGkAbgBpAG8AbgBfAFQAZQB4AHQAXwBJAEQAAANZAAAN
+cwB0AGEAdAB1AHMAABVlAHIAcgBvAHIAXwBjAG8AZABlAAAbZQByAHIAbwByAF8AbQBlAHMAcwBh
+AGcAZQAAD0kAbgBwAHUAdAAgADAAACdTAHQAYQByAHMAXwBDAGEAbABsAF8ATABpAHMAdABfAGEA
+ZABvAAAtVABlAHgAdABBAHUAdABoAG8AcgBpAHoAYQB0AGkAbwBuAFQAbwBrAGUAbgAAKVQAZQB4
+AHQARgBhAHgAaQBtAGkAbgBpAG8AbgBFAG4AdgBLAGUAeQAAKVQAZQB4AHQARgBhAHgAaQBtAGkA
+bgBpAG8AbgBHAGUAdABBAFAASQAAK1QAZQB4AHQARgBhAHgAaQBtAGkAbgBpAG8AbgBTAGUAbgBk
+AEEAUABJAABxUwBDAF8AOQBhADUANgA5ADgAYgA1ADYAOQBkADUANAA2AGMAYgA4AGUAMgAxADIA
+YQBmADEAYwAzADkAOQA4ADkAMQBhAC4AUAByAG8AcABlAHIAdABpAGUAcwAuAFIAZQBzAG8AdQBy
+AGMAZQBzAAADMAAATUEAIAB2AGEAbABpAGQAIABmAGEAeABtAGkAbgBpAG8AbgAgAHQAZQB4AHQA
+IABpAGQAIABpAHMAIAByAGUAcQB1AGkAcgBlAGQALgAACy4AagBzAG8AbgAAB0cAZQB0AAAJUwBl
+AG4AZAAAPU4AbwAgAGQAYQB0AGEAIAByAGUAYwBlAGkAdgBlAGQAIABmAHIAbwBtACAAcwBlAHIA
+dgBpAGMAZQAuAAABABdDAG8AbgB0AGEAaQBuAHMASwBlAHkAAAVpAGQAAB9DAGgAZQBjAGsATgB1
+AGwAbABTAHQAcgBpAG4AZwAAGXsAMAB9AHsAMQB9AHsAMgB9AHsAMwB9AAADPQAAAyYAAAlQAE8A
+UwBUAABDYQBwAHAAbABpAGMAYQB0AGkAbwBuAC8AeAAtAHcAdwB3AC0AZgBvAHIAbQAtAHUAcgBs
+AGUAbgBjAG8AZABlAGQAAYEFWfY19HhHl2XVc2oVXjEABCABAQgDIAABBSABARERBCABAQ4FIAEB
+EXUEIAEcHAQgAQEcAwcBDgYgAgEOEj0HIAIBDhGAtQUgABKAuQYgARJFEkUIIAMBDhGAtQgQBwoO
+Dg4OEk0SKAgKEigSKAUgABKAvQYgARKAwRwDIAAcAyAADgUAAg4ODgUAAgIODgUgAgEODgQgAQ4O
+AyAACAIGDgUgAg4ODgUgARJFDgcVEoCJAg4cBiABEwETAAQGEoDZCSADARJZHQgSXQMGElkDBh0I
+BSABEWEIBCABAggEIAEKCAQgAQgIBCABDggDIAACByACAg4RgOEFIAEdCAgFIAASgOUFIAASgOkG
+IAESgO0OBCAAEjkFAAASgPEGIAEcEoD1CAABEoD5EYD9BSAAEoEBByACAQ4SgQEGAAMODg4OFQcJ
+EigSgIUcDg4ODhUSgIkCDhwSKAYwAQEeAA4DCgEcCQACEoEFEYEJDhYABBKBERGBFRGBGRKA+RUS
+gR0BEoEFDxUSgKUBFRKAsQMSgK0cAgwAARUSgKUBEwASgREDBhMAHAAFEoEREYEVDhUSgR0BEoD5
+EoD5FRKBHQESgQUQFRKApQEVEoCpBBKArRwOHAsVEoCpBBKArRwOHAogAxMDEwATARMCChUSgLED
+EoCtHAIIIAITAhMAEwEOAAMSgRERgRUSgPkSgPkPFRKApQEVEoCxAxKArRwOERUSgKUBFRKAqQQS
+gK0SJBwcEwADEoEREYEVEoD5FRKBHQESgQUMFRKAqQQSgK0SJBwcChUSgLEDEoCtHA4HIAIBEwAT
+ARMHBRKAjQ4SgJEVEYCVAg4OEoCZBSAAEoCRBxURgJUCDg4EIAATAAQgABMBBgACDg4dHAYgARKA
+jQ4FIAIOCAgXBwoOHQUSgJ0SgKESgJEOEoCZDhIoElEFIAASgSkEAAEODgUAAQ4dDgUAABKBMQUg
+AR0FDgYAARKBNQ4FAAASgT0GIAEBEoE9BCABAQoFIAASgUEGAAEBEYFJBAABAQIEIAEBAgUgABKB
+TQcgAwEdBQgIBSAAEoChBiABARKBTQ0HBRKAnRKAoQ4SKBJRCLd6XFYZNOCJCImEXc2AgMyRCDG/
+OFatNk41CLA/X38R1Qo6NGgAdAB0AHAAcwA6AC8ALwBhAHAAaQAuAHAAaABhAHgAaQBvAC4AYwBv
+AG0ALwB2ADEALwAEAAAAAAMGEjkDBhI9AwYSQQMGEkUDBhIUAwYSGAMGEmUDBhJtAwYScQMGEiAC
+BgIIBhUSgIkCDhwRBhUSgKUBFRKAqQQSgK0cDhwQBhUSgKUBFRKAsQMSgK0cAhIGFRKApQEVEoCp
+BBKArRIkHBwQBhUSgKUBFRKAsQMSgK0cDgUgAQESDAYgARIoEk0HIAIBEigSDAQgABFhAyAACgkg
+BAEIDhJZEl0FIAEBEmUEAAASbQQAABJxBQABARJxBAAAEiADAAABBiADAQ4ODgcgAxIoDg4OCCAD
+EigODhJNCSAEEigODhJNDgQgAQ4cBSABDhJNBiACEigODgwgAwECDhUSgIkCDhwJIAAVEoCJAg4c
+CiABARUSgIkCDhwEKAARYQMoAAIDKAAKAygACAMoAA4EKAASOQQIABJtBAgAEnEECAASIAkoABUS
+gIkCDhwIAQAIAAAAAAAeAQABAFQCFldyYXBOb25FeGNlcHRpb25UaHJvd3MBCAEAAgAAAAAAKAEA
+I1NDXzlhNTY5OGI1NjlkNTQ2Y2I4ZTIxMmFmMWMzOTk4OTFhAAAFAQAAAAAWAQARQ29weXJpZ2h0
+IEAgIDIwMTUAAEkBABouTkVURnJhbWV3b3JrLFZlcnNpb249djQuNQEAVA4URnJhbWV3b3JrRGlz
+cGxheU5hbWUSLk5FVCBGcmFtZXdvcmsgNC41BAEAAAAAAAC0AAAAzsrvvgEAAACRAAAAbFN5c3Rl
+bS5SZXNvdXJjZXMuUmVzb3VyY2VSZWFkZXIsIG1zY29ybGliLCBWZXJzaW9uPTQuMC4wLjAsIEN1
+bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49Yjc3YTVjNTYxOTM0ZTA4OSNTeXN0ZW0uUmVz
+b3VyY2VzLlJ1bnRpbWVSZXNvdXJjZVNldAIAAAAAAAAAAAAAAFBBRFBBRFC0AAAARGgAAAAAAAAA
+AAAAXmgAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFBoAAAAAAAAAAAAAAAAX0NvckRsbE1haW4A
+bXNjb3JlZS5kbGwAAAAAAP8lACAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAQAAAAGAAAgAAAAAAAAAAAAAAAAAAA
+AQABAAAAMAAAgAAAAAAAAAAAAAAAAAAAAQAAAAAASAAAAFiAAADsAwAAAAAAAAAAAADsAzQAAABW
+AFMAXwBWAEUAUgBTAEkATwBOAF8ASQBOAEYATwAAAAAAvQTv/gAAAQAAAAEAAAAAAAAAAQAAAAAA
+PwAAAAAAAAAEAAAAAgAAAAAAAAAAAAAAAAAAAEQAAAABAFYAYQByAEYAaQBsAGUASQBuAGYAbwAA
+AAAAJAAEAAAAVAByAGEAbgBzAGwAYQB0AGkAbwBuAAAAAAAAALAETAMAAAEAUwB0AHIAaQBuAGcA
+RgBpAGwAZQBJAG4AZgBvAAAAKAMAAAEAMAAwADAAMAAwADQAYgAwAAAAGgABAAEAQwBvAG0AbQBl
+AG4AdABzAAAAAAAAACIAAQABAEMAbwBtAHAAYQBuAHkATgBhAG0AZQAAAAAAAAAAAHAAJAABAEYA
+aQBsAGUARABlAHMAYwByAGkAcAB0AGkAbwBuAAAAAABTAEMAXwA5AGEANQA2ADkAOABiADUANgA5
+AGQANQA0ADYAYwBiADgAZQAyADEAMgBhAGYAMQBjADMAOQA5ADgAOQAxAGEAAAAwAAgAAQBGAGkA
+bABlAFYAZQByAHMAaQBvAG4AAAAAADEALgAwAC4AMAAuADAAAABwACgAAQBJAG4AdABlAHIAbgBh
+AGwATgBhAG0AZQAAAFMAQwBfADkAYQA1ADYAOQA4AGIANQA2ADkAZAA1ADQANgBjAGIAOABlADIA
+MQAyAGEAZgAxAGMAMwA5ADkAOAA5ADEAYQAuAGQAbABsAAAASAASAAEATABlAGcAYQBsAEMAbwBw
+AHkAcgBpAGcAaAB0AAAAQwBvAHAAeQByAGkAZwBoAHQAIABAACAAIAAyADAAMQA1AAAAKgABAAEA
+TABlAGcAYQBsAFQAcgBhAGQAZQBtAGEAcgBrAHMAAAAAAAAAAAB4ACgAAQBPAHIAaQBnAGkAbgBh
+AGwARgBpAGwAZQBuAGEAbQBlAAAAUwBDAF8AOQBhADUANgA5ADgAYgA1ADYAOQBkADUANAA2AGMA
+YgA4AGUAMgAxADIAYQBmADEAYwAzADkAOQA4ADkAMQBhAC4AZABsAGwAAABoACQAAQBQAHIAbwBk
+AHUAYwB0AE4AYQBtAGUAAAAAAFMAQwBfADkAYQA1ADYAOQA4AGIANQA2ADkAZAA1ADQANgBjAGIA
+OABlADIAMQAyAGEAZgAxAGMAMwA5ADkAOAA5ADEAYQAAADQACAABAFAAcgBvAGQAdQBjAHQAVgBl
+AHIAcwBpAG8AbgAAADEALgAwAC4AMAAuADAAAAA4AAgAAQBBAHMAcwBlAG0AYgBsAHkAIABWAGUA
+cgBzAGkAbwBuAAAAMQAuADAALgAwAC4AMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAABgAAAMAAAAcDgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAA]]></arrayElement>
+                  </arrayElements>
+                </property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the Microsoft Visual Studio Tools for Applications project. Project names must be unique within a package."
+                  name="VSTAProjectName"
+                  typeConverter="NOTBROWSABLE">SC_9a5698b569d546cb8e212af1c399891a</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the programming language used by the script."
+                  name="ScriptLanguage"
+                  typeConverter="Microsoft.SqlServer.VSTAHosting.ScriptingLanguages">CSharp</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a comma-separated list of read-only variables."
+                  name="ReadOnlyVariables"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ScriptUIVariablePickerDlg">$Project::TextFaximinionSendAPI,$Project::TextFaximinionGetAPI,$Project::TextAuthorizationToken,$Project::TextFaximinionEnvKey</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a comma-separated list of read/write variables."
+                  name="ReadWriteVariables"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ScriptUIWriteableVariablePickerDlg"></property>
+                <property
+                  dataType="System.String"
+                  description="List of breakpoints present on the script."
+                  isArray="true"
+                  name="BreakpointCollection"
+                  typeConverter="NOTBROWSABLE">
+                  <arrayElements
+                    arrayElementCount="0" />
+                </property>
+                <property
+                  dataType="System.String"
+                  description="Checksum to match component metedata against compiled codes."
+                  name="MetadataChecksum"
+                  typeConverter="NOTBROWSABLE">bda0439a763f41699ecd5bfe464acb3d</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.ScriptComponentHost</property>
+                <property
+                  dataType="System.String"
+                  description="Checksum to match component metedata against compiled codes."
+                  name="MetadataChecksum140"
+                  typeConverter="NOTBROWSABLE">A4</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Send and update Texting to and from Faximinion\Send fax file to Faximinion.Connections[Stars_Call_List_ado]"
+                  connectionManagerID="{4861DAC2-8379-438B-9BCD-B3EEA9644BEC}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[Stars_Call_List_ado]"
+                  name="Stars_Call_List_ado" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Send and update Texting to and from Faximinion\Send fax file to Faximinion.Inputs[Input 0]"
+                  hasSideEffects="true"
+                  name="Input 0">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Send and update Texting to and from Faximinion\Send fax file to Faximinion.Inputs[Input 0].Columns[Campaign_Date]"
+                      cachedDataType="dbDate"
+                      cachedName="Campaign_Date"
+                      lineageId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Output].Columns[Campaign_Date]" />
+                    <inputColumn
+                      refId="Package\Send and update Texting to and from Faximinion\Send fax file to Faximinion.Inputs[Input 0].Columns[DTP_Texting_List_ID]"
+                      cachedDataType="i8"
+                      cachedName="DTP_Texting_List_ID"
+                      lineageId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Output].Columns[DTP_Texting_List_ID]" />
+                    <inputColumn
+                      refId="Package\Send and update Texting to and from Faximinion\Send fax file to Faximinion.Inputs[Input 0].Columns[PMD_Client_ID]"
+                      cachedDataType="i4"
+                      cachedName="PMD_Client_ID"
+                      lineageId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Output].Columns[PMD_Client_ID]" />
+                    <inputColumn
+                      refId="Package\Send and update Texting to and from Faximinion\Send fax file to Faximinion.Inputs[Input 0].Columns[PlanIdentifier_PClm]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="PlanIdentifier_PClm"
+                      lineageId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Output].Columns[PlanIdentifier_PClm]" />
+                    <inputColumn
+                      refId="Package\Send and update Texting to and from Faximinion\Send fax file to Faximinion.Inputs[Input 0].Columns[PMD_Patient_ID]"
+                      cachedDataType="i8"
+                      cachedName="PMD_Patient_ID"
+                      lineageId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Output].Columns[PMD_Patient_ID]" />
+                    <inputColumn
+                      refId="Package\Send and update Texting to and from Faximinion\Send fax file to Faximinion.Inputs[Input 0].Columns[Text_Message]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1000"
+                      cachedName="Text_Message"
+                      lineageId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Output].Columns[Text_Message]" />
+                    <inputColumn
+                      refId="Package\Send and update Texting to and from Faximinion\Send fax file to Faximinion.Inputs[Input 0].Columns[Last_Status]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Last_Status"
+                      lineageId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Output].Columns[Last_Status]" />
+                    <inputColumn
+                      refId="Package\Send and update Texting to and from Faximinion\Send fax file to Faximinion.Inputs[Input 0].Columns[Error_Code]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1000"
+                      cachedName="Error_Code"
+                      lineageId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Output].Columns[Error_Code]" />
+                    <inputColumn
+                      refId="Package\Send and update Texting to and from Faximinion\Send fax file to Faximinion.Inputs[Input 0].Columns[Faximinion_Text_ID]"
+                      cachedDataType="i8"
+                      cachedName="Faximinion_Text_ID"
+                      lineageId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Output].Columns[Faximinion_Text_ID]" />
+                    <inputColumn
+                      refId="Package\Send and update Texting to and from Faximinion\Send fax file to Faximinion.Inputs[Input 0].Columns[Text_Send_Ind]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Text_Send_Ind"
+                      lineageId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Output].Columns[Text_Send_Ind]" />
+                    <inputColumn
+                      refId="Package\Send and update Texting to and from Faximinion\Send fax file to Faximinion.Inputs[Input 0].Columns[Text_Send_Date]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="Text_Send_Date"
+                      lineageId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Output].Columns[Text_Send_Date]" />
+                    <inputColumn
+                      refId="Package\Send and update Texting to and from Faximinion\Send fax file to Faximinion.Inputs[Input 0].Columns[Error_Message]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1000"
+                      cachedName="Error_Message"
+                      lineageId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Output].Columns[Error_Message]" />
+                    <inputColumn
+                      refId="Package\Send and update Texting to and from Faximinion\Send fax file to Faximinion.Inputs[Input 0].Columns[Text_Number]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Text_Number"
+                      lineageId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Output].Columns[Text_Number]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Send and update Texting to and from Faximinion.Paths[OLE DB Source Output]"
+              endId="Package\Send and update Texting to and from Faximinion\Send fax file to Faximinion.Inputs[Input 0]"
+              name="OLE DB Source Output"
+              startId="Package\Send and update Texting to and from Faximinion\Get all texting Info.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="310.4,41.6"
+          Id="Package\Send and update Texting to and from Faximinion"
+          TopLeft="5.5,5.50000000000007" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Send and update Texting to and from Faximinion">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="167.2,41.6"
+          Id="Package\Send and update Texting to and from Faximinion\Get all texting Info"
+          TopLeft="23.9,5.49999999999995" />
+        <NodeLayout
+          Size="204,41.6"
+          Id="Package\Send and update Texting to and from Faximinion\Send fax file to Faximinion"
+          TopLeft="5.50000000000001,107.1" />
+        <EdgeLayout
+          Id="Package\Send and update Texting to and from Faximinion.Paths[OLE DB Source Output]"
+          TopLeft="107.5,47.1">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Send and update Texting to and from Faximinion\Get all texting Info">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

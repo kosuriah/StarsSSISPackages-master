@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.705
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "Stars_Datawarehouse_Packages", "Stars_Datawarehouse_Packages\Stars_Datawarehouse_Packages.dtproj", "{55E3A60A-03F3-49EC-A196-D297B972DECD}"
+EndProject
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "Stars_Operational_Packages", "Stars_Operational_Packages\Stars_Operational_Packages.dtproj", "{2ACF53DB-C426-4F0C-BCF6-FF940E521131}"
+EndProject
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "Stars_ODS_Load_Packages", "Stars_ODS_Load_Packages\Stars_ODS_Load_Packages.dtproj", "{7937195D-F3A5-4204-BD17-F1D21925763D}"
+EndProject
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "Stars_MediSpan_Packages", "Stars_MediSpan_Packages\Stars_MediSpan_Packages.dtproj", "{18E58ECE-B3C8-4A57-88F7-6436F3E24423}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D6FF4D6C-162C-4F34-A3A0-FE8E60ECAB6E}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{55E3A60A-03F3-49EC-A196-D297B972DECD}.Development|Default.ActiveCfg = Development
+		{55E3A60A-03F3-49EC-A196-D297B972DECD}.Development|Default.Build.0 = Development
+		{2ACF53DB-C426-4F0C-BCF6-FF940E521131}.Development|Default.ActiveCfg = Development
+		{2ACF53DB-C426-4F0C-BCF6-FF940E521131}.Development|Default.Build.0 = Development
+		{7937195D-F3A5-4204-BD17-F1D21925763D}.Development|Default.ActiveCfg = Development
+		{7937195D-F3A5-4204-BD17-F1D21925763D}.Development|Default.Build.0 = Development
+		{18E58ECE-B3C8-4A57-88F7-6436F3E24423}.Development|Default.ActiveCfg = Development
+		{18E58ECE-B3C8-4A57-88F7-6436F3E24423}.Development|Default.Build.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {428F61D0-73A2-46D0-AF11-4A971AAFD5A0}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,643 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="10/19/2016 2:53:50 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="LT-372CM72-0402"
+  DTS:CreatorName="PHARMMD\bill.shoap2"
+  DTS:DTSID="{0F6A575C-0D28-4AA6-8A4D-FAA8409CA3C3}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.1300.371"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Stars_Filewatch_LateFiles"
+  DTS:PackageType="5"
+  DTS:VersionBuild="48"
+  DTS:VersionGUID="{8041AE5B-990D-4DAC-9BB5-F33D291A825A}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{3B4EC9FA-702F-4252-B5FB-8E26A5424B14}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="ClientList">
+      <DTS:VariableValue
+        DTS:DataSubType="ManagedSerializable"
+        DTS:DataType="13">
+        <SOAP-ENV:Envelope xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+          <SOAP-ENV:Body>
+            <xsd:anyType
+              id="ref-1"></xsd:anyType>
+          </SOAP-ENV:Body>
+        </SOAP-ENV:Envelope>
+      </DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{86E9FDB3-002F-423D-844D-B88AD69C5368}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="Filelocation">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{5C4BDDCC-C2F3-418D-B8C8-604C786B72F7}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="Filename">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{5DDBA45E-EB82-4F9D-8C2B-260F12B18072}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="LateFileCount">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{31714170-7A84-41C4-9CDF-ADA69EC3AC74}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="PMD_Client_ID">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Detect Late Files"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{C13933B7-1E6E-4EDB-A6F9-4DC7EE6E9FE0}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Detect Late Files"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{833D12C4-85D0-48E0-89ED-50C49F533C60}"
+          SQLTask:SqlStatementSource="  SELECT COUNT(*)&#xA;   &#xA;  FROM [STARS_rdsm].[dbo].[Filewatch_Config] fc&#xA;  INNER JOIN (SELECT DISTINCT PMD_Client_ID, Client_Name FROM Stars.dbo.Client_Contracts WHERE Contract_Year=YEAR(GETDATE())) cc&#xA;  ON cc.PMD_Client_ID = fc.PMD_Client_ID&#xA;&#xA;&#xA;  WHERE filetype IN ('M','C') AND active = 1&#xA;  AND (&#xA;     (DATEDIFF(d,[LastDateReceived],GETDATE()) &gt;  fc.Frequency  AND Filetype = 'C')&#xA;  OR (DATEDIFF(d,[LastDateReceived],GETDATE()) &gt; fc.Frequency AND Filetype = 'M')&#xA;  )"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::LateFileCount" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\LateFileSummary"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{76342875-7EFE-4449-A188-FC7BCEFFE371}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="LateFileSummary"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{833D12C4-85D0-48E0-89ED-50C49F533C60}"
+          SQLTask:SqlStatementSource="INSERT INTO [STARS_rdsm].[dbo].[Late_File_Summary]&#xA;(&#xA;[PMD_Client_ID]&#xA;      ,[Client_Name]&#xA;      ,[Filetype]&#xA;      ,[DayElapsed]&#xA;      ,[LastDateReceived]&#xA;      ,[CurrentDate]&#xA;&#x9;)&#xA;&#x9;&#xA;SELECT fc.[PMD_Client_ID]&#xA;&#x9;  ,cc.Client_Name&#xA;      ,CASE WHEN [Filetype]  ='M' THEN 'Membership' WHEN fc.Filetype='C' THEN 'Claims' ELSE 'Unknown' END AS FileType  &#x9;  &#xA;      ,DATEDIFF(d,[LastDateReceived],GETDATE()) AS DayElapsed&#xA;&#x9;  ,CAST(fc.LastDateReceived AS DATE) AS LastDateReceived&#xA;&#x9;  ,GETDATE() AS CurrentDate&#xA;   &#xA;  FROM [STARS_rdsm].[dbo].[Filewatch_Config] fc&#xA;  INNER JOIN (SELECT DISTINCT PMD_Client_ID, Client_Name FROM Stars.dbo.Client_Contracts) cc&#xA;  ON cc.PMD_Client_ID = fc.PMD_Client_ID&#xA;&#xA;&#xA;  WHERE filetype IN ('M','C') AND active = 1&#xA;  AND (&#xA;     (DATEDIFF(d,[LastDateReceived],GETDATE()) &gt;  fc.Frequency  AND Filetype = 'C')&#xA;  OR (DATEDIFF(d,[LastDateReceived],GETDATE()) &gt; fc.Frequency AND Filetype = 'M')&#xA;  )" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Loop through Filewatch Config"
+      DTS:CreationName="STOCK:FOREACHLOOP"
+      DTS:Description="Foreach Loop Container"
+      DTS:DTSID="{e3a634d2-5779-48f9-9bd7-c1c708271892}"
+      DTS:ExecutableType="STOCK:FOREACHLOOP"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Loop through Filewatch Config">
+      <DTS:ForEachEnumerator
+        DTS:CreationName="Microsoft.ForEachADOEnumerator"
+        DTS:DTSID="{b437e2ef-034e-4a8d-a869-b877c396aa2d}"
+        DTS:ObjectName="{8A8B47E6-E1CC-4E1D-8097-BE851789501B}">
+        <DTS:ObjectData>
+          <FEEADO
+            EnumType="EnumerateRowsInFirstTable"
+            VarName="User::ClientList" />
+        </DTS:ObjectData>
+      </DTS:ForEachEnumerator>
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Loop through Filewatch Config\Delete Unsmoketested NULL"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{82a128bf-cf90-4e7d-999d-6b22b5b166d8}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Delete Unsmoketested NULL"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{833D12C4-85D0-48E0-89ED-50C49F533C60}"
+              SQLTask:SqlStatementSource="delete&#xA;  FROM [STARS_rdsm].[dbo].[Filewatch_UnSmokeTested] where UnsmokeTested_Filecount is null" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Loop through Filewatch Config\Detect Files"
+          DTS:CreationName="STOCK:FOREACHLOOP"
+          DTS:DelayValidation="True"
+          DTS:Description="Foreach Loop Container"
+          DTS:DTSID="{ccc9fc78-acdb-479c-86b6-36530fc908a6}"
+          DTS:ExecutableType="STOCK:FOREACHLOOP"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Detect Files">
+          <DTS:ForEachEnumerator
+            DTS:CreationName="Microsoft.ForEachFileEnumerator"
+            DTS:DTSID="{e32d6072-1752-442d-925d-14cc94748127}"
+            DTS:ObjectName="{119486C4-8E65-4343-A973-4B0F88F0CB67}">
+            <DTS:PropertyExpression
+              DTS:Name="Directory">@[User::Filelocation]</DTS:PropertyExpression>
+            <DTS:PropertyExpression
+              DTS:Name="FileSpec">@[User::Filename]</DTS:PropertyExpression>
+            <DTS:ObjectData>
+              <ForEachFileEnumeratorProperties>
+                <FEFEProperty
+                  Folder="" />
+                <FEFEProperty
+                  FileSpec="" />
+                <FEFEProperty
+                  FileNameRetrievalType="0" />
+                <FEFEProperty
+                  Recurse="0" />
+              </ForEachFileEnumeratorProperties>
+            </DTS:ObjectData>
+          </DTS:ForEachEnumerator>
+          <DTS:Variables />
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\Loop through Filewatch Config\Detect Files\Update Filewatch Config"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{06eaf743-7be0-437b-9eef-3285f010781b}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Update Filewatch Config"
+              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{833D12C4-85D0-48E0-89ED-50C49F533C60}"
+                  SQLTask:SqlStatementSource="DECLARE @PMD_Client_ID INT = ?&#xA;DECLARE @Filename VARCHAR(50) = ?&#xA;&#xA;UPDATE f&#xA;SET UnSmokeTested_Filecount = CAST((SELECT ISNULL(UnSmokeTested_Filecount,0) FROM [dbo].[Filewatch_UnSmokeTested] WHERE pmd_client_id = @PMD_Client_ID AND filename = @Filename) AS INT) + 1&#xA;FROM [dbo].[Filewatch_UnSmokeTested] f&#xA;WHERE pmd_client_id = @PMD_Client_ID AND filename = @Filename" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="0"
+                    SQLTask:DtsVariableName="User::PMD_Client_ID"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="3"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="1"
+                    SQLTask:DtsVariableName="User::Filename"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="129"
+                    SQLTask:ParameterSize="-1" />
+                </SQLTask:SqlTaskData>
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Loop through Filewatch Config\Reset Filecounts"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{039142fd-3142-4bb2-8ffd-973db09fbcb3}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Reset Filecounts"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{833D12C4-85D0-48E0-89ED-50C49F533C60}"
+              SQLTask:SqlStatementSource="DECLARE @PMD_Client_ID INT = ?&#xA;DECLARE @Filename VARCHAR(50) = ?&#xA;DECLARE @Environment_Flag VARCHAR(10) = ?&#xA;&#xA;&#xA;&#xA;  Insert INTO [dbo].[Filewatch_UnSmokeTested]&#xA;  (&#xA;&#x9;   [PMD_Client_ID]&#xA;      ,[Filetype]&#xA;      ,[Filename]&#xA;      ,[Filelocation]&#xA;      ,[DateReceived]  &#xA;&#xA;  )  &#xA;&#xA;&#xA;SELECT [PMD_Client_ID]   &#xA;&#x9;  ,FileType   &#xA;      ,substring([Filename],4,len(filename)-3) as UnSmokeTestedFileName&#xA;      ,CASE WHEN @Environment_Flag = 'Prod' THEN [Filelocation] &#xA;&#x9;&#x9;&#x9;WHEN @Environment_Flag = 'Dev' THEN [FilelocationDEV]&#xA;&#x9;&#x9;&#x9;WHEN @Environment_Flag = 'QA' THEN [FilelocationQA]&#xA;&#x9;&#x9;&#x9;ELSE 'Dev'&#xA;&#x9;&#x9;&#x9;END AS Filelocation&#xA;&#x9;  ,DateReceived = getdate()&#xA;&#xA;  FROM [Stars_rdsm].[dbo].[Filewatch_Config]&#xA;WHERE active = 1 &#xA;AND pmd_client_id = @PMD_Client_ID AND substring([Filename],4,len(filename)-3) = @Filename&#xA;&#xA;order by PMD_Client_ID desc" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::PMD_Client_ID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="User::Filename"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="2"
+                SQLTask:DtsVariableName="$Project::Environment_Flag"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Loop through Filewatch Config.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{6b038590-bbb5-4b8f-87d2-1a339012c089}"
+          DTS:From="Package\Loop through Filewatch Config\Reset Filecounts"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Loop through Filewatch Config\Detect Files" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Loop through Filewatch Config.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{42158376-9049-42e2-a933-4b7fdd0a3196}"
+          DTS:From="Package\Loop through Filewatch Config\Detect Files"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Loop through Filewatch Config\Delete Unsmoketested NULL" />
+      </DTS:PrecedenceConstraints>
+      <DTS:ForEachVariableMappings>
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{24208D53-C015-4E90-A994-DBFF2C60898E}"
+          DTS:ObjectName="{24208D53-C015-4E90-A994-DBFF2C60898E}"
+          DTS:ValueIndex="0"
+          DTS:VariableName="User::PMD_Client_ID" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{B404DEC0-44C3-42DF-BC44-BB4DD50CC66F}"
+          DTS:ObjectName="{B404DEC0-44C3-42DF-BC44-BB4DD50CC66F}"
+          DTS:ValueIndex="1"
+          DTS:VariableName="User::Filename" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{AA9E1A16-19EB-434C-88F1-E6E4A82D8F61}"
+          DTS:ObjectName="{AA9E1A16-19EB-434C-88F1-E6E4A82D8F61}"
+          DTS:ValueIndex="2"
+          DTS:VariableName="User::Filelocation" />
+      </DTS:ForEachVariableMappings>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Obtain Client List"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{0abca724-4ab5-4ce3-a46e-26d92430264f}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Obtain Client List"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{833D12C4-85D0-48E0-89ED-50C49F533C60}"
+          SQLTask:SqlStatementSource="DECLARE @Environment_Flag VARCHAR(10) = ?&#xA;&#xA;SELECT [PMD_Client_ID]      &#xA;      ,substring([Filename],4,len(filename)-3) as UnSmokeTestedFileName&#xA;      ,CASE WHEN @Environment_Flag = 'Prod' THEN [Filelocation] &#xA;&#x9;&#x9;&#x9;WHEN @Environment_Flag = 'Dev' THEN [FilelocationDEV]&#xA;&#x9;&#x9;&#x9;WHEN @Environment_Flag = 'QA' THEN [FilelocationQA]&#xA;&#x9;&#x9;&#x9;ELSE 'Dev'&#xA;&#x9;&#x9;&#x9;END AS Filelocation&#xA;  FROM [Stars_rdsm].[dbo].[Filewatch_Config]&#xA;WHERE active = 1 order by PMD_Client_ID desc"
+          SQLTask:ResultType="ResultSetType_Rowset" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::ClientList" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="$Project::Environment_Flag"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Send Alert"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{01C45442-6F13-4BA2-B36D-EE19338C979C}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Send Alert"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{833D12C4-85D0-48E0-89ED-50C49F533C60}"
+          SQLTask:SqlStatementSource="--Late File Summary &#xA;Declare @Subject nvarchar(1000)&#xA;set @Subject= 'Late File Summary on ' + Convert(varchar(12),getdate(), 100)&#xA;&#xA;Declare @xml11 nvarchar(MAX)&#xA;Declare @Unsmoketestedfilecount int&#xA;Declare @xml12 nvarchar(MAX)&#xA;Declare @body11 nvarchar(MAX)&#xA;Declare @body12 nvarchar(MAX)&#xA;Declare @bodyFinal nvarchar(MAX)&#xA;DECLARE @ConfirmationEmailRecipients VARCHAR(500) = 'Suman.Narne@adherehealth.com'&#xA;DECLARE @CallListEmailDatabaseProfile VARCHAR(50) = ?&#xA;&#xA;SET @body11 ='&lt;html&gt;&lt;head&gt;&lt;style&gt;table, th, td { border: 1px solid black; border-collapse: collapse;}&lt;/style&gt;&lt;/head&gt; &lt;body&gt;&lt;H3&gt;Late File Summary&lt;/H3&gt;&lt;table border = 1&gt; &lt;tr&gt;&lt;th&gt;Overdue Alert!&lt;/th&gt;&lt;/tr&gt;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&lt;tr&gt;&lt;th&gt; PMD_Client_ID &lt;/th&gt; &lt;th&gt; Client_Name &lt;/th&gt; &lt;th&gt; FileType &lt;/th&gt;&lt;th&gt; DayElapsed &lt;/th&gt;&lt;th&gt; LastDateReceived &lt;/th&gt;&lt;/tr&gt;'  &#xA;Set @xml11 = CAST(( SELECT [PMD_Client_ID] AS 'td','', Client_Name AS 'td','', FileType AS 'td','', DayElapsed AS 'td','', LastDateReceived AS 'td'&#xA;FROM &#xA;(&#xA;&#x9;SELECT fc.[PMD_Client_ID]&#xA;&#x9;  ,cc.Client_Name&#xA;      ,CASE WHEN [Filetype]  ='M' THEN 'Membership' WHEN fc.Filetype='C' THEN 'Claims' ELSE 'Unknown' END AS FileType  &#x9;  &#xA;      ,DATEDIFF(d,[LastDateReceived],GETDATE()) AS DayElapsed&#xA;&#x9;  ,CAST(fc.LastDateReceived AS DATE) AS LastDateReceived&#xA;   &#xA;  FROM [STARS_rdsm].[dbo].[Filewatch_Config] fc&#xA;  INNER JOIN (SELECT DISTINCT PMD_Client_ID, Client_Name FROM Stars.dbo.Client_Contracts) cc&#xA;  ON cc.PMD_Client_ID = fc.PMD_Client_ID&#xA;&#xA;&#xA;  WHERE filetype IN ('M','C') AND active = 1&#xA;  AND (&#xA;     (DATEDIFF(d,[LastDateReceived],GETDATE()) &gt;  fc.Frequency  AND Filetype = 'C')&#xA;  OR (DATEDIFF(d,[LastDateReceived],GETDATE()) &gt; fc.Frequency AND Filetype = 'M')&#xA;  )&#xA;) a&#xA;&#xA;FOR XML PATH('tr'), ELEMENTS ) AS nvarchar(MAX))&#xA;&#xA;--Test to see unsmoked test files exists&#xA;Set @Unsmoketestedfilecount=&#xA;(SELECT  count(*)&#xA;  FROM [STARS_rdsm].[dbo].[Filewatch_UnSmokeTested] u&#xA;  INNER JOIN (Select distinct PMD_Client_ID, Client_Name from Stars.dbo.Client_Contracts) cc&#xA;  ON cc.PMD_Client_ID = u.PMD_Client_ID)&#xA;&#xA;&#xA;SET @body12 =' &lt;html&gt;&lt;head&gt;&lt;style&gt;table, th, td { border: 1px solid black; border-collapse: collapse;}&lt;/style&gt;&lt;/head&gt; &lt;body&gt;&lt;H3&gt;Files pending smoke test&lt;/H3&gt;&lt;table border = 1&gt;&#x9;&#x9;&#x9;  &#xA;&#x9;&#x9;&#x9;   &lt;tr&gt;&lt;th&gt; PMD_Client_ID &lt;/th&gt; &lt;th&gt; Client_Name &lt;/th&gt; &lt;th&gt; FileType &lt;/th&gt;&lt;th&gt; FileName &lt;/th&gt;&lt;th&gt; Filelocation &lt;/th&gt;&lt;th&gt; DateReceived &lt;/th&gt;&lt;th&gt;Filecount&lt;/th&gt;&lt;/tr&gt;'  &#xA;&#xA;Set @xml12 = CAST(( SELECT [PMD_Client_ID] AS 'td','', Client_Name AS 'td','', FileType AS 'td','', FileName AS 'td','', FileLocation AS 'td','', DateReceived AS 'td','', UnSmokeTested_FileCount AS 'td'&#xA;From&#xA;(&#xA;SELECT  u.[PMD_Client_ID]&#xA;&#x9;   ,cc.Client_Name&#xA;      ,[Filetype]&#xA;      ,[Filename]&#xA;      ,[Filelocation]&#xA;      ,cast([DateReceived] as date) as DateReceived&#xA;      ,[UnsmokeTested_Filecount]&#xA;  FROM [STARS_rdsm].[dbo].[Filewatch_UnSmokeTested] u&#xA;  INNER JOIN (Select distinct PMD_Client_ID, Client_Name from Stars.dbo.Client_Contracts) cc&#xA;  ON cc.PMD_Client_ID = u.PMD_Client_ID&#xA;&#xA;) a2&#xA;FOR XML PATH('tr'), ELEMENTS ) AS nvarchar(MAX))&#xA;&#xA;&#xA;SET @body11 = @body11  + @xml11 +'&lt;/table&gt;&lt;br/&gt;&lt;br/&gt;'&#xA;SET @body12 =@body12 +  @xml12 + '&lt;/table&gt;&lt;br/&gt;&lt;br/&gt;'&#xA;&#xA;If @Unsmoketestedfilecount &gt; 0 &#xA;Begin&#xA;SET @bodyFinal = @body11 + @body12&#xA;End&#xA;&#xA;If @Unsmoketestedfilecount = 0 &#xA;Begin&#xA;SET @bodyFinal = @body11 &#xA;End&#xA;&#xA;EXEC msdb.dbo.sp_send_dbmail&#xA;@profile_name = @CallListEmailDatabaseProfile,-- replace with your SQL Database Mail Profile &#xA;@body = @bodyfinal,&#xA;@body_format ='HTML',&#xA;@recipients = @ConfirmationEmailRecipients,&#xA;@subject = @Subject&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="$Project::CallListEmailDatabaseProfile"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate Table"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{FFD98310-839D-4008-9368-8AF6847A3D82}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate Table"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{833D12C4-85D0-48E0-89ED-50C49F533C60}"
+          SQLTask:SqlStatementSource="Truncate Table [dbo].[Filewatch_UnSmokeTested]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{0408C2D9-1DE9-49FB-97D8-4931C37D3BEA}"
+      DTS:EvalOp="3"
+      DTS:Expression="@[User::LateFileCount]&gt;0"
+      DTS:From="Package\Detect Late Files"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Send Alert" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{C4D0692A-1E7C-4BA6-926E-44F25B01930C}"
+      DTS:From="Package\Obtain Client List"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Truncate Table" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{8AD7DDF3-4B9A-4F6A-8CCB-777EAC3DCC62}"
+      DTS:From="Package\Loop through Filewatch Config"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Detect Late Files" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{5A96E010-366C-44FF-B842-55992019CF25}"
+      DTS:From="Package\Truncate Table"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Loop through Filewatch Config" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{49C127D4-ACA9-4C83-A03C-2A44A2F330D8}"
+      DTS:From="Package\Send Alert"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\LateFileSummary" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="163.2,41.6"
+          Id="Package\Detect Late Files"
+          TopLeft="506,182" />
+        <NodeLayout
+          Size="163.2,41.6"
+          Id="Package\LateFileSummary"
+          TopLeft="506,344" />
+        <NodeLayout
+          Size="212.8,41.6"
+          Id="Package\Loop through Filewatch Config\Delete Unsmoketested NULL"
+          TopLeft="29.75,232.666666666667" />
+        <NodeLayout
+          Size="195.2,41.6"
+          Id="Package\Loop through Filewatch Config\Detect Files\Update Filewatch Config"
+          TopLeft="14,19" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="222.4,83.2"
+          Size="222.4,126.4"
+          Id="Package\Loop through Filewatch Config\Detect Files"
+          TopLeft="23.25,83.3333333333334" />
+        <NodeLayout
+          Size="156.8,41.6"
+          Id="Package\Loop through Filewatch Config\Reset Filecounts"
+          TopLeft="55.75,16" />
+        <EdgeLayout
+          Id="Package\Loop through Filewatch Config.PrecedenceConstraints[Constraint]"
+          TopLeft="134.25,58">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,25.3333333333334"
+              Start="0,0"
+              End="0,17.8333333333334">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.8333333333334" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Loop through Filewatch Config.PrecedenceConstraints[Constraint 1]"
+          TopLeft="135.25,209.333333333333">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,23.3333333333336"
+              Start="0,0"
+              End="0,15.8333333333336">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,15.8333333333336" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="271.2,304.8"
+          Size="271.2,348"
+          Id="Package\Loop through Filewatch Config"
+          TopLeft="29,178" />
+        <NodeLayout
+          Size="160.8,41.6"
+          Id="Package\Obtain Client List"
+          TopLeft="66,52" />
+        <NodeLayout
+          Size="163.2,41.6"
+          Id="Package\Send Alert"
+          TopLeft="506,263" />
+        <NodeLayout
+          Size="150.4,41.6"
+          Id="Package\Truncate Table"
+          TopLeft="75,118" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="587.5,224">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,39"
+              Start="0,0"
+              End="0,31.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-8,7.75,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="148.25,94">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,24"
+              Start="0,0"
+              End="0,16.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="300,352">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="206,-149"
+              Start="0,0"
+              End="198.5,-149">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="99,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="99,0"
+                    Point2="103,0"
+                    Point3="103,-4" />
+                  <mssgle:LineSegment
+                    End="103,-145" />
+                  <mssgle:CubicBezierSegment
+                    Point1="103,-145"
+                    Point2="103,-149"
+                    Point3="107,-149" />
+                  <mssgle:LineSegment
+                    End="198.5,-149" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="75,139">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="89.5,39"
+              Start="0,0"
+              End="89.5,31.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="85.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="85.5,0"
+                    Point2="89.5,0"
+                    Point3="89.5,4" />
+                  <mssgle:LineSegment
+                    End="89.5,31.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="587.5,305">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,39"
+              Start="0,0"
+              End="0,31.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

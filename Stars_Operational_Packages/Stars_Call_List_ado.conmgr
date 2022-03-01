@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:DelayValidation="True"
+  DTS:ObjectName="Stars_Call_List_ado"
+  DTS:DTSID="{4861DAC2-8379-438B-9BCD-B3EEA9644BEC}"
+  DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <DTS:PropertyExpression
+    DTS:Name="ConnectionString">"Data Source="+ @[$Project::ServerQiLinkOPS] +";Initial Catalog=Stars_Call_Lists;Integrated Security=True;Application Name=SSIS-{4861DAC2-8379-438B-9BCD-B3EEA9644BEC}Stars_Call_List_ado;"</DTS:PropertyExpression>
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectionString="Data Source=p10prdsde003;Initial Catalog=Stars_Call_Lists;Integrated Security=True;Application Name=SSIS-{4861DAC2-8379-438B-9BCD-B3EEA9644BEC}Stars_Call_List_ado;" />
+  </DTS:ObjectData>
+</DTS:ConnectionManager>

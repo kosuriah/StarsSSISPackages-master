@@ -1,0 +1,1680 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="2/9/2016 3:42:44 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="LT-354L162-0148"
+  DTS:CreatorName="PHARMMD\bill.shoap2"
+  DTS:DTSID="{D9045BCF-F332-44F8-96B0-7D3563828F0C}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.1301.433"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="D_Category"
+  DTS:PackageType="5"
+  DTS:VersionBuild="3"
+  DTS:VersionGUID="{E0D0C915-0D38-4714-BF42-24F335D839CC}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Add Inferred Member if does not exist"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{666AA10E-EFD3-493D-B472-104BED0AAF5E}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Add Inferred Member if does not exist"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{F130C9C1-8230-45DD-AA40-3603B0BFBE9E}"
+          SQLTask:SqlStatementSource="IF (SELECT COUNT(*) FROM [dbo].[D_Category] WHERE Category_Ident = -99) =0 &#xA;&#xA;Begin&#xA;SET IDENTITY_INSERT  [dbo].[D_Category] ON&#xA;INSERT INTO [dbo].[D_Category]&#xA;(&#xA;[Category_Ident]&#xA;      ,[Category_ID]&#xA;      ,[Category_Name]&#xA;      ,[Subcategory_ID]&#xA;      ,[Subcategory_Name]&#xA;      ,[created_at]&#xA;      ,[updated_at]&#xA;      ,[deleted_at]&#xA;)&#xA;&#xA;  SELECT [Category_Ident] =-99&#xA;      ,[Category_ID] =-99&#xA;      ,[Category_Name] ='Unknown'&#xA;      ,[Subcategory_ID] =-99&#xA;      ,[Subcategory_Name] ='Unknown'&#xA;      ,[created_at] =GETDATE()&#xA;      ,[updated_at] =GETDATE()&#xA;      ,[deleted_at] =GETDATE()&#xA;&#xA;&#x9;&#x9;SET IDENTITY_INSERT  [dbo].[D_Category] OFF&#xA;&#xA;&#x9;  End" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Load Category Subcategory Dimension"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{4E36908C-EBE7-43AE-BBBE-DA6FBDF6F2F9}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load Category Subcategory Dimension"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Load Category Subcategory Dimension\D_Category"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="D_Category"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[D_Category]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Category Subcategory Dimension\D_Category.Connections[OleDbConnection]"
+                  connectionManagerID="{F130C9C1-8230-45DD-AA40-3603B0BFBE9E}:invalid"
+                  connectionManagerRefId="{F130C9C1-8230-45DD-AA40-3603B0BFBE9E}:invalid"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load Category Subcategory Dimension\D_Category.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load Category Subcategory Dimension\D_Category.Inputs[OLE DB Destination Input].Columns[Category_ID]"
+                      cachedDataType="i4"
+                      cachedName="Category_ID"
+                      externalMetadataColumnId="Package\Load Category Subcategory Dimension\D_Category.Inputs[OLE DB Destination Input].ExternalColumns[Category_ID]"
+                      lineageId="Package\Load Category Subcategory Dimension\S_D_Category.Outputs[OLE DB Source Output].Columns[Category_ID]" />
+                    <inputColumn
+                      refId="Package\Load Category Subcategory Dimension\D_Category.Inputs[OLE DB Destination Input].Columns[Category_Name]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="Category_Name"
+                      externalMetadataColumnId="Package\Load Category Subcategory Dimension\D_Category.Inputs[OLE DB Destination Input].ExternalColumns[Category_Name]"
+                      lineageId="Package\Load Category Subcategory Dimension\S_D_Category.Outputs[OLE DB Source Output].Columns[Category_Name]" />
+                    <inputColumn
+                      refId="Package\Load Category Subcategory Dimension\D_Category.Inputs[OLE DB Destination Input].Columns[Subcategory_ID]"
+                      cachedDataType="i4"
+                      cachedName="Subcategory_ID"
+                      externalMetadataColumnId="Package\Load Category Subcategory Dimension\D_Category.Inputs[OLE DB Destination Input].ExternalColumns[Subcategory_ID]"
+                      lineageId="Package\Load Category Subcategory Dimension\S_D_Category.Outputs[OLE DB Source Output].Columns[Subcategory_ID]" />
+                    <inputColumn
+                      refId="Package\Load Category Subcategory Dimension\D_Category.Inputs[OLE DB Destination Input].Columns[Subcategory_Name]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="Subcategory_Name"
+                      externalMetadataColumnId="Package\Load Category Subcategory Dimension\D_Category.Inputs[OLE DB Destination Input].ExternalColumns[Subcategory_Name]"
+                      lineageId="Package\Load Category Subcategory Dimension\S_D_Category.Outputs[OLE DB Source Output].Columns[Subcategory_Name]" />
+                    <inputColumn
+                      refId="Package\Load Category Subcategory Dimension\D_Category.Inputs[OLE DB Destination Input].Columns[created_at]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="created_at"
+                      externalMetadataColumnId="Package\Load Category Subcategory Dimension\D_Category.Inputs[OLE DB Destination Input].ExternalColumns[created_at]"
+                      lineageId="Package\Load Category Subcategory Dimension\S_D_Category.Outputs[OLE DB Source Output].Columns[created_at]" />
+                    <inputColumn
+                      refId="Package\Load Category Subcategory Dimension\D_Category.Inputs[OLE DB Destination Input].Columns[updated_at]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="updated_at"
+                      externalMetadataColumnId="Package\Load Category Subcategory Dimension\D_Category.Inputs[OLE DB Destination Input].ExternalColumns[updated_at]"
+                      lineageId="Package\Load Category Subcategory Dimension\S_D_Category.Outputs[OLE DB Source Output].Columns[updated_at]" />
+                    <inputColumn
+                      refId="Package\Load Category Subcategory Dimension\D_Category.Inputs[OLE DB Destination Input].Columns[deleted_at]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="deleted_at"
+                      externalMetadataColumnId="Package\Load Category Subcategory Dimension\D_Category.Inputs[OLE DB Destination Input].ExternalColumns[deleted_at]"
+                      lineageId="Package\Load Category Subcategory Dimension\S_D_Category.Outputs[OLE DB Source Output].Columns[deleted_at]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load Category Subcategory Dimension\D_Category.Inputs[OLE DB Destination Input].ExternalColumns[Category_Ident]"
+                      dataType="i4"
+                      name="Category_Ident" />
+                    <externalMetadataColumn
+                      refId="Package\Load Category Subcategory Dimension\D_Category.Inputs[OLE DB Destination Input].ExternalColumns[Category_ID]"
+                      dataType="i4"
+                      name="Category_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Category Subcategory Dimension\D_Category.Inputs[OLE DB Destination Input].ExternalColumns[Category_Name]"
+                      dataType="wstr"
+                      length="100"
+                      name="Category_Name" />
+                    <externalMetadataColumn
+                      refId="Package\Load Category Subcategory Dimension\D_Category.Inputs[OLE DB Destination Input].ExternalColumns[Subcategory_ID]"
+                      dataType="i4"
+                      name="Subcategory_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Category Subcategory Dimension\D_Category.Inputs[OLE DB Destination Input].ExternalColumns[Subcategory_Name]"
+                      dataType="wstr"
+                      length="100"
+                      name="Subcategory_Name" />
+                    <externalMetadataColumn
+                      refId="Package\Load Category Subcategory Dimension\D_Category.Inputs[OLE DB Destination Input].ExternalColumns[created_at]"
+                      dataType="dbTimeStamp"
+                      name="created_at" />
+                    <externalMetadataColumn
+                      refId="Package\Load Category Subcategory Dimension\D_Category.Inputs[OLE DB Destination Input].ExternalColumns[updated_at]"
+                      dataType="dbTimeStamp"
+                      name="updated_at" />
+                    <externalMetadataColumn
+                      refId="Package\Load Category Subcategory Dimension\D_Category.Inputs[OLE DB Destination Input].ExternalColumns[deleted_at]"
+                      dataType="dbTimeStamp"
+                      name="deleted_at" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Category Subcategory Dimension\D_Category.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Load Category Subcategory Dimension\D_Category.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Category Subcategory Dimension\D_Category.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Category Subcategory Dimension\D_Category.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Category Subcategory Dimension\D_Category.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Category Subcategory Dimension\D_Category.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Category Subcategory Dimension\Lookup"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT [Category_ID]     
+      ,[Subcategory_ID]
+     
+  FROM [Stars_DWH].[dbo].[D_Category] with (Nolock)</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">select * from (SELECT [Category_ID]     
+      ,[Subcategory_ID]
+     
+  FROM [Stars_DWH].[dbo].[D_Category] with (Nolock)) [refTable]
+where [refTable].[Category_ID] = ? and [refTable].[Subcategory_ID] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="Category_ID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Subcategory_ID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Load Category Subcategory Dimension\S_D_Category.Outputs[OLE DB Source Output].Columns[Category_ID]};#{Package\Load Category Subcategory Dimension\S_D_Category.Outputs[OLE DB Source Output].Columns[Subcategory_ID]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Category Subcategory Dimension\Lookup.Connections[OleDbConnection]"
+                  connectionManagerID="{F130C9C1-8230-45DD-AA40-3603B0BFBE9E}:invalid"
+                  connectionManagerRefId="{F130C9C1-8230-45DD-AA40-3603B0BFBE9E}:invalid"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load Category Subcategory Dimension\Lookup.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load Category Subcategory Dimension\Lookup.Inputs[Lookup Input].Columns[Category_ID]"
+                      cachedDataType="i4"
+                      cachedName="Category_ID"
+                      lineageId="Package\Load Category Subcategory Dimension\S_D_Category.Outputs[OLE DB Source Output].Columns[Category_ID]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">Category_ID</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load Category Subcategory Dimension\Lookup.Inputs[Lookup Input].Columns[Subcategory_ID]"
+                      cachedDataType="i4"
+                      cachedName="Subcategory_ID"
+                      lineageId="Package\Load Category Subcategory Dimension\S_D_Category.Outputs[OLE DB Source Output].Columns[Subcategory_ID]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">Subcategory_ID</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Category Subcategory Dimension\Lookup.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Load Category Subcategory Dimension\Lookup.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load Category Subcategory Dimension\Lookup.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Load Category Subcategory Dimension\Lookup.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load Category Subcategory Dimension\Lookup.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Load Category Subcategory Dimension\Lookup.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Category Subcategory Dimension\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Category Subcategory Dimension\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Category Subcategory Dimension\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Category Subcategory Dimension\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Category Subcategory Dimension\S_D_Category"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="S_D_Category"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT [Category_ID]
+      ,[Category_Name]
+      ,[Subcategory_ID]
+      ,[Subcategory_Name]
+      ,[created_at]
+      ,[updated_at]
+      ,[deleted_at]
+  FROM [Stars_DWH].[staging].[S_D_Category] with (Nolock)</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Category Subcategory Dimension\S_D_Category.Connections[OleDbConnection]"
+                  connectionManagerID="{F130C9C1-8230-45DD-AA40-3603B0BFBE9E}:invalid"
+                  connectionManagerRefId="{F130C9C1-8230-45DD-AA40-3603B0BFBE9E}:invalid"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Load Category Subcategory Dimension\S_D_Category.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Category Subcategory Dimension\S_D_Category.Outputs[OLE DB Source Output].Columns[Category_ID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Category Subcategory Dimension\S_D_Category.Outputs[OLE DB Source Output].ExternalColumns[Category_ID]"
+                      lineageId="Package\Load Category Subcategory Dimension\S_D_Category.Outputs[OLE DB Source Output].Columns[Category_ID]"
+                      name="Category_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Category Subcategory Dimension\S_D_Category.Outputs[OLE DB Source Output].Columns[Category_Name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Category Subcategory Dimension\S_D_Category.Outputs[OLE DB Source Output].ExternalColumns[Category_Name]"
+                      length="100"
+                      lineageId="Package\Load Category Subcategory Dimension\S_D_Category.Outputs[OLE DB Source Output].Columns[Category_Name]"
+                      name="Category_Name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Category Subcategory Dimension\S_D_Category.Outputs[OLE DB Source Output].Columns[Subcategory_ID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Category Subcategory Dimension\S_D_Category.Outputs[OLE DB Source Output].ExternalColumns[Subcategory_ID]"
+                      lineageId="Package\Load Category Subcategory Dimension\S_D_Category.Outputs[OLE DB Source Output].Columns[Subcategory_ID]"
+                      name="Subcategory_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Category Subcategory Dimension\S_D_Category.Outputs[OLE DB Source Output].Columns[Subcategory_Name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Category Subcategory Dimension\S_D_Category.Outputs[OLE DB Source Output].ExternalColumns[Subcategory_Name]"
+                      length="100"
+                      lineageId="Package\Load Category Subcategory Dimension\S_D_Category.Outputs[OLE DB Source Output].Columns[Subcategory_Name]"
+                      name="Subcategory_Name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Category Subcategory Dimension\S_D_Category.Outputs[OLE DB Source Output].Columns[created_at]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Category Subcategory Dimension\S_D_Category.Outputs[OLE DB Source Output].ExternalColumns[created_at]"
+                      lineageId="Package\Load Category Subcategory Dimension\S_D_Category.Outputs[OLE DB Source Output].Columns[created_at]"
+                      name="created_at"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Category Subcategory Dimension\S_D_Category.Outputs[OLE DB Source Output].Columns[updated_at]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Category Subcategory Dimension\S_D_Category.Outputs[OLE DB Source Output].ExternalColumns[updated_at]"
+                      lineageId="Package\Load Category Subcategory Dimension\S_D_Category.Outputs[OLE DB Source Output].Columns[updated_at]"
+                      name="updated_at"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Category Subcategory Dimension\S_D_Category.Outputs[OLE DB Source Output].Columns[deleted_at]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Category Subcategory Dimension\S_D_Category.Outputs[OLE DB Source Output].ExternalColumns[deleted_at]"
+                      lineageId="Package\Load Category Subcategory Dimension\S_D_Category.Outputs[OLE DB Source Output].Columns[deleted_at]"
+                      name="deleted_at"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load Category Subcategory Dimension\S_D_Category.Outputs[OLE DB Source Output].ExternalColumns[Category_ID]"
+                      dataType="i4"
+                      name="Category_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Category Subcategory Dimension\S_D_Category.Outputs[OLE DB Source Output].ExternalColumns[Category_Name]"
+                      dataType="wstr"
+                      length="100"
+                      name="Category_Name" />
+                    <externalMetadataColumn
+                      refId="Package\Load Category Subcategory Dimension\S_D_Category.Outputs[OLE DB Source Output].ExternalColumns[Subcategory_ID]"
+                      dataType="i4"
+                      name="Subcategory_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Category Subcategory Dimension\S_D_Category.Outputs[OLE DB Source Output].ExternalColumns[Subcategory_Name]"
+                      dataType="wstr"
+                      length="100"
+                      name="Subcategory_Name" />
+                    <externalMetadataColumn
+                      refId="Package\Load Category Subcategory Dimension\S_D_Category.Outputs[OLE DB Source Output].ExternalColumns[created_at]"
+                      dataType="dbTimeStamp"
+                      name="created_at" />
+                    <externalMetadataColumn
+                      refId="Package\Load Category Subcategory Dimension\S_D_Category.Outputs[OLE DB Source Output].ExternalColumns[updated_at]"
+                      dataType="dbTimeStamp"
+                      name="updated_at" />
+                    <externalMetadataColumn
+                      refId="Package\Load Category Subcategory Dimension\S_D_Category.Outputs[OLE DB Source Output].ExternalColumns[deleted_at]"
+                      dataType="dbTimeStamp"
+                      name="deleted_at" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Load Category Subcategory Dimension\S_D_Category.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Category Subcategory Dimension\S_D_Category.Outputs[OLE DB Source Error Output].Columns[Category_ID]"
+                      dataType="i4"
+                      lineageId="Package\Load Category Subcategory Dimension\S_D_Category.Outputs[OLE DB Source Error Output].Columns[Category_ID]"
+                      name="Category_ID" />
+                    <outputColumn
+                      refId="Package\Load Category Subcategory Dimension\S_D_Category.Outputs[OLE DB Source Error Output].Columns[Category_Name]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Load Category Subcategory Dimension\S_D_Category.Outputs[OLE DB Source Error Output].Columns[Category_Name]"
+                      name="Category_Name" />
+                    <outputColumn
+                      refId="Package\Load Category Subcategory Dimension\S_D_Category.Outputs[OLE DB Source Error Output].Columns[Subcategory_ID]"
+                      dataType="i4"
+                      lineageId="Package\Load Category Subcategory Dimension\S_D_Category.Outputs[OLE DB Source Error Output].Columns[Subcategory_ID]"
+                      name="Subcategory_ID" />
+                    <outputColumn
+                      refId="Package\Load Category Subcategory Dimension\S_D_Category.Outputs[OLE DB Source Error Output].Columns[Subcategory_Name]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Load Category Subcategory Dimension\S_D_Category.Outputs[OLE DB Source Error Output].Columns[Subcategory_Name]"
+                      name="Subcategory_Name" />
+                    <outputColumn
+                      refId="Package\Load Category Subcategory Dimension\S_D_Category.Outputs[OLE DB Source Error Output].Columns[created_at]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Load Category Subcategory Dimension\S_D_Category.Outputs[OLE DB Source Error Output].Columns[created_at]"
+                      name="created_at" />
+                    <outputColumn
+                      refId="Package\Load Category Subcategory Dimension\S_D_Category.Outputs[OLE DB Source Error Output].Columns[updated_at]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Load Category Subcategory Dimension\S_D_Category.Outputs[OLE DB Source Error Output].Columns[updated_at]"
+                      name="updated_at" />
+                    <outputColumn
+                      refId="Package\Load Category Subcategory Dimension\S_D_Category.Outputs[OLE DB Source Error Output].Columns[deleted_at]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Load Category Subcategory Dimension\S_D_Category.Outputs[OLE DB Source Error Output].Columns[deleted_at]"
+                      name="deleted_at" />
+                    <outputColumn
+                      refId="Package\Load Category Subcategory Dimension\S_D_Category.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Category Subcategory Dimension\S_D_Category.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Category Subcategory Dimension\S_D_Category.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Category Subcategory Dimension\S_D_Category.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Category Subcategory Dimension\S_D_Category_Update"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="S_D_Category_Update"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[staging].[S_D_Category_Update]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Category Subcategory Dimension\S_D_Category_Update.Connections[OleDbConnection]"
+                  connectionManagerID="{F130C9C1-8230-45DD-AA40-3603B0BFBE9E}:invalid"
+                  connectionManagerRefId="{F130C9C1-8230-45DD-AA40-3603B0BFBE9E}:invalid"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load Category Subcategory Dimension\S_D_Category_Update.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load Category Subcategory Dimension\S_D_Category_Update.Inputs[OLE DB Destination Input].Columns[Category_ID]"
+                      cachedDataType="i4"
+                      cachedName="Category_ID"
+                      externalMetadataColumnId="Package\Load Category Subcategory Dimension\S_D_Category_Update.Inputs[OLE DB Destination Input].ExternalColumns[Category_ID]"
+                      lineageId="Package\Load Category Subcategory Dimension\S_D_Category.Outputs[OLE DB Source Output].Columns[Category_ID]" />
+                    <inputColumn
+                      refId="Package\Load Category Subcategory Dimension\S_D_Category_Update.Inputs[OLE DB Destination Input].Columns[Category_Name]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="Category_Name"
+                      externalMetadataColumnId="Package\Load Category Subcategory Dimension\S_D_Category_Update.Inputs[OLE DB Destination Input].ExternalColumns[Category_Name]"
+                      lineageId="Package\Load Category Subcategory Dimension\S_D_Category.Outputs[OLE DB Source Output].Columns[Category_Name]" />
+                    <inputColumn
+                      refId="Package\Load Category Subcategory Dimension\S_D_Category_Update.Inputs[OLE DB Destination Input].Columns[Subcategory_ID]"
+                      cachedDataType="i4"
+                      cachedName="Subcategory_ID"
+                      externalMetadataColumnId="Package\Load Category Subcategory Dimension\S_D_Category_Update.Inputs[OLE DB Destination Input].ExternalColumns[Subcategory_ID]"
+                      lineageId="Package\Load Category Subcategory Dimension\S_D_Category.Outputs[OLE DB Source Output].Columns[Subcategory_ID]" />
+                    <inputColumn
+                      refId="Package\Load Category Subcategory Dimension\S_D_Category_Update.Inputs[OLE DB Destination Input].Columns[Subcategory_Name]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="Subcategory_Name"
+                      externalMetadataColumnId="Package\Load Category Subcategory Dimension\S_D_Category_Update.Inputs[OLE DB Destination Input].ExternalColumns[Subcategory_Name]"
+                      lineageId="Package\Load Category Subcategory Dimension\S_D_Category.Outputs[OLE DB Source Output].Columns[Subcategory_Name]" />
+                    <inputColumn
+                      refId="Package\Load Category Subcategory Dimension\S_D_Category_Update.Inputs[OLE DB Destination Input].Columns[created_at]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="created_at"
+                      externalMetadataColumnId="Package\Load Category Subcategory Dimension\S_D_Category_Update.Inputs[OLE DB Destination Input].ExternalColumns[created_at]"
+                      lineageId="Package\Load Category Subcategory Dimension\S_D_Category.Outputs[OLE DB Source Output].Columns[created_at]" />
+                    <inputColumn
+                      refId="Package\Load Category Subcategory Dimension\S_D_Category_Update.Inputs[OLE DB Destination Input].Columns[updated_at]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="updated_at"
+                      externalMetadataColumnId="Package\Load Category Subcategory Dimension\S_D_Category_Update.Inputs[OLE DB Destination Input].ExternalColumns[updated_at]"
+                      lineageId="Package\Load Category Subcategory Dimension\S_D_Category.Outputs[OLE DB Source Output].Columns[updated_at]" />
+                    <inputColumn
+                      refId="Package\Load Category Subcategory Dimension\S_D_Category_Update.Inputs[OLE DB Destination Input].Columns[deleted_at]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="deleted_at"
+                      externalMetadataColumnId="Package\Load Category Subcategory Dimension\S_D_Category_Update.Inputs[OLE DB Destination Input].ExternalColumns[deleted_at]"
+                      lineageId="Package\Load Category Subcategory Dimension\S_D_Category.Outputs[OLE DB Source Output].Columns[deleted_at]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load Category Subcategory Dimension\S_D_Category_Update.Inputs[OLE DB Destination Input].ExternalColumns[Category_ID]"
+                      dataType="i4"
+                      name="Category_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Category Subcategory Dimension\S_D_Category_Update.Inputs[OLE DB Destination Input].ExternalColumns[Category_Name]"
+                      dataType="wstr"
+                      length="100"
+                      name="Category_Name" />
+                    <externalMetadataColumn
+                      refId="Package\Load Category Subcategory Dimension\S_D_Category_Update.Inputs[OLE DB Destination Input].ExternalColumns[Subcategory_ID]"
+                      dataType="i4"
+                      name="Subcategory_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Category Subcategory Dimension\S_D_Category_Update.Inputs[OLE DB Destination Input].ExternalColumns[Subcategory_Name]"
+                      dataType="wstr"
+                      length="100"
+                      name="Subcategory_Name" />
+                    <externalMetadataColumn
+                      refId="Package\Load Category Subcategory Dimension\S_D_Category_Update.Inputs[OLE DB Destination Input].ExternalColumns[created_at]"
+                      dataType="dbTimeStamp"
+                      name="created_at" />
+                    <externalMetadataColumn
+                      refId="Package\Load Category Subcategory Dimension\S_D_Category_Update.Inputs[OLE DB Destination Input].ExternalColumns[updated_at]"
+                      dataType="dbTimeStamp"
+                      name="updated_at" />
+                    <externalMetadataColumn
+                      refId="Package\Load Category Subcategory Dimension\S_D_Category_Update.Inputs[OLE DB Destination Input].ExternalColumns[deleted_at]"
+                      dataType="dbTimeStamp"
+                      name="deleted_at" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Category Subcategory Dimension\S_D_Category_Update.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Load Category Subcategory Dimension\S_D_Category_Update.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Category Subcategory Dimension\S_D_Category_Update.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Category Subcategory Dimension\S_D_Category_Update.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Category Subcategory Dimension\S_D_Category_Update.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Category Subcategory Dimension\S_D_Category_Update.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Load Category Subcategory Dimension.Paths[Lookup Match Output]"
+              endId="Package\Load Category Subcategory Dimension\S_D_Category_Update.Inputs[OLE DB Destination Input]"
+              name="Lookup Match Output"
+              startId="Package\Load Category Subcategory Dimension\Lookup.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Load Category Subcategory Dimension.Paths[Lookup No Match Output]"
+              endId="Package\Load Category Subcategory Dimension\D_Category.Inputs[OLE DB Destination Input]"
+              name="Lookup No Match Output"
+              startId="Package\Load Category Subcategory Dimension\Lookup.Outputs[Lookup No Match Output]" />
+            <path
+              refId="Package\Load Category Subcategory Dimension.Paths[OLE DB Source Output]"
+              endId="Package\Load Category Subcategory Dimension\Lookup.Inputs[Lookup Input]"
+              name="OLE DB Source Output"
+              startId="Package\Load Category Subcategory Dimension\S_D_Category.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Stage Category Subcategory"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{BB083C61-1ABF-48C3-8D57-880B583F00C6}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Stage Category Subcategory"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Stage Category Subcategory\StarsConnect Category Subcategory"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="StarsConnect Category Subcategory"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT 
+      c.[id] AS Category_ID
+	  ,c.name AS Category_Name
+	 , sc.[id] AS Subcategory_ID
+      ,sc.[name] AS Subcategory_Name
+      ,sc.[created_at]
+      ,sc.[updated_at]
+      ,sc.[deleted_at]
+
+  FROM [StarsConnect].[dbo].[sub_categories] sc
+  INNER JOIN [starsconnect].[dbo].[categories] c
+  ON c.id = sc.category_id</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Stage Category Subcategory\StarsConnect Category Subcategory.Connections[OleDbConnection]"
+                  connectionManagerID="{98CA1A2E-D1A2-4041-AD05-8E13C575C71A}:invalid"
+                  connectionManagerRefId="{98CA1A2E-D1A2-4041-AD05-8E13C575C71A}:invalid"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Stage Category Subcategory\StarsConnect Category Subcategory.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage Category Subcategory\StarsConnect Category Subcategory.Outputs[OLE DB Source Output].Columns[Category_ID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Category Subcategory\StarsConnect Category Subcategory.Outputs[OLE DB Source Output].ExternalColumns[Category_ID]"
+                      lineageId="Package\Stage Category Subcategory\StarsConnect Category Subcategory.Outputs[OLE DB Source Output].Columns[Category_ID]"
+                      name="Category_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Category Subcategory\StarsConnect Category Subcategory.Outputs[OLE DB Source Output].Columns[Category_Name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Category Subcategory\StarsConnect Category Subcategory.Outputs[OLE DB Source Output].ExternalColumns[Category_Name]"
+                      length="100"
+                      lineageId="Package\Stage Category Subcategory\StarsConnect Category Subcategory.Outputs[OLE DB Source Output].Columns[Category_Name]"
+                      name="Category_Name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Category Subcategory\StarsConnect Category Subcategory.Outputs[OLE DB Source Output].Columns[Subcategory_ID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Category Subcategory\StarsConnect Category Subcategory.Outputs[OLE DB Source Output].ExternalColumns[Subcategory_ID]"
+                      lineageId="Package\Stage Category Subcategory\StarsConnect Category Subcategory.Outputs[OLE DB Source Output].Columns[Subcategory_ID]"
+                      name="Subcategory_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Category Subcategory\StarsConnect Category Subcategory.Outputs[OLE DB Source Output].Columns[Subcategory_Name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Category Subcategory\StarsConnect Category Subcategory.Outputs[OLE DB Source Output].ExternalColumns[Subcategory_Name]"
+                      length="100"
+                      lineageId="Package\Stage Category Subcategory\StarsConnect Category Subcategory.Outputs[OLE DB Source Output].Columns[Subcategory_Name]"
+                      name="Subcategory_Name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Category Subcategory\StarsConnect Category Subcategory.Outputs[OLE DB Source Output].Columns[created_at]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Category Subcategory\StarsConnect Category Subcategory.Outputs[OLE DB Source Output].ExternalColumns[created_at]"
+                      lineageId="Package\Stage Category Subcategory\StarsConnect Category Subcategory.Outputs[OLE DB Source Output].Columns[created_at]"
+                      name="created_at"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Category Subcategory\StarsConnect Category Subcategory.Outputs[OLE DB Source Output].Columns[updated_at]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Category Subcategory\StarsConnect Category Subcategory.Outputs[OLE DB Source Output].ExternalColumns[updated_at]"
+                      lineageId="Package\Stage Category Subcategory\StarsConnect Category Subcategory.Outputs[OLE DB Source Output].Columns[updated_at]"
+                      name="updated_at"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Stage Category Subcategory\StarsConnect Category Subcategory.Outputs[OLE DB Source Output].Columns[deleted_at]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Stage Category Subcategory\StarsConnect Category Subcategory.Outputs[OLE DB Source Output].ExternalColumns[deleted_at]"
+                      lineageId="Package\Stage Category Subcategory\StarsConnect Category Subcategory.Outputs[OLE DB Source Output].Columns[deleted_at]"
+                      name="deleted_at"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Stage Category Subcategory\StarsConnect Category Subcategory.Outputs[OLE DB Source Output].ExternalColumns[Category_ID]"
+                      dataType="i4"
+                      name="Category_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Category Subcategory\StarsConnect Category Subcategory.Outputs[OLE DB Source Output].ExternalColumns[Category_Name]"
+                      dataType="wstr"
+                      length="100"
+                      name="Category_Name" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Category Subcategory\StarsConnect Category Subcategory.Outputs[OLE DB Source Output].ExternalColumns[Subcategory_ID]"
+                      dataType="i4"
+                      name="Subcategory_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Category Subcategory\StarsConnect Category Subcategory.Outputs[OLE DB Source Output].ExternalColumns[Subcategory_Name]"
+                      dataType="wstr"
+                      length="100"
+                      name="Subcategory_Name" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Category Subcategory\StarsConnect Category Subcategory.Outputs[OLE DB Source Output].ExternalColumns[created_at]"
+                      dataType="dbTimeStamp"
+                      name="created_at" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Category Subcategory\StarsConnect Category Subcategory.Outputs[OLE DB Source Output].ExternalColumns[updated_at]"
+                      dataType="dbTimeStamp"
+                      name="updated_at" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Category Subcategory\StarsConnect Category Subcategory.Outputs[OLE DB Source Output].ExternalColumns[deleted_at]"
+                      dataType="dbTimeStamp"
+                      name="deleted_at" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Stage Category Subcategory\StarsConnect Category Subcategory.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage Category Subcategory\StarsConnect Category Subcategory.Outputs[OLE DB Source Error Output].Columns[Category_ID]"
+                      dataType="i4"
+                      lineageId="Package\Stage Category Subcategory\StarsConnect Category Subcategory.Outputs[OLE DB Source Error Output].Columns[Category_ID]"
+                      name="Category_ID" />
+                    <outputColumn
+                      refId="Package\Stage Category Subcategory\StarsConnect Category Subcategory.Outputs[OLE DB Source Error Output].Columns[Category_Name]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Stage Category Subcategory\StarsConnect Category Subcategory.Outputs[OLE DB Source Error Output].Columns[Category_Name]"
+                      name="Category_Name" />
+                    <outputColumn
+                      refId="Package\Stage Category Subcategory\StarsConnect Category Subcategory.Outputs[OLE DB Source Error Output].Columns[Subcategory_ID]"
+                      dataType="i4"
+                      lineageId="Package\Stage Category Subcategory\StarsConnect Category Subcategory.Outputs[OLE DB Source Error Output].Columns[Subcategory_ID]"
+                      name="Subcategory_ID" />
+                    <outputColumn
+                      refId="Package\Stage Category Subcategory\StarsConnect Category Subcategory.Outputs[OLE DB Source Error Output].Columns[Subcategory_Name]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Stage Category Subcategory\StarsConnect Category Subcategory.Outputs[OLE DB Source Error Output].Columns[Subcategory_Name]"
+                      name="Subcategory_Name" />
+                    <outputColumn
+                      refId="Package\Stage Category Subcategory\StarsConnect Category Subcategory.Outputs[OLE DB Source Error Output].Columns[created_at]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Stage Category Subcategory\StarsConnect Category Subcategory.Outputs[OLE DB Source Error Output].Columns[created_at]"
+                      name="created_at" />
+                    <outputColumn
+                      refId="Package\Stage Category Subcategory\StarsConnect Category Subcategory.Outputs[OLE DB Source Error Output].Columns[updated_at]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Stage Category Subcategory\StarsConnect Category Subcategory.Outputs[OLE DB Source Error Output].Columns[updated_at]"
+                      name="updated_at" />
+                    <outputColumn
+                      refId="Package\Stage Category Subcategory\StarsConnect Category Subcategory.Outputs[OLE DB Source Error Output].Columns[deleted_at]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Stage Category Subcategory\StarsConnect Category Subcategory.Outputs[OLE DB Source Error Output].Columns[deleted_at]"
+                      name="deleted_at" />
+                    <outputColumn
+                      refId="Package\Stage Category Subcategory\StarsConnect Category Subcategory.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage Category Subcategory\StarsConnect Category Subcategory.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage Category Subcategory\StarsConnect Category Subcategory.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage Category Subcategory\StarsConnect Category Subcategory.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Stage Category Subcategory\S_D_Category"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="S_D_Category"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[staging].[S_D_Category]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Stage Category Subcategory\S_D_Category.Connections[OleDbConnection]"
+                  connectionManagerID="{F130C9C1-8230-45DD-AA40-3603B0BFBE9E}:invalid"
+                  connectionManagerRefId="{F130C9C1-8230-45DD-AA40-3603B0BFBE9E}:invalid"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Stage Category Subcategory\S_D_Category.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Stage Category Subcategory\S_D_Category.Inputs[OLE DB Destination Input].Columns[Category_ID]"
+                      cachedDataType="i4"
+                      cachedName="Category_ID"
+                      externalMetadataColumnId="Package\Stage Category Subcategory\S_D_Category.Inputs[OLE DB Destination Input].ExternalColumns[Category_ID]"
+                      lineageId="Package\Stage Category Subcategory\StarsConnect Category Subcategory.Outputs[OLE DB Source Output].Columns[Category_ID]" />
+                    <inputColumn
+                      refId="Package\Stage Category Subcategory\S_D_Category.Inputs[OLE DB Destination Input].Columns[Category_Name]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="Category_Name"
+                      externalMetadataColumnId="Package\Stage Category Subcategory\S_D_Category.Inputs[OLE DB Destination Input].ExternalColumns[Category_Name]"
+                      lineageId="Package\Stage Category Subcategory\StarsConnect Category Subcategory.Outputs[OLE DB Source Output].Columns[Category_Name]" />
+                    <inputColumn
+                      refId="Package\Stage Category Subcategory\S_D_Category.Inputs[OLE DB Destination Input].Columns[Subcategory_ID]"
+                      cachedDataType="i4"
+                      cachedName="Subcategory_ID"
+                      externalMetadataColumnId="Package\Stage Category Subcategory\S_D_Category.Inputs[OLE DB Destination Input].ExternalColumns[Subcategory_ID]"
+                      lineageId="Package\Stage Category Subcategory\StarsConnect Category Subcategory.Outputs[OLE DB Source Output].Columns[Subcategory_ID]" />
+                    <inputColumn
+                      refId="Package\Stage Category Subcategory\S_D_Category.Inputs[OLE DB Destination Input].Columns[Subcategory_Name]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="Subcategory_Name"
+                      externalMetadataColumnId="Package\Stage Category Subcategory\S_D_Category.Inputs[OLE DB Destination Input].ExternalColumns[Subcategory_Name]"
+                      lineageId="Package\Stage Category Subcategory\StarsConnect Category Subcategory.Outputs[OLE DB Source Output].Columns[Subcategory_Name]" />
+                    <inputColumn
+                      refId="Package\Stage Category Subcategory\S_D_Category.Inputs[OLE DB Destination Input].Columns[created_at]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="created_at"
+                      externalMetadataColumnId="Package\Stage Category Subcategory\S_D_Category.Inputs[OLE DB Destination Input].ExternalColumns[created_at]"
+                      lineageId="Package\Stage Category Subcategory\StarsConnect Category Subcategory.Outputs[OLE DB Source Output].Columns[created_at]" />
+                    <inputColumn
+                      refId="Package\Stage Category Subcategory\S_D_Category.Inputs[OLE DB Destination Input].Columns[updated_at]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="updated_at"
+                      externalMetadataColumnId="Package\Stage Category Subcategory\S_D_Category.Inputs[OLE DB Destination Input].ExternalColumns[updated_at]"
+                      lineageId="Package\Stage Category Subcategory\StarsConnect Category Subcategory.Outputs[OLE DB Source Output].Columns[updated_at]" />
+                    <inputColumn
+                      refId="Package\Stage Category Subcategory\S_D_Category.Inputs[OLE DB Destination Input].Columns[deleted_at]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="deleted_at"
+                      externalMetadataColumnId="Package\Stage Category Subcategory\S_D_Category.Inputs[OLE DB Destination Input].ExternalColumns[deleted_at]"
+                      lineageId="Package\Stage Category Subcategory\StarsConnect Category Subcategory.Outputs[OLE DB Source Output].Columns[deleted_at]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Stage Category Subcategory\S_D_Category.Inputs[OLE DB Destination Input].ExternalColumns[Category_ID]"
+                      dataType="i4"
+                      name="Category_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Category Subcategory\S_D_Category.Inputs[OLE DB Destination Input].ExternalColumns[Category_Name]"
+                      dataType="wstr"
+                      length="100"
+                      name="Category_Name" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Category Subcategory\S_D_Category.Inputs[OLE DB Destination Input].ExternalColumns[Subcategory_ID]"
+                      dataType="i4"
+                      name="Subcategory_ID" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Category Subcategory\S_D_Category.Inputs[OLE DB Destination Input].ExternalColumns[Subcategory_Name]"
+                      dataType="wstr"
+                      length="100"
+                      name="Subcategory_Name" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Category Subcategory\S_D_Category.Inputs[OLE DB Destination Input].ExternalColumns[created_at]"
+                      dataType="dbTimeStamp"
+                      name="created_at" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Category Subcategory\S_D_Category.Inputs[OLE DB Destination Input].ExternalColumns[updated_at]"
+                      dataType="dbTimeStamp"
+                      name="updated_at" />
+                    <externalMetadataColumn
+                      refId="Package\Stage Category Subcategory\S_D_Category.Inputs[OLE DB Destination Input].ExternalColumns[deleted_at]"
+                      dataType="dbTimeStamp"
+                      name="deleted_at" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Stage Category Subcategory\S_D_Category.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Stage Category Subcategory\S_D_Category.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Stage Category Subcategory\S_D_Category.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Stage Category Subcategory\S_D_Category.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Stage Category Subcategory\S_D_Category.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Stage Category Subcategory\S_D_Category.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Stage Category Subcategory.Paths[OLE DB Source Output]"
+              endId="Package\Stage Category Subcategory\S_D_Category.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Stage Category Subcategory\StarsConnect Category Subcategory.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate Staging"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{A6CB870B-269D-4CE8-B970-8541CBC1727E}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate Staging"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{F130C9C1-8230-45DD-AA40-3603B0BFBE9E}"
+          SQLTask:SqlStatementSource="Truncate Table staging.S_D_Category&#xA;Go&#xA;&#xA;Truncate Table staging.S_D_Category_Update&#xA;Go" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Update D_Category"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{06DF4A04-BB74-4EAF-867A-04753A30829C}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Update D_Category"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{F130C9C1-8230-45DD-AA40-3603B0BFBE9E}"
+          SQLTask:SqlStatementSource="UPDATE d  &#xA;&#x9;SET d.[Category_Name]=u.[Category_Name]&#xA;      ,d.[Subcategory_Name]=u.[Subcategory_Name]&#xA;      ,d.[created_at]=u.[created_at]&#xA;      ,d.[updated_at]=u.[updated_at]&#xA;      ,d.[deleted_at]=u.[deleted_at]&#xA;  FROM [dbo].[D_Category] d&#xA;  INNER JOIN [staging].[S_D_Category_Update] u&#xA;  ON d.Category_ID = u.Category_ID&#xA;  AND d.Subcategory_ID = u.Subcategory_ID" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{E2983210-3FD0-495D-AE69-56317A9D77F2}"
+      DTS:From="Package\Truncate Staging"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Stage Category Subcategory" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{6BF7F2F1-CE3B-437C-AE8C-3FE72FBCE8DE}"
+      DTS:From="Package\Stage Category Subcategory"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Load Category Subcategory Dimension" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{38FFCC3E-8210-4809-AD76-C6B5C0FAE7A8}"
+      DTS:From="Package\Load Category Subcategory Dimension"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Update D_Category" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{E7897126-8663-4576-9262-B39FDAB55630}"
+      DTS:From="Package\Update D_Category"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Add Inferred Member if does not exist" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql12">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="258,42"
+          Id="Package\Add Inferred Member if does not exist"
+          TopLeft="100,311" />
+        <NodeLayout
+          Size="258,42"
+          Id="Package\Load Category Subcategory Dimension"
+          TopLeft="101,182" />
+        <NodeLayout
+          Size="258,42"
+          Id="Package\Stage Category Subcategory"
+          TopLeft="101,114" />
+        <NodeLayout
+          Size="258,42"
+          Id="Package\Truncate Staging"
+          TopLeft="101,44" />
+        <NodeLayout
+          Size="258,42"
+          Id="Package\Update D_Category"
+          TopLeft="101,245" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="230,86">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,28"
+              Start="0,0"
+              End="0,20.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="230,156">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,26"
+              Start="0,0"
+              End="0,18.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="101,203">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,63"
+              Start="0,0"
+              End="-7.5,63">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-18.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-18.5,0"
+                    Point2="-22.5,0"
+                    Point3="-22.5,4" />
+                  <mssgle:LineSegment
+                    End="-22.5,59" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-22.5,59"
+                    Point2="-22.5,63"
+                    Point3="-18.5,63" />
+                  <mssgle:LineSegment
+                    End="-7.5,63" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="229.5,287">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,24"
+              Start="0,0"
+              End="0,16.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Load Category Subcategory Dimension">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="146,42"
+          Id="Package\Load Category Subcategory Dimension\S_D_Category"
+          TopLeft="103,49" />
+        <NodeLayout
+          Size="142,42"
+          Id="Package\Load Category Subcategory Dimension\Lookup"
+          TopLeft="107,118" />
+        <EdgeLayout
+          Id="Package\Load Category Subcategory Dimension.Paths[OLE DB Source Output]"
+          TopLeft="177,91">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,27"
+              Start="0,0"
+              End="0,19.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="134,42"
+          Id="Package\Load Category Subcategory Dimension\D_Category"
+          TopLeft="111,196" />
+        <EdgeLayout
+          Id="Package\Load Category Subcategory Dimension.Paths[Lookup No Match Output]"
+          TopLeft="178,160">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,36"
+              Start="0,0"
+              End="0,28.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-55.80638671875,8.4453125,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="185,42"
+          Id="Package\Load Category Subcategory Dimension\S_D_Category_Update"
+          TopLeft="405,115" />
+        <EdgeLayout
+          Id="Package\Load Category Subcategory Dimension.Paths[Lookup Match Output]"
+          TopLeft="249,137.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="156,0"
+              Start="0,0"
+              End="148.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="148.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="26.05861328125,5,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Category Subcategory Dimension\Lookup">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Category Subcategory Dimension\S_D_Category_Update">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Category Subcategory Dimension\S_D_Category">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Category Subcategory Dimension\D_Category">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Stage Category Subcategory">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="248,42"
+          Id="Package\Stage Category Subcategory\StarsConnect Category Subcategory"
+          TopLeft="149,66" />
+        <NodeLayout
+          Size="146,42"
+          Id="Package\Stage Category Subcategory\S_D_Category"
+          TopLeft="191,142" />
+        <EdgeLayout
+          Id="Package\Stage Category Subcategory.Paths[OLE DB Source Output]"
+          TopLeft="273,108">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-9,34"
+              Start="0,0"
+              End="-9,26.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,13" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,13"
+                    Point2="0,17"
+                    Point3="-4,17" />
+                  <mssgle:LineSegment
+                    End="-5,17" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-5,17"
+                    Point2="-9,17"
+                    Point3="-9,21" />
+                  <mssgle:LineSegment
+                    End="-9,26.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Stage Category Subcategory\StarsConnect Category Subcategory">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Stage Category Subcategory\S_D_Category">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

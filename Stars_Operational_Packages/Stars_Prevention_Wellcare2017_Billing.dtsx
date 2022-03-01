@@ -1,0 +1,373 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="1/16/2018 4:06:12 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="LT-5M69L32-0133"
+  DTS:CreatorName="PHARMMD\bill.shoap2"
+  DTS:DTSID="{4DE7281D-2F71-49C8-9A6B-DD390FDD4EE1}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="12.0.5000.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Stars_Prevention_Wellcare2017_Billing"
+  DTS:PackageType="5"
+  DTS:VersionBuild="11"
+  DTS:VersionGUID="{C66436E1-BE97-4DD4-98D4-F1DF268F4418}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Step 0 Stage Client Config"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{39D8093D-0026-4643-A344-7DF1582460A0}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Step 0 Stage Client Config"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{4CE44E7F-4048-4669-8B7B-76E808B7ED38}"
+          SQLTask:SqlStatementSource="--Step 0&#xA;&#xA;&#xA;DECLARE @PMD_Client_ID INT = 74&#xA;DECLARE @RunYear INT = 2017&#xA;&#xA;If Object_Id ('Stars_Billing.staging.Wellcare2017_ClientMeasures') is not null &#xA;Drop Table &#x9;Stars_Billing.staging.Wellcare2017_ClientMeasures&#xA;&#xA;CREATE TABLE Stars_Billing.staging.Wellcare2017_ClientMeasures(&#xA;&#x9;[PlanIdentifier_PClm] [varchar](10) NULL,&#xA;&#x9;[MeasureUse] [varchar](50) NULL&#xA;) ON [PRIMARY]&#xA;&#xA;&#xA;Insert INTO Stars_Billing.staging.Wellcare2017_ClientMeasures&#xA;SELECT PlanIdentifier_PClm, 'RAS'  as MeasureUse  &#xA;  FROM [Stars_Billing].[dbo].[billing_config] where PMD_Client_ID =@PMD_Client_ID AND ras =1&#xA;AND RunYear = @RunYear  &#xA;  &#xA;Insert INTO Stars_Billing.staging.Wellcare2017_ClientMeasures&#xA;SELECT PlanIdentifier_PClm, 'Diabetes' AS MeasureUse&#xA;  FROM [Stars_Billing].[dbo].[billing_config] where PMD_Client_ID =@PMD_Client_ID AND Diabetes = 1&#xA;AND RunYear = @RunYear  &#xA;  &#xA;Insert INTO Stars_Billing.staging.Wellcare2017_ClientMeasures&#xA;SELECT PlanIdentifier_PClm,'Statin' as MeasureUse&#xA;  FROM [Stars_Billing].[dbo].[billing_config] where PMD_Client_ID =@PMD_Client_ID AND statin = 1&#xA;AND RunYear = @RunYear  &#xA;  &#xA;Insert INTO Stars_Billing.staging.Wellcare2017_ClientMeasures&#xA;SELECT PlanIdentifier_PClm,'DTM' as MeasureUse&#xA;  FROM [Stars_Billing].[dbo].[billing_config] where PMD_Client_ID =@PMD_Client_ID AND dtm = 1&#xA;AND RunYear = @RunYear  &#xA;&#xA;Insert INTO Stars_Billing.staging.Wellcare2017_ClientMeasures&#xA;SELECT PlanIdentifier_PClm, 'HRM' as MeasureUse&#xA;  FROM [Stars_Billing].[dbo].[billing_config] where PMD_Client_ID =@PMD_Client_ID AND hrm = 1&#xA;AND RunYear = @RunYear  &#xA;&#xA;Insert INTO Stars_Billing.staging.Wellcare2017_ClientMeasures&#xA;SELECT PlanIdentifier_PClm, 'Insulin' as MeasureUse&#xA;  FROM [Stars_Billing].[dbo].[billing_config] where PMD_Client_ID =@PMD_Client_ID AND Insulin = 1&#xA;AND RunYear = @RunYear  &#xA;&#xA;Insert INTO Stars_Billing.staging.Wellcare2017_ClientMeasures&#xA;SELECT PlanIdentifier_PClm, 'Asthma' as MeasureUse&#xA;  FROM [Stars_Billing].[dbo].[billing_config] where PMD_Client_ID =@PMD_Client_ID AND Asthma = 1&#xA;AND RunYear = @RunYear  &#xA;&#xA;Insert INTO Stars_Billing.staging.Wellcare2017_ClientMeasures&#xA;SELECT PlanIdentifier_PClm, 'DTS' as MeasureUse&#xA;  FROM [Stars_Billing].[dbo].[billing_config] where PMD_Client_ID =@PMD_Client_ID AND DTS = 1&#xA;AND RunYear = @RunYear  " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Step 1 Stage Min PDC"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{D6940A79-42F7-49DD-908A-83F164FA83A3}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Step 1 Stage Min PDC"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{4CE44E7F-4048-4669-8B7B-76E808B7ED38}"
+          SQLTask:SqlStatementSource="--Step 1&#xA;&#xA;DECLARE @Pmd_Client_ID INT = 74&#xA;DECLARE @RunYear INT = 2017&#xA;&#xA;&#xA;IF @RunYear &lt;&gt; year(GETDATE()) &#xA;&#xA;BEGIN&#xA;If Object_Id ('[Stars_Billing].[staging].[Wellcare2017_billing_pdc_min]') is not null &#xA;Drop Table &#x9;[Stars_Billing].[staging].[Wellcare2017_billing_pdc_min]&#xA;&#xA;SELECT   p.Patient_ID AS PatientID&#xA;&#x9;&#x9;,cast(MeasureUse AS VARCHAR(14)) AS MeasureUse&#xA;&#x9;&#x9;,cast(mtc.PlanIdentifier_PClm as varchar(5)) as PlanIdentifier_PClm&#xA;&#x9;&#x9;,p.patient_unique_ident AS PMD_Patient_ID&#xA;&#x9;&#x9;,MIN(PDC_for_Month) MinPDC&#xA;&#x9;&#x9;,@RunYear as RunYear&#xA;INTO [Stars_Billing].[staging].[Wellcare2017_billing_pdc_min]&#xA;FROM Stars_Warehouse.dbo.ClientOutput_MemberMeasure mtc&#xA;&#x9;&#x9;INNER JOIN STARS_rdsm.dbo.Stars_Patients p&#xA;&#x9;&#x9;ON mtc.PMD_Patient_ID = p.Patient_Unique_Ident&#xA;&#xA;INNER JOIN (SELECT client_id, MAX(r.EvalRun_ID) AS maxevalrunid &#xA;&#x9;&#x9;&#x9;&#x9;FROM Stars.dbo.Stars_RunData r&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;WHERE runyear=@RunYear AND r.Run_Type = 'adherence'&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;GROUP BY r.Client_ID) evalsprioryear&#xA;&#x9;&#x9;ON evalsprioryear.maxevalrunid = mtc.EvalRun_ID&#xA;WHERE mtc.PMD_Client_ID = @Pmd_Client_ID&#xA;GROUP BY p.Patient_ID, p.Patient_Unique_Ident, MeasureUse, mtc.PlanIdentifier_PClm&#xA;&#xA;End" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Step 2 Stage Month Qualified Measure"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{1401C0AA-84E5-4885-8ECD-BBD2256F46B5}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Step 2 Stage Month Qualified Measure"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{4CE44E7F-4048-4669-8B7B-76E808B7ED38}"
+          SQLTask:SqlStatementSource="--Step 2&#xA;&#xA;DECLARE @PMD_Client_ID INT = 74&#xA;DECLARE @RunYear INT = 2017&#xA;&#xA;&#xA;&#xA;  &#xA;&#xA;IF @RunYear &lt; year(GETDATE()) &#xA;&#xA;BEGIN&#xA;&#xA;If Object_Id ('staging.Wellcare2017_billing_MonthFirstQualifiedMeasure_ADH') is not null &#xA;Drop Table &#x9;staging.Wellcare2017_billing_MonthFirstQualifiedMeasure_ADH&#xA;&#xA;SELECT a.[PMD_Patient_ID]&#xA;      ,a.[MeasureUse]&#xA;      ,a.[PlanIdentifier_PClm]&#xA;      ,@RunYear  AS MeasureYear&#xA;      ,MIN(a.[EvaluationMonth]) MonthFirstQualifiedMeasure&#xA;  &#xA;  INTO staging.Wellcare2017_billing_MonthFirstQualifiedMeasure_ADH&#xA;  FROM [Stars_Warehouse].[dbo].[ClientOutput_MemberMeasure] a &#xA;  &#xA;INNER JOIN (SELECT client_id, MAX(r.EvalRun_ID) AS maxevalrunid &#xA;&#x9;&#x9;&#x9;FROM Stars.dbo.Stars_RunData r&#x9;&#xA;&#x9;&#x9;&#x9;WHERE runyear=@RunYear AND r.Run_Type = 'adherence'&#x9;&#xA;&#x9;&#x9;&#x9;GROUP BY r.Client_ID) evalsprioryear&#xA;&#x9;ON evalsprioryear.maxevalrunid = a.EvalRun_ID&#xA;&#x9;AND evalsprioryear.Client_ID = @PMD_Client_ID&#x9; &#xA;  &#xA;  WHERE a.PMD_Client_ID = @PMD_Client_ID&#xA;  AND MeasureQualified =1 &#xA;  AND MeasureUse &lt;&gt; 'AntiRetroViral'  &#xA;  --AND MeasureADH_Status &lt;&gt; '6'&#xA;  AND MeasureQual_Status_EOY not in ('DisQual-InsulinFill','Not Qualified')&#xA;  &#xA;  GROUP BY  a.[PMD_Patient_ID],a.[MeasureUse], a.[PlanIdentifier_PClm]&#xA;&#xA;End" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Step 3 Stage ADH Calls"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{DCB837C9-904A-4361-B7AF-192AADF1BB18}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Step 3 Stage ADH Calls"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{4CE44E7F-4048-4669-8B7B-76E808B7ED38}"
+          SQLTask:SqlStatementSource="--Step 3&#xA;&#xA;--ADH Calls&#xA;DECLARE @PMD_Client_ID INT = 74&#xA;DECLARE @RunYear INT = 2017&#xA;&#xA;Declare @EvalRun_ID int = (SELECT MAX(r.EvalRun_ID) AS maxevalrunid &#xA;&#x9;&#x9;&#x9;FROM Stars.dbo.Stars_RunData r&#x9;&#xA;&#x9;&#x9;&#x9;WHERE runyear=@RunYear AND r.Run_Type = 'adherence'&#x9; and client_ID=@PMD_Client_ID and Run_Completed is not null&#xA;&#x9;&#x9;&#x9;GROUP BY r.Client_ID)&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;IF @RunYear &lt; year(GETDATE()) &#xA;&#xA;BEGIN&#xA;If Object_Id ('[Stars_Billing].[staging].[WellCare2017_billing_call_measure_output_ADH]') is not null &#xA;Drop Table &#x9;[Stars_Billing].[staging].[WellCare2017_billing_call_measure_output_ADH]&#xA;&#xA;&#xA;SELECT  m.PMD_Patient_ID&#xA;        ,[Member_ID] as Patient_ID&#xA; &#x9;&#x9;,[m].[PMD_Client_ID] &#x9;&#x9;       &#xA;        ,cast(t.PlanIdentifier_PClm as varchar(5)) as PlanIdentifier_PClm&#xA;        ,m.[MeasureUse]&#xA;&#x9;&#x9;,[MeasureNoteDate]&#xA;&#x9;&#x9;,YEAR([MeasureNoteDate]) AS MeasureYear&#xA;&#x9;&#x9;,Case&#x9;WHEN  t.PDC_For_Month &lt;.80 then '180' &#xA;&#x9;&#x9;&#x9;&#x9;WHEN t.PDC_For_Month &gt;= .80 and t.PDC_For_Month &lt; .95 then '8095'&#xA;&#x9;&#x9;&#x9;&#x9;WHEN  t.PDC_For_Month &gt;= .95  and  t.PDC_For_Month &lt; .98 then '9598'&#xA;&#x9;&#x9;&#x9;&#x9;WHEN t.PDC_For_Month &gt;=.98 then 98100&#xA;&#x9;&#x9;&#x9;END as PDC_Bucket&#x9;&#xA;&#x9;&#x9;,t.MeasureADH_Status&#xA;&#x9;&#x9;,pdcm.MinPDC as Min_PDC&#x9;&#xA;&#x9;&#x9;,t.PDC_For_Month &#x9;&#x9;&#xA;&#x9;&#x9;,m.Call_ID as StarsConnect_Call_ID&#xA;        ,q.MonthFirstQualifiedMeasure AS QM&#xA;&#x9;&#x9;,m.[Call_Type_Name] [Call_Type]&#xA;&#xA; INTO [Stars_Billing].[staging].[WellCare2017_billing_call_measure_output_ADH]   &#xA;&#xA;FROM [Stars_Call_Lists].[dbo].[DTP_StarConnect_Call_List] m with (NOLOCK)&#xA;  &#xA;--Join the ClientOutput_MemberMeasure record for the last month for the named year (to see patients numbers for December of that year) *************FIXED THIS TO POINT TO LAST MONTH THE PATIENT HAS, NOT DEC********************&#xA;INNER JOIN [Stars_Warehouse].[dbo].[ClientOutput_MemberMeasure] t with (NOLOCK)&#xA;&#x9;&#x9;ON m.PMD_Patient_ID = t.PMD_Patient_ID &#xA;&#x9;&#x9;AND m.PlanIdentifier_PClm = t.PlanIdentifier_PClm  &#xA;&#x9;&#x9;AND m.MeasureUse = t.MeasureUse &#xA;&#xA;INNER JOIN (SELECT pmd_patient_ID, MeasureUse, PlanIdentifier_PClm, MAX(evaluationmonth) AS EvaluationMonth FROM Stars_Warehouse.dbo.ClientOutput_MemberMeasure t&#xA;  &#x9;&#x9;&#x9;INNER JOIN (SELECT client_id, MAX(r.EvalRun_ID) AS maxevalrunid &#xA;&#x9;&#x9;&#x9;FROM Stars.dbo.Stars_RunData r&#x9; with (Nolock) &#xA;&#x9;&#x9;&#x9;WHERE runyear=@RunYear AND r.Run_Type = 'adherence'&#x9;&#xA;&#x9;&#x9;&#x9;GROUP BY r.Client_ID) evalsprioryear&#xA;&#x9;&#x9;&#x9;ON evalsprioryear.maxevalrunid = t.EvalRun_ID&#xA;&#x9;&#x9;&#x9;AND evalsprioryear.Client_ID = @PMD_Client_ID&#x9; &#xA;&#x9;&#x9;&#x9;GROUP BY PMD_Patient_ID, MeasureUse, PlanIdentifier_PClm&#xA;&#x9;&#x9;&#x9;) maxevalmonth&#xA;&#x9;&#x9;ON maxevalmonth.EvaluationMonth = t.EvaluationMonth  --The last month the patient has been evaluated for in ADH_StatusData&#xA;&#x9;&#x9;AND maxevalmonth.pmd_patient_id = t.PMD_Patient_ID&#xA;&#x9;&#x9;AND maxevalmonth.planidentifier_pclm = t.PlanIdentifier_PClm&#xA;&#x9;&#x9;AND maxevalmonth.measureuse = t.MeasureUse&#xA;&#xA; &#xA;&#xA;--Find the patients minimum PDC for the current year&#xA;INNER JOIN [Stars_Billing].[staging].[Wellcare2017_billing_pdc_min] pdcm with (Nolock) &#xA;&#x9;&#x9;ON pdcm.PMD_Patient_ID = t.PMD_Patient_ID &#xA;&#x9;&#x9;AND pdcm.PlanIdentifier_PClm = t.PlanIdentifier_PClm&#xA;&#x9;&#x9;AND pdcm.MeasureUse = t.MeasureUse                                 &#x9;&#x9; &#xA;        AND pdcm.RunYear = @RunYear&#x9;&#xA;         &#x9; &#xA;--Find the patients first month that they qualified for each measure      &#xA;INNER JOIN   Stars_Billing.staging.Wellcare2017_billing_MonthFirstQualifiedMeasure_ADH  q with (Nolock) &#xA;&#x9;ON pdcm.PMD_Patient_ID = q.PMD_Patient_ID&#xA;&#x9;AND pdcm.PlanIdentifier_PClm = q.PlanIdentifier_PClm&#xA;&#x9;AND pdcm.MeasureUse = q.MeasureUse&#xA;&#x9;AND q.MeasureYear = @RunYear&#xA;  &#xA;  WHERE m.dtp_visibilities_key='2018 Prevention'&#xA;  AND t.EvalRun_ID = @EvalRun_ID&#xA;  AND Year(m.MeasureNoteDate) = @RunYear --only calls for the specified year&#xA;--AND ISNULL(m.Call_Status_Detail_ID,-99) NOT IN (1,2,4,6,9,11,12,14,15,18,-99)  --1 and 18 added per billing mtg on 10/29/2015&#xA;--AND ISNULL(m.Sub_Category_ID,-99) NOT IN (12,7,-99)--eventually will be deprecated since we now have  status_detail that addresses these flags 10/29/2015&#x9;&#x9;&#xA;&#x9;&#x9;&#xA;AND ISNULL(m.Sub_Category_ID,-99) NOT IN  &#xA;(SELECT  [ClientConfigCode]&#xA;&#x9;FROM [Stars_Billing].[dbo].[Billing_Exceptions] with (Nolock) &#xA;&#x9;WHERE PMD_Client_ID = 999&#xA;&#x9;AND ClientConfigType = 'Sub_Category_ID'&#xA;&#x9;AND ClientConfigExceptionType = 'Exclude'&#xA;&#x9;AND MeasureType='ADH'&#xA;&#xA;&#x9;UNION SELECT -99 --once all NULLS are removed, this UNION statement can be removed.&#xA;)&#xA;&#xA;AND ISNULL(Call_Status_Detail_ID,-99) NOT IN &#xA;(SELECT  [ClientConfigCode]&#xA;&#x9;FROM [Stars_Billing].[dbo].[Billing_Exceptions] with (Nolock) &#xA;&#x9;WHERE PMD_Client_ID = 999&#xA;&#x9;AND ClientConfigType = 'Call_Status_Detail_ID'&#xA;&#x9;AND ClientConfigExceptionType = 'Exclude'&#xA;&#x9;AND MeasureType='ADH'&#xA;&#xA;&#x9;UNION SELECT -99 --once all NULLS are removed, this UNION statement can be removed.&#xA;)&#xA;&#x9;&#x9;&#xA;AND m.MeasureUse IN ('RAS', 'STATIN', 'DIABETES','Insulin','Asthma')&#xA;AND isnull(m.[Call_Type_ID],-99) not in (3,4,-99) -- Exclude 'Fax Update' and 'Administrative'&#xA;--AND m.[dtp_visibilities_key] not like '%Prevention%' -- Exclude Prevention calls Per Cyndi and Kelly M, comment out this line (WRS 1/2/2018)&#xA;--AND t.[MeasureADH_Status] &lt;&gt; 6 -- Guaranteed Non Adherent'&#xA;AND q.MonthFirstQualifiedMeasure &lt;= t.EvaluationMonth --Ensure that member initial qual month is less or equal to the eval month&#xA;AND q.MonthFirstQualifiedMeasure &lt;= Month(m.MeasureNoteDate) --Ensure that the member initial qual month less less or equal to the call month&#xA;--AND pdcm.MINPDC &lt; .950&#xA;&#xA;&#xA;END" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Step 4 Stage Transactions"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{338228EE-AE98-46A4-BEBA-43309D8439F3}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Step 4 Stage Transactions"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{4CE44E7F-4048-4669-8B7B-76E808B7ED38}"
+          SQLTask:SqlStatementSource="--Step 4&#xA;DECLARE @PMD_Client_ID INT = 74&#xA;DECLARE @RunYear INT = 2017&#xA;&#xA;If Object_Id ('[Stars_Billing].[staging].[Wellcare2017_billing_claims_transactions_ADH]') is not null &#xA;Drop Table &#x9;[Stars_Billing].[staging].[Wellcare2017_billing_claims_transactions_ADH]&#xA;&#xA;SELECT Transaction_ID, &#xA;       Product_Service_ID, &#xA;       Date_of_Service, &#xA;       co.PMD_Patient_ID, &#xA;       co.PMD_Client_ID, &#xA;       adh.MeasureUse, &#xA;       Cast(COALESCE([accountid2], [accountid]) AS VARCHAR(5)) AS &#xA;       PlanIdentifier_Pclm &#xA;&#xA;&#xA;INTO  [Stars_Billing].[staging].[Wellcare2017_billing_claims_transactions_ADH]&#xA;FROM   Stars.dbo.pclm_star s2 WITH (nolock) &#xA;       INNER JOIN (SELECT measureuse, LEFT(a.ndc, 9) AS ndc&#xA;&#x9;&#x9;&#x9;&#x9;    FROM   MediSpan.[dbo].[PQA_Medispan_ADH] a WITH (nolock)&#xA;                   WHERE  measureuse IN ( 'RAS', 'STATIN', 'DIABETES','Insulin','Asthma' ) &#xA;                   GROUP  BY measureuse, &#xA;                             LEFT(a.ndc, 9)) adh &#xA;               ON adh.ndc = LEFT(s2.product_service_id, 9) &#xA;       INNER JOIN (SELECT DISTINCT patient_id, &#xA;                                   pmd_patient_id, &#xA;                                   pmd_client_id, &#xA;                                   measureuse &#xA;                   FROM   [Stars_Billing].[staging].[WellCare2017_billing_call_measure_output_ADH]) &#xA;                  co &#xA;               ON co.patient_id = s2.patient_id &#xA;                  AND co.pmd_client_id = s2.pmd_client_id &#xA;                  AND co.measureuse = adh.measureuse &#xA;WHERE  s2.pmd_client_id = @PMD_Client_ID        &#xA;&#x9;   AND year(s2.Date_Of_Service) = @RunYear&#xA;       AND claimexccd IS NULL" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Step 5 Stage Attribution"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{C26FCBB5-2DE3-4614-B623-68D769DA8FEA}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Step 5 Stage Attribution"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{4CE44E7F-4048-4669-8B7B-76E808B7ED38}"
+          SQLTask:SqlStatementSource="--Step 5&#xA;&#xA;If Object_Id ('[Stars_Billing].[staging].Wellcare2017_billing_call_measure_output_claims_attribution_ADH ') is not null &#xA;Drop Table &#x9;[Stars_Billing].[staging].Wellcare2017_billing_call_measure_output_claims_attribution_ADH &#xA;&#xA;SELECT  &#xA;&#x9;COUNT(t.transaction_id) as Claims_Attributed&#xA;&#x9;,MIN(t.transaction_id) AS Transaction_id&#xA;&#x9;,co.[Patient_ID]&#xA;&#x9;,co.[PMD_Patient_ID]&#xA;&#x9;,co.[PMD_Client_ID]&#xA;&#x9;,co.[PlanIdentifier_PClm]&#xA;&#x9;,co.[QM]&#xA;&#x9;,co.[MeasureNoteDate]&#xA;&#x9;,co.[PDC_Bucket]&#xA;&#x9;,co.[MeasureADH_Status]&#xA;&#x9;,co.[Min_PDC]&#xA;&#x9;,co.[PDC_For_Month]&#xA;&#x9;,co.[MeasureUse]&#xA;&#x9;,co.[StarsConnect_Call_ID]    &#xA;&#x9;,co.[Call_Type]&#xA;INTO [Stars_Billing].[staging].Wellcare2017_billing_call_measure_output_claims_attribution_ADH  &#xA;FROM [Stars_Billing].[staging].[Wellcare2017_billing_call_measure_output_ADH] co with (NOLOCK)&#xA;INNER JOIN [Stars_Billing].staging.Wellcare2017_billing_claims_transactions_ADH t with (NOLOCK)&#xA;&#x9;ON t.PMD_Patient_ID = co.PMD_Patient_ID&#xA;&#x9;AND t.MeasureUse = co.MeasureUse &#xA;&#x9;AND t.PlanIdentifier_PClm = co.PlanIdentifier_PClm&#xA;&#x9;AND cast(t.date_of_service as date) &gt;= co.MeasureNoteDate &#xA;&#x9;AND cast(t.date_of_service as date) &lt; cast(coalesce((Select MIN(measurenotedate) from [Stars_Billing].staging.Wellcare2017_billing_call_measure_output_ADH with (NOLOCK)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;  where MeasureNoteDate &gt; co.MeasureNoteDate and PMD_Patient_ID = co.PMD_Patient_ID and measureuse=co.measureuse),getdate()) as date)&#xA;&#x9;AND Year(t.date_of_service) = Year(co.MeasureNoteDate)&#xA;&#x9;--Only bill for calls that have date_of_service within 30 days of call&#xA;&#x9;AND DATEDIFF(d,co.measurenotedate, t.Date_of_Service) &lt;= 30&#xA;&#xA;GROUP BY &#xA;&#x9;co.[Patient_ID]&#xA;&#x9;,co.[PMD_Patient_ID]&#xA;&#x9;,co.[PMD_Client_ID]&#xA;&#x9;,co.[PlanIdentifier_PClm]&#xA;&#x9;,co.[QM]&#xA;&#x9;,co.[MeasureNoteDate]&#xA;&#x9;,co.[PDC_Bucket]&#xA;&#x9;,co.[MeasureADH_Status]&#xA;&#x9;,co.[Min_PDC]&#xA;&#x9;,co.[PDC_For_Month]&#xA;&#x9;,co.[MeasureUse]&#xA;&#x9;,co.[StarsConnect_Call_ID]&#xA;&#x9;,co.[Call_Type]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Step 6 Final Bill"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{C2ACA604-8E20-4D2E-ADD2-1731A0F72CAE}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Step 6 Final Bill"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{4CE44E7F-4048-4669-8B7B-76E808B7ED38}"
+          SQLTask:SqlStatementSource="--Step 6&#xA;&#xA;Declare @RunYear int = 2017&#xA;&#xA;If Object_Id ('Stars_Billing.dbo.Wellcare2017_Billing') is not null &#xA;Drop Table &#x9;Stars_Billing.dbo.Wellcare2017_Billing&#xA;&#xA;SELECT DISTINCT&#xA;&#xA;&#x9;   ca.[Claims_Attributed]&#xA;&#x9;  ,ca.Transaction_ID&#xA;      ,ca.[Patient_ID]&#xA;      ,ca.PMD_Patient_ID&#xA;      ,ca.PlanIdentifier_PClm&#xA;      ,ca.[MeasureNoteDate]&#xA;,ca.[QM]&#xA;      ,YEAR(ca.MeasureNoteDate) as Billing_Year&#xA;      ,ca.[PDC_Bucket]&#xA;      ,ca.[MeasureADH_Status]&#xA;      ,ca.PMD_Client_ID&#xA;&#x9;  ,ca.[Min_PDC]&#xA;      ,ca.[PDC_For_Month]&#xA;      ,ca.[MeasureUse]&#xA;      ,bc.RatePerHead&#xA;      ,ca.StarsConnect_Call_ID      &#xA;     ,ca.Call_Type&#xA;  INTO Stars_Billing.dbo.Wellcare2017_Billing  &#xA;  FROM [Stars_Billing].[staging].[Wellcare2017_billing_call_measure_output_claims_attribution_ADH] ca with (NOLOCK)&#xA;  &#xA;   INNER JOIN (Select * from dbo.Billing_Config with (NOLOCK)) bc &#xA;   ON bc.PMD_Client_ID = ca.PMD_Client_ID&#xA;   AND bc.PlanIdentifier_PClm = ca.PlanIdentifier_PClm&#xA;   AND year(ca.MeasureNoteDate) = bc.RunYear&#xA;     &#xA;  &#xA;  --Pick the later MeasureNoteDate&#xA;  INNER JOIN (Select Max(MeasureNoteDate) as MaxMeasureNoteDate, PMD_Patient_ID,  MeasureUse, PlanIdentifier_PClm    &#xA;&#x9;&#x9;&#x9;&#x9;FROM [Stars_Billing].[staging].[Wellcare2017_billing_call_measure_output_claims_attribution_ADH] ca with (NOLOCK)&#xA;&#x9;&#x9;&#x9;&#x9;WHERE Claims_Attributed &gt; 0 &#xA;&#x9;&#x9;&#x9;  GROUP by PMD_Patient_ID, MeasureUse, PlanIdentifier_PClm) mb&#xA;&#x9;  ON mb.MaxMeasureNoteDate = cast(ca.MeasureNoteDate as date)&#xA;&#x9;  AND mb.PMD_Patient_ID = ca.PMD_Patient_ID&#xA;&#x9;  AND mb.MeasureUse=ca.MeasureUse&#xA;&#x9;  AND mb.PlanIdentifier_PClm=ca.PlanIdentifier_PClm&#xA;&#x9;  &#xA; --Pick max StarsConnect_Call_ID.  About 5 pct of time, the PES calls and leaves message, and then the patient calls back. Usually, &#xA; --the second call is the completed call. &#xA; INNER JOIN (SELECT MAX(StarsConnect_Call_ID) AS MaxCallID, PMD_Patient_ID, MeasureUse, PlanIdentifier_PClm&#xA;&#x9;&#x9;&#x9;&#x9;FROM [Stars_Billing].[staging].[Wellcare2017_billing_call_measure_output_claims_attribution_ADH] ca with (NOLOCK)&#xA;&#x9;&#x9;&#x9;&#x9;GROUP BY PMD_Patient_ID, MeasureUse, PlanIdentifier_PClm) maxcall&#xA;&#x9;  ON maxcall.MaxCallID = ca.StarsConnect_Call_ID&#xA;&#x9;  AND maxcall.PMD_Patient_ID = ca.PMD_Patient_ID&#xA;&#x9;  AND maxcall.MeasureUse = ca.MeasureUSE&#xA;&#x9;  AND maxcall.PlanIdentifier_PClm = ca.PlanIdentifier_PClm&#x9;&#xA; &#xA; INNER JOIN Stars_Billing.staging.Wellcare2017_ClientMeasures scm with (NOLOCK)&#xA;&#x9; ON scm.MeasureUse = ca.MeasureUse&#xA;&#x9; AND scm.PlanIdentifier_PClm=ca.PlanIdentifier_PClm&#xA;&#xA;WHERE  ca.measurenotedate &lt; [dbo].[Billing_Holdback_Date] (bc.curr_mo_val,@RunYear)&#xA;and ca.[MeasureADH_Status] = 6 --make sure they are still burned&#xA;&#x9;   --AND ca.[PDC_For_Month] &gt;= Case when ca.[MeasureUse] = 'Asthma' then .75 else .80 end&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{2A261983-EB49-429B-914F-117F8468F795}"
+      DTS:From="Package\Step 0 Stage Client Config"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Step 1 Stage Min PDC" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{056BC364-0A46-4CF8-B20E-F78C8F3B95EC}"
+      DTS:From="Package\Step 1 Stage Min PDC"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Step 2 Stage Month Qualified Measure" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{DA7F57DC-4B35-414A-8F89-19B845C0FF18}"
+      DTS:From="Package\Step 2 Stage Month Qualified Measure"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Step 3 Stage ADH Calls" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{9B23DEBD-2EA4-4448-931C-41BA4BDC2808}"
+      DTS:From="Package\Step 3 Stage ADH Calls"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Step 4 Stage Transactions" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{455E69E5-12EE-4661-B711-5211F0037367}"
+      DTS:From="Package\Step 4 Stage Transactions"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\Step 5 Stage Attribution" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{98E29D91-ADBC-4D28-BF03-A22220971CA1}"
+      DTS:From="Package\Step 5 Stage Attribution"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\Step 6 Final Bill" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql12">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="209,42"
+          Id="Package\Step 0 Stage Client Config"
+          TopLeft="154,76" />
+        <NodeLayout
+          Size="209,42"
+          Id="Package\Step 1 Stage Min PDC"
+          TopLeft="154,148.5" />
+        <NodeLayout
+          Size="209,42"
+          Id="Package\Step 2 Stage Month Qualified Measure"
+          TopLeft="154,221" />
+        <NodeLayout
+          Size="209,42"
+          Id="Package\Step 3 Stage ADH Calls"
+          TopLeft="154,293.5" />
+        <NodeLayout
+          Size="209,42"
+          Id="Package\Step 4 Stage Transactions"
+          TopLeft="154,366" />
+        <NodeLayout
+          Size="209,42"
+          Id="Package\Step 5 Stage Attribution"
+          TopLeft="154,438.5" />
+        <NodeLayout
+          Size="208,42"
+          Id="Package\Step 6 Final Bill"
+          TopLeft="154,511" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="258.5,118">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,30.5"
+              Start="0,0"
+              End="0,23">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="258.5,190.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,30.5"
+              Start="0,0"
+              End="0,23">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="258.5,263">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,30.5"
+              Start="0,0"
+              End="0,23">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="258.5,335.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,30.5"
+              Start="0,0"
+              End="0,23">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="258.5,408">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,30.5"
+              Start="0,0"
+              End="0,23">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="258.25,480.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,30.5"
+              Start="0,0"
+              End="0,23">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="/****** For Final Output and see who was at one time non GNA previously bllled******/&#xD;&#xA;SELECT wb.[Claims_Attributed]&#xD;&#xA;      ,wb.[Transaction_ID]&#xD;&#xA;      ,wb.[Patient_ID]&#xD;&#xA;      ,wb.[PMD_Patient_ID]&#xD;&#xA;      ,wb.[PlanIdentifier_PClm]&#xD;&#xA;      ,wb.[MeasureNoteDate]&#xD;&#xA;      ,wb.[QM]&#xD;&#xA;      ,wb.[Billing_Year]&#xD;&#xA;      ,wb.[PDC_Bucket]&#xD;&#xA;      ,wb.[MeasureADH_Status]&#xD;&#xA;      ,wb.[PMD_Client_ID]&#xD;&#xA;      ,wb.[Min_PDC]&#xD;&#xA;      ,wb.[PDC_For_Month]&#xD;&#xA;      ,wb.[MeasureUse]&#xD;&#xA;      ,wb.[RatePerHead]&#xD;&#xA;      ,wb.[StarsConnect_Call_ID]&#xD;&#xA;      ,wb.[Call_Type]&#xD;&#xA;   ,Case when b.Billing_Id is not null then 1 else 0 end as PreviouslyBilledButBecameGNA&#xD;&#xA;   ,b.[MeasureNoteDate] as PreviouslyBilledMeasureNoteDate&#xD;&#xA;   ,b.[PDC_For_Month] as PreviouslyBilledPDC&#xD;&#xA;   ,b.[MeasureADH_Status_Today] as PreviouslyBilledMeasureADHStatus&#xD;&#xA;   ,b.[StarsConnect_Call_ID] as PreviouslyBilledCallID&#xD;&#xA;&#xD;&#xA;  FROM [Stars_Billing].[dbo].[Wellcare2017_Billing] wb&#xD;&#xA;  LEFT JOIN [Stars_Billing].[dbo].[Billing] b &#xD;&#xA;  ON b.Patient_Unique_Ident=wb.PMD_Patient_ID &#xD;&#xA;  and b.PlanIdentifier_PClm = wb.PlanIdentifier_PClm &#xD;&#xA;  and b.MeasureUse=wb.MeasureUse &#xD;&#xA;  and b.Billing_Year=2017&#xD;&#xA;&#xD;&#xA;  and wb.Billing_Year=2017&#xD;&#xA;"
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="492,551"
+          Id="655432ff-bd30-4d01-8128-d73a0e2edf1b"
+          TopLeft="624,178" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

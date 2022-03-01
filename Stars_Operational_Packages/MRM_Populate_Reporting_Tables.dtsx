@@ -1,0 +1,2052 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="1/27/2018 8:14:18 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="LT-354L162-0148"
+  DTS:CreatorName="PHARMMD\Suman.Narne"
+  DTS:DTSID="{370CE320-2FD8-4551-BA3E-BBE35D837B8C}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.1100.123"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="MRM_Populate_Reporting_Tables"
+  DTS:PackageType="5"
+  DTS:VersionBuild="48"
+  DTS:VersionGUID="{55AD3750-5E96-44C9-8307-49E6D6E5C210}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[P10prdSDE002.StarsConnect]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{F1A44B3C-0056-446A-8000-D58EE146C252}"
+      DTS:ObjectName="P10prdSDE002.StarsConnect">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">"Data Source="+ @[$Project::ServerOperationalDataStore] +";Initial Catalog=StarsConnect;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;"</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=P10DEVSDE002;Initial Catalog=StarsConnect;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[p10prdsde002.Stars_Billing]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{1F467D8E-7132-442D-A9C3-A1F933868CE8}"
+      DTS:ObjectName="p10prdsde002.Stars_Billing">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">"Data Source="+ @[$Project::ServerOperationalDataStore] +";Initial Catalog=Stars_Billing;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;"</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=P10DEVSDE002;Initial Catalog=Stars_Billing;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[SQLOPS.MRM_Reporting]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{52402809-22B8-426A-A09D-9A01467C9E77}"
+      DTS:ObjectName="SQLOPS.MRM_Reporting">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">"Data Source="+ @[$Project::ServerSQLOPS] +";Initial Catalog=MRM_Reporting;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;"</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=SQLOPSDEV\SQLOPSY;Initial Catalog=MRM_Reporting;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[SQLOPS.Populations]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{B9024E0D-F358-47E3-8A07-63557CE527A8}"
+      DTS:ObjectName="SQLOPS.Populations">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">"Data Source="+ @[$Project::ServerMTMOPS] +";Initial Catalog=Populations;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;"</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=SQLOPSDEV\SQLOPSX;Initial Catalog=Populations;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{72AF675F-5A63-40A3-9638-D9E2DBE13A80}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="getdate()"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="Create_Datetime">
+      <DTS:VariableValue
+        DTS:DataType="7">10/17/2019 9:25:42 AM</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\MRM_Intervention"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{81A1A65F-2289-430B-963A-97FB70C57A4C}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="MRM_Intervention"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\MRM_Intervention\Derived Column"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\MRM_Intervention\Derived Column.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\MRM_Intervention\Derived Column.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\MRM_Intervention\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\MRM_Intervention\Derived Column.Outputs[Derived Column Output].Columns[Create_Datetime]"
+                      dataType="date"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\MRM_Intervention\Derived Column.Outputs[Derived Column Output].Columns[Create_Datetime]"
+                      name="Create_Datetime"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">@[User::Create_Datetime]</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">@[User::Create_Datetime]</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\MRM_Intervention\Derived Column.Outputs[Derived Column Output].Columns[Update_Datetime]"
+                      dataType="date"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\MRM_Intervention\Derived Column.Outputs[Derived Column Output].Columns[Update_Datetime]"
+                      name="Update_Datetime"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">@[User::Create_Datetime]</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">@[User::Create_Datetime]</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\MRM_Intervention\Derived Column.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\MRM_Intervention\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\MRM_Intervention\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\MRM_Intervention\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\MRM_Intervention\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\MRM_Intervention\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\MRM_Intervention\MRM_Intervention"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="MRM_Intervention"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[MRM_Interventions]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\MRM_Intervention\MRM_Intervention.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[SQLOPS.MRM_Reporting]"
+                  connectionManagerRefId="Package.ConnectionManagers[SQLOPS.MRM_Reporting]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\MRM_Intervention\MRM_Intervention.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\MRM_Intervention\MRM_Intervention.Inputs[OLE DB Destination Input].Columns[ClientID]"
+                      cachedDataType="i4"
+                      cachedName="ClientID"
+                      externalMetadataColumnId="Package\MRM_Intervention\MRM_Intervention.Inputs[OLE DB Destination Input].ExternalColumns[ClientID]"
+                      lineageId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Output].Columns[ClientID]" />
+                    <inputColumn
+                      refId="Package\MRM_Intervention\MRM_Intervention.Inputs[OLE DB Destination Input].Columns[PMDPatientID]"
+                      cachedDataType="i8"
+                      cachedName="PMDPatientID"
+                      externalMetadataColumnId="Package\MRM_Intervention\MRM_Intervention.Inputs[OLE DB Destination Input].ExternalColumns[PMDPatientID]"
+                      lineageId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Output].Columns[PMDPatientID]" />
+                    <inputColumn
+                      refId="Package\MRM_Intervention\MRM_Intervention.Inputs[OLE DB Destination Input].Columns[CDEDTPID]"
+                      cachedDataType="i8"
+                      cachedName="CDEDTPID"
+                      externalMetadataColumnId="Package\MRM_Intervention\MRM_Intervention.Inputs[OLE DB Destination Input].ExternalColumns[CDEDTPID]"
+                      lineageId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Output].Columns[CDEDTPID]" />
+                    <inputColumn
+                      refId="Package\MRM_Intervention\MRM_Intervention.Inputs[OLE DB Destination Input].Columns[DTPDispositionDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="DTPDispositionDate"
+                      externalMetadataColumnId="Package\MRM_Intervention\MRM_Intervention.Inputs[OLE DB Destination Input].ExternalColumns[DTPDispositionDate]"
+                      lineageId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Output].Columns[DTPDispositionDate]" />
+                    <inputColumn
+                      refId="Package\MRM_Intervention\MRM_Intervention.Inputs[OLE DB Destination Input].Columns[ProviderNPI]"
+                      cachedDataType="wstr"
+                      cachedLength="25"
+                      cachedName="ProviderNPI"
+                      externalMetadataColumnId="Package\MRM_Intervention\MRM_Intervention.Inputs[OLE DB Destination Input].ExternalColumns[ProviderNPI]"
+                      lineageId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Output].Columns[ProviderNPI]" />
+                    <inputColumn
+                      refId="Package\MRM_Intervention\MRM_Intervention.Inputs[OLE DB Destination Input].Columns[ProviderPhoneNumb]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="ProviderPhoneNumb"
+                      externalMetadataColumnId="Package\MRM_Intervention\MRM_Intervention.Inputs[OLE DB Destination Input].ExternalColumns[ProviderPhoneNumb]"
+                      lineageId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Output].Columns[ProviderPhoneNumb]" />
+                    <inputColumn
+                      refId="Package\MRM_Intervention\MRM_Intervention.Inputs[OLE DB Destination Input].Columns[DTPDisposition]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="DTPDisposition"
+                      externalMetadataColumnId="Package\MRM_Intervention\MRM_Intervention.Inputs[OLE DB Destination Input].ExternalColumns[DTPDisposition]"
+                      lineageId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Output].Columns[DTPDisposition]" />
+                    <inputColumn
+                      refId="Package\MRM_Intervention\MRM_Intervention.Inputs[OLE DB Destination Input].Columns[UserLastName]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="UserLastName"
+                      externalMetadataColumnId="Package\MRM_Intervention\MRM_Intervention.Inputs[OLE DB Destination Input].ExternalColumns[UserLastName]"
+                      lineageId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Output].Columns[UserLastName]" />
+                    <inputColumn
+                      refId="Package\MRM_Intervention\MRM_Intervention.Inputs[OLE DB Destination Input].Columns[Create_Datetime]"
+                      cachedDataType="date"
+                      cachedName="Create_Datetime"
+                      externalMetadataColumnId="Package\MRM_Intervention\MRM_Intervention.Inputs[OLE DB Destination Input].ExternalColumns[Create_datetime]"
+                      lineageId="Package\MRM_Intervention\Derived Column.Outputs[Derived Column Output].Columns[Create_Datetime]" />
+                    <inputColumn
+                      refId="Package\MRM_Intervention\MRM_Intervention.Inputs[OLE DB Destination Input].Columns[Update_Datetime]"
+                      cachedDataType="date"
+                      cachedName="Update_Datetime"
+                      externalMetadataColumnId="Package\MRM_Intervention\MRM_Intervention.Inputs[OLE DB Destination Input].ExternalColumns[Update_datetime]"
+                      lineageId="Package\MRM_Intervention\Derived Column.Outputs[Derived Column Output].Columns[Update_Datetime]" />
+                    <inputColumn
+                      refId="Package\MRM_Intervention\MRM_Intervention.Inputs[OLE DB Destination Input].Columns[DTPCallDisposition]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="DTPCallDisposition"
+                      externalMetadataColumnId="Package\MRM_Intervention\MRM_Intervention.Inputs[OLE DB Destination Input].ExternalColumns[DTPCallDispostion]"
+                      lineageId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Output].Columns[DTPCallDisposition]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\MRM_Intervention\MRM_Intervention.Inputs[OLE DB Destination Input].ExternalColumns[MRM_InterventionID]"
+                      dataType="i4"
+                      name="MRM_InterventionID" />
+                    <externalMetadataColumn
+                      refId="Package\MRM_Intervention\MRM_Intervention.Inputs[OLE DB Destination Input].ExternalColumns[MRM_Unique_Ident]"
+                      dataType="guid"
+                      name="MRM_Unique_Ident" />
+                    <externalMetadataColumn
+                      refId="Package\MRM_Intervention\MRM_Intervention.Inputs[OLE DB Destination Input].ExternalColumns[ClientID]"
+                      dataType="i8"
+                      name="ClientID" />
+                    <externalMetadataColumn
+                      refId="Package\MRM_Intervention\MRM_Intervention.Inputs[OLE DB Destination Input].ExternalColumns[PMDPatientID]"
+                      dataType="i8"
+                      name="PMDPatientID" />
+                    <externalMetadataColumn
+                      refId="Package\MRM_Intervention\MRM_Intervention.Inputs[OLE DB Destination Input].ExternalColumns[PatientState]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="PatientState" />
+                    <externalMetadataColumn
+                      refId="Package\MRM_Intervention\MRM_Intervention.Inputs[OLE DB Destination Input].ExternalColumns[PatientZip]"
+                      codePage="1252"
+                      dataType="str"
+                      length="11"
+                      name="PatientZip" />
+                    <externalMetadataColumn
+                      refId="Package\MRM_Intervention\MRM_Intervention.Inputs[OLE DB Destination Input].ExternalColumns[CDEDTPID]"
+                      dataType="i4"
+                      name="CDEDTPID" />
+                    <externalMetadataColumn
+                      refId="Package\MRM_Intervention\MRM_Intervention.Inputs[OLE DB Destination Input].ExternalColumns[DTPDispositionDate]"
+                      dataType="dbTimeStamp"
+                      name="DTPDispositionDate" />
+                    <externalMetadataColumn
+                      refId="Package\MRM_Intervention\MRM_Intervention.Inputs[OLE DB Destination Input].ExternalColumns[DTPCallDispostion]"
+                      dataType="wstr"
+                      length="255"
+                      name="DTPCallDispostion" />
+                    <externalMetadataColumn
+                      refId="Package\MRM_Intervention\MRM_Intervention.Inputs[OLE DB Destination Input].ExternalColumns[ProviderNPI]"
+                      dataType="i4"
+                      name="ProviderNPI" />
+                    <externalMetadataColumn
+                      refId="Package\MRM_Intervention\MRM_Intervention.Inputs[OLE DB Destination Input].ExternalColumns[ProviderPhoneNumb]"
+                      dataType="wstr"
+                      length="15"
+                      name="ProviderPhoneNumb" />
+                    <externalMetadataColumn
+                      refId="Package\MRM_Intervention\MRM_Intervention.Inputs[OLE DB Destination Input].ExternalColumns[DTPDisposition]"
+                      dataType="wstr"
+                      length="199"
+                      name="DTPDisposition" />
+                    <externalMetadataColumn
+                      refId="Package\MRM_Intervention\MRM_Intervention.Inputs[OLE DB Destination Input].ExternalColumns[UserLastName]"
+                      dataType="wstr"
+                      length="100"
+                      name="UserLastName" />
+                    <externalMetadataColumn
+                      refId="Package\MRM_Intervention\MRM_Intervention.Inputs[OLE DB Destination Input].ExternalColumns[MRM_MonthlySavings]"
+                      dataType="numeric"
+                      name="MRM_MonthlySavings"
+                      precision="10"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\MRM_Intervention\MRM_Intervention.Inputs[OLE DB Destination Input].ExternalColumns[Update_datetime]"
+                      dataType="dbTimeStamp"
+                      name="Update_datetime" />
+                    <externalMetadataColumn
+                      refId="Package\MRM_Intervention\MRM_Intervention.Inputs[OLE DB Destination Input].ExternalColumns[Create_datetime]"
+                      dataType="dbTimeStamp"
+                      name="Create_datetime" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\MRM_Intervention\MRM_Intervention.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\MRM_Intervention\MRM_Intervention.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\MRM_Intervention\MRM_Intervention.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\MRM_Intervention\MRM_Intervention.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\MRM_Intervention\MRM_Intervention.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\MRM_Intervention\MRM_Intervention.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\MRM_Intervention\Star_Connect_source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Star_Connect_source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT DISTINCT
+  	 [ClientID]= d.pmd_client_id
+  	, [PMDPatientID]= d.pmd_patient_id
+ 	, [CDEDTPID]= cde_dtp_id
+  	, [DTPDispositionDate]=  CONVERT(DATETIME , SWITCHOFFSET(CONVERT(DATETIMEOFFSET , dd.created_at) , DATENAME(TzOffset , SYSDATETIMEOFFSET()))) 
+  	, [DTPCallDisposition]= sd.description 
+  	, [ProviderNPI]= p.npi 
+  	, [ProviderPhoneNumb]= ph.number
+  	, [DTPDisposition]= sc.name 
+  	, [UserLastName]= u.last_name 
+FROM
+StarsConnect.dbo.dtps d
+INNER JOIN StarsConnect.dbo.dtp_details dd 
+	ON d.id = dd.dtp_id
+INNER JOIN StarsConnect.dbo.call_dtps cd
+	ON d.id=cd.dtp_id
+INNER JOIN StarsConnect.dbo.calls c
+	 ON c.id = cd.call_id
+		AND c.product_line_id = 2
+		AND c.id=dd.call_id
+		AND c.user_id=dd.user_id
+INNER JOIN StarsConnect.dbo.providers p
+	 ON c.entity_id = p.id
+
+LEFT JOIN StarsConnect.dbo.phones ph 
+	ON ph.entity_id = p.id
+		AND ph.[primary] = 1
+		AND ph.entity_type = 'Provider'
+		AND ph.phone_type = 'phone'
+LEFT JOIN StarsConnect.dbo.sub_categories sc 
+	ON dd.sub_category_id = sc.id
+INNER JOIN StarsConnect.dbo.users u 
+	ON dd.user_id = u.id
+		AND c.user_id = u.id
+INNER JOIN StarsConnect.dbo.status_details sd
+	 ON c.status_detail_id=sd.id
+INNER JOIN StarsConnect.dbo.statuses ss
+	 ON c.status_id=ss.id
+		AND ss.product_line_id = 2
+WHERE 
+    d.product_line_id = 2
+	--AND d.pmd_client_id = 61
+	-----------AND d.pmd_client_id IN (SELECT Value FROM dbo.FnSplit(@ClientID,','))
+	AND  CAST(c.created_at AS DATE)&gt; '12/31/2016'</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\MRM_Intervention\Star_Connect_source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[P10prdSDE002.StarsConnect]"
+                  connectionManagerRefId="Package.ConnectionManagers[P10prdSDE002.StarsConnect]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Output].Columns[ClientID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Output].ExternalColumns[ClientID]"
+                      lineageId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Output].Columns[ClientID]"
+                      name="ClientID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Output].Columns[PMDPatientID]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Output].ExternalColumns[PMDPatientID]"
+                      lineageId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Output].Columns[PMDPatientID]"
+                      name="PMDPatientID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Output].Columns[CDEDTPID]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Output].ExternalColumns[CDEDTPID]"
+                      lineageId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Output].Columns[CDEDTPID]"
+                      name="CDEDTPID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Output].Columns[DTPDispositionDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Output].ExternalColumns[DTPDispositionDate]"
+                      lineageId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Output].Columns[DTPDispositionDate]"
+                      name="DTPDispositionDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Output].Columns[DTPCallDisposition]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Output].ExternalColumns[DTPCallDisposition]"
+                      length="255"
+                      lineageId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Output].Columns[DTPCallDisposition]"
+                      name="DTPCallDisposition"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Output].Columns[ProviderNPI]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Output].ExternalColumns[ProviderNPI]"
+                      length="25"
+                      lineageId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Output].Columns[ProviderNPI]"
+                      name="ProviderNPI"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Output].Columns[ProviderPhoneNumb]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Output].ExternalColumns[ProviderPhoneNumb]"
+                      length="15"
+                      lineageId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Output].Columns[ProviderPhoneNumb]"
+                      name="ProviderPhoneNumb"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Output].Columns[DTPDisposition]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Output].ExternalColumns[DTPDisposition]"
+                      length="100"
+                      lineageId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Output].Columns[DTPDisposition]"
+                      name="DTPDisposition"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Output].Columns[UserLastName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Output].ExternalColumns[UserLastName]"
+                      length="100"
+                      lineageId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Output].Columns[UserLastName]"
+                      name="UserLastName"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Output].ExternalColumns[ClientID]"
+                      dataType="i4"
+                      name="ClientID" />
+                    <externalMetadataColumn
+                      refId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Output].ExternalColumns[PMDPatientID]"
+                      dataType="i8"
+                      name="PMDPatientID" />
+                    <externalMetadataColumn
+                      refId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Output].ExternalColumns[CDEDTPID]"
+                      dataType="i8"
+                      name="CDEDTPID" />
+                    <externalMetadataColumn
+                      refId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Output].ExternalColumns[DTPDispositionDate]"
+                      dataType="dbTimeStamp"
+                      name="DTPDispositionDate" />
+                    <externalMetadataColumn
+                      refId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Output].ExternalColumns[DTPCallDisposition]"
+                      dataType="wstr"
+                      length="255"
+                      name="DTPCallDisposition" />
+                    <externalMetadataColumn
+                      refId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Output].ExternalColumns[ProviderNPI]"
+                      dataType="wstr"
+                      length="25"
+                      name="ProviderNPI" />
+                    <externalMetadataColumn
+                      refId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Output].ExternalColumns[ProviderPhoneNumb]"
+                      dataType="wstr"
+                      length="15"
+                      name="ProviderPhoneNumb" />
+                    <externalMetadataColumn
+                      refId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Output].ExternalColumns[DTPDisposition]"
+                      dataType="wstr"
+                      length="100"
+                      name="DTPDisposition" />
+                    <externalMetadataColumn
+                      refId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Output].ExternalColumns[UserLastName]"
+                      dataType="wstr"
+                      length="100"
+                      name="UserLastName" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Error Output].Columns[ClientID]"
+                      dataType="i4"
+                      lineageId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Error Output].Columns[ClientID]"
+                      name="ClientID" />
+                    <outputColumn
+                      refId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Error Output].Columns[PMDPatientID]"
+                      dataType="i8"
+                      lineageId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Error Output].Columns[PMDPatientID]"
+                      name="PMDPatientID" />
+                    <outputColumn
+                      refId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Error Output].Columns[CDEDTPID]"
+                      dataType="i8"
+                      lineageId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Error Output].Columns[CDEDTPID]"
+                      name="CDEDTPID" />
+                    <outputColumn
+                      refId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Error Output].Columns[DTPDispositionDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Error Output].Columns[DTPDispositionDate]"
+                      name="DTPDispositionDate" />
+                    <outputColumn
+                      refId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Error Output].Columns[DTPCallDisposition]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Error Output].Columns[DTPCallDisposition]"
+                      name="DTPCallDisposition" />
+                    <outputColumn
+                      refId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Error Output].Columns[ProviderNPI]"
+                      dataType="wstr"
+                      length="25"
+                      lineageId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Error Output].Columns[ProviderNPI]"
+                      name="ProviderNPI" />
+                    <outputColumn
+                      refId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Error Output].Columns[ProviderPhoneNumb]"
+                      dataType="wstr"
+                      length="15"
+                      lineageId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Error Output].Columns[ProviderPhoneNumb]"
+                      name="ProviderPhoneNumb" />
+                    <outputColumn
+                      refId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Error Output].Columns[DTPDisposition]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Error Output].Columns[DTPDisposition]"
+                      name="DTPDisposition" />
+                    <outputColumn
+                      refId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Error Output].Columns[UserLastName]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Error Output].Columns[UserLastName]"
+                      name="UserLastName" />
+                    <outputColumn
+                      refId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\MRM_Intervention.Paths[Derived Column Output]"
+              endId="Package\MRM_Intervention\MRM_Intervention.Inputs[OLE DB Destination Input]"
+              name="Derived Column Output"
+              startId="Package\MRM_Intervention\Derived Column.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\MRM_Intervention.Paths[OLE DB Source Output]"
+              endId="Package\MRM_Intervention\Derived Column.Inputs[Derived Column Input]"
+              name="OLE DB Source Output"
+              startId="Package\MRM_Intervention\Star_Connect_source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\MRM_ResolutionCalc"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{F10F9272-BEBC-4E67-980A-BD67132D4A3D}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="MRM_ResolutionCalc"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\MRM_ResolutionCalc\Derived Column"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\MRM_ResolutionCalc\Derived Column.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\MRM_ResolutionCalc\Derived Column.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\MRM_ResolutionCalc\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\MRM_ResolutionCalc\Derived Column.Outputs[Derived Column Output].Columns[Create_Datetime]"
+                      dataType="date"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\MRM_ResolutionCalc\Derived Column.Outputs[Derived Column Output].Columns[Create_Datetime]"
+                      name="Create_Datetime"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">@[User::Create_Datetime]</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">@[User::Create_Datetime]</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\MRM_ResolutionCalc\Derived Column.Outputs[Derived Column Output].Columns[Update_Datetime]"
+                      dataType="date"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\MRM_ResolutionCalc\Derived Column.Outputs[Derived Column Output].Columns[Update_Datetime]"
+                      name="Update_Datetime"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">@[User::Create_Datetime]</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">@[User::Create_Datetime]</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\MRM_ResolutionCalc\Derived Column.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\MRM_ResolutionCalc\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\MRM_ResolutionCalc\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\MRM_ResolutionCalc\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\MRM_ResolutionCalc\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\MRM_ResolutionCalc\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\MRM_ResolutionCalc\MRM_ResolutionCalc"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="MRM_ResolutionCalc"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[MRM_ResolutionCalc]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\MRM_ResolutionCalc\MRM_ResolutionCalc.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[SQLOPS.MRM_Reporting]"
+                  connectionManagerRefId="Package.ConnectionManagers[SQLOPS.MRM_Reporting]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\MRM_ResolutionCalc\MRM_ResolutionCalc.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\MRM_ResolutionCalc\MRM_ResolutionCalc.Inputs[OLE DB Destination Input].Columns[cdeDTPID]"
+                      cachedDataType="i4"
+                      cachedName="cdeDTPID"
+                      externalMetadataColumnId="Package\MRM_ResolutionCalc\MRM_ResolutionCalc.Inputs[OLE DB Destination Input].ExternalColumns[CDEDTPID]"
+                      lineageId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Output].Columns[cdeDTPID]" />
+                    <inputColumn
+                      refId="Package\MRM_ResolutionCalc\MRM_ResolutionCalc.Inputs[OLE DB Destination Input].Columns[PMDClientID]"
+                      cachedDataType="i4"
+                      cachedName="PMDClientID"
+                      externalMetadataColumnId="Package\MRM_ResolutionCalc\MRM_ResolutionCalc.Inputs[OLE DB Destination Input].ExternalColumns[PMDClientID]"
+                      lineageId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Output].Columns[PMDClientID]" />
+                    <inputColumn
+                      refId="Package\MRM_ResolutionCalc\MRM_ResolutionCalc.Inputs[OLE DB Destination Input].Columns[PMDPatientID]"
+                      cachedDataType="i8"
+                      cachedName="PMDPatientID"
+                      externalMetadataColumnId="Package\MRM_ResolutionCalc\MRM_ResolutionCalc.Inputs[OLE DB Destination Input].ExternalColumns[PMDPatientID]"
+                      lineageId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Output].Columns[PMDPatientID]" />
+                    <inputColumn
+                      refId="Package\MRM_ResolutionCalc\MRM_ResolutionCalc.Inputs[OLE DB Destination Input].Columns[ResInterventionDate]"
+                      cachedDataType="dbDate"
+                      cachedName="ResInterventionDate"
+                      externalMetadataColumnId="Package\MRM_ResolutionCalc\MRM_ResolutionCalc.Inputs[OLE DB Destination Input].ExternalColumns[ResInterventionDate]"
+                      lineageId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Output].Columns[ResInterventionDate]" />
+                    <inputColumn
+                      refId="Package\MRM_ResolutionCalc\MRM_ResolutionCalc.Inputs[OLE DB Destination Input].Columns[ResInterventionType]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="ResInterventionType"
+                      externalMetadataColumnId="Package\MRM_ResolutionCalc\MRM_ResolutionCalc.Inputs[OLE DB Destination Input].ExternalColumns[ResInterventionType]"
+                      lineageId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Output].Columns[ResInterventionType]" />
+                    <inputColumn
+                      refId="Package\MRM_ResolutionCalc\MRM_ResolutionCalc.Inputs[OLE DB Destination Input].Columns[ResChangeDate]"
+                      cachedDataType="dbDate"
+                      cachedName="ResChangeDate"
+                      externalMetadataColumnId="Package\MRM_ResolutionCalc\MRM_ResolutionCalc.Inputs[OLE DB Destination Input].ExternalColumns[ResChangeDate]"
+                      lineageId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Output].Columns[ResChangeDate]" />
+                    <inputColumn
+                      refId="Package\MRM_ResolutionCalc\MRM_ResolutionCalc.Inputs[OLE DB Destination Input].Columns[ResDaysTime]"
+                      cachedDataType="i4"
+                      cachedName="ResDaysTime"
+                      externalMetadataColumnId="Package\MRM_ResolutionCalc\MRM_ResolutionCalc.Inputs[OLE DB Destination Input].ExternalColumns[ResDaysTime]"
+                      lineageId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Output].Columns[ResDaysTime]" />
+                    <inputColumn
+                      refId="Package\MRM_ResolutionCalc\MRM_ResolutionCalc.Inputs[OLE DB Destination Input].Columns[ResBilledDate]"
+                      cachedDataType="dbDate"
+                      cachedName="ResBilledDate"
+                      externalMetadataColumnId="Package\MRM_ResolutionCalc\MRM_ResolutionCalc.Inputs[OLE DB Destination Input].ExternalColumns[ResBilledDate]"
+                      lineageId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Output].Columns[ResBilledDate]" />
+                    <inputColumn
+                      refId="Package\MRM_ResolutionCalc\MRM_ResolutionCalc.Inputs[OLE DB Destination Input].Columns[ResBillingID]"
+                      cachedDataType="i8"
+                      cachedName="ResBillingID"
+                      externalMetadataColumnId="Package\MRM_ResolutionCalc\MRM_ResolutionCalc.Inputs[OLE DB Destination Input].ExternalColumns[ResBillingID]"
+                      lineageId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Output].Columns[ResBillingID]" />
+                    <inputColumn
+                      refId="Package\MRM_ResolutionCalc\MRM_ResolutionCalc.Inputs[OLE DB Destination Input].Columns[Create_Datetime]"
+                      cachedDataType="date"
+                      cachedName="Create_Datetime"
+                      externalMetadataColumnId="Package\MRM_ResolutionCalc\MRM_ResolutionCalc.Inputs[OLE DB Destination Input].ExternalColumns[Create_Datetime]"
+                      lineageId="Package\MRM_ResolutionCalc\Derived Column.Outputs[Derived Column Output].Columns[Create_Datetime]" />
+                    <inputColumn
+                      refId="Package\MRM_ResolutionCalc\MRM_ResolutionCalc.Inputs[OLE DB Destination Input].Columns[Update_Datetime]"
+                      cachedDataType="date"
+                      cachedName="Update_Datetime"
+                      externalMetadataColumnId="Package\MRM_ResolutionCalc\MRM_ResolutionCalc.Inputs[OLE DB Destination Input].ExternalColumns[Update_Datetime]"
+                      lineageId="Package\MRM_ResolutionCalc\Derived Column.Outputs[Derived Column Output].Columns[Update_Datetime]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\MRM_ResolutionCalc\MRM_ResolutionCalc.Inputs[OLE DB Destination Input].ExternalColumns[CDEDTPID]"
+                      dataType="i8"
+                      name="CDEDTPID" />
+                    <externalMetadataColumn
+                      refId="Package\MRM_ResolutionCalc\MRM_ResolutionCalc.Inputs[OLE DB Destination Input].ExternalColumns[PMDClientID]"
+                      dataType="i4"
+                      name="PMDClientID" />
+                    <externalMetadataColumn
+                      refId="Package\MRM_ResolutionCalc\MRM_ResolutionCalc.Inputs[OLE DB Destination Input].ExternalColumns[PMDPatientID]"
+                      dataType="i8"
+                      name="PMDPatientID" />
+                    <externalMetadataColumn
+                      refId="Package\MRM_ResolutionCalc\MRM_ResolutionCalc.Inputs[OLE DB Destination Input].ExternalColumns[ResBehaviorChange]"
+                      codePage="1252"
+                      dataType="str"
+                      length="80"
+                      name="ResBehaviorChange" />
+                    <externalMetadataColumn
+                      refId="Package\MRM_ResolutionCalc\MRM_ResolutionCalc.Inputs[OLE DB Destination Input].ExternalColumns[ResChangeDate]"
+                      dataType="dbDate"
+                      name="ResChangeDate" />
+                    <externalMetadataColumn
+                      refId="Package\MRM_ResolutionCalc\MRM_ResolutionCalc.Inputs[OLE DB Destination Input].ExternalColumns[ResBilledDate]"
+                      dataType="dbDate"
+                      name="ResBilledDate" />
+                    <externalMetadataColumn
+                      refId="Package\MRM_ResolutionCalc\MRM_ResolutionCalc.Inputs[OLE DB Destination Input].ExternalColumns[ResBillingID]"
+                      dataType="i8"
+                      name="ResBillingID" />
+                    <externalMetadataColumn
+                      refId="Package\MRM_ResolutionCalc\MRM_ResolutionCalc.Inputs[OLE DB Destination Input].ExternalColumns[ResBilledRate]"
+                      dataType="numeric"
+                      name="ResBilledRate"
+                      precision="10"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\MRM_ResolutionCalc\MRM_ResolutionCalc.Inputs[OLE DB Destination Input].ExternalColumns[ResMonthlySavings]"
+                      dataType="numeric"
+                      name="ResMonthlySavings"
+                      precision="10"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\MRM_ResolutionCalc\MRM_ResolutionCalc.Inputs[OLE DB Destination Input].ExternalColumns[ResSavingsToDate]"
+                      dataType="numeric"
+                      name="ResSavingsToDate"
+                      precision="10"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\MRM_ResolutionCalc\MRM_ResolutionCalc.Inputs[OLE DB Destination Input].ExternalColumns[RuleLevelROI]"
+                      dataType="numeric"
+                      name="RuleLevelROI"
+                      precision="10"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\MRM_ResolutionCalc\MRM_ResolutionCalc.Inputs[OLE DB Destination Input].ExternalColumns[ResDaysTime]"
+                      dataType="i4"
+                      name="ResDaysTime" />
+                    <externalMetadataColumn
+                      refId="Package\MRM_ResolutionCalc\MRM_ResolutionCalc.Inputs[OLE DB Destination Input].ExternalColumns[ResInterventionDate]"
+                      dataType="dbDate"
+                      name="ResInterventionDate" />
+                    <externalMetadataColumn
+                      refId="Package\MRM_ResolutionCalc\MRM_ResolutionCalc.Inputs[OLE DB Destination Input].ExternalColumns[ResInterventionType]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="ResInterventionType" />
+                    <externalMetadataColumn
+                      refId="Package\MRM_ResolutionCalc\MRM_ResolutionCalc.Inputs[OLE DB Destination Input].ExternalColumns[ResProviderNPI]"
+                      dataType="i4"
+                      name="ResProviderNPI" />
+                    <externalMetadataColumn
+                      refId="Package\MRM_ResolutionCalc\MRM_ResolutionCalc.Inputs[OLE DB Destination Input].ExternalColumns[ResPMPY]"
+                      dataType="numeric"
+                      name="ResPMPY"
+                      precision="10"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\MRM_ResolutionCalc\MRM_ResolutionCalc.Inputs[OLE DB Destination Input].ExternalColumns[Create_Datetime]"
+                      dataType="dbTimeStamp"
+                      name="Create_Datetime" />
+                    <externalMetadataColumn
+                      refId="Package\MRM_ResolutionCalc\MRM_ResolutionCalc.Inputs[OLE DB Destination Input].ExternalColumns[Update_Datetime]"
+                      dataType="dbTimeStamp"
+                      name="Update_Datetime" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\MRM_ResolutionCalc\MRM_ResolutionCalc.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\MRM_ResolutionCalc\MRM_ResolutionCalc.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\MRM_ResolutionCalc\MRM_ResolutionCalc.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\MRM_ResolutionCalc\MRM_ResolutionCalc.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\MRM_ResolutionCalc\MRM_ResolutionCalc.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\MRM_ResolutionCalc\MRM_ResolutionCalc.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\MRM_ResolutionCalc\Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT 
+b.cdeDTPID
+, [PMDClientID]= b.PMD_Client_ID
+, [PMDPatientID]= b.PMD_Patient_ID
+, [ResInterventionDate]= b.InterventionDate
+, [ResInterventionType]= b.InterventionType
+, [ResChangeDate]= b.ResolutionDate
+, [ResDaysTime]= DATEDIFF(day, GETDATE(), b.ResolutionDate)               
+, [ResBilledDate]= b.BillDate
+, [ResBillingID] = b.Billing_ID 
+--, cr.MRMCaseRate
+-- ,  id.MRMMonthlySavings
+--  , [SavingsToDate]= id.MRMMonthlySavings * (DATEDIFF(day, GETDATE(), b.ResolutionDate) / 30  )
+-- , [RuleLevelROI]= ((id.MRMMonthlySavings * (DATEDIFF(day, GETDATE(), b.ResolutionDate) / 30  ))/cr.MRMCaseRate)
+FROM p10prdsde002.[Stars_Billing].[dbo].[MRM_Billing] b
+WHERE
+InterventionDate &gt; '2016-12-31'</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\MRM_ResolutionCalc\Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[p10prdsde002.Stars_Billing]"
+                  connectionManagerRefId="Package.ConnectionManagers[p10prdsde002.Stars_Billing]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Output].Columns[cdeDTPID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Output].ExternalColumns[cdeDTPID]"
+                      lineageId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Output].Columns[cdeDTPID]"
+                      name="cdeDTPID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Output].Columns[PMDClientID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Output].ExternalColumns[PMDClientID]"
+                      lineageId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Output].Columns[PMDClientID]"
+                      name="PMDClientID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Output].Columns[PMDPatientID]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Output].ExternalColumns[PMDPatientID]"
+                      lineageId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Output].Columns[PMDPatientID]"
+                      name="PMDPatientID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Output].Columns[ResInterventionDate]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Output].ExternalColumns[ResInterventionDate]"
+                      lineageId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Output].Columns[ResInterventionDate]"
+                      name="ResInterventionDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Output].Columns[ResInterventionType]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Output].ExternalColumns[ResInterventionType]"
+                      length="50"
+                      lineageId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Output].Columns[ResInterventionType]"
+                      name="ResInterventionType"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Output].Columns[ResChangeDate]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Output].ExternalColumns[ResChangeDate]"
+                      lineageId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Output].Columns[ResChangeDate]"
+                      name="ResChangeDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Output].Columns[ResDaysTime]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Output].ExternalColumns[ResDaysTime]"
+                      lineageId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Output].Columns[ResDaysTime]"
+                      name="ResDaysTime"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Output].Columns[ResBilledDate]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Output].ExternalColumns[ResBilledDate]"
+                      lineageId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Output].Columns[ResBilledDate]"
+                      name="ResBilledDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Output].Columns[ResBillingID]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Output].ExternalColumns[ResBillingID]"
+                      lineageId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Output].Columns[ResBillingID]"
+                      name="ResBillingID"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Output].ExternalColumns[cdeDTPID]"
+                      dataType="i4"
+                      name="cdeDTPID" />
+                    <externalMetadataColumn
+                      refId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Output].ExternalColumns[PMDClientID]"
+                      dataType="i4"
+                      name="PMDClientID" />
+                    <externalMetadataColumn
+                      refId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Output].ExternalColumns[PMDPatientID]"
+                      dataType="i8"
+                      name="PMDPatientID" />
+                    <externalMetadataColumn
+                      refId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Output].ExternalColumns[ResInterventionDate]"
+                      dataType="dbDate"
+                      name="ResInterventionDate" />
+                    <externalMetadataColumn
+                      refId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Output].ExternalColumns[ResInterventionType]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="ResInterventionType" />
+                    <externalMetadataColumn
+                      refId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Output].ExternalColumns[ResChangeDate]"
+                      dataType="dbDate"
+                      name="ResChangeDate" />
+                    <externalMetadataColumn
+                      refId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Output].ExternalColumns[ResDaysTime]"
+                      dataType="i4"
+                      name="ResDaysTime" />
+                    <externalMetadataColumn
+                      refId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Output].ExternalColumns[ResBilledDate]"
+                      dataType="dbDate"
+                      name="ResBilledDate" />
+                    <externalMetadataColumn
+                      refId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Output].ExternalColumns[ResBillingID]"
+                      dataType="i8"
+                      name="ResBillingID" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Error Output].Columns[cdeDTPID]"
+                      dataType="i4"
+                      lineageId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Error Output].Columns[cdeDTPID]"
+                      name="cdeDTPID" />
+                    <outputColumn
+                      refId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Error Output].Columns[PMDClientID]"
+                      dataType="i4"
+                      lineageId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Error Output].Columns[PMDClientID]"
+                      name="PMDClientID" />
+                    <outputColumn
+                      refId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Error Output].Columns[PMDPatientID]"
+                      dataType="i8"
+                      lineageId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Error Output].Columns[PMDPatientID]"
+                      name="PMDPatientID" />
+                    <outputColumn
+                      refId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Error Output].Columns[ResInterventionDate]"
+                      dataType="dbDate"
+                      lineageId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Error Output].Columns[ResInterventionDate]"
+                      name="ResInterventionDate" />
+                    <outputColumn
+                      refId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Error Output].Columns[ResInterventionType]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Error Output].Columns[ResInterventionType]"
+                      name="ResInterventionType" />
+                    <outputColumn
+                      refId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Error Output].Columns[ResChangeDate]"
+                      dataType="dbDate"
+                      lineageId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Error Output].Columns[ResChangeDate]"
+                      name="ResChangeDate" />
+                    <outputColumn
+                      refId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Error Output].Columns[ResDaysTime]"
+                      dataType="i4"
+                      lineageId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Error Output].Columns[ResDaysTime]"
+                      name="ResDaysTime" />
+                    <outputColumn
+                      refId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Error Output].Columns[ResBilledDate]"
+                      dataType="dbDate"
+                      lineageId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Error Output].Columns[ResBilledDate]"
+                      name="ResBilledDate" />
+                    <outputColumn
+                      refId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Error Output].Columns[ResBillingID]"
+                      dataType="i8"
+                      lineageId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Error Output].Columns[ResBillingID]"
+                      name="ResBillingID" />
+                    <outputColumn
+                      refId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\MRM_ResolutionCalc.Paths[Derived Column Output]"
+              endId="Package\MRM_ResolutionCalc\MRM_ResolutionCalc.Inputs[OLE DB Destination Input]"
+              name="Derived Column Output"
+              startId="Package\MRM_ResolutionCalc\Derived Column.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\MRM_ResolutionCalc.Paths[OLE DB Source Output]"
+              endId="Package\MRM_ResolutionCalc\Derived Column.Inputs[Derived Column Input]"
+              name="OLE DB Source Output"
+              startId="Package\MRM_ResolutionCalc\Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Populate_DTP_Identified_Date_Range"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{3D741284-8C2B-4B81-8323-5A9FE99C532A}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Populate_DTP_Identified_Date_Range"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{52402809-22B8-426A-A09D-9A01467C9E77}"
+          SQLTask:SqlStatementSource="Exec [dbo].[usp_DTP_Identified_No_Date_Range]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Populate_MRM_PatientDetails"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{B066BB9F-2FD1-400D-A2C7-3CDD0C53B21B}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Populate_MRM_PatientDetails"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{52402809-22B8-426A-A09D-9A01467C9E77}"
+          SQLTask:SqlStatementSource="Exec  [dbo].[usp_populate_MRM_PatientDetails]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Trucate MRM_PatientDetails"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{9CCA054E-3E7A-44CC-A705-DE65634F3261}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Trucate MRM_PatientDetails"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{52402809-22B8-426A-A09D-9A01467C9E77}"
+          SQLTask:SqlStatementSource="Truncate table [MRM_Reporting].[dbo].[MRM_PatientDetails]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate MRM_IDENTIFICATION"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{F254FECD-4F60-4C05-A57D-83EF8063CE50}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate MRM_IDENTIFICATION"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{52402809-22B8-426A-A09D-9A01467C9E77}"
+          SQLTask:SqlStatementSource="Truncate table [MRM_Reporting].[dbo].[MRM_IDENTIFICATION]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\TRUNCATE MRM_Interventions"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{08C50E3B-96FC-473C-B22D-495A51D86B04}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="TRUNCATE MRM_Interventions"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{52402809-22B8-426A-A09D-9A01467C9E77}"
+          SQLTask:SqlStatementSource="TRUNCATE table [MRM_Reporting].[dbo].[MRM_Interventions]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\TRUNCATE MRM_ResolutionCalc"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{ACD5FF78-544C-4792-8BBD-03698EECF160}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="TRUNCATE MRM_ResolutionCalc"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{52402809-22B8-426A-A09D-9A01467C9E77}"
+          SQLTask:SqlStatementSource=" TRUNCATE TABLE [MRM_Reporting].[dbo].[MRM_ResolutionCalc]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Update_lookup"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{00E8ACC3-19D4-460D-95A5-56FF705D66C1}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Update_lookup"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{52402809-22B8-426A-A09D-9A01467C9E77}"
+          SQLTask:SqlStatementSource="--Declare @Create_Datetime datetime&#xA;--@Create_Datetime=?&#xA;UPDATE  MI &#xA;SET MI.PatientState=PD.MRMCardholderState&#xA;,MI.PatientZip=PD.MRMCardholderZip&#xA;,MI.MRM_MonthlySavings=MID.MRMMonthlySavings&#xA;,MI.UPDATE_DATETIME=GETDATE()&#xA;&#x9;&#xA;FROM [MRM_Reporting].[dbo].[MRM_Interventions] MI&#xA;LEFT JOIN dbo.MRM_PatientDetails pd &#xA;ON pd.PMDPatientID=MI.pmdpatientid&#xA;&#xA;LEFT JOIN dbo.MRM_IDENTIFICATION mid&#xA;ON mid.CDEDTPID=MI.CDEDTPID&#xA;WHERE MI.CREATE_DATETIME=(select max(Create_Datetime) from [MRM_Reporting].[dbo].[MRM_Interventions])" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Update_Lookup"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{E91F9404-882F-4D5E-AA17-8C6B99A20A08}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Update_Lookup"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{52402809-22B8-426A-A09D-9A01467C9E77}"
+          SQLTask:SqlStatementSource="DECLARE @Current_date DATETIME &#xA;SET @Current_date=GETDATE()&#xA;UPDATE b &#xA;SET b.ResBilledRate=mc.MRMCaseRate,&#xA;b.ResMonthlySavings=id.MRMMonthlySavings,&#xA;b.ResProviderNPI=mi.ProviderNPI,&#xA;b.[ResPMPY]=mc.[MRM_PMPY]   &#x9;         &#xA;        -- , cr.MRMCaseRate&#xA;        --,  id.MRMMonthlySavings&#xA;        , b.ResSavingsToDate= id.MRMMonthlySavings * (DATEDIFF(day, GETDATE(), b.ResChangeDate) / 30  )&#xA;        , b.[RuleLevelROI]= ((id.MRMMonthlySavings * (DATEDIFF(day, GETDATE(), b.ResChangeDate) / 30  ))/mc.MRMCaseRate)&#xA;&#x9;&#x9;,b.update_datetime=@Current_date&#xA;FROM [MRM_Reporting].[dbo].[MRM_ResolutionCalc] b&#xA;                  &#xA;        LEFT JOIN SQLOPS.[MRM_Reporting].[dbo].[MRM_IDENTIFICATION] id  &#xA;&#x9;&#x9;&#x9;on b.CDEDTPID=id.CDEDTPID&#xA;&#x9;&#x9;LEFT JOIN [MRM_Reporting].[dbo].[MRM_Interventions] mi&#xA;&#x9;&#x9;ON b.PMDPatientID=mi.PMDPatientID&#xA;&#x9;&#x9;LEFT JOIN [MRM_Reporting].[dbo].[MRM_ClientCaseRates] mc                                                            &#xA;                        ON         b.cdeDTPID = id.CDEDTPID&#xA;                               &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;WHERE&#xA;b.create_datetime=(SELECT MAX(create_datetime) FROM [MRM_Reporting].[dbo].[MRM_ResolutionCalc]) " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{FEBB0D76-61B4-452E-B08A-9E2F5F5335FC}"
+      DTS:From="Package\Populate_MRM_PatientDetails"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Truncate MRM_IDENTIFICATION" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{703EDF21-5BF1-4D9A-A19A-1B30AC6E86ED}"
+      DTS:From="Package\MRM_Intervention"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Update_lookup" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{6AD7D0FB-C44F-4403-87FD-8A775E60F103}"
+      DTS:From="Package\Populate_DTP_Identified_Date_Range"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\TRUNCATE MRM_Interventions" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{7A5E1C57-941B-4460-A053-B8342A1730D0}"
+      DTS:From="Package\MRM_ResolutionCalc"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Update_Lookup" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{0E1E886A-D072-46B9-80BA-787AE7E913D3}"
+      DTS:From="Package\Update_lookup"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\TRUNCATE MRM_ResolutionCalc" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{9F420649-3D98-4458-94DC-BA02ADD4DFEE}"
+      DTS:From="Package\Trucate MRM_PatientDetails"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\Populate_MRM_PatientDetails" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 6]"
+      DTS:CreationName=""
+      DTS:DTSID="{16AC9356-A8A8-4689-A212-C230A7705BE0}"
+      DTS:From="Package\Truncate MRM_IDENTIFICATION"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 6"
+      DTS:To="Package\Populate_DTP_Identified_Date_Range" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 7]"
+      DTS:CreationName=""
+      DTS:DTSID="{5E325D74-EFF6-4C42-A3DE-8E17F2FA445A}"
+      DTS:From="Package\TRUNCATE MRM_Interventions"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 7"
+      DTS:To="Package\MRM_Intervention" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 8]"
+      DTS:CreationName=""
+      DTS:DTSID="{341AC658-09C7-4F68-8D04-9439F7DD24AA}"
+      DTS:From="Package\TRUNCATE MRM_ResolutionCalc"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 8"
+      DTS:To="Package\MRM_ResolutionCalc" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql12">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="235,41"
+          Id="Package\MRM_Intervention"
+          TopLeft="414.714290375612,320.996078071976" />
+        <NodeLayout
+          Size="235,41"
+          Id="Package\MRM_ResolutionCalc"
+          TopLeft="414.714290375612,108.943137416011" />
+        <NodeLayout
+          Size="235,41"
+          Id="Package\Populate_DTP_Identified_Date_Range"
+          TopLeft="141.57142858116,250.311764519987" />
+        <NodeLayout
+          Size="235,41"
+          Id="Package\Populate_MRM_PatientDetails"
+          TopLeft="141,108.943137416011" />
+        <NodeLayout
+          Size="235,41"
+          Id="Package\Trucate MRM_PatientDetails"
+          TopLeft="139.85714283768,38.2588238640228" />
+        <NodeLayout
+          Size="235,41"
+          Id="Package\Truncate MRM_IDENTIFICATION"
+          TopLeft="141,179.627450967999" />
+        <NodeLayout
+          Size="235,41"
+          Id="Package\TRUNCATE MRM_Interventions"
+          TopLeft="141.57142858116,320.996078071976" />
+        <NodeLayout
+          Size="235,41"
+          Id="Package\TRUNCATE MRM_ResolutionCalc"
+          TopLeft="414.714290375612,179.627450967999" />
+        <NodeLayout
+          Size="235,41"
+          Id="Package\Update_lookup"
+          TopLeft="414.714290375612,250.311764519987" />
+        <NodeLayout
+          Size="235,41"
+          Id="Package\Update_Lookup"
+          TopLeft="414.714290375612,38.2588238640228" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="258.6,150.543137416011">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,29.0843135519882"
+              Start="0,0"
+              End="0,21.5843135519882">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.5843135519882" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="532.314290375612,320.996078071976">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,-29.0843135519882"
+              Start="0,0"
+              End="0,-21.5843135519882">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-21.5843135519882" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="259.17142858116,291.911764519987">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,29.0843135519882"
+              Start="0,0"
+              End="0,21.5843135519882">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.5843135519882" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="532.314290375612,108.943137416011">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,-29.0843135519883"
+              Start="0,0"
+              End="0,-21.5843135519883">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-21.5843135519883" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="532.314290375612,250.311764519987">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,-29.0843135519882"
+              Start="0,0"
+              End="0,-21.5843135519882">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-21.5843135519882" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="258.02857141884,79.8588238640228">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,29.0843135519883"
+              Start="0,0"
+              End="0,21.5843135519883">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.5843135519883" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 6]"
+          TopLeft="258.88571429058,221.227450967999">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,29.0843135519882"
+              Start="0,0"
+              End="0,21.5843135519882">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.5843135519882" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 7]"
+          TopLeft="376.77142858116,341.796078071976">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="37.9428617944524,0"
+              Start="0,0"
+              End="30.4428617944524,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="30.4428617944524,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 8]"
+          TopLeft="532.314290375612,179.627450967999">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,-29.0843135519882"
+              Start="0,0"
+              End="0,-21.5843135519882">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-21.5843135519882" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\MRM_Intervention">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="165,42"
+          Id="Package\MRM_Intervention\Star_Connect_source"
+          TopLeft="180,130" />
+        <NodeLayout
+          Size="165,42"
+          Id="Package\MRM_Intervention\Derived Column"
+          TopLeft="180,219" />
+        <NodeLayout
+          Size="165,42"
+          Id="Package\MRM_Intervention\MRM_Intervention"
+          TopLeft="180,308" />
+        <EdgeLayout
+          Id="Package\MRM_Intervention.Paths[OLE DB Source Output]"
+          TopLeft="262.4,171.6">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,47.4"
+              Start="0,0"
+              End="0,39.9">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,39.9" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\MRM_Intervention.Paths[Derived Column Output]"
+          TopLeft="262.4,260.6">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,47.4"
+              Start="0,0"
+              End="0,39.9">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,39.9" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\MRM_Intervention\Star_Connect_source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\MRM_Intervention\MRM_Intervention">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\MRM_ResolutionCalc">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="176,42"
+          Id="Package\MRM_ResolutionCalc\Source"
+          TopLeft="216,258" />
+        <NodeLayout
+          Size="176,42"
+          Id="Package\MRM_ResolutionCalc\Derived Column"
+          TopLeft="216,347.5" />
+        <NodeLayout
+          Size="176,42"
+          Id="Package\MRM_ResolutionCalc\MRM_ResolutionCalc"
+          TopLeft="216,437" />
+        <EdgeLayout
+          Id="Package\MRM_ResolutionCalc.Paths[OLE DB Source Output]"
+          TopLeft="304,299.6">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,47.9"
+              Start="0,0"
+              End="0,40.4">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,40.4" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\MRM_ResolutionCalc.Paths[Derived Column Output]"
+          TopLeft="304,389.1">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,47.9"
+              Start="0,0"
+              End="0,40.4">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,40.4" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\MRM_ResolutionCalc\Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\MRM_ResolutionCalc\MRM_ResolutionCalc">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
