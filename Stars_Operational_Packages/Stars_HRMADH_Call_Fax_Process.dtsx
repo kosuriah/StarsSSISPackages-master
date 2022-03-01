@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Stars_HRMADH_Call_Fax_Process"
   DTS:PackageType="5"
-  DTS:VersionBuild="1901"
-  DTS:VersionGUID="{C1760E6D-9565-4862-9D3D-199E6A5AC6AF}">
+  DTS:VersionBuild="1902"
+  DTS:VersionGUID="{A08C2172-F3DA-4E69-8A69-2E19A96F1D93}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -50,11 +50,11 @@
             <DTS:Property
               DTS:Name="ServerPassword"
               Sensitive="1"
-              Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWWFCw4OzmUSTaFZBxn9hwwAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAADGa/byjCdYeFdbqANVJD56AAAAAASAAACgAAAAEAAAAGe621uuQpon1CkTSoSGWQowAAAA9WJQQQ4uSeE8ZcQnURuqNFk3/mxxJBTXbT0WO2cxs79JClBWTPnXva9Ngzm/eN3IFAAAAOh8s6b0m30Mp9P1f5bXiF3Kh631</DTS:Property>
+              Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWWFCw4OzmUSTaFZBxn9hwwAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAAB11WZ54qMigzBRFjOh3URYAAAAAASAAACgAAAAEAAAAKPnLDMLvnxFQ2hLal1QukAwAAAAFxMLetqlkhKd20kleHunzKGMiccnsdqeRc97MUwKVKrk+GtmXm2gtoI/2Od60ODVFAAAACLeOCPEyO/M0LDe3MT5lOVtRKWQ</DTS:Property>
             <DTS:Property
               DTS:Name="ProxyPassword"
               Sensitive="1"
-              Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWWFCw4OzmUSTaFZBxn9hwwAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAAA5O3tGZZvZD9oHcqQJ1frHAAAAAASAAACgAAAAEAAAAPDhBm4yl5eqi687rkRVyr0IAAAAyCRG26S7xgYUAAAAsZjdKxUuVhAxU7MqwkrU2SUmBGQ</DTS:Property>
+              Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWWFCw4OzmUSTaFZBxn9hwwAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAADn23zdno9Rn2G3f/NGmCIwAAAAAASAAACgAAAAEAAAAJHPWDrtBVjpk0iopYET2XkIAAAAZ0ANNMM8n9oUAAAAsiimQ0E7kBSbd+iK+bAVzUvc72w</DTS:Property>
           </DTS:HttpConnection>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
